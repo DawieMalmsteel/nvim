@@ -158,3 +158,6 @@ end, { desc = 'Next Warning' })
 map('n', '[w', function()
   vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.WARN, float = true }
 end, { desc = 'Prev Warning' })
+
+-- Mason
+map('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })

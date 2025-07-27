@@ -60,3 +60,21 @@ end, { desc = 'Git Status' })
 map('n', '<leader>gS', function()
   Snacks.picker.git_stash()
 end, { desc = 'Git Stash' })
+
+-- Quit
+map('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'quit all' })
+map('n', '<leader>q<ESC>', '<CMD>qa!<CR>', { desc = 'quit all !' })
+map('n', '<leader>qb', '<CMD>bd<CR>', { desc = 'Quit Buffer (Keep Window)' })
+map('n', '<leader>qb', '<CMD>bw<CR>', { desc = 'Quit Buffer and windows' })
+
+-- Window management
+map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })
+map('n', '<leader>_', '<CMD>split<CR>', { desc = 'Split window above' })
+map('n', '<leader>\\', '<CMD>vsplit<CR>', { desc = 'Split window right' })
+map('n', '<leader>?', '<CMD>vsplit<CR>', { desc = 'Split window left' })
+
+-- Resize window
+map('n', '<C-Down>', ':resize +1<CR>', { desc = 'Tăng chiều cao cửa sổ' })
+map('n', '<C-Up>', ':resize -1<CR>', { desc = 'Giảm chiều cao cửa sổ' })
+map('n', '<C-Left>', ':vertical resize +1<CR>', { desc = 'Tăng chiều rộng cửa sổ' })
+map('n', '<C-Right>', ':vertical resize -1<CR>', { desc = 'Giảm chiều rộng cửa sổ' })

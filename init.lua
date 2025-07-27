@@ -229,7 +229,7 @@ end
 -- Example usage:
 -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {})
-vim.keymap.set({ 'n', 't' }, '<C-/>', toggle_terminal, { noremap = true, silent = true, desc = 'Toggle Floating Terminal' })
+-- vim.keymap.set({ 'n', 't' }, '<C-/>', toggle_terminal, { noremap = true, silent = true, desc = 'Toggle Floating Terminal' })
 vim.keymap.set({ 'n', 't' }, '<C-_>', toggle_terminal, { noremap = true, silent = true, desc = 'Toggle Floating Terminal' })
 
 -- end floaterminal
@@ -470,7 +470,7 @@ require('lazy').setup({
         --
         defaults = {
           mappings = {
-            i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            i = { ['<C-enter>'] = 'to_fuzzy_refine' },
           },
         },
         pickers = {},
@@ -1040,7 +1040,6 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  require 'custom.plugins.snacks',
   -- require 'kickstart.plugins.tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 

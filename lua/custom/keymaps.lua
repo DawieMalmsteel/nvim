@@ -4,6 +4,9 @@ local map = vim.keymap.set
 map('n', ';', ':', { desc = 'CMD enter command mode' })
 map('i', 'kj', '<ESC>')
 
+-- Save file
+map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
+
 -- Sql query
 -- map("n", "<leader>r", ":'<,'>DB", { noremap = true, silent = true })
 
@@ -36,22 +39,29 @@ map('n', 'x', [["_x]])
 map('n', '<S-X>', [["_dd]])
 map('v', 'x', [["_x]])
 
--- git keymaps
+-- Snacks git keymaps
+local Snacks = require 'snacks'
+
 map('n', '<leader>gl', function()
-  require('snacks').lazygit.log()
+  Snacks.lazygit.log()
 end, { desc = 'Lazygit Logs' })
 
 map('n', '<leader>gg', function()
-  require('snacks').lazygit()
+  Snacks.lazygit()
 end, { desc = 'Lazygit Logs' })
 
 map('n', '<leader>gbr', function()
-  require('snacks').picker.git_branches { layout = 'select' }
+  Snacks.picker.git_branches { layout = 'select' }
 end, { desc = 'Pick and Switch Git Branches' })
 
--- Snacks
 map('n', '<leader>e', function()
-  require('snacks').explorer()
+  Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
 
-map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
+map('n', '<leader>gs', function()
+  Snacks.picker.git_status()
+end, { desc = 'Git Status' })
+
+map('n', '<leader>gS', function()
+  Snacks.picker.git_stash()
+end, { desc = 'Git Stash' })

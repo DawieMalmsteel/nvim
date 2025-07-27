@@ -12,8 +12,8 @@ map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc 
 -- Sql query
 -- map("n", "<leader>r", ":'<,'>DB", { noremap = true, silent = true })
 
--- diagnostics list
-map('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- -- diagnostics list
+-- map('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Explore
 map('n', '<leader>E', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })

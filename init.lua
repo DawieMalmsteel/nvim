@@ -546,7 +546,7 @@ require('lazy').setup({
           -- Find references for the word under your cursor.
           map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
-          -- Jump to the implementation of the word under your cursor.
+          -- Jump to the implementation of the iniword under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
           map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
@@ -793,6 +793,9 @@ require('lazy').setup({
     event = 'VimEnter',
     version = '1.*',
     dependencies = {
+      {
+        'giuxtaposition/blink-cmp-copilot',
+      },
       -- Snippet Engine
       {
         'L3MON4D3/LuaSnip',
@@ -863,12 +866,64 @@ require('lazy').setup({
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        ghost_text = { enabled = vim.g.ai_cmp },
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'lazydev', 'copilot' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          copilot = {
+            name = 'copilot',
+            module = 'blink-cmp-copilot',
+            score_offset = 100,
+            async = true,
+            transform_items = function(_, items)
+              local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
+              local kind_idx = #CompletionItemKind + 1
+              CompletionItemKind[kind_idx] = 'Copilot'
+              for _, item in ipairs(items) do
+                item.kind = kind_idx
+              end
+              return items
+            end,
+          },
+        },
+        appearance = {
+          -- Blink does not expose its default kind icons so you must copy them all (or set your custom ones) and add Copilot
+          kind_icons = {
+            Copilot = '',
+            Text = '󰉿',
+            Method = '󰊕',
+            Function = '󰊕',
+            Constructor = '󰒓',
+
+            Field = '󰜢',
+            Variable = '󰆦',
+            Property = '󰖷',
+
+            Class = '󱡠',
+            Interface = '󱡠',
+            Struct = '󱡠',
+            Module = '󰅩',
+
+            Unit = '󰪚',
+            Value = '󰦨',
+            Enum = '󰦨',
+            EnumMember = '󰦨',
+
+            Keyword = '󰻾',
+            Constant = '󰏿',
+
+            Snippet = '󱄽',
+            Color = '󰏘',
+            File = '󰈔',
+            Reference = '󰬲',
+            Folder = '󰉋',
+            Event = '󱐋',
+            Operator = '󰪚',
+            TypeParameter = '󰬛',
+          },
         },
       },
 

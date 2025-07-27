@@ -16,8 +16,8 @@ map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc 
 map('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Explore
-map('n', '<leader>eo', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open parent directory' })
-map('n', '<leader>ee', function()
+map('n', '<leader>E', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
+map('n', '<leader>e', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
 

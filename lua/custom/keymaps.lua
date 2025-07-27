@@ -123,3 +123,38 @@ end, { desc = 'Notification History' })
 map('n', '<leader>fg', function()
   picker.grep { prompt = 'Search> ', live = true }
 end, { desc = 'Live grep' })
+
+-- Di chuyển diagnostic: dùng jump với float
+map('n', '[d', function()
+  vim.diagnostic.jump { count = -1, float = true }
+end, { desc = 'Go to previous diagnostic' })
+
+map('n', ']d', function()
+  vim.diagnostic.jump { count = 1, float = true }
+end, { desc = 'Go to next diagnostic' })
+
+-- Hiển thị diagnostic dưới con trỏ
+map('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
+
+-- Mở diagnostics ra quickfix list
+map('n', '<leader>cq', vim.diagnostic.setqflist, { desc = 'Diagnostics → Quickfix' })
+
+-- Diagnostic mức độ error tiếp theo
+map('n', ']e', function()
+  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR, float = true }
+end, { desc = 'Next Error' })
+
+-- Diagnostic mức độ error trước đó
+map('n', '[e', function()
+  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR, float = true }
+end, { desc = 'Prev Error' })
+
+-- Diagnostic mức độ warning tiếp theo
+map('n', ']w', function()
+  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.WARN, float = true }
+end, { desc = 'Next Warning' })
+
+-- Diagnostic mức độ warning trước đó
+map('n', '[w', function()
+  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.WARN, float = true }
+end, { desc = 'Prev Warning' })

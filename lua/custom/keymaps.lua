@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 local Snacks = require 'snacks'
+local picker = Snacks.picker
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
@@ -47,9 +48,9 @@ end, { desc = 'Lazygit Logs' })
 
 map('n', '<leader>gg', function()
   Snacks.lazygit()
-end, { desc = 'Lazygit Logs' })
+end, { desc = 'Lazygit' })
 
-map('n', '<leader>gbr', function()
+map('n', '<leader>gc', function()
   Snacks.picker.git_branches { layout = 'select' }
 end, { desc = 'Pick and Switch Git Branches' })
 
@@ -88,3 +89,37 @@ end, { desc = 'Toggle Wrap Text' })
 -- Switch buffer
 map('n', '<Tab>', '<CMD>bnext<CR>', { desc = 'Next Buffer' })
 map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
+
+-- Snacks picker
+map('n', '<leader>fb', function()
+  picker.buffers()
+end, { desc = 'Buffers' })
+
+map('n', '<leader>ff', function()
+  picker.files()
+end, { desc = 'Find Files' })
+
+map('n', '<leader>fr', function()
+  picker.recent { live = true }
+end, { desc = 'Recent Files' })
+
+map('n', '<leader>gb', function()
+  picker.git_branches()
+end, { desc = 'Git Branches' })
+
+map('n', '<leader>gL', function()
+  picker.git_log_line()
+end, { desc = 'Git Log Line' })
+
+map('n', '<leader>:', function()
+  picker.command_history()
+end, { desc = 'Command History' })
+
+map('n', '<leader>n', function()
+  picker.notifications()
+end, { desc = 'Notification History' })
+
+-- custom grep picker:
+map('n', '<leader>fg', function()
+  picker.grep { prompt = 'Search> ', live = true }
+end, { desc = 'Live grep' })

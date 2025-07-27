@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local Snacks = require 'snacks'
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
@@ -13,11 +14,11 @@ map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc 
 -- diagnostics list
 map('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- Oil
-map('n', '<leader>o', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open parent directory' })
-
--- --bring ctrl i back
--- map('n', '<Tab>', '<C-i>', { noremap = true, silent = true })
+-- Explore
+map('n', '<leader>eo', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open parent directory' })
+map('n', '<leader>ee', function()
+  Snacks.explorer()
+end, { desc = 'Explorer Snacks (cwd)' })
 
 -- add keymap to remove trailing whitespace
 map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })
@@ -40,8 +41,6 @@ map('n', '<S-X>', [["_dd]])
 map('v', 'x', [["_x]])
 
 -- Snacks git keymaps
-local Snacks = require 'snacks'
-
 map('n', '<leader>gl', function()
   Snacks.lazygit.log()
 end, { desc = 'Lazygit Logs' })
@@ -53,10 +52,6 @@ end, { desc = 'Lazygit Logs' })
 map('n', '<leader>gbr', function()
   Snacks.picker.git_branches { layout = 'select' }
 end, { desc = 'Pick and Switch Git Branches' })
-
-map('n', '<leader>e', function()
-  Snacks.explorer()
-end, { desc = 'Explorer Snacks (cwd)' })
 
 map('n', '<leader>gs', function()
   Snacks.picker.git_status()

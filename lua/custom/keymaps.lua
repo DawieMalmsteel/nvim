@@ -52,7 +52,7 @@ end, { desc = 'Lazygit' })
 
 map('n', '<leader>gc', function()
   Snacks.picker.git_branches { layout = 'select' }
-end, { desc = 'Pick and Switch Git Branches' })
+end, { desc = 'Pick and Change Git Branches' })
 
 map('n', '<leader>gs', function()
   Snacks.picker.git_status()

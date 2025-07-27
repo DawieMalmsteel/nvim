@@ -111,7 +111,7 @@ map('n', '<leader>gL', function()
   picker.git_log_line()
 end, { desc = 'Git Log Line' })
 
-map('n', '<leader>:', function()
+map('n', '<leader>;', function()
   picker.command_history()
 end, { desc = 'Command History' })
 

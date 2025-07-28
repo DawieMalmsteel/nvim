@@ -4,6 +4,7 @@ local picker = Snacks.picker
 
 -- Decriptions for keymaps
 map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
+map({ 'n', 'v' }, '<leader>a', '', { desc = '+ai' })
 map({ 'n', 'v' }, '<leader>cp', '', { desc = '+copilot' })
 map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
 map({ 'n', 'v' }, '<leader>g', '', { desc = '+git' })

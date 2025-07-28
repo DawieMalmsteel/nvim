@@ -41,13 +41,11 @@ return { -- Collection of various small independent plugins/modules
       use_icons = vim.g.have_nerd_font, -- Use Nerd Font icons if available
       content = {
         active = function()
-          local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
           local git = statusline.section_git { trunc_width = 75 }
-          local filename = statusline.section_filename { trunc_width = 140 }
           local location = statusline.section_location { trunc_width = 75 }
 
           -- Custom diagnostics section with lualine symbols and distinct colors
-          local section_diagnostics = function(args)
+          local section_diagnostics = function()
             local symbols = {
               error = ' ',
               warn = ' ',
@@ -121,18 +119,11 @@ return { -- Collection of various small independent plugins/modules
             c = { name = 'COMMAND', icon = '', color = '#fab387', hl = 'MiniStatuslineModeCommand' },
             R = { name = 'REPLACE', icon = '', color = '#f38ba8', hl = 'MiniStatuslineModeReplace' },
             t = { name = 'TERMINAL', icon = '', color = '#cba6f7', hl = 'MiniStatuslineModeNormal' },
-            floaterm = { name = 'TERMINAL', icon = '', color = '#cba6f7', hl = 'MiniStatuslineModeNormal' },
           }
 
-          -- Handle terminal modes and Floaterm
+          -- Handle mode
           local current_mode = vim.fn.mode()
-          local is_terminal = vim.bo.buftype == 'terminal' or vim.bo.filetype == 'floaterm'
-          if is_terminal then
-            current_mode = 't' -- Force terminal mode for Floaterm and terminal buffers
-          end
-          local mode_data = mode_info[current_mode]
-            or mode_info[vim.bo.filetype]
-            or { name = current_mode:upper(), icon = '', color = '#cba6f7', hl = 'MiniStatuslineModeNormal' }
+          local mode_data = mode_info[current_mode] or { name = current_mode:upper(), icon = '', color = '#cba6f7', hl = 'MiniStatuslineModeNormal' }
 
           -- Custom filename with modified/readonly symbols and dynamic color
           local filename_section = function()
@@ -193,7 +184,6 @@ return { -- Collection of various small independent plugins/modules
           }
         end,
         inactive = function()
-          local filename = statusline.section_filename { trunc_width = 140 }
           local location = statusline.section_location { trunc_width = 75 }
 
           -- Custom filename section for inactive windows

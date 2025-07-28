@@ -53,11 +53,12 @@ return {
         search_bm25 = false, -- Enable BM25 vector search (default: false)
       },
 
-      file_selector = {
-        provider = 'snacks',
-        -- Options override for custom providers
-        provider_opts = {},
-      },
+      -- Snacks slow as f
+      -- file_selector = {
+      --   provider = 'snacks',
+      --   -- Options override for custom providers
+      --   provider_opts = {},
+      -- },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     -- build = "make BUILD_FROM_SOURCE=true",

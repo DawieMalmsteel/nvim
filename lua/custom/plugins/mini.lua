@@ -35,16 +35,192 @@ return { -- Collection of various small independent plugins/modules
     --  You could remove this setup call if you don't like it,
     --  and try some other statusline plugin
     local statusline = require 'mini.statusline'
-    -- set use_icons to true if you have a Nerd Font
-    statusline.setup { use_icons = vim.g.have_nerd_font }
+    local devicons = require 'nvim-web-devicons'
 
-    -- You can configure sections in the statusline by overriding their
-    -- default behavior. For example, here we set the section for
-    -- cursor location to LINE:COLUMN
-    ---@diagnostic disable-next-line: duplicate-set-field
-    statusline.section_location = function()
-      return '%2l:%-2v'
-    end
+    statusline.setup {
+      use_icons = vim.g.have_nerd_font, -- Use Nerd Font icons if available
+      content = {
+        active = function()
+          local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
+          local git = statusline.section_git { trunc_width = 75 }
+          local filename = statusline.section_filename { trunc_width = 140 }
+          local location = statusline.section_location { trunc_width = 75 }
+
+          -- Custom diagnostics section with lualine symbols and distinct colors
+          local section_diagnostics = function(args)
+            local symbols = {
+              error = ' ',
+              warn = ' ',
+              info = ' ',
+              hint = vim.g.have_nerd_font and '󰌶 ' or '💡 ',
+            }
+            local status = { error = 0, warn = 0, info = 0, hint = 0 }
+            local levels = vim.diagnostic.severity
+
+            -- Get diagnostic counts
+            for _, severity in ipairs { levels.ERROR, levels.WARN, levels.INFO, levels.HINT } do
+              local count = #vim.diagnostic.get(0, { severity = severity })
+              if severity == levels.ERROR then
+                status.error = count
+              elseif severity == levels.WARN then
+                status.warn = count
+              elseif severity == levels.INFO then
+                status.info = count
+              elseif severity == levels.HINT then
+                status.hint = count
+              end
+            end
+
+            -- Build diagnostics string with distinct highlight groups
+            local result = {}
+            if status.error > 0 then
+              table.insert(result, string.format('%%#MiniStatuslineDiagnosticsError#%s%d', symbols.error, status.error))
+            end
+            if status.warn > 0 then
+              table.insert(result, string.format('%%#MiniStatuslineDiagnosticsWarn#%s%d', symbols.warn, status.warn))
+            end
+            if status.info > 0 then
+              table.insert(result, string.format('%%#MiniStatuslineDiagnosticsInfo#%s%d', symbols.info, status.info))
+            end
+            if status.hint > 0 then
+              table.insert(result, string.format('%%#MiniStatuslineDiagnosticsHint#%s%d', symbols.hint, status.hint))
+            end
+            return table.concat(result, ' ')
+          end
+
+          -- Custom progress section
+          local section_progress = function()
+            local line = vim.fn.line '.'
+            local total_lines = vim.fn.line '$'
+            if total_lines == 0 then
+              return '0%'
+            end
+            local percentage = math.floor((line / total_lines) * 100)
+            return string.format('%d%%', percentage)
+          end
+
+          -- Custom filetype section with colored icon
+          local section_filetype = function()
+            local ft = vim.bo.filetype
+            if ft == '' then
+              return ''
+            end
+            local icon, color = devicons.get_icon_color(vim.fn.expand '%:t', ft, { default = true })
+            local hl_group = 'MiniStatuslineFiletype' .. ft:gsub('[^%w]', '_') -- Unique highlight group per filetype
+            vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = 'NONE' })
+            return string.format('%%#%s#%s', hl_group, icon or '')
+          end
+
+          -- Custom mode section
+          local mode_info = {
+            n = { name = 'NORMAL', icon = '', color = '#cba6f7', hl = 'MiniStatuslineModeNormal' },
+            i = { name = 'INSERT', icon = '', color = '#a6e3a1', hl = 'MiniStatuslineModeInsert' },
+            v = { name = 'VISUAL', icon = '✂️', color = '#f9e2af', hl = 'MiniStatuslineModeVisual' },
+            V = { name = 'V-LINE', icon = '', color = '#f9e2af', hl = 'MiniStatuslineModeVisual' },
+            [''] = { name = 'V-BLOCK', icon = '', color = '#f9e2af', hl = 'MiniStatuslineModeVisual' },
+            c = { name = 'COMMAND', icon = '', color = '#fab387', hl = 'MiniStatuslineModeCommand' },
+            R = { name = 'REPLACE', icon = '', color = '#f38ba8', hl = 'MiniStatuslineModeReplace' },
+            t = { name = 'TERMINAL', icon = '', color = '#cba6f7', hl = 'MiniStatuslineModeNormal' },
+            floaterm = { name = 'TERMINAL', icon = '', color = '#cba6f7', hl = 'MiniStatuslineModeNormal' },
+          }
+
+          -- Handle terminal modes and Floaterm
+          local current_mode = vim.fn.mode()
+          local is_terminal = vim.bo.buftype == 'terminal' or vim.bo.filetype == 'floaterm'
+          if is_terminal then
+            current_mode = 't' -- Force terminal mode for Floaterm and terminal buffers
+          end
+          local mode_data = mode_info[current_mode]
+            or mode_info[vim.bo.filetype]
+            or { name = current_mode:upper(), icon = '', color = '#cba6f7', hl = 'MiniStatuslineModeNormal' }
+
+          -- Custom filename with modified/readonly symbols and dynamic color
+          local filename_section = function()
+            local name = vim.fn.expand '%:~' -- Use ~ for home directory
+            if name == '' then
+              return '[No Name]'
+            end
+            local modified = vim.bo.modified and '●' or ''
+            local readonly = vim.bo.readonly and '🔒' or ''
+            local hl_group = vim.bo.modified and 'MiniStatuslineFilenameModified' or 'MiniStatuslineFilename'
+            return string.format('%%#%s#%s%s%s', hl_group, name, modified, readonly)
+          end
+
+          -- Custom recording macro section
+          local recording = function()
+            local reg = vim.fn.reg_recording()
+            if reg == '' then
+              return ''
+            end
+            return string.format('%%#MiniStatuslineRecording#⏺️ Recording @%s', reg)
+          end
+
+          -- Define highlight groups
+          vim.api.nvim_set_hl(0, 'MiniStatuslineModeNormal', { fg = '#cba6f7', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineModeInsert', { fg = '#a6e3a1', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineModeVisual', { fg = '#f9e2af', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineModeReplace', { fg = '#f38ba8', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineModeCommand', { fg = '#fab387', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { fg = '#cdd6f4', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineFilenameModified', { fg = '#fab387', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineRecording', { fg = '#f38ba8', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineGit', { fg = '#89b4fa', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsError', { fg = '#f38ba8', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsWarn', { fg = '#f9e2af', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsInfo', { fg = '#89b4fa', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsHint', { fg = '#a6e3a1', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineProgress', { fg = '#a6e3a1', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineLocation', { fg = '#cdd6f4', bg = 'NONE' })
+
+          -- Construct the statusline with space separators
+          return table.concat {
+            string.format('%%#%s#%s %s', mode_data.hl, mode_data.icon, mode_data.name),
+            ' ',
+            string.format('%%#MiniStatuslineGit#%s', git),
+            ' ',
+            section_diagnostics(),
+            ' ',
+            filename_section(),
+            ' ',
+            section_filetype(),
+            '%<', -- Truncate point
+            '%=', -- Align right
+            recording(),
+            recording() ~= '' and ' ' or '', -- Only show space if recording is active
+            string.format('%%#MiniStatuslineProgress#📏 %s', section_progress()),
+            ' ',
+            string.format('%%#MiniStatuslineLocation#📍 %s', location),
+          }
+        end,
+        inactive = function()
+          local filename = statusline.section_filename { trunc_width = 140 }
+          local location = statusline.section_location { trunc_width = 75 }
+
+          -- Custom filename section for inactive windows
+          local filename_section = function()
+            local name = vim.fn.expand '%:~' -- Use ~ for home directory
+            if name == '' then
+              return '[No Name]'
+            end
+            local modified = vim.bo.modified and '●' or ''
+            local readonly = vim.bo.readonly and '🔒' or ''
+            local hl_group = vim.bo.modified and 'MiniStatuslineFilenameModified' or 'MiniStatuslineInactive'
+            return string.format('%%#%s#%s%s%s', hl_group, name, modified, readonly)
+          end
+
+          vim.api.nvim_set_hl(0, 'MiniStatuslineInactive', { fg = '#45475a', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniStatuslineFilenameModified', { fg = '#fab387', bg = 'NONE' })
+
+          return table.concat {
+            filename_section(),
+            '%<', -- Truncate point
+            '%=', -- Align right
+            string.format('%%#MiniStatuslineInactive#📍 %s', location),
+          }
+        end,
+      },
+      set_vim_settings = false, -- We'll handle globalstatus manually
+    }
 
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim

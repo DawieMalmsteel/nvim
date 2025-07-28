@@ -17,6 +17,8 @@ return { -- Collection of various small independent plugins/modules
     require('mini.surround').setup()
     require('mini.tabline').setup()
     require('mini.notify').setup()
+    require('mini.sessions').setup()
+    -- TODO: add keybindings for sessions
 
     require('mini.files').setup {
       windows = {

@@ -16,6 +16,7 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
     require('mini.tabline').setup()
+    require('mini.indentscope').setup()
     require('mini.notify').setup() -- TODO: add keybindings for notifications
 
     local mini_snippets = require 'mini.snippets'

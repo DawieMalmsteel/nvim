@@ -13,13 +13,13 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +18 lua/custom/plugins/mini.lua
+badd +26 lua/custom/plugins/mini.lua
 badd +15 ~/.config/nvim/init.lua
 argglobal
 %argdel
-edit ~/.config/nvim/init.lua
+edit lua/custom/plugins/mini.lua
 argglobal
-balt lua/custom/plugins/mini.lua
+balt ~/.config/nvim/init.lua
 setlocal foldmethod=manual
 setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
 setlocal foldmarker={{{,}}}
@@ -30,12 +30,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 15 - ((14 * winheight(0) + 12) / 24)
+let s:l = 26 - ((14 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 15
-normal! 0
+keepjumps 26
+normal! 010|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -2,6 +2,13 @@ local map = vim.keymap.set
 local Snacks = require 'snacks'
 local picker = Snacks.picker
 
+-- Decriptions for keymaps
+map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
+map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
+map({ 'n', 'v' }, '<leader>g', '', { desc = '+git' })
+map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })
+map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
+
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
 map('i', 'kj', '<ESC>')

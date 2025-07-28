@@ -491,7 +491,7 @@ require('lazy').setup({
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
+      -- { 'j-hui/fidget.nvim', opts = {} },
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
@@ -1053,6 +1053,6 @@ require('lazy').setup({
 require 'custom.keymaps'
 require 'custom.floaterminal'
 vim.opt.termguicolors = true
-require('bufferline').setup {}
+-- require('bufferline').setup {}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

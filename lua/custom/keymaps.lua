@@ -10,6 +10,7 @@ map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
 map({ 'n', 'v' }, '<leader>g', '', { desc = '+git' })
 map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })
 map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
+map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })

@@ -25,7 +25,7 @@ map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc 
 -- map("n", "<leader>r", ":'<,'>DB", { noremap = true, silent = true })
 
 -- Explore
-map('n', '<leader>E', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
+-- map('n', '<leader>E', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
 map('n', '<leader>e', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })

@@ -33,6 +33,8 @@ return { -- Collection of various small independent plugins/modules
     }
     require('mini.notify').setup() -- TODO: add keybindings for notifications
 
+    require('mini.fuzzy').setup()
+
     -- Mini Pick  TODO: add keybindings for pick
     local pick = require 'mini.pick'
 

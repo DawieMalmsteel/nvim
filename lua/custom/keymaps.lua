@@ -53,7 +53,7 @@ map('v', 'x', [["_x]])
 
 -- Snacks git keymaps
 map('n', '<leader>gl', function()
-  Snacks.lazygit.log()
+  Snacks.lazygit.log { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Lazygit Logs' })
 
 map('n', '<leader>gg', function()
@@ -61,15 +61,15 @@ map('n', '<leader>gg', function()
 end, { desc = 'Lazygit' })
 
 map('n', '<leader>gB', function()
-  Snacks.picker.git_branches { layout = 'select' }
+  Snacks.picker.git_branches { layout = 'select', cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Pick and Change Git Branches' })
 
 map('n', '<leader>gs', function()
-  Snacks.picker.git_status()
+  Snacks.picker.git_status { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git Status' })
 
 map('n', '<leader>gS', function()
-  Snacks.picker.git_stash()
+  Snacks.picker.git_stash { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git Stash' })
 
 -- Quit

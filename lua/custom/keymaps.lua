@@ -29,6 +29,7 @@ map('n', '<leader>E', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'O
 map('n', '<leader>e', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
+map('n', '<leader>o', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
 
 -- add keymap to remove trailing whitespace
 map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })

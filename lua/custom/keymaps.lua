@@ -57,7 +57,7 @@ map('n', '<leader>gl', function()
 end, { desc = 'Lazygit Logs' })
 
 map('n', '<leader>gg', function()
-  Snacks.lazygit()
+  Snacks.lazygit { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Lazygit' })
 
 map('n', '<leader>gB', function()

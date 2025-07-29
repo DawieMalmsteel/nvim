@@ -60,7 +60,7 @@ map('n', '<leader>gg', function()
   Snacks.lazygit()
 end, { desc = 'Lazygit' })
 
-map('n', '<leader>gc', function()
+map('n', '<leader>gB', function()
   Snacks.picker.git_branches { layout = 'select' }
 end, { desc = 'Pick and Change Git Branches' })
 
@@ -116,6 +116,7 @@ map('n', '<leader>fr', function()
   picker.recent { live = true }
 end, { desc = 'Recent Files' })
 
+-- GIT
 map('n', '<leader>gb', function()
   picker.git_branches()
 end, { desc = 'Git Branches' })
@@ -123,6 +124,9 @@ end, { desc = 'Git Branches' })
 map('n', '<leader>gL', function()
   picker.git_log_line()
 end, { desc = 'Git Log Line' })
+
+map('n', '<leader>gf', '<CMD>Pick git_files<CR>', { desc = 'Open git files' })
+map('n', '<leader>gc', '<CMD>Pick git_commits<CR>', { desc = 'Open git commits' })
 
 map('n', '<leader>;', function()
   picker.command_history()
@@ -198,6 +202,4 @@ map('n', '<leader>sw', function()
 end, { desc = 'Search current Word' })
 map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = '[/] Fuzzily search' })
 map('n', '<leader>sk', '<CMD>Pick keymaps', { desc = '[S]earch [K]eymaps' })
-
--- Keymaps adapted from Telescope, using available mini.pick commands
 -- map('n', '<leader>ss', ':lua pick_registry()<CR>', { desc = '[S]earch [S]elect MiniPick' }) TODO: Fix this keymap

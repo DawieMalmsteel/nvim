@@ -26,7 +26,7 @@ map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc 
 
 -- Explore
 -- map('n', '<leader>E', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
-map('n', '<leader>e', function()
+map('n', '<leader>E', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
 map('n', '<leader>o', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
@@ -183,11 +183,11 @@ end, { desc = 'Prev Warning' })
 map('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })
 
 -- Mini Files
-map('n', '<leader>fm', function()
+map('n', '<leader>e', function()
   mini_files.open(vim.api.nvim_buf_get_name(0), true)
 end, { desc = 'Open mini.files (Directory of Current File)' })
 
-map('n', '<leader>fM', function()
+map('n', '<leader>fm', function()
   mini_files.open(vim.uv.cwd(), true)
 end, { desc = 'Open mini.files (cwd)' })
 

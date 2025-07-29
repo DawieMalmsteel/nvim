@@ -204,5 +204,28 @@ map('n', '<leader>sw', function()
   mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }
 end, { desc = 'Search current Word' })
 map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = '[/] Fuzzily search' })
-map('n', '<leader>sk', '<CMD>Pick keymaps', { desc = '[S]earch [K]eymaps' })
+map('n', '<leader>sk', '<CMD>Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
 -- map('n', '<leader>ss', ':lua pick_registry()<CR>', { desc = '[S]earch [S]elect MiniPick' }) TODO: Fix this keymap
+
+-- LSP keymaps
+map('n', 'grd', function()
+  require('mini.extra').pickers.lsp { scope = 'definition' }
+end, { desc = '[G]o to [D]efinition' })
+map('n', 'gri', function()
+  require('mini.extra').pickers.lsp { scope = 'implementation' }
+end, { desc = '[G]oto [I]mplementation' })
+map('n', 'grr', function()
+  require('mini.extra').pickers.lsp { scope = 'references' }
+end, { desc = '[G]oto [R]eferences' })
+map('n', 'grD', function()
+  require('mini.extra').pickers.lsp { scope = 'declaration' }
+end, { desc = '[G]oto [D]eclaration' })
+map('n', 'gO', function()
+  require('mini.extra').pickers.lsp { scope = 'document_symbol' }
+end, { desc = 'Open Document Symbols' })
+map('n', 'gW', function()
+  require('mini.extra').pickers.lsp { scope = 'workspace_symbol' }
+end, { desc = 'Open Workspace Symbols' })
+map('n', 'grt', function()
+  require('mini.extra').pickers.lsp { scope = 'type_definition' }
+end, { desc = '[G]oto [T]ype Definition' })

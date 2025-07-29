@@ -20,6 +20,7 @@ return { -- Collection of various small independent plugins/modules
     require('mini.extra').setup()
     require('mini.visits').setup()
     require('mini.icons').setup()
+    -- require('mini.starter').setup()
     require('mini.diff').setup {
       view = {
         style = 'sign',

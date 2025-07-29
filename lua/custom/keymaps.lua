@@ -206,7 +206,9 @@ map('n', '<leader>sw', function()
 end, { desc = 'Search current Word' })
 map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = '[/] Fuzzily search' })
 map('n', '<leader>sk', '<CMD>Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
--- map('n', '<leader>ss', ':lua pick_registry()<CR>', { desc = '[S]earch [S]elect MiniPick' }) TODO: Fix this keymap
+-- map('n', '<leader>ss', function()
+--   require('mini.pick').builtin.files()
+-- end, { desc = '[S]earch [S]elect MiniPick' })
 
 -- LSP keymaps
 map('n', 'grd', function()

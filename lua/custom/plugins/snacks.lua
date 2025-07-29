@@ -10,6 +10,11 @@ return {
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
       },
+      bigfile = {
+        -- your bigfile configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      },
       explore = {
         replace_netrw = true,
       },

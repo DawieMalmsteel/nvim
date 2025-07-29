@@ -17,6 +17,8 @@ return { -- Collection of various small independent plugins/modules
     require('mini.surround').setup()
     require('mini.tabline').setup()
     require('mini.indentscope').setup()
+    require('mini.extra').setup()
+    require('mini.visits').setup()
     require('mini.notify').setup() -- TODO: add keybindings for notifications
 
     -- Mini Pick  TODO: add keybindings for pick

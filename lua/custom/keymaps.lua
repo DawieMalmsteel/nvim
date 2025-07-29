@@ -1,6 +1,8 @@
 local map = vim.keymap.set
 local Snacks = require 'snacks'
 local picker = Snacks.picker
+local mini_files = require 'mini.files'
+local mini_pick = require 'mini.pick'
 
 -- Decriptions for keymaps
 map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
@@ -93,6 +95,9 @@ map('n', '<leader>uw', function()
   vim.wo.wrap = not vim.wo.wrap
 end, { desc = 'Toggle Wrap Text' })
 
+-- Change color scheme
+map('n', '<leader>uc', '<CMD>Pick colorschemes<CR>', { desc = 'Change theme' })
+
 -- Switch buffer
 map('n', '<Tab>', '<CMD>bnext<CR>', { desc = 'Next Buffer' })
 map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
@@ -171,9 +176,27 @@ map('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })
 
 -- Mini Files
 map('n', '<leader>fm', function()
-  require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
+  mini_files.open(vim.api.nvim_buf_get_name(0), true)
 end, { desc = 'Open mini.files (Directory of Current File)' })
 
 map('n', '<leader>fM', function()
-  require('mini.files').open(vim.uv.cwd(), true)
+  mini_files.open(vim.uv.cwd(), true)
 end, { desc = 'Open mini.files (cwd)' })
+
+map('n', '<leader>fc', "<CMD>lua require('mini.files').open(vim.fn.stdpath('config'))<CR>", { noremap = true, silent = true })
+
+-- Keymaps adapted from Telescope, using command strings to avoid nil errors
+map('n', '<leader>sh', '<CMD>Pick help<CR>', { desc = '[S]earch [H]elp' })
+map('n', '<leader><leader>', '<CMD>Pick files<CR>', { desc = '[S]earch [F]iles' })
+map('n', '<leader>sg', '<CMD>Pick grep_live<CR>', { desc = '[S]earch by [G]rep' })
+map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = '[S]earch [R]esume' })
+map('n', '<leader>r', '<CMD>Pick buffers<CR>', { desc = '[ ] Find existing buffers' })
+map('n', '<leader>sd', '<CMD>Pick diagnostic<CR>', { desc = '[S]earch [D]iagnostics' })
+map('n', '<leader>sw', function()
+  mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }
+end, { desc = '[S]earch current [W]ord' })
+map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = '[/] Fuzzily search' })
+map('n', '<leader>sk', '<CMD>Pick keymaps', { desc = '[S]earch [K]eymaps' })
+
+-- Keymaps adapted from Telescope, using available mini.pick commands
+-- map('n', '<leader>ss', ':lua pick_registry()<CR>', { desc = '[S]earch [S]elect MiniPick' }) TODO: Fix this keymap

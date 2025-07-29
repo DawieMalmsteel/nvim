@@ -110,7 +110,7 @@ return { -- Collection of various small independent plugins/modules
       window = {
         -- Float window config (table or callable returning it)
         config = function()
-          local height = math.floor(0.5 * vim.o.lines) -- 50% of window height
+          local height = math.floor(0.7 * vim.o.lines) -- 70% of window height
           local width = math.floor(0.8 * vim.o.columns) -- 80% of window width
           local row = math.floor((vim.o.lines - height) / 2) -- Center vertically
           local col = math.floor((vim.o.columns - width) / 2) -- Center horizontally

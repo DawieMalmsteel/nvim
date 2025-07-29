@@ -187,15 +187,15 @@ end, { desc = 'Open mini.files (cwd)' })
 map('n', '<leader>fc', "<CMD>lua require('mini.files').open(vim.fn.stdpath('config'))<CR>", { noremap = true, silent = true })
 
 -- Keymaps adapted from Telescope, using command strings to avoid nil errors
-map('n', '<leader>sh', '<CMD>Pick help<CR>', { desc = '[S]earch [H]elp' })
-map('n', '<leader><leader>', '<CMD>Pick files<CR>', { desc = '[S]earch [F]iles' })
-map('n', '<leader>sg', '<CMD>Pick grep_live<CR>', { desc = '[S]earch by [G]rep' })
-map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = '[S]earch [R]esume' })
+map('n', '<leader>sh', '<CMD>Pick help<CR>', { desc = 'Search [H]elp' })
+map('n', '<leader><leader>', '<CMD>Pick files<CR>', { desc = 'Search [F]iles' })
+map('n', '<leader>sg', '<CMD>Pick grep_live<CR>', { desc = 'Search by [G]rep' })
+map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search [R]esume' })
 map('n', '<leader>r', '<CMD>Pick buffers<CR>', { desc = '[ ] Find existing buffers' })
-map('n', '<leader>sd', '<CMD>Pick diagnostic<CR>', { desc = '[S]earch [D]iagnostics' })
+map('n', '<leader>sd', '<CMD>Pick diagnostic<CR>', { desc = 'Search [D]iagnostics' })
 map('n', '<leader>sw', function()
   mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }
-end, { desc = '[S]earch current [W]ord' })
+end, { desc = 'Search current Word' })
 map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = '[/] Fuzzily search' })
 map('n', '<leader>sk', '<CMD>Pick keymaps', { desc = '[S]earch [K]eymaps' })
 

@@ -19,6 +19,7 @@ return { -- Collection of various small independent plugins/modules
     require('mini.indentscope').setup()
     require('mini.extra').setup()
     require('mini.visits').setup()
+    require('mini.icons').setup()
     require('mini.diff').setup {
       view = {
         style = 'sign',
@@ -170,7 +171,7 @@ return { -- Collection of various small independent plugins/modules
     --  You could remove this setup call if you don't like it,
     --  and try some other statusline plugin
     local statusline = require 'mini.statusline'
-    local devicons = require 'nvim-web-devicons'
+    local icons = require 'mini.icons'
 
     statusline.setup {
       use_icons = vim.g.have_nerd_font, -- Use Nerd Font icons if available
@@ -232,16 +233,20 @@ return { -- Collection of various small independent plugins/modules
             return string.format('%d%%', percentage)
           end
 
-          -- Custom filetype section with colored icon
+          -- Custom filetype section with colored icon using mini.icons
           local section_filetype = function()
             local ft = vim.bo.filetype
             if ft == '' then
               return ''
             end
-            local icon, color = devicons.get_icon_color(vim.fn.expand '%:t', ft, { default = true })
+            local filename = vim.fn.expand '%:t'
+            local icon_data = icons.get('file', filename) or { icon = '', hl = 'MiniIconsDefault' }
+            local icon = icon_data.icon or ''
             local hl_group = 'MiniStatuslineFiletype' .. ft:gsub('[^%w]', '_') -- Unique highlight group per filetype
+            -- Use mini.icons highlight group color or fallback to default
+            local color = icon_data.hl and vim.api.nvim_get_hl(0, { name = icon_data.hl }).fg or '#cdd6f4'
             vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = 'NONE' })
-            return string.format('%%#%s#%s', hl_group, icon or '')
+            return string.format('%%#%s#%s', hl_group, icon)
           end
 
           -- Custom mode section
@@ -297,6 +302,7 @@ return { -- Collection of various small independent plugins/modules
           vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsHint', { fg = '#a6e3a1', bg = 'NONE' })
           vim.api.nvim_set_hl(0, 'MiniStatuslineProgress', { fg = '#a6e3a1', bg = 'NONE' })
           vim.api.nvim_set_hl(0, 'MiniStatuslineLocation', { fg = '#cdd6f4', bg = 'NONE' })
+          vim.api.nvim_set_hl(0, 'MiniIconsDefault', { fg = '#cdd6f4', bg = 'NONE' }) -- Fallback highlight group
 
           -- Construct the statusline with space separators
           return table.concat {
@@ -344,7 +350,6 @@ return { -- Collection of various small independent plugins/modules
           }
         end,
       },
-      set_vim_settings = false, -- We'll handle globalstatus manually
     }
 
     -- ... and there is more!

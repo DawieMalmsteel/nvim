@@ -127,6 +127,9 @@ end, { desc = 'Git Log Line' })
 
 map('n', '<leader>gf', '<CMD>Pick git_files<CR>', { desc = 'Open git files' })
 map('n', '<leader>gc', '<CMD>Pick git_commits<CR>', { desc = 'Open git commits' })
+map('n', '<leader>go', function()
+  require('mini.diff').toggle_overlay(0)
+end, { desc = 'Toggle mini.diff overlay' })
 
 map('n', '<leader>;', function()
   picker.command_history()

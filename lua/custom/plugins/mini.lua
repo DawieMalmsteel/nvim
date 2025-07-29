@@ -19,6 +19,22 @@ return { -- Collection of various small independent plugins/modules
     require('mini.indentscope').setup()
     require('mini.extra').setup()
     require('mini.visits').setup()
+    require('mini.diff').setup {
+      view = {
+        style = 'sign',
+        signs = {
+          add = '▎',
+          change = '▎',
+          delete = '',
+        },
+      },
+      mappings = {
+        goto_first = '[C',
+        goto_prev = '[c',
+        goto_next = ']c',
+        goto_last = ']C',
+      },
+    }
     require('mini.notify').setup() -- TODO: add keybindings for notifications
 
     -- Mini Pick  TODO: add keybindings for pick

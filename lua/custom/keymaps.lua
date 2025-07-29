@@ -232,3 +232,18 @@ end, { desc = 'Open Workspace Symbols' })
 map('n', 'grt', function()
   mini_extra.pickers.lsp { scope = 'type_definition' }
 end, { desc = '[G]oto [T]ype Definition' })
+
+map('n', 'grN', function() --TODO: implement Mini Notification for this
+  local old = vim.api.nvim_buf_get_name(0)
+  local new = vim.fn.input('Rename to: ', old, 'file')
+  if new ~= '' and new ~= old then
+    vim.cmd('saveas ' .. vim.fn.fnameescape(new))
+    vim.cmd('silent! !rm ' .. vim.fn.fnameescape(old))
+    vim.cmd('bdelete ' .. vim.fn.bufnr(old))
+  end
+end, { desc = 'Rename current file' })
+
+-- Lazygit test
+-- map('n', '<leader>gm', function()
+--   vim.cmd 'Floaterminal lazygit'
+-- end, { desc = 'Open LazyGit (Floaterminal)' })

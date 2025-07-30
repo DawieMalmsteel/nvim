@@ -20,7 +20,59 @@ return { -- Collection of various small independent plugins/modules
     require('mini.extra').setup()
     require('mini.visits').setup()
     require('mini.icons').setup()
-    -- require('mini.starter').setup()
+    require('mini.clue').setup()
+    require('mini.starter').setup {
+      header = [[
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀
+⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟⠀
+⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        @NeoVim của Dwcks 🦀        ]],
+
+      layout = {
+        -- 'center' để căn giữa, 'horizontal' để hiển thị ngang
+        align = 'center',
+        direction = 'horizontal',
+      },
+    }
+
+    -- require('mini.clue').setup {
+    --   triggers = {
+    --     -- Normal mode
+    --     { mode = 'n', keys = '<leader>' },
+    --     { mode = 'n', keys = 'g' },
+    --     { mode = 'n', keys = 'z' },
+    --     { mode = 'n', keys = ']' },
+    --     { mode = 'n', keys = '[' },
+    --     { mode = 'n', keys = 'm' }, -- marks
+    --     { mode = 'n', keys = "'" }, -- marks
+    --     { mode = 'n', keys = '`' }, -- marks
+    --     { mode = 'n', keys = '"' }, -- registers
+    --     { mode = 'i', keys = '<C-r>' }, -- registers trong insert mode
+    --     -- Visual mode
+    --     { mode = 'v', keys = '<leader>' },
+    --     { mode = 'v', keys = 'g' },
+    --     { mode = 'v', keys = 'z' },
+    --     { mode = 'v', keys = ']' },
+    --     { mode = 'v', keys = '[' },
+    --   },
+    --   clues = {
+    --     -- Bạn có thể thêm mô tả cho các nhóm/phím chính
+    --     require('mini.clue').gen_clues.builtin_completion(),
+    --     require('mini.clue').gen_clues.g(),
+    --     require('mini.clue').gen_clues.marks(),
+    --     require('mini.clue').gen_clues.registers(),
+    --     require('mini.clue').gen_clues.windows(),
+    --     require('mini.clue').gen_clues.z(),
+    --     -- Thêm mô tả cho các prefix custom của bạn
+    --     { mode = 'n', keys = '<leader>s', desc = 'Search' },
+    --     { mode = 'n', keys = '<leader>t', desc = 'Toggle' },
+    --     { mode = 'n', keys = '<leader>h', desc = 'Git [H]unk' },
+    --     { mode = 'v', keys = '<leader>h', desc = 'Git [H]unk' },
+    --   },
+    --   window = { delay = 0 },
+    -- }
+
     require('mini.diff').setup {
       view = {
         style = 'sign',

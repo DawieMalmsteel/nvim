@@ -247,6 +247,8 @@ end, { desc = 'Rename current file' })
 map('n', '[c', function()
   require('treesitter-context').go_to_context(vim.v.count1)
 end, { silent = true, desc = 'Go to upward Treesitter context' })
+-- Toggle Treesitter context
+map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
 
 -- Lazygit test
 -- map('n', '<leader>gm', function()

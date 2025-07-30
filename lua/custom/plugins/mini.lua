@@ -23,17 +23,70 @@ return { -- Collection of various small independent plugins/modules
     require('mini.clue').setup()
     require('mini.starter').setup {
       header = [[
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀
-⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟⠀
-⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        @NeoVim của Dwcks 🦀        ]],
-
-      layout = {
-        -- 'center' để căn giữa, 'horizontal' để hiển thị ngang
-        align = 'center',
-        direction = 'horizontal',
+     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀     ⠀
+     ⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟     ⠀
+     ⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀     ⠀
+     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠀
+             @NeoVim của Dwcks 🦀             ]],
+      items = {
+        { name = 'Find File 🔍 (f)', action = ':lua MiniPick.builtin.files()', section = 'Keymaps' },
+        { name = 'New File 📝 (n)', action = ':ene | startinsert', section = 'Keymaps' },
+        { name = 'Grep 🔎 (g)', action = ':lua MiniPick.builtin.grep_live()', section = 'Keymaps' },
+        {
+          name = 'Recent Files 🕑 (r)',
+          action = ':Pick oldfiles',
+          section = 'Keymaps',
+        },
+        {
+          name = 'Config ⚙️ (c)',
+          action = function()
+            require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })
+          end,
+          section = 'Keymaps',
+        },
+        { name = 'Lazy 💤 (L)', action = ':Lazy', section = 'Keymaps' },
+        { name = 'Quit 🚪 (q)', action = ':qa', section = 'Keymaps' },
+        {
+          name = 'Projects 🗂️ (p)',
+          action = function()
+            local roots = { '~/Projects', '~/Projects-to-plays', '~/Playground' }
+            local projects = {}
+            for _, dir in ipairs(roots) do
+              local abs_dir = vim.fn.expand(dir)
+              local handle = vim.loop.fs_scandir(abs_dir)
+              if handle then
+                while true do
+                  local name, t = vim.loop.fs_scandir_next(handle)
+                  if not name then
+                    break
+                  end
+                  if t == 'directory' then
+                    table.insert(projects, abs_dir .. '/' .. name)
+                  end
+                end
+              end
+            end
+            require('mini.pick').start {
+              source = {
+                name = 'Projects',
+                items = projects,
+              },
+              action = function(path)
+                vim.cmd('tabnew ' .. path)
+              end,
+            }
+          end,
+          section = 'Keymaps',
+        },
       },
+      footer = [[
+─────────────────────────────────────────────
+🔎 Type query to filter   ⌫ <BS>: delete
+⎋ <Esc>: reset query     🔒 <C-c>: close
+⬆️ <Up>/<Down>: move     🆗 <CR>: select
+🔽 <C-n>/<C-p>: move     🔀 <M-j>/<M-k>: move
+─────────────────────────────────────────────
+]],
     }
 
     -- require('mini.clue').setup {

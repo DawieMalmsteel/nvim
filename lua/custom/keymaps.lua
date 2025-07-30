@@ -4,6 +4,7 @@ local picker = Snacks.picker
 local mini_files = require 'mini.files'
 local mini_pick = require 'mini.pick'
 local mini_extra = require 'mini.extra'
+local mini_starter = require 'mini.starter'
 
 -- Decriptions for keymaps
 map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
@@ -109,9 +110,7 @@ map('n', '<leader>fb', function()
   picker.buffers()
 end, { desc = 'Buffers' })
 
-map('n', '<leader>ff', function()
-  picker.files()
-end, { desc = 'Find Files' })
+map('n', '<leader>ff', '<CMD>Pick files<CR>', { desc = 'Find Files' })
 
 map('n', '<leader>fr', function()
   picker.recent { live = true }
@@ -196,7 +195,11 @@ map('n', '<leader>fc', "<CMD>lua require('mini.files').open(vim.fn.stdpath('conf
 
 -- Keymaps adapted from Telescope, using command strings to avoid nil errors
 map('n', '<leader>sh', '<CMD>Pick help<CR>', { desc = 'Search [H]elp' })
-map('n', '<leader><leader>', '<CMD>Pick files<CR>', { desc = 'Search [F]iles' })
+map('n', '<leader><leader>', function()
+  local file = vim.api.nvim_buf_get_name(0)
+  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+  mini_pick.builtin.files(nil, { source = { cwd = dir } })
+end, { desc = 'Search [F]iles in file root or cwd' })
 map('n', '<leader>sg', '<CMD>Pick grep_live<CR>', { desc = 'Search by [G]rep' })
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search [R]esume' })
 map('n', '<leader>r', '<CMD>Pick buffers<CR>', { desc = '[ ] Find existing buffers' })
@@ -206,9 +209,6 @@ map('n', '<leader>sw', function()
 end, { desc = 'Search current Word' })
 map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = '[/] Fuzzily search' })
 map('n', '<leader>sk', '<CMD>Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
--- map('n', '<leader>ss', function()
---   require('mini.pick').builtin.files()
--- end, { desc = '[S]earch [S]elect MiniPick' })
 
 -- LSP keymaps
 map('n', 'grd', function()
@@ -249,6 +249,10 @@ map('n', '[c', function()
 end, { silent = true, desc = 'Go to upward Treesitter context' })
 -- Toggle Treesitter context
 map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
+-- Open mini starter
+map('n', '<leader>uo', function()
+  mini_starter.open()
+end, { desc = 'Open MiniStarter' })
 
 -- Lazygit test
 -- map('n', '<leader>gm', function()

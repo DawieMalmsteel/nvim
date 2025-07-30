@@ -243,6 +243,11 @@ map('n', 'grN', function() --TODO: implement Mini Notification for this
   end
 end, { desc = 'Rename current file' })
 
+-- Treesitter context keymaps
+map('n', '[c', function()
+  require('treesitter-context').go_to_context(vim.v.count1)
+end, { silent = true, desc = 'Go to upward Treesitter context' })
+
 -- Lazygit test
 -- map('n', '<leader>gm', function()
 --   vim.cmd 'Floaterminal lazygit'

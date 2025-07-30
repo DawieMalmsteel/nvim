@@ -26,10 +26,10 @@ return { -- Collection of various small independent plugins/modules
         style = 'sign',
       },
       mappings = {
-        goto_first = '[C',
-        goto_prev = '[c',
-        goto_next = ']c',
-        goto_last = ']C',
+        goto_first = '[G',
+        goto_prev = '[g',
+        goto_next = ']g',
+        goto_last = ']G',
       },
     }
     require('mini.notify').setup() -- TODO: add keybindings for notifications

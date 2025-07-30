@@ -5,21 +5,8 @@ return {
   {
     'folke/snacks.nvim',
     opts = {
-      lazygit = {
-        -- your lazygit configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      },
-      bigfile = {
-        -- your bigfile configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      },
-      explore = {
-        replace_netrw = true,
-      },
       dashboard = {
-        enabled = true,
+        enabled = false, -- disable the dashboard by default
         width = 80,
         row = nil, -- dashboard position. nil for center
         col = nil, -- dashboard position. nil for center

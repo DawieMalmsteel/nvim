@@ -5,6 +5,7 @@ local mini_files = require 'mini.files'
 local mini_pick = require 'mini.pick'
 local mini_extra = require 'mini.extra'
 local mini_starter = require 'mini.starter'
+local mini_map = require 'mini.map'
 
 -- Decriptions for keymaps
 map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
@@ -249,10 +250,20 @@ map('n', '[c', function()
 end, { silent = true, desc = 'Go to upward Treesitter context' })
 -- Toggle Treesitter context
 map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
+
 -- Open mini starter
 map('n', '<leader>uo', function()
   mini_starter.open()
 end, { desc = 'Open MiniStarter' })
+
+-- Open Mini map
+map('n', '<leader>um', function()
+  mini_map.toggle()
+end, { desc = 'Toggle Mini Map' })
+-- Toggle Mini map focus
+map('n', '<leader>uM', function()
+  mini_map.toggle_focus()
+end, { desc = 'Toggle Mini Map Focus' })
 
 -- Lazygit test
 -- map('n', '<leader>gm', function()

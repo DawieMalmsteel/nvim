@@ -68,8 +68,9 @@ map('n', '<leader>gB', function()
 end, { desc = 'Pick and Change Git Branches' })
 
 map('n', '<leader>gs', function()
-  Snacks.picker.git_status { cwd = vim.fn.expand '%:p:h' }
-end, { desc = 'Git Status' })
+  vim.cmd('cd ' .. vim.fn.expand '%:p:h')
+  vim.cmd 'Pick git_hunks'
+end, { desc = 'Open git hunks (cwd to file dir)' })
 
 map('n', '<leader>gS', function()
   Snacks.picker.git_stash { cwd = vim.fn.expand '%:p:h' }

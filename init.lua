@@ -690,6 +690,24 @@ require('lazy').setup({
             unusedparams = true,
           },
         },
+        intelephense = {
+          -- cmd = { ... },
+          -- filetypes = { ... },
+          -- capabilities = {},
+          settings = {
+            intellicode = {
+              enable = true,
+              suggest = {
+                autoImports = true,
+                localKeywords = true,
+                localVariables = true,
+              },
+            },
+          },
+        },
+        elixirls = {
+          cmd = { vim.fn.stdpath 'data' .. '/mason/packages/elixir-ls/language_server.sh' },
+        },
         pyright = {},
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs

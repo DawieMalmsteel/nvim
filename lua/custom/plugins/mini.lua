@@ -284,7 +284,7 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
-    require('mini.sessions').setup()
+    require('mini.sessions').setup() -- TODO: implement multiple sessions and keybindings for multiple sessions
 
     -- Simple and easy statusline.
     --  You could remove this setup call if you don't like it,

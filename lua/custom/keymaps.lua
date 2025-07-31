@@ -91,8 +91,8 @@ map('n', '<leader>qd', '<CMD>close<CR>', { desc = 'Close Window (Keep Buffer)' }
 
 -- Resize window
 map('n', '<C-Up>', ':resize +1<CR>', { desc = 'Tăng chiều cao cửa sổ' })
-map('n', '<C->Down', ':resize -1<CR>', { desc = 'Giảm chiều cao cửa sổ' })
-map('n', '<C->Right', ':vertical resize +1<CR>', { desc = 'Tăng chiều rộng cửa sổ' })
+map('n', '<C-Down>', ':resize -1<CR>', { desc = 'Giảm chiều cao cửa sổ' })
+map('n', '<C-Right>', ':vertical resize +1<CR>', { desc = 'Tăng chiều rộng cửa sổ' })
 map('n', '<C-Left>', ':vertical resize -1<CR>', { desc = 'Giảm chiều rộng cửa sổ' })
 
 -- Wraptext

@@ -2,6 +2,12 @@ return {
   {
     'AlexvZyl/nordic.nvim',
     config = function()
+      require('nordic').setup {
+        transparent = {
+          bg = false,
+          float = false,
+        },
+      }
       vim.cmd.colorscheme 'nordic'
     end,
   },

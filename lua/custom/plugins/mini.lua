@@ -1,3 +1,5 @@
+-- TODO: Split code into multiple files for better organization and maintainability
+-- TODO: Add more plugins or modules as needed
 return { -- Collection of various small independent plugins/modules
   'echasnovski/mini.nvim',
   config = function()
@@ -282,7 +284,7 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
-    require('mini.sessions').setup() -- TODO: add keybindings for sessions
+    require('mini.sessions').setup()
 
     -- Simple and easy statusline.
     --  You could remove this setup call if you don't like it,

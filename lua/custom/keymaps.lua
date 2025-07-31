@@ -13,7 +13,7 @@ map({ 'n', 'v' }, '<leader>a', '', { desc = '+ai' })
 map({ 'n', 'v' }, '<leader>cp', '', { desc = '+copilot' })
 map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
 map({ 'n', 'v' }, '<leader>g', '', { desc = '+git' })
-map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })
+map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui and session' })
 map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
 map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
 
@@ -78,9 +78,20 @@ end, { desc = 'Git Stash' })
 
 -- Quit
 map('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'quit all' })
-map('n', '<leader>q<ESC>', '<CMD>qa!<CR>', { desc = 'quit all !' })
+map('n', '<leader>qQ', '<CMD>qa!<CR>', { desc = 'quit all !' })
 map('n', '<leader>qb', '<CMD>bd<CR>', { desc = 'Quit Buffer (Keep Window)' })
 map('n', '<leader>qB', '<CMD>bw<CR>', { desc = 'Quit Buffer and windows' })
+map('n', '<leader>qw', function()
+  local session_file = 'Session.vim'
+  local uv = vim.loop
+  local stat = uv.fs_stat(session_file)
+  if stat then
+    vim.cmd('mksession! ' .. session_file)
+  else
+    vim.cmd('mksession ' .. session_file)
+  end
+  vim.cmd 'qa'
+end, { desc = 'Save session and quit' })
 
 -- Window management
 map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })
@@ -281,6 +292,27 @@ end, { desc = 'Toggle Mini Map' })
 map('n', '<leader>uM', function()
   mini_map.toggle_focus()
 end, { desc = 'Toggle Mini Map Focus' })
+
+-- Mini session
+map('n', '<leader>us', function()
+  require('mini.sessions').select()
+end, { desc = 'Open Session' })
+map('n', '<leader>usw', function()
+  require('mini.sessions').write()
+end, { desc = 'Write Session' })
+map('n', '<leader>usR', function()
+  require('mini.sessions').delete(nil, { force = true })
+end, { desc = 'Remove Session' })
+map('n', '<leader>usl', function()
+  require('mini.sessions').select()
+end, { desc = 'List Sessions' })
+map('n', '<leader>usL', function()
+  require('mini.sessions').read(nil, { force = true })
+end, { desc = 'Load Last Session (Current Project)' })
+
+map('n', '<leader>usc', function()
+  vim.cmd 'mksession'
+end, { desc = 'Create Session (:mksession)' })
 
 -- Lazygit test
 -- map('n', '<leader>gm', function()

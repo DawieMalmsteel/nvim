@@ -10,7 +10,7 @@ return {
       --     -- float = true,
       --   },
       -- }
-      vim.cmd.colorscheme 'kanagawa'
+      vim.cmd.colorscheme 'nordic'
     end,
   },
   -- {

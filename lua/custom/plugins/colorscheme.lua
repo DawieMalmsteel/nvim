@@ -1,14 +1,16 @@
 return {
+  { 'sainnhe/gruvbox-material' },
+  { 'rebelot/kanagawa.nvim' },
   {
     'AlexvZyl/nordic.nvim',
     config = function()
-      require('nordic').setup {
-        transparent = {
-          -- bg = true,
-          -- float = true,
-        },
-      }
-      vim.cmd.colorscheme 'nordic'
+      -- require('nordic').setup {
+      --   transparent = {
+      --     -- bg = true,
+      --     -- float = true,
+      --   },
+      -- }
+      vim.cmd.colorscheme 'kanagawa'
     end,
   },
   -- {
@@ -32,8 +34,6 @@ return {
   --     transparent_background = false,
   --   },
   -- },
-  { 'sainnhe/gruvbox-material' },
-  -- { 'rebelot/kanagawa.nvim' },
   -- {
   --   'folke/tokyonight.nvim',
   --   priority = 1000, -- Make sure to load this before all the other start plugins.

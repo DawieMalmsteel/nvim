@@ -4,8 +4,8 @@ return {
     config = function()
       require('nordic').setup {
         transparent = {
-          bg = false,
-          float = false,
+          -- bg = true,
+          -- float = true,
         },
       }
       vim.cmd.colorscheme 'nordic'
@@ -32,7 +32,7 @@ return {
   --     transparent_background = false,
   --   },
   -- },
-  -- { 'sainnhe/gruvbox-material' },
+  { 'sainnhe/gruvbox-material' },
   -- { 'rebelot/kanagawa.nvim' },
   -- {
   --   'folke/tokyonight.nvim',

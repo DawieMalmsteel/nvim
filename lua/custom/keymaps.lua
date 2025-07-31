@@ -126,11 +126,20 @@ map('n', '<leader>gL', function()
   picker.git_log_line()
 end, { desc = 'Git Log Line' })
 
-map('n', '<leader>gf', '<CMD>Pick git_files<CR>', { desc = 'Open git files' })
-map('n', '<leader>gc', '<CMD>Pick git_commits<CR>', { desc = 'Open git commits' })
+map('n', '<leader>gf', function()
+  vim.cmd('cd ' .. vim.fn.expand '%:p:h')
+  vim.cmd 'Pick git_files'
+end, { desc = 'Open git files (cwd to file dir)' })
+
+map('n', '<leader>gc', function()
+  vim.cmd('cd ' .. vim.fn.expand '%:p:h')
+  vim.cmd 'Pick git_commits'
+end, { desc = 'Open git commits (cwd to file dir)' })
+
 map('n', '<leader>go', function()
+  vim.cmd('cd ' .. vim.fn.expand '%:p:h')
   require('mini.diff').toggle_overlay(0)
-end, { desc = 'Toggle mini.diff overlay' })
+end, { desc = 'Toggle mini.diff overlay (cwd to file dir)' })
 
 map('n', '<leader>;', function()
   picker.command_history()
@@ -192,7 +201,9 @@ map('n', '<leader>fm', function()
   mini_files.open(vim.uv.cwd(), true)
 end, { desc = 'Open mini.files (cwd)' })
 
-map('n', '<leader>fc', "<CMD>lua require('mini.files').open(vim.fn.stdpath('config'))<CR>", { noremap = true, silent = true })
+map('n', '<leader>fc', "<CMD>lua require('mini.files').open(vim.fn.stdpath('config'))<CR>", { desc = 'Open mini.files (nvim config)' })
+map('n', '<leader>fR', '<CMD>Pick registers<CR>', { desc = 'Open register' })
+map('n', '<leader>fM', '<CMD>Pick marks<CR>', { desc = 'Open marks' })
 
 -- Keymaps adapted from Telescope, using command strings to avoid nil errors
 map('n', '<leader>sh', '<CMD>Pick help<CR>', { desc = 'Search [H]elp' })

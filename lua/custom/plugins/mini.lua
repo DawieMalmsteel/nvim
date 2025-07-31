@@ -106,7 +106,7 @@ return { -- Collection of various small independent plugins/modules
       },
       footer = [[
 ─────────────────────────────────────────────
-🔎 Type query to filter   ⌫ <BS>: delete
+🔎 Type to query          ⌫ <BS>: delete
 ⎋ <Esc>: reset query     🔒 <C-c>: close
 ⬆️ <Up>/<Down>: move     🆗 <CR>: select
 🔽 <C-n>/<C-p>: move     🔀 <M-j>/<M-k>: move

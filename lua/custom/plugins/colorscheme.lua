@@ -28,7 +28,9 @@ return {
     name = 'catppuccin',
     priority = 1001,
     opts = {
-      transparent_background = true,
+      transparent_background = false,
     },
   },
+  { 'sainnhe/gruvbox-material' },
+  { 'rebelot/kanagawa.nvim' },
 }

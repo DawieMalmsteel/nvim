@@ -309,6 +309,9 @@ end, { desc = 'List Sessions' })
 map('n', '<leader>usL', function()
   require('mini.sessions').read(nil, { force = true })
 end, { desc = 'Load Last Session (Current Project)' })
+map('n', '<leader>ql', function()
+  require('mini.sessions').read(nil, { force = true })
+end, { desc = 'Load Last Session (Current Project)' })
 
 map('n', '<leader>usc', function()
   vim.cmd 'mksession'

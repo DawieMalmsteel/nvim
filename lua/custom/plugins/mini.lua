@@ -18,6 +18,12 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
     require('mini.tabline').setup()
+    vim.cmd [[
+  highlight TabLine guibg=#282c34 guifg=#abb2bf
+  highlight TabLineSel guibg=#61afef guifg=#282c34
+  highlight TabLineFill guibg=NONE guifg=#5c6370
+]]
+
     require('mini.indentscope').setup()
     require('mini.hipatterns').setup {
       tailwind = {

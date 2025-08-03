@@ -14,12 +14,12 @@ else
   set shortmess=aoO
 endif
 badd +21 ~/.config/nvim/init.lua
-badd +5 mini.lua
-badd +302 ~/.config/nvim/lua/custom/keymaps.lua
-badd +16 colorscheme.lua
+badd +741 mini.lua
+badd +1 ~/.config/nvim/lua/custom/keymaps.lua
+badd +30 colorscheme.lua
 argglobal
 %argdel
-edit mini.lua
+edit colorscheme.lua
 argglobal
 balt ~/.config/nvim/lua/custom/keymaps.lua
 setlocal foldmethod=manual
@@ -32,12 +32,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 5 - ((4 * winheight(0) + 11) / 23)
+let s:l = 30 - ((11 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 5
-normal! 07|
+keepjumps 30
+normal! 08|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

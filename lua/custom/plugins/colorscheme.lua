@@ -10,68 +10,31 @@ return {
           float = true,
         },
       }
-      -- vim.cmd.colorscheme 'nordic'
-    end,
-  },
+      vim.cmd.colorscheme 'nordic'
 
-  {
-    'V4N1LLA-1CE/xcodedark.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require('xcodedark').setup {
-        transparent = true,
-        integrations = {
-          telescope = true,
-          nvim_tree = true,
-          gitsigns = true,
-          bufferline = true,
-          incline = true,
-          lazygit = true,
-          which_key = true,
-          notify = true,
-        },
-      }
-      vim.cmd.colorscheme 'xcodedark'
+      vim.cmd [[
+        highlight TabLine guibg=NONE guifg=#abb2bf
+        highlight TabLineSel guibg=#61afef guifg=#282c34
+        highlight TabLineFill guibg=NONE guifg=#5c6370
+
+        highlight MiniTablineCurrent guibg=NONE guifg=#98c379
+        highlight MiniTablineVisible guibg=NONE guifg=#abb2bf
+        highlight MiniTablineHidden guibg=NONE guifg=#5c6370
+        highlight MiniTablineModifiedCurrent guibg=NONE guifg=#e06c75
+        highlight MiniTablineModifiedVisible guibg=NONE guifg=#e5c07b
+        highlight MiniTablineModifiedHidden guibg=NONE guifg=#e5c07b
+        highlight MiniTablineTabpagesection guibg=NONE guifg=#61afef
+        highlight MiniTablineFill guibg=NONE guifg=#5c6370
+        highlight MiniTablineTrunc guibg=NONE guifg=#5c6370
+        highlight MiniStarterItemBullet guibg=NONE guifg=#61afef
+        highlight MiniHipatterns_abb2bf_bg guibg=NONE guifg=#abb2bf
+        highlight MiniHipatterns_61afef_bg guibg=NONE guifg=#61afef
+
+        highlight StatusLine guibg=NONE
+        highlight StatusLineNC guibg=NONE
+        highlight StatusLineTerm guibg=NONE
+        highlight StatusLineTermNC guibg=NONE
+      ]]
     end,
   },
-  -- {
-  --   'navarasu/onedark.nvim',
-  --   opts = {
-  --     transparent = true,
-  --     on_highlights = function(hlgroup, color)
-  --       hlgroup.NormalFloat = { bg = color.none, fg = color.fg }
-  --     end,
-  --   },
-  -- },
-  -- {
-  --   'glepnir/zephyr-nvim',
-  --   requires = { 'nvim-treesitter/nvim-treesitter', opt = true },
-  -- },
-  -- {
-  --   'catppuccin/nvim',
-  --   name = 'catppuccin',
-  --   priority = 1001,
-  --   opts = {
-  --     transparent_background = false,
-  --   },
-  -- },
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000, -- Make sure to load this before all the other start plugins.
-  --   config = function()
-  --     ---@diagnostic disable-next-line: missing-fields
-  --     require('tokyonight').setup {
-  --       styles = {
-  --         comments = { italic = false }, -- Disable italics in comments
-  --       },
-  --     }
-  --
-  --     -- Load the colorscheme here.
-  --     -- Like many other themes, this one has different styles, and you could load
-  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --     -- vim.cmd.colorscheme 'catppuccin'
-  --     -- vim.cmd.colorscheme 'kanagawa'
-  --   end,
-  -- },
 }

@@ -102,6 +102,13 @@ return { -- Collection of various small independent plugins/modules
           section = 'Keymaps',
         },
         {
+          name = 'Session load lastest 🔄 (S)',
+          action = function()
+            require('mini.sessions').read(nil, { force = true })
+          end,
+          section = 'Keymaps',
+        },
+        {
           name = 'Config ⚙️ (c)',
           action = function()
             require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })

@@ -3,7 +3,7 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/.config/nvim
+cd ~/.config/nvim/lua/custom/plugins
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
@@ -13,15 +13,15 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +21 init.lua
-badd +2 lua/custom/plugins/mini.lua
-badd +302 lua/custom/keymaps.lua
-badd +16 lua/custom/plugins/colorscheme.lua
+badd +21 ~/.config/nvim/init.lua
+badd +5 mini.lua
+badd +302 ~/.config/nvim/lua/custom/keymaps.lua
+badd +16 colorscheme.lua
 argglobal
 %argdel
-edit lua/custom/plugins/colorscheme.lua
+edit mini.lua
 argglobal
-balt lua/custom/keymaps.lua
+balt ~/.config/nvim/lua/custom/keymaps.lua
 setlocal foldmethod=manual
 setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
 setlocal foldmarker={{{,}}}
@@ -32,12 +32,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 16 - ((10 * winheight(0) + 11) / 23)
+let s:l = 5 - ((4 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 16
-normal! 09|
+keepjumps 5
+normal! 07|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

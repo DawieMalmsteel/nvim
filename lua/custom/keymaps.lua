@@ -122,12 +122,18 @@ map('n', '<leader>uc', '<CMD>Pick colorschemes<CR>', { desc = 'Change theme' })
 map('n', '<Tab>', '<CMD>bnext<CR>', { desc = 'Next Buffer' })
 map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
 
+-- Oil
+map('n', '<leader>O', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
+
 -- Snacks picker
 map('n', '<leader>fb', function()
   picker.buffers()
 end, { desc = 'Buffers' })
 
-map('n', '<leader>ff', '<CMD>Pick files<CR>', { desc = 'Find Files' })
+map('n', '<leader>ff', function()
+  vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
+  vim.cmd 'Pick files'
+end, { desc = 'Find Files' })
 
 map('n', '<leader>fr', function()
   picker.recent { live = true }
@@ -228,7 +234,12 @@ map('n', '<leader><leader>', function()
   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
   mini_pick.builtin.files(nil, { source = { cwd = dir } })
 end, { desc = 'Search [F]iles in file root or cwd' })
-map('n', '<leader>sG', '<CMD>Pick grep_live<CR>', { desc = 'Search by [G]rep' })
+
+map('n', '<leader>sG', function()
+  vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
+  vim.cmd 'Pick grep_live'
+end, { desc = 'Search by [G]rep' })
+
 map('n', '<leader>sg', function()
   local file = vim.api.nvim_buf_get_name(0)
   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()

@@ -77,7 +77,7 @@ map('n', '<leader>gT', function()
 end, { desc = 'Git Stash' })
 
 map('n', '<leader>gS', function()
-  Snacks.picker.git_status()
+  Snacks.picker.git_status { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git Status' })
 
 -- Quit

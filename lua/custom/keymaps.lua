@@ -72,9 +72,13 @@ map('n', '<leader>gs', function()
   vim.cmd 'Pick git_hunks'
 end, { desc = 'Open git hunks (cwd to file dir)' })
 
-map('n', '<leader>gS', function()
+map('n', '<leader>gT', function()
   Snacks.picker.git_stash { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git Stash' })
+
+map('n', '<leader>gS', function()
+  Snacks.picker.git_status()
+end, { desc = 'Git Status' })
 
 -- Quit
 map('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'quit all' })

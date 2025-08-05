@@ -34,7 +34,7 @@ return {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
     },
     keys = {
-      { '<c-s>', '<CR>', ft = 'copilot-chat', desc = 'Submit Prompt', remap = true },
+      { '<C-s>', '<CR>', ft = 'copilot-chat', desc = 'Submit Prompt', remap = true },
       {
         '<leader>aa',
         function()
@@ -99,7 +99,9 @@ return {
       },
     },
     opts = {
-      model = 'gpt-4.1',
+      model = 'claude-sonnet-4',
+      -- model = 'gpt-4.1',
+      -- model = 'gemini-2.5-flash',
       debug = false,
       temperature = 0,
       sticky = '#buffers',
@@ -152,6 +154,7 @@ return {
           disabled = false,
         },
         gemini = {
+
           get_headers = function()
             local api_key = assert(os.getenv 'GEMINI_API_KEY', 'GEMINI_API_KEY env not set')
             return {
@@ -207,6 +210,15 @@ return {
     },
     config = function(_, opts)
       local chat = require 'CopilotChat'
+
+      -- Đảm bảo provider tồn tại
+      opts.providers = opts.providers or {}
+      opts.providers.gemini = opts.providers.gemini or {}
+
+      -- Require đúng module sau khi plugin đã load
+      local providers = require 'CopilotChat.config.providers'
+      opts.providers.gemini.prepare_input = providers.copilot.prepare_input
+      opts.providers.gemini.prepare_output = providers.copilot.prepare_output
 
       vim.api.nvim_create_autocmd('BufEnter', {
         pattern = 'copilot-*',

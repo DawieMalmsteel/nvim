@@ -345,7 +345,8 @@ end, { desc = 'Load Last Session (Current Project)' })
 map('n', '<leader>usc', function()
   vim.cmd 'mksession'
 end, { desc = 'Create Session (:mksession)' })
-
+-- Edit file
+map('n', '<leader><Tab>', ':e<Space>', { desc = 'Edit file' })
 -- Lazygit test
 -- map('n', '<leader>gm', function()
 --   vim.cmd 'Floaterminal lazygit'

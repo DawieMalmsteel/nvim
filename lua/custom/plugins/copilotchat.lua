@@ -6,7 +6,7 @@ return {
 
     dependencies = {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
-      { 'echasnovski/mini.pick', version = false },
+      -- { 'echasnovski/mini.pick', version = false },
     },
     keys = {
       { '<C-s>', '<CR>', ft = 'copilot-chat', desc = 'Submit Prompt', remap = true },
@@ -75,10 +75,11 @@ return {
     },
     opts = function()
       return {
-        -- model = 'claude-sonnet-4',
+        model = 'claude-sonnet-4',
         -- model = 'gpt-4.1',
-        provider = 'gemini',
-        model = 'gemini-2.0-flash',
+
+        -- provider = 'gemini',
+        -- model = 'gemini-2.0-flash',
         debug = false,
         temperature = 0,
         sticky = '#buffers',
@@ -99,8 +100,12 @@ return {
         prompts = {},
         providers = {
           github_models = {
-            disabled = true,
+            disabled = false,
           },
+
+          -- copilot = {
+          --   disabled = true,
+          -- },
           gemini = {
             prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
             prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
@@ -168,7 +173,7 @@ return {
         end,
       })
 
-      -- Override the file input method TODO: change to mini.pick
+      -- Override the file input method TODO: change to mini.pick, vim.ui.select=require('mini.pick').ui_select not working in copilot-chat
       local original_input = vim.ui.input
       vim.ui.input = function(input_opts, on_confirm)
         input_opts = input_opts or {}

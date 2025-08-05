@@ -34,6 +34,9 @@ return {
         highlight StatusLineNC guibg=NONE
         highlight StatusLineTerm guibg=NONE
         highlight StatusLineTermNC guibg=NONE
+
+        highlight CopilotChatHeader guifg=#7C3AED gui=bold
+        highlight CopilotChatSeparator guifg=#374151
       ]]
     end,
   },

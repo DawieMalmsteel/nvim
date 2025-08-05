@@ -268,7 +268,7 @@ return { -- Collection of various small independent plugins/modules
         content_from_bottom = false,
 
         -- Whether to cache matches (more speed and memory on repeated prompts)
-        use_cache = false,
+        use_cache = true,
       },
 
       -- Source definition. See `:h MiniPick-source`.

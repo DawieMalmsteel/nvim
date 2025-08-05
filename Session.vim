@@ -13,43 +13,26 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +23 init.lua
-badd +220 lua/custom/keymaps.lua
-badd +38 lua/custom/plugins/colorscheme.lua
-badd +1 lua/custom/plugins/kulala.lua
-badd +1 lua/custom/plugins/oil.lua
-badd +39 lua/kickstart/plugins/lint.lua
-badd +3 lua/custom/plugins/codecompanion.lua
-badd +2 lua/custom/plugins/gemini.lua
-badd +102 lua/custom/plugins/copilot.lua
-badd +15 lua/custom/plugins/avante.lua
+badd +1 copilot-chat
+badd +19 lua/custom/plugins/mini.lua
 argglobal
 %argdel
-edit lua/custom/plugins/gemini.lua
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
+edit copilot-chat
 argglobal
-balt lua/custom/plugins/codecompanion.lua
-setlocal foldmethod=manual
-setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
+balt lua/custom/plugins/mini.lua
+setlocal foldmethod=expr
+setlocal foldexpr=v:lua.CopilotChatFoldExpr(v:lnum,\ 'â”€â”€â”€')
 setlocal foldmarker={{{,}}}
 setlocal foldignore=#
-setlocal foldlevel=0
+setlocal foldlevel=99
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 2 - ((1 * winheight(0) + 12) / 25)
+let s:l = 1 - ((0 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
+keepjumps 1
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
@@ -58,8 +41,6 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

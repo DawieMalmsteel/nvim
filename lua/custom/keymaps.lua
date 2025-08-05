@@ -135,6 +135,10 @@ map('n', '<leader>ff', function()
   vim.cmd 'Pick files'
 end, { desc = 'Find Files' })
 
+-- map('n', '<leader>ff', function()
+--   picker.files { live = true, prompt = 'Find Files> ' }
+-- end, { desc = 'Find Files' })
+
 map('n', '<leader>fr', function()
   picker.recent { live = true }
 end, { desc = 'Recent Files' })

@@ -228,6 +228,31 @@ return {
         end,
       })
 
+      -- Override the file input method to use mini.pick
+      local original_input = vim.ui.input
+      vim.ui.input = function(input_opts, on_confirm)
+        input_opts = input_opts or {}
+        local prompt = input_opts.prompt or ''
+
+        -- Check if this is CopilotChat asking for a file
+        if prompt:match 'file' or prompt:match 'path' then
+          vim.ui.select(vim.fn.glob('**/*', false, true), {
+            prompt = prompt,
+            format_item = function(item)
+              return item
+            end,
+          }, function(selected)
+            if selected then
+              on_confirm(selected)
+            else
+              on_confirm(input_opts.default)
+            end
+          end)
+        else
+          original_input(input_opts, on_confirm)
+        end
+      end
+
       chat.setup(opts)
 
       -- MCP hub setup

@@ -1,6 +1,6 @@
 return {
-  { 'sainnhe/gruvbox-material' },
-  { 'rebelot/kanagawa.nvim' },
+  -- { 'sainnhe/gruvbox-material' },
+  -- { 'rebelot/kanagawa.nvim' },
   {
     'AlexvZyl/nordic.nvim',
     config = function()

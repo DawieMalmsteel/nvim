@@ -312,6 +312,8 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
+    vim.ui.select = pick.ui_select
+
     -- Mini Snippets
     local mini_snippets = require 'mini.snippets'
     mini_snippets.setup {

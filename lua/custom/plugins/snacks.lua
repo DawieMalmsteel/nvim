@@ -6,7 +6,7 @@ return {
     'folke/snacks.nvim',
     opts = {
       -- DO NOT DELETE THIS LINE
-      picker = {},
+      -- picker = {},
       dashboard = {
         enabled = false, -- disable the dashboard by default
         width = 80,

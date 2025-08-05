@@ -220,7 +220,13 @@ map('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })
 
 -- Mini Files
 map('n', '<leader>e', function()
-  mini_files.open(vim.api.nvim_buf_get_name(0), true)
+  local current_file = vim.api.nvim_buf_get_name(0)
+  -- Check for special buffers first - only check specific known protocols
+  if current_file == '' or current_file:match '^ministarter://' or current_file:match '^oil://' or vim.fn.filereadable(current_file) ~= 1 then
+    mini_files.open(vim.fn.getcwd(), true)
+  else
+    mini_files.open(current_file, true)
+  end
 end, { desc = 'Open mini.files (Directory of Current File)' })
 
 map('n', '<leader>fm', function()
@@ -281,15 +287,20 @@ map('n', 'grt', function()
   mini_extra.pickers.lsp { scope = 'type_definition' }
 end, { desc = '[G]oto [T]ype Definition' })
 
-map('n', 'grN', function() --TODO: implement Mini Notification for this
-  local old = vim.api.nvim_buf_get_name(0)
-  local new = vim.fn.input('Rename to: ', old, 'file')
-  if new ~= '' and new ~= old then
-    vim.cmd('saveas ' .. vim.fn.fnameescape(new))
-    vim.cmd('silent! !rm ' .. vim.fn.fnameescape(old))
-    vim.cmd('bdelete ' .. vim.fn.bufnr(old))
+map('n', 'grN', function()
+  local current_file = vim.api.nvim_buf_get_name(0)
+  if current_file == '' then
+    -- Open mini.files at current working directory if no file is open
+    mini_files.open(vim.fn.getcwd(), true)
+    vim.notify('No file open. Opened mini.files at current directory', vim.log.levels.INFO)
+    return
   end
-end, { desc = 'Rename current file' })
+
+  -- Open mini.files at the current file's directory with the file selected
+  mini_files.open(current_file, true)
+
+  vim.notify('Use "r" to rename the file in mini.files', vim.log.levels.INFO)
+end, { desc = 'Rename current file with mini.files' })
 
 -- Treesitter context keymaps
 map('n', '[c', function()

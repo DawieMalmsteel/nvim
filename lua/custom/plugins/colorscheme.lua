@@ -37,6 +37,16 @@ return {
 
         highlight CopilotChatHeader guifg=#7C3AED gui=bold
         highlight CopilotChatSeparator guifg=#374151
+
+        highlight MiniStarterItem guibg=NONE guifg=#d8dee9
+        highlight MiniStarterCurrent guibg=#5e81ac guifg=#2e3440
+        highlight MiniStarterFooter guibg=NONE guifg=#81a1c1
+        highlight MiniStarterHeader guibg=NONE guifg=#88c0d0 gui=bold
+        highlight MiniStarterInactive guibg=NONE guifg=#4c566a
+        highlight MiniStarterItemBullet guibg=NONE guifg=#61afef
+        highlight MiniStarterItemPrefix guibg=NONE guifg=#a3be8c
+        highlight MiniStarterSection guibg=NONE guifg=#ebcb8b gui=bold
+        highlight MiniStarterQuery guibg=NONE guifg=#b48ead
       ]]
     end,
   },

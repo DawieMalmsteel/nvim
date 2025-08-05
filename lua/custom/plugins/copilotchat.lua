@@ -6,7 +6,6 @@ return {
 
     dependencies = {
       { 'nvim-lua/plenary.nvim', branch = 'master' },
-      -- { 'echasnovski/mini.pick', version = false },
     },
     keys = {
       { '<C-s>', '<CR>', ft = 'copilot-chat', desc = 'Submit Prompt', remap = true },

@@ -39,7 +39,6 @@ return {
         highlight CopilotChatSeparator guifg=#374151
 
         highlight MiniStarterItem guibg=NONE guifg=#d8dee9
-        highlight MiniStarterCurrent guibg=#5e81ac guifg=#2e3440
         highlight MiniStarterFooter guibg=NONE guifg=#81a1c1
         highlight MiniStarterHeader guibg=NONE guifg=#88c0d0 gui=bold
         highlight MiniStarterInactive guibg=NONE guifg=#4c566a

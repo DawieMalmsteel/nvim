@@ -1,6 +1,11 @@
 return {
   -- { 'sainnhe/gruvbox-material' },
-  { 'rebelot/kanagawa.nvim' },
+  {
+    'rebelot/kanagawa.nvim',
+    opts = {
+      transparent = true,
+    },
+  },
   {
     'AlexvZyl/nordic.nvim',
     config = function()

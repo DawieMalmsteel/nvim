@@ -173,7 +173,7 @@ return {
         end,
       })
 
-      -- Override the file input method TODO: change to mini.pick, vim.ui.select=require('mini.pick').ui_select not working in copilot-chat
+      -- Override the file input method  TODO: change to mini.pick, vim.ui.select=require('mini.pick').ui_select not working in copilot-chat
       local original_input = vim.ui.input
       vim.ui.input = function(input_opts, on_confirm)
         input_opts = input_opts or {}

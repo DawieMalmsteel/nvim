@@ -1,6 +1,6 @@
 return {
   -- { 'sainnhe/gruvbox-material' },
-  -- { 'rebelot/kanagawa.nvim' },
+  { 'rebelot/kanagawa.nvim' },
   {
     'AlexvZyl/nordic.nvim',
     config = function()
@@ -10,7 +10,7 @@ return {
           float = true,
         },
       }
-      vim.cmd.colorscheme 'nordic'
+      vim.cmd.colorscheme 'kanagawa'
 
       vim.cmd [[
         highlight TabLine guibg=NONE guifg=#abb2bf

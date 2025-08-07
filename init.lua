@@ -737,6 +737,8 @@ require('lazy').setup({
         --   enable_import_completion = true,
         -- },
 
+        jdtls = {},
+
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },

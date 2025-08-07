@@ -350,7 +350,7 @@ require('lazy').setup({
       spec = {
         { '<leader>s', group = 'Search' },
         { '<leader>t', group = 'Toggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
   },

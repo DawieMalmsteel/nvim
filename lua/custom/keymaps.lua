@@ -361,3 +361,8 @@ end, { desc = 'Create Session (:mksession)' })
 
 -- Edit file
 map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
+
+-- Toggle dashboard
+map('n', '<leader>td', function()
+  Snacks.dashboard()
+end, { desc = 'Toggle Dashboard' })

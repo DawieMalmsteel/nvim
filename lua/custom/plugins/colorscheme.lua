@@ -6,6 +6,15 @@ return {
       transparent = true,
     },
   },
+
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1001,
+    opts = {
+      transparent_background = true,
+    },
+  },
   {
     'AlexvZyl/nordic.nvim',
     config = function()
@@ -15,7 +24,7 @@ return {
           float = true,
         },
       }
-      vim.cmd.colorscheme 'kanagawa'
+      vim.cmd.colorscheme 'catppuccin-mocha'
 
       vim.cmd [[
         highlight TabLine guibg=NONE guifg=#abb2bf

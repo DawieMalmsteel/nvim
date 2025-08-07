@@ -119,7 +119,9 @@ map('n', '<leader>uc', '<CMD>Pick colorschemes<CR>', { desc = 'Change theme' })
 
 -- Switch buffer
 map('n', '<Tab>', '<CMD>bnext<CR>', { desc = 'Next Buffer' })
+map('n', 'H', '<CMD>bnext<CR>', { desc = 'Next Buffer' })
 map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
+map('n', 'L', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
 
 -- Oil
 map('n', '<leader>O', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })

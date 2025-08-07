@@ -705,18 +705,37 @@ require('lazy').setup({
             },
           },
         },
-        elixirls = {
-          cmd = { vim.fn.stdpath 'data' .. '/mason/packages/elixir-ls/language_server.sh' },
-        },
+        -- elixirls = {
+        --   cmd = { vim.fn.stdpath 'data' .. '/mason/packages/elixir-ls/language_server.sh' },
+        --   filetypes = { 'elixir', 'eelixir' },
+        --   root_dir = function(fname)
+        --     return require('lspconfig.util').root_pattern('mix.exs', '.git')(fname) or vim.fn.getcwd()
+        --   end,
+        -- },
         pyright = {},
         rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
         vtsls = {},
+
+        -- Phiên bản nhẹ của LSP C# (CSharp Language Server)
+        csharp_ls = {},
+
+        -- Phiên bản đầy đủ của LSP C# (OmniSharp) nhưng mà nặng hơn và có nhiều tính năng hơn
+        -- omnisharp = {
+        --   cmd = { vim.fn.stdpath 'data' .. '/mason/packages/omnisharp/OmniSharp' },
+        --   filetypes = { 'cs' },
+        --   root_dir = function(fname)
+        --     return require('lspconfig.util').root_pattern('*.csproj', '*.sln', '.git')(fname) or vim.fn.getcwd()
+        --   end,
+        --   handlers = {
+        --     ['textDocument/definition'] = require('omnisharp_extended').definition_handler,
+        --     ['textDocument/typeDefinition'] = require('omnisharp_extended').type_definition_handler,
+        --     ['textDocument/references'] = require('omnisharp_extended').references_handler,
+        --     ['textDocument/implementation'] = require('omnisharp_extended').implementation_handler,
+        --   },
+        --   enable_roslyn_analyzers = true,
+        --   organize_imports_on_format = true,
+        --   enable_import_completion = true,
+        -- },
 
         lua_ls = {
           -- cmd = { ... },
@@ -807,6 +826,8 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        -- ocaml = { 'ocamlformat' },
+        -- cs = { 'csharpier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -982,7 +1003,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'ocaml', 'c_sharp' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

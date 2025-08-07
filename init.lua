@@ -682,14 +682,49 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
+
         gopls = {
-          completion = { callSnippet = 'Replace' },
-          completeUnimported = true,
-          usePlaceholders = true,
           analyses = {
+            ST1003 = true,
+            fieldalignment = false,
+            fillreturns = true,
+            nilness = true,
+            nonewvars = true,
+            shadow = true,
+            undeclaredname = true,
+            unreachable = true,
             unusedparams = true,
+            unusedwrite = true,
+            useany = true,
           },
+          codelenses = {
+            generate = true, -- show the `go generate` lens.
+            regenerate_cgo = true,
+            test = true,
+            tidy = true,
+            upgrade_dependency = true,
+            vendor = true,
+          },
+          hints = {
+            assignVariableTypes = true,
+            compositeLiteralFields = true,
+            compositeLiteralTypes = true,
+            constantValues = true,
+            functionTypeParameters = true,
+            parameterNames = true,
+            rangeVariableTypes = true,
+          },
+          buildFlags = { '-tags', 'integration' },
+          completeUnimported = true,
+          diagnosticsDelay = '500ms',
+          gofumpt = true,
+          matcher = 'Fuzzy',
+          semanticTokens = true,
+          staticcheck = true,
+          symbolMatcher = 'fuzzy',
+          usePlaceholders = true,
         },
+
         intelephense = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -759,6 +794,7 @@ require('lazy').setup({
         server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
         require('lspconfig')[server_name].setup(server_config)
       end
+      require('csharpls_extended').buf_read_cmd_bind()
       -- Ensure the servers and tools above are installed
       --
       -- To check the current status of installed tools and/or manually install

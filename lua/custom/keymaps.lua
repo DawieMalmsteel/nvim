@@ -124,7 +124,7 @@ map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
 map('n', 'H', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
 
 -- Oil
-map('n', '<leader>O', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
+-- map('n', '<leader>O', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
 
 -- Snacks picker
 map('n', '<leader>fb', function()
@@ -234,7 +234,18 @@ map('n', '<leader>fm', function()
   mini_files.open(vim.uv.cwd(), true)
 end, { desc = 'Open mini.files (cwd)' })
 
-map('n', '<leader>fc', "<CMD>lua require('mini.files').open(vim.fn.stdpath('config'))<CR>", { desc = 'Open mini.files (nvim config)' })
+map(
+  'n',
+  '<leader>fC',
+  ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })",
+  { desc = 'Open mini.files (nvim config)' }
+)
+map(
+  'n',
+  '<leader>fc',
+  ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })",
+  { desc = 'Open mini.picker (nvim config)' }
+)
 map('n', '<leader>fR', '<CMD>Pick registers<CR>', { desc = 'Open register' })
 map('n', '<leader>fM', '<CMD>Pick marks<CR>', { desc = 'Open marks' })
 

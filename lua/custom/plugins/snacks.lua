@@ -6,9 +6,8 @@ return {
     'folke/snacks.nvim',
     opts = {
       -- DO NOT DELETE THIS LINE
-      -- picker = {},
       dashboard = {
-        enabled = false, -- disable the dashboard by default
+        enabled = true, -- disable the dashboard by default
         width = 80,
         row = nil, -- dashboard position. nil for center
         col = nil, -- dashboard position. nil for center
@@ -24,24 +23,53 @@ return {
           -- When using a function, the `items` argument are the default keymaps.
           ---@type snacks.dashboard.Item[]
           keys = {
-            { icon = ' ', key = 'f', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
-            { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
-            { icon = ' ', key = 'g', desc = 'Find Text', action = ":lua Snacks.dashboard.pick('live_grep')" },
-            { icon = ' ', key = 'r', desc = 'Recent Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
+            { icon = ' ', key = 'f', desc = 'Find File', action = ':Pick files' },
+            { icon = '', key = 'n', desc = 'New File', action = ':ene | startinsert' },
+            { icon = ' ', key = 'g', desc = 'Find Text', action = ':Pick grep_live' },
+            { icon = ' ', key = 'r', desc = 'Recent Files', action = ':Pick oldfiles' },
             {
               icon = ' ',
               key = 'c',
               desc = 'Config',
-              action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+              action = ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })",
             },
-            -- { icon = ' ', key = 's', desc = 'Restore Session', section = 'session' },
-            -- {
-            --   icon = ' ',
-            --   key = 'x',
-            --   desc = 'Lazy Extras',
-            --   action = ':LazyExtras',
-            -- },
-            { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+            {
+              icon = '',
+              key = 's',
+              desc = 'Session load latest',
+              action = ":lua require('mini.sessions').read(nil, { force = true })",
+            },
+            {
+              icon = ' ',
+              key = 'p',
+              desc = 'Projects',
+              action = function()
+                local roots = { '~/Projects', '~/Projects-to-plays', '~/Playground' }
+                local projects = {}
+                for _, dir in ipairs(roots) do
+                  local abs_dir = vim.fn.expand(dir)
+                  local handle = vim.loop.fs_scandir(abs_dir)
+                  if handle then
+                    while true do
+                      local name, t = vim.loop.fs_scandir_next(handle)
+                      if not name then
+                        break
+                      end
+                      if t == 'directory' then
+                        table.insert(projects, abs_dir .. '/' .. name)
+                      end
+                    end
+                  end
+                end
+                require('mini.pick').start {
+                  source = { name = 'Projects', items = projects },
+                  action = function(path)
+                    vim.cmd('tabnew ' .. path)
+                  end,
+                }
+              end,
+            },
+            { icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
             { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
           },
 

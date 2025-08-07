@@ -85,78 +85,78 @@ return { -- Collection of various small independent plugins/modules
     require('mini.visits').setup()
     require('mini.icons').setup()
     require('mini.clue').setup()
-    require('mini.starter').setup {
-      header = [[
-     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀     ⠀
-     ⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟     ⠀
-     ⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀     ⠀
-     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠀
-             @NeoVim của Dwcks 🦀             ]],
-      items = {
-        { name = 'Find File 🔍 (f)', action = ':lua MiniPick.builtin.files()', section = 'Keymaps' },
-        { name = 'New File 📝 (n)', action = ':ene | startinsert', section = 'Keymaps' },
-        { name = 'Grep 🔎 (g)', action = ':lua MiniPick.builtin.grep_live()', section = 'Keymaps' },
-        {
-          name = 'Recent Files 🕑 (r)',
-          action = ':Pick oldfiles',
-          section = 'Keymaps',
-        },
-        {
-          name = 'Session load lastest 🔄 (S)',
-          action = function()
-            require('mini.sessions').read(nil, { force = true })
-          end,
-          section = 'Keymaps',
-        },
-        {
-          name = 'Config ⚙️ (c)',
-          action = function()
-            require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })
-          end,
-          section = 'Keymaps',
-        },
-        { name = 'Lazy 💤 (L)', action = ':Lazy', section = 'Keymaps' },
-        { name = 'Quit 🚪 (q)', action = ':qa', section = 'Keymaps' },
-        {
-          name = 'Projects 🗂️ (p)',
-          action = function()
-            local roots = { '~/Projects', '~/Projects-to-plays', '~/Playground' }
-            local projects = {}
-            for _, dir in ipairs(roots) do
-              local abs_dir = vim.fn.expand(dir)
-              local handle = vim.loop.fs_scandir(abs_dir)
-              if handle then
-                while true do
-                  local name, t = vim.loop.fs_scandir_next(handle)
-                  if not name then
-                    break
-                  end
-                  if t == 'directory' then
-                    table.insert(projects, abs_dir .. '/' .. name)
-                  end
-                end
-              end
-            end
-            require('mini.pick').start {
-              source = {
-                name = 'Projects',
-                items = projects,
-              },
-              action = function(path)
-                vim.cmd('tabnew ' .. path)
-              end,
-            }
-          end,
-          section = 'Keymaps',
-        },
-      },
-      footer = [[
-           |\      _,,,---,,_             
-     ZZZzz /,`.-'`'    -.  ;-;;,_         
-          |,4-  ) )-,_..;\ (  `'-'        
-         '---''(_/--'  `-'\_)             
-]],
-    }
+    --     require('mini.starter').setup {
+    --       header = [[
+    --      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀     ⠀
+    --      ⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟     ⠀
+    --      ⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀     ⠀
+    --      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠀
+    --              @NeoVim của Dwcks 🦀             ]],
+    --       items = {
+    --         { name = 'Find File 🔍 (f)', action = ':lua MiniPick.builtin.files()', section = 'Keymaps' },
+    --         { name = 'New File 📝 (n)', action = ':ene | startinsert', section = 'Keymaps' },
+    --         { name = 'Grep 🔎 (g)', action = ':lua MiniPick.builtin.grep_live()', section = 'Keymaps' },
+    --         {
+    --           name = 'Recent Files 🕑 (r)',
+    --           action = ':Pick oldfiles',
+    --           section = 'Keymaps',
+    --         },
+    --         {
+    --           name = 'Session load lastest 🔄 (S)',
+    --           action = function()
+    --             require('mini.sessions').read(nil, { force = true })
+    --           end,
+    --           section = 'Keymaps',
+    --         },
+    --         {
+    --           name = 'Config ⚙️ (c)',
+    --           action = function()
+    --             require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })
+    --           end,
+    --           section = 'Keymaps',
+    --         },
+    --         { name = 'Lazy 💤 (L)', action = ':Lazy', section = 'Keymaps' },
+    --         { name = 'Quit 🚪 (q)', action = ':qa', section = 'Keymaps' },
+    --         {
+    --           name = 'Projects 🗂️ (p)',
+    --           action = function()
+    --             local roots = { '~/Projects', '~/Projects-to-plays', '~/Playground' }
+    --             local projects = {}
+    --             for _, dir in ipairs(roots) do
+    --               local abs_dir = vim.fn.expand(dir)
+    --               local handle = vim.loop.fs_scandir(abs_dir)
+    --               if handle then
+    --                 while true do
+    --                   local name, t = vim.loop.fs_scandir_next(handle)
+    --                   if not name then
+    --                     break
+    --                   end
+    --                   if t == 'directory' then
+    --                     table.insert(projects, abs_dir .. '/' .. name)
+    --                   end
+    --                 end
+    --               end
+    --             end
+    --             require('mini.pick').start {
+    --               source = {
+    --                 name = 'Projects',
+    --                 items = projects,
+    --               },
+    --               action = function(path)
+    --                 vim.cmd('tabnew ' .. path)
+    --               end,
+    --             }
+    --           end,
+    --           section = 'Keymaps',
+    --         },
+    --       },
+    --       footer = [[
+    --            |\      _,,,---,,_
+    --      ZZZzz /,`.-'`'    -.  ;-;;,_
+    --           |,4-  ) )-,_..;\ (  `'-'
+    --          '---''(_/--'  `-'\_)
+    -- ]],
+    --     }
 
     -- TODO: Migrate to Mini Clue
     -- require('mini.clue').setup {

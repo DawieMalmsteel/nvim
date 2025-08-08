@@ -74,8 +74,8 @@ return {
     },
     opts = function()
       return {
-        model = 'claude-sonnet-4',
-        -- model = 'gpt-4.1',
+        -- model = 'claude-sonnet-4',
+        model = 'gpt-5',
 
         -- provider = 'gemini',
         -- model = 'gemini-2.0-flash',
@@ -174,21 +174,21 @@ return {
       })
 
       -- Override the file input method  TODO: change to mini.pick, vim.ui.select=require('mini.pick').ui_select not working in copilot-chat
-      local original_input = vim.ui.input
-      vim.ui.input = function(input_opts, on_confirm)
-        input_opts = input_opts or {}
-        local prompt = input_opts.prompt or ''
-
-        -- Check if this is CopilotChat asking for a file
-        if prompt:match 'file' or prompt:match 'path' then
-          local files = vim.fn.glob('**/*', false, true)
-          vim.ui.select(files, {
-            prompt = prompt,
-          }, on_confirm)
-        else
-          original_input(input_opts, on_confirm)
-        end
-      end
+      -- local original_input = vim.ui.input
+      -- vim.ui.input = function(input_opts, on_confirm)
+      --   input_opts = input_opts or {}
+      --   local prompt = input_opts.prompt or ''
+      --
+      --   -- Check if this is CopilotChat asking for a file
+      --   if prompt:match 'file' or prompt:match 'path' then
+      --     local files = vim.fn.glob('**/*', false, true)
+      --     vim.ui.select(files, {
+      --       prompt = prompt,
+      --     }, on_confirm)
+      --   else
+      --     original_input(input_opts, on_confirm)
+      --   end
+      -- end
 
       chat.setup(opts)
 

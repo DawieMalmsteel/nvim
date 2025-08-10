@@ -1114,3 +1114,11 @@ vim.opt.termguicolors = true
 -- require('bufferline').setup {}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+if vim.g.neovide then
+  vim.g.neovide_input_ime = true
+  vim.g.neovide_opacity = 0.4
+  vim.g.neovide_padding_top = 0
+  vim.g.neovide_padding_left = 0
+  vim.g.neovide_padding_right = 0
+  vim.g.neovide_padding_bottom = 0
+end

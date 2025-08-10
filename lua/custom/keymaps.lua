@@ -7,6 +7,20 @@ local mini_extra = require 'mini.extra'
 local mini_starter = require 'mini.starter'
 local mini_map = require 'mini.map'
 
+map('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Diagnostic keymaps
+map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Keybinds to make split navigation easier.
+map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
 -- Decriptions for keymaps
 map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
 map({ 'n', 'v' }, '<leader>a', '', { desc = '+ai' })

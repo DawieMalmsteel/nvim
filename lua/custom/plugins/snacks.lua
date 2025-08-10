@@ -6,6 +6,38 @@ return {
     'folke/snacks.nvim',
     opts = {
       picker = {},
+      indent = {
+        enabled = true,
+        -- hl = {
+        --   'RainbowYellow',
+        --   'RainbowBlue',
+        --   'RainbowOrange',
+        --   'RainbowGreen',
+        --   'RainbowViolet',
+        --   'RainbowCyan',
+        -- },
+
+        scope = {
+          enabled = true, -- enable highlighting the current scope
+          priority = 200,
+          char = '│',
+          underline = true, -- underline the start of the scope
+          only_current = true, -- only show scope in the current window
+          hl = 'MiniStarterSection', -- highlight group for the scope
+        },
+
+        chunk = {
+          enabled = true,
+          only_current = true,
+          char = {
+            corner_top = '╭',
+            corner_bottom = '╰',
+            horizontal = '─',
+            vertical = '│',
+            arrow = '>',
+          },
+        },
+      },
       dashboard = {
         enabled = true, -- disable the dashboard by default
         width = 80,

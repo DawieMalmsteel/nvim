@@ -19,7 +19,11 @@ return { -- Collection of various small independent plugins/modules
     require('mini.surround').setup()
     require('mini.tabline').setup()
 
-    require('mini.indentscope').setup()
+    -- require('mini.indentscope').setup {
+    --   -- symbol = '▏',
+    --   symbol = '│',
+    --   options = { try_as_border = true },
+    -- }
     require('mini.hipatterns').setup {
       tailwind = {
         enabled = true,

@@ -1,5 +1,6 @@
 return {
-  -- { 'sainnhe/gruvbox-material' },
+  { 'sainnhe/gruvbox-material' },
+
   {
     'rebelot/kanagawa.nvim',
     opts = {
@@ -60,7 +61,16 @@ return {
         highlight MiniStarterItemPrefix guibg=NONE guifg=#a3be8c
         highlight MiniStarterSection guibg=NONE guifg=#ebcb8b gui=bold
         highlight MiniStarterQuery guibg=NONE guifg=#b48ead
+
       ]]
+
+      -- highlight RainbowYellow guibg=NONE guifg=#E5C07B
+      -- highlight RainbowViolet guibg=NONE guifg=#C678DD
+      -- highlight RainbowCyan guibg=NONE guifg=#56B6C2
+      -- highlight RainbowRed guibg=NONE guifg=#E06C75
+      -- highlight RainbowBlue guibg=NONE guifg=#61AFEF
+      -- highlight RainbowOrange guibg=NONE guifg=#D19A66
+      -- highlight RainbowGreen guibg=NONE guifg=#98C379
     end,
   },
 }

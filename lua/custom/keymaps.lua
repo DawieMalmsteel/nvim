@@ -237,13 +237,13 @@ end, { desc = 'Open mini.files (cwd)' })
 map(
   'n',
   '<leader>fC',
-  ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })",
+  ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })<CR>",
   { desc = 'Open mini.files (nvim config)' }
 )
 map(
   'n',
   '<leader>fc',
-  ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })",
+  ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })<CR>",
   { desc = 'Open mini.picker (nvim config)' }
 )
 map('n', '<leader>fR', '<CMD>Pick registers<CR>', { desc = 'Open register' })

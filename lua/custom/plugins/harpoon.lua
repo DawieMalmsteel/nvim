@@ -41,6 +41,21 @@ return {
         end,
         desc = 'Harpoon File',
       },
+      {
+        '<M-n>',
+        function()
+          require('harpoon'):list():next()
+        end,
+        desc = 'Harpoon File',
+      },
+
+      {
+        '<M-p>',
+        function()
+          require('harpoon'):list():prev()
+        end,
+        desc = 'Harpoon File',
+      },
     }
 
     for i = 1, 9 do

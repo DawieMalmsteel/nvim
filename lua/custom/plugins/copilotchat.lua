@@ -75,7 +75,8 @@ return {
     opts = function()
       return {
         -- model = 'claude-sonnet-4',
-        model = 'gpt-5',
+        -- model = 'gpt-5',
+        model = 'gpt-4o',
 
         -- provider = 'gemini',
         -- model = 'gemini-2.0-flash',

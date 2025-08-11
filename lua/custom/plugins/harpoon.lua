@@ -26,11 +26,26 @@ return {
         end,
         desc = 'Harpoon Quick Menu',
       },
+      {
+        '<M-q>',
+        function()
+          local harpoon = require 'harpoon'
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = 'Harpoon Quick Menu',
+      },
+      {
+        '<M-a>',
+        function()
+          require('harpoon'):list():add()
+        end,
+        desc = 'Harpoon File',
+      },
     }
 
-    for i = 1, 5 do
+    for i = 1, 9 do
       table.insert(keys, {
-        '<leader>' .. i,
+        '<M-' .. i .. '>',
         function()
           require('harpoon'):list():select(i)
         end,

@@ -576,3 +576,4 @@ if vim.g.neovide then
   vim.o.guifont = 'Google Sans Code:h14'
   vim.g.neovide_fullscreen = true
 end
+require 'core.statusline'

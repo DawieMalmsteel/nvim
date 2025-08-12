@@ -83,6 +83,7 @@ return { -- Collection of various small independent plugins/modules
     require('mini.extra').setup()
     require('mini.visits').setup()
     require('mini.icons').setup()
+
     -- require('mini.clue').setup()
 
     require('mini.diff').setup {
@@ -218,11 +219,6 @@ return { -- Collection of various small independent plugins/modules
     }
 
     require('mini.sessions').setup() -- TODO: implement multiple sessions and keybindings for multiple sessions
-
-    -- Simple and easy statusline.
-    --  You could remove this setup call if you don't like it,
-    --  and try some other statusline plugin
-    require('mini.statusline').setup {}
 
     require('mini.files').setup {
       windows = {

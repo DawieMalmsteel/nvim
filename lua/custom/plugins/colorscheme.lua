@@ -62,7 +62,7 @@ return {
         highlight MiniStarterSection guibg=NONE guifg=#ebcb8b gui=bold
         highlight MiniStarterQuery guibg=NONE guifg=#b48ead
 
-        highlight! Normal guifg=#c3e88d
+        "highlight! Normal guifg=#c3e88d
       ]]
 
       -- highlight RainbowYellow guibg=NONE guifg=#E5C07B

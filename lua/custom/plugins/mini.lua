@@ -83,6 +83,7 @@ return { -- Collection of various small independent plugins/modules
     require('mini.extra').setup()
     require('mini.visits').setup()
     require('mini.icons').setup()
+    require('mini.statusline').setup {}
 
     -- require('mini.clue').setup()
 

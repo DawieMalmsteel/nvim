@@ -326,22 +326,39 @@ local function get_diagnostics()
   if not vim.diagnostic.is_enabled() or vim.bo.filetype == 'intro' then
     return ''
   end
-  ---@type table, table, table, table
-  local diagnostics, counts, result, severities
-  diagnostics = vim.diagnostic.get(0)
-  counts = { 0, 0, 0, 0 }
 
+  local diagnostics = vim.diagnostic.get(0)
+  local counts = { 0, 0, 0, 0 }
   for _, d in ipairs(diagnostics) do
     counts[d.severity] = (counts[d.severity] or 0) + 1
   end
 
-  result = {}
-  severities = { 'Error', 'Warn', 'Info', 'Hint' }
+  local result = {}
+  local severities = { 'Error', 'Warn', 'Info', 'Hint' }
+  local fallback_icons = { Error = '', Warn = '', Info = '', Hint = '' }
+  local fallback_colors = {
+    Error = '#FF0000', -- Red
+    Warn = '#FFA500', -- Orange
+    Info = '#00FFFF', -- Cyan
+    Hint = '#00FF00', -- Green
+  }
 
   for i, severity in ipairs(severities) do
-    local _, MiniIcons = pcall(require, 'mini.icons')
-    local icon, hl = MiniIcons.get('lsp', severity)
-    hl = statusline.define_highlight(severity, hl)
+    local icon, hl
+    local ok, MiniIcons = pcall(require, 'mini.icons')
+    if ok and MiniIcons then
+      icon, hl = MiniIcons.get('lsp', severity)
+    end
+
+    -- Fallback nếu mini.icons không trả về giá trị
+    icon = icon or fallback_icons[severity]
+    hl = hl or string.format('Statusline%s', severity)
+
+    -- Định nghĩa highlight group nếu chưa tồn tại
+    if not vim.api.nvim_get_hl_by_name(hl, true) then
+      vim.api.nvim_set_hl(0, hl, { fg = fallback_colors[severity], bg = 'NONE', bold = true })
+    end
+
     if counts[i] > 0 then
       table.insert(result, string.format('%%#%s#%s%d', hl, icon, counts[i]))
     end

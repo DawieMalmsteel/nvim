@@ -36,6 +36,7 @@ vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 vim.o.relativenumber = true
+vim.o.cmdheight = 0 -- Height of the command line, set to 1 to save space
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -576,4 +577,4 @@ if vim.g.neovide then
   vim.o.guifont = 'Google Sans Code:h14'
   vim.g.neovide_fullscreen = true
 end
-require 'core.statusline'
+-- require 'core.statusline'

@@ -27,7 +27,7 @@ return {
         desc = 'Harpoon Quick Menu',
       },
       {
-        '<M-q>',
+        '<M-w>',
         function()
           local harpoon = require 'harpoon'
           harpoon.ui:toggle_quick_menu(harpoon:list())

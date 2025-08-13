@@ -18,7 +18,6 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
     require('mini.tabline').setup()
-    -- require('mini.statusline').setup()
 
     require('mini.hipatterns').setup {
       tailwind = {
@@ -85,9 +84,22 @@ return { -- Collection of various small independent plugins/modules
     require('mini.visits').setup()
     require('mini.icons').setup()
     require('mini.git').setup()
-    -- require('mini.statusline').setup()
+    require('mini.statusline').setup()
 
     -- require('mini.clue').setup()
+
+    require('mini.diff').setup {
+      view = {
+        style = 'sign',
+      },
+      mappings = {
+        goto_first = '[G',
+        goto_prev = '[g',
+        goto_next = ']g',
+        goto_last = ']G',
+      },
+    }
+    require('mini.notify').setup() -- TODO: add keybindings for notifications
 
     -- Mini Pick  TODO: add keybindings for pick
     local pick = require 'mini.pick'

@@ -31,7 +31,7 @@ return {
         function()
           local harpoon = require 'harpoon'
           harpoon.ui:toggle_quick_menu(harpoon:list())
-          print 'Harpoon Quick Menu toggled'
+          -- print 'Harpoon Quick Menu toggled'
         end,
         desc = 'Harpoon Quick Menu',
       },
@@ -40,7 +40,7 @@ return {
         function()
           require('harpoon'):list():add()
           -- print('📌 Added to Harpoon: ' .. vim.fn.expand '%:p')
-          print '📌 Added to Harpoon'
+          -- print '📌 Added to Harpoon'
         end,
         desc = 'Harpoon File',
       },
@@ -48,7 +48,7 @@ return {
         '<M-n>',
         function()
           require('harpoon'):list():next()
-          print '➡️  Next Harpoon File'
+          -- print '➡️  Next Harpoon File'
         end,
         desc = 'Harpoon File',
       },
@@ -57,7 +57,7 @@ return {
         '<M-p>',
         function()
           require('harpoon'):list():prev()
-          print '⬅️  Previous Harpoon File'
+          -- print '⬅️  Previous Harpoon File'
         end,
         desc = 'Harpoon File',
       },
@@ -79,9 +79,9 @@ return {
 
           if index then
             table.remove(list.items, index) -- Xoá và dịch phần tử lại
-            print('🗑 Removed from Harpoon: ' .. current_file)
+            -- print('🗑 Removed from Harpoon: ' .. current_file)
           else
-            print '⚠ File not in Harpoon list'
+            -- print '⚠ File not in Harpoon list'
           end
         end,
         desc = 'Harpoon Delete File',

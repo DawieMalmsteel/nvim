@@ -99,9 +99,8 @@ return { -- Collection of various small independent plugins/modules
         goto_last = ']G',
       },
     }
-    require('mini.notify').setup() -- TODO: add keybindings for notifications
+    require('mini.notify').setup()
 
-    -- Mini Pick  TODO: add keybindings for pick
     local pick = require 'mini.pick'
 
     pick.setup {

@@ -64,14 +64,23 @@ return {
         highlight MiniStarterQuery guibg=NONE guifg=#b48ead
       ]]
 
-      -- highlight! Normal guifg=#c3e88d
-      -- highlight RainbowYellow guibg=NONE guifg=#E5C07B
-      -- highlight RainbowViolet guibg=NONE guifg=#C678DD
-      -- highlight RainbowCyan guibg=NONE guifg=#56B6C2
-      -- highlight RainbowRed guibg=NONE guifg=#E06C75
-      -- highlight RainbowBlue guibg=NONE guifg=#61AFEF
-      -- highlight RainbowOrange guibg=NONE guifg=#D19A66
-      -- highlight RainbowGreen guibg=NONE guifg=#98C379
+      vim.api.nvim_set_hl(0, 'MiniStatuslineModeNormal', { fg = '#cba6f7', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineModeInsert', { fg = '#a6e3a1', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineModeVisual', { fg = '#f9e2af', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineModeCommand', { fg = '#fab387', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineModeReplace', { fg = '#f38ba8', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineDevinfo', { fg = '#89b4fa', bg = 'NONE' }) -- Git
+      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnostics', { fg = '#f38ba8', bg = 'NONE' }) -- Diagnostics tổng
+      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsError', { fg = '#f38ba8', bg = 'NONE' }) -- Error
+      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsWarn', { fg = '#f9e2af', bg = 'NONE' }) -- Warn
+      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsInfo', { fg = '#89b4fa', bg = 'NONE' }) -- Info
+      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsHint', { fg = '#a6e3a1', bg = 'NONE' }) -- Hint
+      vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { fg = '#cdd6f4', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineLocation', { fg = '#a6e3a1', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineRecording', { fg = '#f38ba8', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineInactive', { fg = '#45475a', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NONE' }) -- Bỏ bg cho statusline tổng
+      vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = 'NONE' }) -- Bỏ bg cho inactive statusline
     end,
   },
 }

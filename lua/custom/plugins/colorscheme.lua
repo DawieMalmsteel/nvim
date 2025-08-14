@@ -7,7 +7,7 @@ return {
       transparent = true,
     },
   },
-
+  { 'shaunsingh/nord.nvim' },
   {
     'catppuccin/nvim',
     name = 'catppuccin',
@@ -25,7 +25,8 @@ return {
           float = true,
         },
       }
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      vim.cmd.colorscheme 'nordic'
+      -- vim.cmd [[colorscheme nord]]
 
       vim.cmd [[
         highlight TabLine guibg=NONE guifg=#abb2bf
@@ -61,10 +62,9 @@ return {
         highlight MiniStarterItemPrefix guibg=NONE guifg=#a3be8c
         highlight MiniStarterSection guibg=NONE guifg=#ebcb8b gui=bold
         highlight MiniStarterQuery guibg=NONE guifg=#b48ead
-
-        "highlight! Normal guifg=#c3e88d
       ]]
 
+      -- highlight! Normal guifg=#c3e88d
       -- highlight RainbowYellow guibg=NONE guifg=#E5C07B
       -- highlight RainbowViolet guibg=NONE guifg=#C678DD
       -- highlight RainbowCyan guibg=NONE guifg=#56B6C2

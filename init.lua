@@ -511,8 +511,8 @@ require('lazy').setup({
         },
       },
 
-      -- fuzzy = { implementation = 'lua' },
-      fuzzy = { implementation = 'prefer_rust_with_warning' },
+      fuzzy = { implementation = 'lua' },
+      -- fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },

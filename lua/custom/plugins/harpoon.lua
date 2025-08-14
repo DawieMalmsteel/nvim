@@ -36,7 +36,7 @@ return {
         desc = 'Harpoon Quick Menu',
       },
       {
-        '<M-a>',
+        '<M-s>',
         function()
           require('harpoon'):list():add()
           -- print('📌 Added to Harpoon: ' .. vim.fn.expand '%:p')
@@ -45,7 +45,7 @@ return {
         desc = 'Harpoon File',
       },
       {
-        '<M-n>',
+        '<M-d>',
         function()
           require('harpoon'):list():next()
           -- print '➡️  Next Harpoon File'
@@ -54,7 +54,7 @@ return {
       },
 
       {
-        '<M-p>',
+        '<M-a>',
         function()
           require('harpoon'):list():prev()
           -- print '⬅️  Previous Harpoon File'
@@ -63,7 +63,7 @@ return {
       },
 
       {
-        '<M-d>',
+        '<M-x>',
         function()
           local harpoon = require 'harpoon'
           local list = harpoon:list()

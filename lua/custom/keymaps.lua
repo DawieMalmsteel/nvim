@@ -10,7 +10,7 @@ local mini_map = require 'mini.map'
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
--- map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
@@ -442,7 +442,7 @@ map('n', '<leader>sk', function()
   Snacks.picker.keymaps()
 end, { desc = 'Keymaps' })
 
-map('n', '<leader>x', function()
+map('n', '<leader>sl', function()
   Snacks.picker.loclist()
 end, { desc = 'Location List' })
 

@@ -498,7 +498,7 @@ return { -- Collection of various small independent plugins/modules
             local current_line = vim.fn.line '.'
             local total_lines = vim.fn.line '$'
             -- local percentage = math.floor((current_line / total_lines) * 100)
-            local bar_length = 6 -- Độ dài bar vừa phải
+            local bar_length = 5 -- Độ dài bar vừa phải
             local filled_length = math.floor((current_line / total_lines) * bar_length)
             local bar_filled = string.rep('█', filled_length)
             local bar_empty = string.rep('░', bar_length - filled_length) -- Dùng '░' cho đẹp hơn '─'

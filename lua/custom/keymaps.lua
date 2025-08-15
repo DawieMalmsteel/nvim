@@ -149,10 +149,10 @@ map('n', '<leader>fb', function()
   picker.buffers()
 end, { desc = 'Buffers' })
 
-map('n', '<leader>ff', function()
-  vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
-  vim.cmd 'Pick files'
-end, { desc = 'Find Files' })
+-- map('n', '<leader>ff', function()
+--   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
+--   vim.cmd 'Pick files'
+-- end, { desc = 'Find Files' })
 
 -- map('n', '<leader>ff', function()
 --   picker.files { live = true, prompt = 'Find Files> ' }
@@ -466,9 +466,10 @@ map('n', '<leader>su', function()
   Snacks.picker.undo()
 end, { desc = 'Undotree' })
 
-map('n', '<leader>sf', function()
+map('n', '<leader>ff', function()
   Snacks.picker.buffers()
 end, { desc = 'Files buffers in Snacks' })
-map('n', '<leader>sF', function()
+
+map('n', '<leader>fF', function()
   Snacks.picker.buffers { hidden = true, nofile = true }
 end, { desc = 'Files buffers in Snacks (all)' })

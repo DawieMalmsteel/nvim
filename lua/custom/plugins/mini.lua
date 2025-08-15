@@ -447,7 +447,7 @@ return { -- Collection of various small independent plugins/modules
       use_icons = true, -- Giữ icons nếu có Nerd Font
       content = {
         active = function()
-          local mode, mode_hl = statusline.section_mode { trunc_width = 120 } -- Sử dụng section_mode mặc định, hỗ trợ Replace
+          local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
           local git = statusline.section_git { trunc_width = 75 }
           local diagnostics = function() -- Thay icon diagnostics thành chữ với màu
             if not vim.diagnostic.is_enabled() then
@@ -498,11 +498,39 @@ return { -- Collection of various small independent plugins/modules
             local current_line = vim.fn.line '.'
             local total_lines = vim.fn.line '$'
             -- local percentage = math.floor((current_line / total_lines) * 100)
-            local bar_length = 8 -- Độ dài bar vừa phải
+            local bar_length = 6 -- Độ dài bar vừa phải
             local filled_length = math.floor((current_line / total_lines) * bar_length)
             local bar_filled = string.rep('█', filled_length)
             local bar_empty = string.rep('░', bar_length - filled_length) -- Dùng '░' cho đẹp hơn '─'
             return '%#MiniStatuslineProgress#' .. bar_filled .. bar_empty -- .. ' ' .. percentage .. '%'
+          end
+
+          local harpoon_status = function()
+            local ok, harpoon = pcall(require, 'harpoon')
+            if not ok then
+              return ''
+            end
+
+            local list = harpoon:list()
+            if not list or #list.items == 0 then
+              return ''
+            end
+
+            local current_file = vim.fn.expand '%:p'
+            local harpoon_entries = {}
+
+            for i, item in ipairs(list.items) do
+              local file_path = vim.loop.fs_realpath(item.value)
+              local file_name = vim.fn.fnamemodify(file_path or '', ':t') or 'N/A' -- Lấy tên file hoặc gán giá trị mặc định
+              local short_name = file_name:sub(1, 2) -- Lấy 3 ký tự đầu tiên của tên file
+              if file_path == vim.loop.fs_realpath(current_file) then
+                table.insert(harpoon_entries, '[' .. i .. ':' .. short_name .. ']') -- Đánh dấu file hiện tại bằng dấu ngoặc vuông
+              else
+                table.insert(harpoon_entries, i .. ':' .. short_name) -- Hiển thị index và tên file rút gọn
+              end
+            end
+
+            return table.concat(harpoon_entries, ' ') -- Ngăn cách các file bằng khoảng trắng
           end
 
           return statusline.combine_groups {
@@ -513,6 +541,7 @@ return { -- Collection of various small independent plugins/modules
             { hl = 'MiniStatuslineFilename', strings = { filename } },
             '%=', -- Right align
             { strings = { recording() } },
+            { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } }, -- Thêm Harpoon ở giữa
             { hl = 'MiniStatuslineLocation', strings = { location } },
             { strings = { progress() } }, -- Progress bar ngang bên phải
           }

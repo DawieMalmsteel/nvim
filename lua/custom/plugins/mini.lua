@@ -447,7 +447,7 @@ return { -- Collection of various small independent plugins/modules
       use_icons = true, -- Giữ icons nếu có Nerd Font
       content = {
         active = function()
-          local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
+          local mode, mode_hl = statusline.section_mode { trunc_width = 120 } -- Sử dụng section_mode mặc định, hỗ trợ Replace
           local git = statusline.section_git { trunc_width = 75 }
           local diagnostics = function() -- Thay icon diagnostics thành chữ với màu
             if not vim.diagnostic.is_enabled() then
@@ -493,6 +493,18 @@ return { -- Collection of various small independent plugins/modules
             return '%#MiniStatuslineRecording#Recording @' .. reg
           end
 
+          -- Progress bar ngang màu đỏ (đẹp hơn, dài 8, chars mượt)
+          local progress = function()
+            local current_line = vim.fn.line '.'
+            local total_lines = vim.fn.line '$'
+            -- local percentage = math.floor((current_line / total_lines) * 100)
+            local bar_length = 8 -- Độ dài bar vừa phải
+            local filled_length = math.floor((current_line / total_lines) * bar_length)
+            local bar_filled = string.rep('█', filled_length)
+            local bar_empty = string.rep('░', bar_length - filled_length) -- Dùng '░' cho đẹp hơn '─'
+            return '%#MiniStatuslineProgress#' .. bar_filled .. bar_empty -- .. ' ' .. percentage .. '%'
+          end
+
           return statusline.combine_groups {
             { hl = mode_hl, strings = { mode } },
             { hl = 'MiniStatuslineDevinfo', strings = { git } },
@@ -502,6 +514,7 @@ return { -- Collection of various small independent plugins/modules
             '%=', -- Right align
             { strings = { recording() } },
             { hl = 'MiniStatuslineLocation', strings = { location } },
+            { strings = { progress() } }, -- Progress bar ngang bên phải
           }
         end,
         inactive = function()

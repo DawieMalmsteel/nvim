@@ -99,7 +99,8 @@ return { -- Collection of various small independent plugins/modules
         goto_last = ']G',
       },
     }
-    require('mini.notify').setup()
+
+    -- require('mini.notify').setup()
 
     local pick = require 'mini.pick'
 

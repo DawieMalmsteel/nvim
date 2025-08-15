@@ -93,6 +93,10 @@ map('n', '<leader>gS', function()
   Snacks.picker.git_status { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git Status' })
 
+map('n', '<leader>gd', function()
+  Snacks.picker.git_diff { cwd = vim.fn.expand '%:p:h' }
+end, { desc = 'Git diff' })
+
 -- Quit
 map('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'quit all' })
 map('n', '<leader>qQ', '<CMD>qa!<CR>', { desc = 'quit all !' })
@@ -187,8 +191,16 @@ map('n', '<leader>;', function()
 end, { desc = 'Command History' })
 
 map('n', '<leader>n', function()
-  picker.notifications()
+  if Snacks.config.picker and Snacks.config.picker.enabled then
+    Snacks.picker.notifications()
+  else
+    Snacks.notifier.show_history()
+  end
 end, { desc = 'Notification History' })
+
+map('n', '<leader>un', function()
+  Snacks.notifier.hide()
+end, { desc = 'Dismiss All Notifications' })
 
 -- custom grep picker:
 map('n', '<leader>fg', function()
@@ -283,12 +295,12 @@ map('n', '<leader>sg', function()
 end, { desc = 'Search by [G]rep in file root or cwd' })
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search [R]esume' })
 map('n', '<leader>r', '<CMD>Pick buffers<CR>', { desc = '[ ] Find existing buffers' })
-map('n', '<leader>sd', '<CMD>Pick diagnostic<CR>', { desc = 'Search [D]iagnostics' })
+-- map('n', '<leader>sd', '<CMD>Pick diagnostic<CR>', { desc = 'Search [D]iagnostics' })
 map('n', '<leader>sw', function()
   mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }
 end, { desc = 'Search current Word' })
 map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = '[/] Fuzzily search' })
-map('n', '<leader>sk', '<CMD>Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
+-- map('n', '<leader>sk', '<CMD>Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
 
 -- LSP keymaps
 map('n', 'grd', function()
@@ -314,18 +326,7 @@ map('n', 'grt', function()
 end, { desc = '[G]oto [T]ype Definition' })
 
 map('n', 'grN', function()
-  local current_file = vim.api.nvim_buf_get_name(0)
-  if current_file == '' then
-    -- Open mini.files at current working directory if no file is open
-    mini_files.open(vim.fn.getcwd(), true)
-    vim.notify('No file open. Opened mini.files at current directory', vim.log.levels.INFO)
-    return
-  end
-
-  -- Open mini.files at the current file's directory with the file selected
-  mini_files.open(current_file, true)
-
-  vim.notify('Use "r" to rename the file in mini.files', vim.log.levels.INFO)
+  Snacks.rename.rename_file()
 end, { desc = 'Rename current file with mini.files' })
 
 -- Treesitter context keymaps
@@ -380,3 +381,94 @@ map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
 map('n', '<leader>td', function()
   Snacks.dashboard()
 end, { desc = 'Toggle Dashboard' })
+
+map('n', '<leader>sb', function()
+  Snacks.picker.lines()
+end, { desc = 'Buffer Lines' })
+
+map('n', '<leader>sB', function()
+  Snacks.picker.grep_buffers()
+end, { desc = 'Grep Open Buffers' })
+
+map('n', '<leader>sp', function()
+  Snacks.picker.lazy()
+end, { desc = 'Search for Plugin Spec' })
+
+map('n', '<leader>s"', function()
+  Snacks.picker.registers()
+end, { desc = 'Registers' })
+
+map('n', '<leader>s/', function()
+  Snacks.picker.search_history()
+end, { desc = 'Search History' })
+
+map('n', '<leader>sa', function()
+  Snacks.picker.autocmds()
+end, { desc = 'Autocmds' })
+
+map('n', '<leader>sc', function()
+  Snacks.picker.command_history()
+end, { desc = 'Command History' })
+
+map('n', '<leader>sC', function()
+  Snacks.picker.commands()
+end, { desc = 'Commands' })
+
+map('n', '<leader>sd', function()
+  Snacks.picker.diagnostics()
+end, { desc = 'Diagnostics' })
+
+map('n', '<leader>sD', function()
+  Snacks.picker.diagnostics_buffer()
+end, { desc = 'Buffer Diagnostics' })
+
+map('n', '<leader>sh', function()
+  Snacks.picker.help()
+end, { desc = 'Help Pages' })
+
+map('n', '<leader>sH', function()
+  Snacks.picker.highlights()
+end, { desc = 'Highlights' })
+
+map('n', '<leader>si', function()
+  Snacks.picker.icons()
+end, { desc = 'Icons' })
+
+map('n', '<leader>sj', function()
+  Snacks.picker.jumps()
+end, { desc = 'Jumps' })
+
+map('n', '<leader>sk', function()
+  Snacks.picker.keymaps()
+end, { desc = 'Keymaps' })
+
+map('n', '<leader>sl', function()
+  Snacks.picker.loclist()
+end, { desc = 'Location List' })
+
+map('n', '<leader>sM', function()
+  Snacks.picker.man()
+end, { desc = 'Man Pages' })
+
+map('n', '<leader>sm', function()
+  Snacks.picker.marks()
+end, { desc = 'Marks' })
+
+map('n', '<leader>sR', function()
+  Snacks.picker.resume()
+end, { desc = 'Resume' })
+
+map('n', '<leader>sq', function()
+  Snacks.picker.qflist()
+end, { desc = 'Quickfix List' })
+
+map('n', '<leader>su', function()
+  Snacks.picker.undo()
+end, { desc = 'Undotree' })
+
+map('n', '<leader>sf', function()
+  Snacks.picker.buffers()
+end, { desc = 'Files buffers in Snacks' })
+map('n', '<leader>sF', function()
+  Snacks.picker.buffers { hidden = true, nofile = true }
+end, { desc = 'Files buffers in Snacks (all)' })

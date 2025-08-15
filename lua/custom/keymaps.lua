@@ -118,7 +118,7 @@ end, { desc = 'Save session and quit' })
 map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })
 map('n', '<leader>_', '<CMD>split<CR>', { desc = 'Split window above' })
 map('n', '<leader>\\', '<CMD>vsplit<CR>', { desc = 'Split window right' })
-map('n', '<leader>?', '<CMD>vsplit<CR>', { desc = 'Split window left' })
+map('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Split window left' })
 map('n', '<leader>qd', '<CMD>close<CR>', { desc = 'Close Window (Keep Buffer)' })
 
 -- Resize window

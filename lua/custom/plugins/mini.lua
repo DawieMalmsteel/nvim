@@ -23,18 +23,16 @@ return { -- Collection of various small independent plugins/modules
 
         -- Nếu là buffer hiện tại, chỉ hiển thị nhãn mặc định (bao gồm icon)
         if buf_id == current_buf then
-          return MiniTabline.default_format(buf_id, label)
+          return ' ' .. MiniTabline.default_format(buf_id, label) .. ' '
         else
           -- Tính số tương đối
           local relative_number = math.abs(vim.fn.bufnr(buf_id) - vim.fn.bufnr(current_buf))
 
-          -- Nếu số tương đối >= 3, hiển thị số tương đối kèm nhãn mặc định
-          if relative_number >= 3 then
-            return relative_number .. MiniTabline.default_format(buf_id, label)
-          else
-            -- Nếu số tương đối < 3, chỉ hiển thị nhãn mặc định
-            return MiniTabline.default_format(buf_id, label)
-          end
+          -- Rút gọn nhãn (chỉ lấy 5 ký tự đầu tiên)
+          local short_label = label:sub(1, 5)
+
+          -- Kết hợp số tương đối và nhãn rút gọn
+          return ' ' .. relative_number .. ':' .. short_label .. ' '
         end
       end,
     }

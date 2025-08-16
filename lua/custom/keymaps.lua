@@ -114,12 +114,13 @@ map('n', '<leader>qw', function()
   vim.cmd 'qa'
 end, { desc = 'Save session and quit' })
 
--- Window management
-map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })
-map('n', '<leader>_', '<CMD>split<CR>', { desc = 'Split window above' })
-map('n', '<leader>\\', '<CMD>vsplit<CR>', { desc = 'Split window right' })
-map('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Split window left' })
-map('n', '<leader>qd', '<CMD>close<CR>', { desc = 'Close Window (Keep Buffer)' })
+-- Window management all trash
+-- map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })
+-- map('n', '<leader>_', '<CMD>split<CR>', { desc = 'Split window above' })
+-- map('n', '<leader>\\', '<CMD>vsplit<CR>', { desc = 'Split window right' })
+-- map('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Split window left' })
+-- map('n', '<leader>qd', '<CMD>close<CR>', { desc = 'Close Window (Keep Buffer)' })
+-- NOTE: use Ctrl-W for window management
 
 -- Resize window
 map('n', '<C-Up>', ':resize +1<CR>', { desc = 'Tăng chiều cao cửa sổ' })

@@ -17,7 +17,27 @@ return { -- Collection of various small independent plugins/modules
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
-    require('mini.tabline').setup()
+    require('mini.tabline').setup {
+      format = function(buf_id, label)
+        local current_buf = vim.api.nvim_get_current_buf()
+
+        -- Nếu là buffer hiện tại, chỉ hiển thị nhãn mặc định (bao gồm icon)
+        if buf_id == current_buf then
+          return MiniTabline.default_format(buf_id, label)
+        else
+          -- Tính số tương đối
+          local relative_number = math.abs(vim.fn.bufnr(buf_id) - vim.fn.bufnr(current_buf))
+
+          -- Nếu số tương đối >= 3, hiển thị số tương đối kèm nhãn mặc định
+          if relative_number >= 3 then
+            return relative_number .. MiniTabline.default_format(buf_id, label)
+          else
+            -- Nếu số tương đối < 3, chỉ hiển thị nhãn mặc định
+            return MiniTabline.default_format(buf_id, label)
+          end
+        end
+      end,
+    }
 
     require('mini.hipatterns').setup {
       tailwind = {

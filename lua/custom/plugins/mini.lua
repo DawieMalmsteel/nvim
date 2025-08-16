@@ -23,7 +23,7 @@ return { -- Collection of various small independent plugins/modules
 
         -- Nếu là buffer hiện tại, chỉ hiển thị nhãn mặc định (bao gồm icon)
         if buf_id == current_buf then
-          return ' ' .. MiniTabline.default_format(buf_id, label) .. ' '
+          return ' [' .. MiniTabline.default_format(buf_id, label) .. '] '
         else
           -- Tính số tương đối
           local relative_number = math.abs(vim.fn.bufnr(buf_id) - vim.fn.bufnr(current_buf))

@@ -17,11 +17,11 @@ return { -- Collection of various small independent plugins/modules
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
-    require('mini.animate').setup {
-      cursor = {
-        enable = false, -- Bật hiệu ứng di chuyển con trỏ
-      },
-    }
+    -- require('mini.animate').setup {
+    --   cursor = {
+    --     enable = false, -- Bật hiệu ứng di chuyển con trỏ
+    --   },
+    -- }
     require('mini.tabline').setup {
       format = function(buf_id, label)
         local current_buf = vim.api.nvim_get_current_buf()

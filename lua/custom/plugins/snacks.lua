@@ -7,7 +7,7 @@ return {
       input = { enabled = true },
       notifier = { enabled = true },
       scope = { enabled = true },
-      scroll = { enabled = false },
+      scroll = { enabled = true },
       words = { enabled = true },
       indent = {
         enabled = true,

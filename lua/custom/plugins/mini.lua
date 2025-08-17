@@ -22,16 +22,42 @@ return { -- Collection of various small independent plugins/modules
     --     enable = false, -- Bật hiệu ứng di chuyển con trỏ
     --   },
     -- }
+    local buffer_positions = {}
+
+    -- Hàm cập nhật danh sách buffer và vị trí
+    local function update_buffer_positions()
+      local listed_buffers = vim.tbl_filter(function(buf)
+        return vim.bo[buf.bufnr].buflisted
+      end, vim.fn.getbufinfo())
+
+      buffer_positions = {}
+      for i, buf in ipairs(listed_buffers) do
+        buffer_positions[buf.bufnr] = i
+      end
+    end
+
+    -- Cập nhật danh sách buffer khi có sự kiện liên quan
+    vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete', 'BufEnter' }, {
+      callback = update_buffer_positions,
+    })
+
+    -- Gọi cập nhật lần đầu khi khởi động
+    update_buffer_positions()
+
     require('mini.tabline').setup {
       format = function(buf_id, label)
         local current_buf = vim.api.nvim_get_current_buf()
+
+        -- Lấy vị trí của buffer hiện tại và buffer đang xử lý
+        local current_index = buffer_positions[current_buf]
+        local buf_index = buffer_positions[buf_id]
 
         -- Nếu là buffer hiện tại, chỉ hiển thị nhãn mặc định (bao gồm icon)
         if buf_id == current_buf then
           return ' [' .. MiniTabline.default_format(buf_id, label) .. '] '
         else
-          -- Tính số tương đối
-          local relative_number = math.abs(vim.fn.bufnr(buf_id) - vim.fn.bufnr(current_buf))
+          -- Tính số tương đối dựa trên vị trí trong danh sách
+          local relative_number = math.abs((buf_index or 0) - (current_index or 0))
 
           -- Rút gọn nhãn (chỉ lấy 5 ký tự đầu tiên)
           local short_label = label:sub(1, 5)

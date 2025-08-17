@@ -11,6 +11,13 @@ map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+map('n', '<leader>td', function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+  else
+    vim.diagnostic.enable()
+  end
+end, { desc = 'Toggle diagnostics' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
@@ -396,7 +403,7 @@ end, { desc = 'Create Session (:mksession)' })
 map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
 
 -- Toggle dashboard
-map('n', '<leader>td', function()
+map('n', '<leader>tD', function()
   Snacks.dashboard()
 end, { desc = 'Toggle Dashboard' })
 

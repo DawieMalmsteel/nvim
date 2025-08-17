@@ -166,9 +166,6 @@ map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
 map('n', 'H', '<CMD>execute "silent! bprevious " . v:count1<CR>', { desc = 'Previous Buffer (with count)' })
 map('n', 'L', '<CMD>execute "silent! bnext " . v:count1<CR>', { desc = 'Next Buffer (with count)' })
 
--- Oil
--- map('n', '<leader>O', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
-
 -- Snacks picker
 map('n', '<leader>fb', function()
   picker.buffers()
@@ -178,10 +175,6 @@ map('n', '<leader>ff', function()
   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
   vim.cmd 'Pick files'
 end, { desc = 'Find Files' })
-
--- map('n', '<leader>ff', function()
---   picker.files { live = true, prompt = 'Find Files> ' }
--- end, { desc = 'Find Files' })
 
 map('n', '<leader>fr', function()
   picker.recent { live = true }

@@ -17,7 +17,14 @@ map('n', '<leader>td', function()
   else
     vim.diagnostic.enable()
   end
-end, { desc = 'Toggle diagnostics' })
+end, { desc = 'Toggle diagnostics (Ctrl+x)' })
+map('n', '<C-x>', function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+  else
+    vim.diagnostic.enable()
+  end
+end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })

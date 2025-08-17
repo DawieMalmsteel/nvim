@@ -25,7 +25,8 @@ return {
           float = true,
         },
       }
-      vim.cmd.colorscheme 'nordic'
+
+      vim.cmd.colorscheme 'nord'
       -- vim.cmd [[colorscheme nord]]
 
       vim.cmd [[

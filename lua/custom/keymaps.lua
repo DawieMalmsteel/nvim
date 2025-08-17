@@ -150,7 +150,7 @@ end, { desc = 'Save session and quit' })
 -- map('n', '<leader>_', '<CMD>split<CR>', { desc = 'Split window above' })
 -- map('n', '<leader>\\', '<CMD>vsplit<CR>', { desc = 'Split window right' })
 -- map('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Split window left' })
--- map('n', '<leader>qd', '<CMD>close<CR>', { desc = 'Close Window (Keep Buffer)' })
+map('n', '<leader>qd', '<C-w>q', { desc = 'Close Window (Keep Buffer)' })
 -- NOTE: use Ctrl-W for window management
 
 -- Resize window

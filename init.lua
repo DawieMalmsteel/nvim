@@ -550,7 +550,6 @@ require('lazy').setup({
 })
 
 require 'custom.keymaps'
-require 'custom.floaterminal'
 vim.opt.termguicolors = true
 if vim.g.neovide then
   vim.g.neovide_input_ime = true

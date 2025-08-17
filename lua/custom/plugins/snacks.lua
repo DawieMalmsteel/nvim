@@ -5,6 +5,8 @@ return {
       picker = {},
       statuscolumn = { enabled = true },
       input = { enabled = true },
+      bigfile = { enabled = true },
+      quickfile = { enabled = true },
       notifier = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = false },

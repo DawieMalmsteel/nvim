@@ -50,6 +50,21 @@ map('n', '<leader>o', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
 -- add keymap to remove trailing whitespace
 map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })
 
+-- Toggle terminal
+map({ 'n', 't' }, '<C-/>', function()
+  Snacks.terminal()
+end, { noremap = true, silent = true, desc = 'Toggle Terminal' })
+map({ 'n', 't' }, '<C-_>', function()
+  Snacks.terminal()
+end, { noremap = true, silent = true, desc = 'which_key_ignore' })
+
+map({ 'n', 't' }, ']]', function()
+  Snacks.words.jump(vim.v.count1)
+end, { desc = 'Next Reference' })
+map({ 'n', 't' }, '[[', function()
+  Snacks.words.jump(-vim.v.count1)
+end, { desc = 'Prev Reference' })
+
 -- Terminal
 map('t', '<ESC><ESC>', '<C-\\><C-n>', { noremap = true })
 
@@ -100,7 +115,9 @@ end, { desc = 'Git diff' })
 -- Quit
 map('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'quit all' })
 map('n', '<leader>qQ', '<CMD>qa!<CR>', { desc = 'quit all !' })
-map('n', '<leader>qb', '<CMD>bd<CR>', { desc = 'Quit Buffer (Keep Window)' })
+map('n', '<leader>qb', function()
+  Snacks.bufdelete()
+end, { desc = 'Delete Buffer' })
 map('n', '<leader>qB', '<CMD>bw<CR>', { desc = 'Quit Buffer and windows' })
 map('n', '<leader>qw', function()
   local session_file = 'Session.vim'

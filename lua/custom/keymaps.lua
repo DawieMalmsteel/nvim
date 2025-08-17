@@ -307,7 +307,7 @@ map('n', '<leader><leader>', function()
   local file = vim.api.nvim_buf_get_name(0)
   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
   mini_pick.builtin.files(nil, { source = { cwd = dir } })
-end, { desc = 'Search [F]iles in file root or cwd' })
+end, { desc = 'Search [F]iles in cwd' })
 
 map('n', '<leader>sG', function()
   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())

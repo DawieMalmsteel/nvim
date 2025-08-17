@@ -49,7 +49,6 @@ map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc 
 -- map("n", "<leader>r", ":'<,'>DB", { noremap = true, silent = true })
 
 -- Explore
--- map('n', '<leader>E', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
 map('n', '<leader>E', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
@@ -488,10 +487,6 @@ end, { desc = 'Quickfix List' })
 map('n', '<leader>su', function()
   Snacks.picker.undo()
 end, { desc = 'Undotree' })
-
--- map('n', '<leader>ff', function()
---   Snacks.picker.buffers()
--- end, { desc = 'Files buffers in Snacks' })
 
 map('n', '<leader>fF', function()
   Snacks.picker.buffers { hidden = true, nofile = true }

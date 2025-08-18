@@ -7,6 +7,12 @@ local mini_extra = require 'mini.extra'
 local mini_starter = require 'mini.starter'
 local mini_map = require 'mini.map'
 
+-- NOTE: fold
+-- zc: Collapse the fold under the cursor.
+-- zo: Open the fold under the cursor.
+-- zM: Collapse all folds in the file.
+-- zR: Open all folds in the file.
+
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps

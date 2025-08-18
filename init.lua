@@ -8,6 +8,11 @@ vim.o.cmdheight = 0 -- Height of the command line, set to 1 to save space
 
 vim.o.mouse = 'a'
 
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldenable = true -- Enable folding by default
+vim.o.foldlevel = 99 -- Start with all folds open
+
 vim.o.showmode = false
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'

@@ -21,26 +21,25 @@ return {
     config = function()
       require('nordic').setup {
         transparent = {
-          bg = true,
-          float = true,
+          -- bg = true,
+          -- float = true,
         },
       }
 
-      vim.cmd.colorscheme 'nord'
-      -- vim.cmd [[colorscheme nord]]
+      vim.cmd.colorscheme 'nordic'
 
       vim.cmd [[
         highlight TabLine guibg=NONE guifg=#abb2bf
         highlight TabLineSel guibg=#61afef guifg=#282c34
         highlight TabLineFill guibg=NONE guifg=#5c6370
 
-        highlight MiniTablineCurrent guibg=NONE guifg=#98c379
+        highlight MiniTablineCurrent guibg=NONE guifg=#61afef
         highlight MiniTablineVisible guibg=NONE guifg=#abb2bf
         highlight MiniTablineHidden guibg=NONE guifg=#5c6370
-        highlight MiniTablineModifiedCurrent guibg=NONE guifg=#e06c75
-        highlight MiniTablineModifiedVisible guibg=NONE guifg=#e5c07b
+        highlight MiniTablineModifiedCurrent guibg=NONE guifg=#e5c07b
+        highlight MiniTablineModifiedVisible guibg=NONE guifg=#e06c75
         highlight MiniTablineModifiedHidden guibg=NONE guifg=#e5c07b
-        highlight MiniTablineTabpagesection guibg=NONE guifg=#61afef
+        highlight MiniTablineTabpagesection guibg=NONE guifg=#98c379
         highlight MiniTablineFill guibg=NONE guifg=#5c6370
         highlight MiniTablineTrunc guibg=NONE guifg=#5c6370
         highlight MiniStarterItemBullet guibg=NONE guifg=#61afef

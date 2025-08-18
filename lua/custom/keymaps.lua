@@ -405,6 +405,9 @@ end, { desc = 'Create Session (:mksession)' })
 -- Edit file
 map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
 
+-- Delete marks
+map('n', 'M', ':delmarks<Space>', { desc = 'Delete marks' })
+
 -- Toggle dashboard
 map('n', '<leader>tD', function()
   Snacks.dashboard()

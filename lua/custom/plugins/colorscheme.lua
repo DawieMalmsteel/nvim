@@ -21,8 +21,8 @@ return {
     config = function()
       require('nordic').setup {
         transparent = {
-          -- bg = true,
-          -- float = true,
+          bg = true,
+          float = true,
         },
       }
 

@@ -1,20 +1,8 @@
 return {
-  { 'sainnhe/gruvbox-material' },
-
   {
-    'rebelot/kanagawa.nvim',
-    opts = {
-      transparent = true,
-    },
-  },
-  { 'shaunsingh/nord.nvim' },
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1001,
-    opts = {
-      transparent_background = true,
-    },
+    'polirritmico/monokai-nightasty.nvim',
+    lazy = false,
+    priority = 1000,
   },
   {
     'AlexvZyl/nordic.nvim',
@@ -26,7 +14,7 @@ return {
         },
       }
 
-      vim.cmd.colorscheme 'nordic'
+      vim.cmd.colorscheme 'monokai-nightasty'
 
       vim.cmd [[
         highlight TabLine guibg=NONE guifg=#abb2bf

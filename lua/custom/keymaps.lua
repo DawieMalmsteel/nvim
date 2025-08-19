@@ -410,7 +410,7 @@ end, { desc = 'Create Session (:mksession)' })
 map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
 
 -- Delete marks
-map('n', 'M', ':delmarks<Space>', { desc = 'Delete marks' })
+map('n', '<C-m>', ':delmarks<Space>', { desc = 'Delete marks' })
 
 -- Toggle dashboard
 map('n', '<leader>tD', function()

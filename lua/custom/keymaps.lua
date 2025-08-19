@@ -504,3 +504,6 @@ end, { desc = 'Undotree' })
 map('n', '<leader>fF', function()
   Snacks.picker.buffers { hidden = true, nofile = true }
 end, { desc = 'Files buffers in Snacks (all)' })
+
+map('v', 'J', ":m'>+1<cr>gv=gv", { noremap = true })
+map('v', 'K', ":m'<-2<cr>gv=gv", { noremap = true })

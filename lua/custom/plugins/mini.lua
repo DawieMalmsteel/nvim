@@ -537,19 +537,19 @@ return { -- Collection of various small independent plugins/modules
             if name == '' then
               name = '[No Name]'
             end
-
             -- Đổi màu toàn bộ filename nếu modified (sử dụng highlight MiniStatuslineModified)
             local hl = vim.bo.modified and '%#MiniStatuslineModified#' or '%#MiniStatuslineFilename#'
-
             -- Flags cho readonly/modifiable (không cần [+] vì đã đổi màu, giữ gọn)
             local flags = ''
+            if vim.bo.modified then
+              flags = flags .. ' ' -- Thêm icon Nerd Font cho modified (pencil icon biểu thị chỉnh sửa)
+            end
             if vim.bo.readonly then
               flags = flags .. ' [RO]'
             end
             if not vim.bo.modifiable then
               flags = flags .. ' [-]'
             end
-
             return hl .. name .. flags
           end
           local location = function()

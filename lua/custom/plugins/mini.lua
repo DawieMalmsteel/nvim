@@ -518,16 +518,16 @@ return { -- Collection of various small independent plugins/modules
             end
             local result = {}
             if counts.E > 0 then
-              table.insert(result, '%#MiniStatuslineDiagnosticsError#E:' .. counts.E)
+              table.insert(result, '%#MiniStatuslineDiagnosticsError# ' .. counts.E)
             end
             if counts.W > 0 then
-              table.insert(result, '%#MiniStatuslineDiagnosticsWarn#W:' .. counts.W)
+              table.insert(result, '%#MiniStatuslineDiagnosticsWarn# ' .. counts.W)
             end
             if counts.I > 0 then
-              table.insert(result, '%#MiniStatuslineDiagnosticsInfo#I:' .. counts.I)
+              table.insert(result, '%#MiniStatuslineDiagnosticsInfo# ' .. counts.I)
             end
             if counts.H > 0 then
-              table.insert(result, '%#MiniStatuslineDiagnosticsHint#H:' .. counts.H)
+              table.insert(result, '%#MiniStatuslineDiagnosticsHint# ' .. counts.H)
             end
             return table.concat(result, ' ')
           end

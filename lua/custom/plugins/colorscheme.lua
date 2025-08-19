@@ -6,6 +6,10 @@ return {
     opts = {
       dark_style_background = 'transparent',
       light_style_background = 'transparent',
+      hl_styles = {
+        floats = 'transparent',
+        sidebars = 'transparent',
+      },
     },
   },
   {

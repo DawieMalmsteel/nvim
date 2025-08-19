@@ -559,7 +559,7 @@ return { -- Collection of various small independent plugins/modules
             local column = vim.fn.col '.'
             local fraction = math.floor((current_line / total_lines) * 8) -- 0 đến 8 cho các mức
             local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' } -- Ký tự progress dọc (tăng từ dưới lên)
-            local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[fraction] or '█') -- Chọn 1 ký tự đại diện progress dọc
+            local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[math.max(1, math.min(#vbars, fraction or 1))] or '█') -- Chọn ký tự đại diện progress dọc
 
             return ' ' .. current_line .. '  ' .. column .. ' ' .. progress_bar
             -- return ' ' .. current_line .. '/' .. total_lines .. '  ' .. column .. ' ' .. progress_bar

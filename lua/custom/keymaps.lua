@@ -132,6 +132,10 @@ map('n', '<leader>gd', function()
   Snacks.picker.git_diff { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git diff' })
 
+map('n', '<leader>gF', function()
+  Snacks.picker.git_log_file { cwd = vim.fn.expand '%:p:h' }
+end, { desc = 'Git Files (cwd to file dir)' })
+
 -- Quit
 map('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'quit all' })
 map('n', '<leader>qQ', '<CMD>qa!<CR>', { desc = 'quit all !' })

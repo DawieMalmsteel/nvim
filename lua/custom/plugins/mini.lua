@@ -497,7 +497,7 @@ return { -- Collection of various small independent plugins/modules
       use_icons = true, -- Giữ icons nếu có Nerd Font
       content = {
         active = function()
-          local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
+          local mode, mode_hl = statusline.section_mode { trunc_width = 150 }
           local git = statusline.section_git { trunc_width = 75 }
           local diagnostics = function() -- Thay icon diagnostics thành chữ với màu
             if not vim.diagnostic.is_enabled() then

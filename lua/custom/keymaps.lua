@@ -171,7 +171,7 @@ map('n', '<leader>uw', function()
 end, { desc = 'Toggle Wrap Text' })
 
 -- Change color scheme
-map('n', '<leader>uc', '<CMD>Pick colorschemes<CR>', { desc = 'Change theme' })
+map('n', '<leader>uc', '<CMD>lua Snacks.picker.colorschemes()<CR>', { desc = 'Change theme' })
 
 -- Switch buffer
 map('n', '<Tab>', '<CMD>bnext<CR>', { desc = 'Next Buffer' })

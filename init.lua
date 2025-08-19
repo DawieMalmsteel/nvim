@@ -558,7 +558,7 @@ require 'custom.keymaps'
 vim.opt.termguicolors = true
 if vim.g.neovide then
   vim.g.neovide_input_ime = true
-  vim.g.neovide_opacity = 0.6
+  vim.g.neovide_opacity = 0.8
   vim.g.neovide_padding_top = 0
   vim.g.neovide_padding_left = 0
   vim.g.neovide_padding_right = 0

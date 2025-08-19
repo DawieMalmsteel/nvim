@@ -65,11 +65,11 @@ return {
       ]]
 
       -- Màu chữ (fg) khác nhau, bỏ bg hoàn toàn (NONE)
-      vim.api.nvim_set_hl(0, 'MiniStatuslineModeNormal', { fg = '#cba6f7', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineModeInsert', { fg = '#a6e3a1', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineModeVisual', { fg = '#f9e2af', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineModeCommand', { fg = '#fab387', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineModeReplace', { fg = '#f38ba8', bg = 'NONE' }) -- Định hl riêng cho Replace
+      -- vim.api.nvim_set_hl(0, 'MiniStatuslineModeNormal', { fg = '#cba6f7', bg = 'NONE' })
+      -- vim.api.nvim_set_hl(0, 'MiniStatuslineModeInsert', { fg = '#a6e3a1', bg = 'NONE' })
+      -- vim.api.nvim_set_hl(0, 'MiniStatuslineModeVisual', { fg = '#f9e2af', bg = 'NONE' })
+      -- vim.api.nvim_set_hl(0, 'MiniStatuslineModeCommand', { fg = '#fab387', bg = 'NONE' })
+      -- vim.api.nvim_set_hl(0, 'MiniStatuslineModeReplace', { fg = '#f38ba8', bg = 'NONE' }) -- Định hl riêng cho Replace
       vim.api.nvim_set_hl(0, 'MiniStatuslineModeOther', { fg = '#b4befe', bg = 'NONE' }) -- Cho các mode khác nếu cần
       vim.api.nvim_set_hl(0, 'MiniStatuslineDevinfo', { fg = '#89b4fa', bg = 'NONE' }) -- Git
       vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnostics', { fg = '#f38ba8', bg = 'NONE' }) -- Diagnostics tổng

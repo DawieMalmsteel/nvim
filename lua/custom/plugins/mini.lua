@@ -531,8 +531,39 @@ return { -- Collection of various small independent plugins/modules
             end
             return table.concat(result, ' ')
           end
-          local filename = statusline.section_filename { trunc_width = 140 }
-          local location = statusline.section_location { trunc_width = 75 }
+          local filename = function()
+            -- Custom filename: relative path shortened with ~ for home, dynamic color if modified
+            local name = vim.fn.expand '%:~:.'
+            if name == '' then
+              name = '[No Name]'
+            end
+
+            -- Đổi màu toàn bộ filename nếu modified (sử dụng highlight MiniStatuslineModified)
+            local hl = vim.bo.modified and '%#MiniStatuslineModified#' or '%#MiniStatuslineFilename#'
+
+            -- Flags cho readonly/modifiable (không cần [+] vì đã đổi màu, giữ gọn)
+            local flags = ''
+            if vim.bo.readonly then
+              flags = flags .. ' [RO]'
+            end
+            if not vim.bo.modifiable then
+              flags = flags .. ' [-]'
+            end
+
+            return hl .. name .. flags
+          end
+          local location = function()
+            -- Kết hợp location đầy đủ (với tổng lines và column) + progress bar dọc (sử dụng ký tự tăng dần dọc để gọn và đẹp)
+            local current_line = vim.fn.line '.'
+            local total_lines = vim.fn.line '$'
+            local column = vim.fn.col '.'
+            local fraction = math.floor((current_line / total_lines) * 8) -- 0 đến 8 cho các mức
+            local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' } -- Ký tự progress dọc (tăng từ dưới lên)
+            local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[fraction] or '█') -- Chọn 1 ký tự đại diện progress dọc
+
+            return ' ' .. current_line .. '  ' .. column .. ' ' .. progress_bar
+            -- return ' ' .. current_line .. '/' .. total_lines .. '  ' .. column .. ' ' .. progress_bar
+          end
 
           -- Thêm recording macro minimal
           local recording = function()
@@ -541,18 +572,6 @@ return { -- Collection of various small independent plugins/modules
               return ''
             end
             return '%#MiniStatuslineRecording#Recording @' .. reg
-          end
-
-          -- Progress bar ngang màu đỏ (đẹp hơn, dài 8, chars mượt)
-          local progress = function()
-            local current_line = vim.fn.line '.'
-            local total_lines = vim.fn.line '$'
-            -- local percentage = math.floor((current_line / total_lines) * 100)
-            local bar_length = 5 -- Độ dài bar vừa phải
-            local filled_length = math.floor((current_line / total_lines) * bar_length)
-            local bar_filled = string.rep('█', filled_length)
-            local bar_empty = string.rep('░', bar_length - filled_length) -- Dùng '░' cho đẹp hơn '─'
-            return '%#MiniStatuslineProgress#' .. bar_filled .. bar_empty -- .. ' ' .. percentage .. '%'
           end
 
           local harpoon_status = function()
@@ -588,12 +607,11 @@ return { -- Collection of various small independent plugins/modules
             { hl = 'MiniStatuslineDevinfo', strings = { git } },
             { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics() } },
             '%<', -- Left truncate
-            { hl = 'MiniStatuslineFilename', strings = { filename } },
+            { hl = 'MiniStatuslineFilename', strings = { filename() } },
             '%=', -- Right align
             { strings = { recording() } },
             { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } }, -- Thêm Harpoon ở giữa
-            { hl = 'MiniStatuslineLocation', strings = { location } },
-            { strings = { progress() } }, -- Progress bar ngang bên phải
+            { hl = 'MiniStatuslineLocation', strings = { location() } },
           }
         end,
         inactive = function()

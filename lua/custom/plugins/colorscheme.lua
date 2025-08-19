@@ -78,11 +78,12 @@ return {
       vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsInfo', { fg = '#89b4fa', bg = 'NONE' }) -- Info
       vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsHint', { fg = '#a6e3a1', bg = 'NONE' }) -- Hint
       vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { fg = '#cdd6f4', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineLocation', { fg = '#a6e3a1', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'MiniStatuslineLocation', { fg = '#f38ba8', bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'MiniStatuslineRecording', { fg = '#f38ba8', bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'MiniStatuslineInactive', { fg = '#45475a', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineProgress', { fg = '#f38ba8', bg = 'NONE' }) -- Màu đỏ cho progress bar
+      vim.api.nvim_set_hl(0, 'MiniStatuslineProgress', { fg = '#a6e3a1', bg = 'NONE' }) -- Màu đỏ cho progress bar
       vim.api.nvim_set_hl(0, 'MiniStatuslineHarpoon', { fg = '#fab387', bg = 'NONE' }) -- Màu cam nhạt
+      vim.api.nvim_set_hl(0, 'MiniStatuslineModified', { fg = '#e5c07b', bg = 'NONE' })
     end,
   },
 }

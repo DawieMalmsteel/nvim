@@ -10,6 +10,7 @@ return {
         floats = 'transparent',
         sidebars = 'transparent',
       },
+      markdown_header_marks = true,
     },
   },
   {

@@ -74,7 +74,7 @@ too - it's ignored in the kickstart repo to make maintenance easier, but it's
 <details><summary> Linux and Mac </summary>
 
 ```sh
-git clone https://github.com/DawieMalmsteel/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+git clone https://github.com/DawieMalmsteel/nvim.git "$HOME/.config"/nvim
 ```
 
 </details>

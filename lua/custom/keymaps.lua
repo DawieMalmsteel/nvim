@@ -181,8 +181,8 @@ end, { desc = 'Toggle Wrap Text' })
 map('n', '<leader>uc', '<CMD>lua Snacks.picker.colorschemes()<CR>', { desc = 'Change theme' })
 
 -- Switch buffer
-map('n', '<Tab>', '<CMD>bnext<CR>', { desc = 'Next Buffer' })
-map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
+-- map('n', '<Tab>', '<CMD>bnext<CR>', { desc = 'Next Buffer' })
+-- map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
 map('n', 'H', '<CMD>execute "silent! bprevious " . v:count1<CR>', { desc = 'Previous Buffer (with count)' })
 map('n', 'L', '<CMD>execute "silent! bnext " . v:count1<CR>', { desc = 'Next Buffer (with count)' })
 
@@ -520,4 +520,4 @@ map('v', 'K', ":m'<-2<cr>gv=gv")
 
 map({ 'n', 'x' }, 'ga', '^')
 map({ 'n', 'x' }, 'gA', 'g_')
-map({ 'n', 'x' }, '\\', '%')
+map({ 'n', 'x' }, '<Tab>', '%')

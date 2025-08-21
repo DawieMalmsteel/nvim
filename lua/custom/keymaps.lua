@@ -518,6 +518,6 @@ end, { desc = 'Files buffers in Snacks (all)' })
 map('v', 'J', ":m'>+1<cr>gv=gv")
 map('v', 'K', ":m'<-2<cr>gv=gv")
 
-map({ 'n', 'x' }, 'ga', '^')
-map({ 'n', 'x' }, 'gA', 'g_')
+map({ 'n', 'x' }, 'gi', '^')
+map({ 'n', 'x' }, 'ga', 'g_')
 map({ 'n', 'x' }, '<Tab>', '%')

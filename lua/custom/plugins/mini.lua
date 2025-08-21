@@ -17,7 +17,57 @@ return { -- Collection of various small independent plugins/modules
     -- - sd'   - [S]urround [D]elete [']quotes
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
-    require('mini.tabline').setup()
+    -- require('mini.animate').setup {
+    --   cursor = {
+    --     enable = false, -- Bật hiệu ứng di chuyển con trỏ
+    --   },
+    -- }
+    local buffer_positions = {}
+
+    -- Hàm cập nhật danh sách buffer và vị trí
+    local function update_buffer_positions()
+      local listed_buffers = vim.tbl_filter(function(buf)
+        return vim.bo[buf.bufnr].buflisted
+      end, vim.fn.getbufinfo())
+
+      buffer_positions = {}
+      for i, buf in ipairs(listed_buffers) do
+        buffer_positions[buf.bufnr] = i
+      end
+    end
+
+    -- Cập nhật danh sách buffer khi có sự kiện liên quan
+    vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete', 'BufEnter' }, {
+      callback = update_buffer_positions,
+    })
+
+    -- Gọi cập nhật lần đầu khi khởi động
+    update_buffer_positions()
+
+    require('mini.tabline').setup {
+      format = function(buf_id, label)
+        local current_buf = vim.api.nvim_get_current_buf()
+
+        -- Lấy vị trí của buffer hiện tại và buffer đang xử lý
+        local current_index = buffer_positions[current_buf]
+        local buf_index = buffer_positions[buf_id]
+
+        -- Nếu là buffer hiện tại, chỉ hiển thị nhãn mặc định (bao gồm icon)
+        if buf_id == current_buf then
+          -- return ' [' .. MiniTabline.default_format(buf_id, label) .. '] '
+          return MiniTabline.default_format(buf_id, label)
+        else
+          -- Tính số tương đối dựa trên vị trí trong danh sách
+          local relative_number = math.abs((buf_index or 0) - (current_index or 0))
+
+          -- Rút gọn nhãn (chỉ lấy 5 ký tự đầu tiên)
+          local short_label = label:sub(1, 5)
+
+          -- Kết hợp số tương đối và nhãn rút gọn
+          return ' ' .. relative_number .. ':' .. short_label .. ' '
+        end
+      end,
+    }
 
     require('mini.hipatterns').setup {
       tailwind = {
@@ -218,7 +268,7 @@ return { -- Collection of various small independent plugins/modules
       },
     }
 
-    require('mini.sessions').setup() -- TODO: implement multiple sessions and keybindings for multiple sessions
+    require('mini.sessions').setup()
 
     require('mini.files').setup {
       windows = {
@@ -448,7 +498,7 @@ return { -- Collection of various small independent plugins/modules
       use_icons = true, -- Giữ icons nếu có Nerd Font
       content = {
         active = function()
-          local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
+          local mode, mode_hl = statusline.section_mode { trunc_width = 150 }
           local git = statusline.section_git { trunc_width = 75 }
           local diagnostics = function() -- Thay icon diagnostics thành chữ với màu
             if not vim.diagnostic.is_enabled() then
@@ -469,21 +519,52 @@ return { -- Collection of various small independent plugins/modules
             end
             local result = {}
             if counts.E > 0 then
-              table.insert(result, '%#MiniStatuslineDiagnosticsError#E:' .. counts.E)
+              table.insert(result, '%#MiniStatuslineDiagnosticsError# ' .. counts.E)
             end
             if counts.W > 0 then
-              table.insert(result, '%#MiniStatuslineDiagnosticsWarn#W:' .. counts.W)
+              table.insert(result, '%#MiniStatuslineDiagnosticsWarn# ' .. counts.W)
             end
             if counts.I > 0 then
-              table.insert(result, '%#MiniStatuslineDiagnosticsInfo#I:' .. counts.I)
+              table.insert(result, '%#MiniStatuslineDiagnosticsInfo# ' .. counts.I)
             end
             if counts.H > 0 then
-              table.insert(result, '%#MiniStatuslineDiagnosticsHint#H:' .. counts.H)
+              table.insert(result, '%#MiniStatuslineDiagnosticsHint# ' .. counts.H)
             end
             return table.concat(result, ' ')
           end
-          local filename = statusline.section_filename { trunc_width = 140 }
-          local location = statusline.section_location { trunc_width = 75 }
+          local filename = function()
+            -- Custom filename: relative path shortened with ~ for home, dynamic color if modified
+            local name = vim.fn.expand '%:~:.'
+            if name == '' then
+              name = '[No Name]'
+            end
+            -- Đổi màu toàn bộ filename nếu modified (sử dụng highlight MiniStatuslineModified)
+            local hl = vim.bo.modified and '%#MiniStatuslineModified#' or '%#MiniStatuslineFilename#'
+            -- Flags cho readonly/modifiable (không cần [+] vì đã đổi màu, giữ gọn)
+            local flags = ''
+            if vim.bo.modified then
+              flags = flags .. ' ' -- Thêm icon Nerd Font cho modified (pencil icon biểu thị chỉnh sửa)
+            end
+            if vim.bo.readonly then
+              flags = flags .. ' [RO]'
+            end
+            if not vim.bo.modifiable then
+              flags = flags .. ' [-]'
+            end
+            return hl .. name .. flags
+          end
+          local location = function()
+            -- Kết hợp location đầy đủ (với tổng lines và column) + progress bar dọc (sử dụng ký tự tăng dần dọc để gọn và đẹp)
+            local current_line = vim.fn.line '.'
+            local total_lines = vim.fn.line '$'
+            local column = vim.fn.col '.'
+            local fraction = math.floor((current_line / total_lines) * 8) -- 0 đến 8 cho các mức
+            local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' } -- Ký tự progress dọc (tăng từ dưới lên)
+            local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[math.max(1, math.min(#vbars, fraction or 1))] or '█') -- Chọn ký tự đại diện progress dọc
+
+            return ' ' .. current_line .. '  ' .. column .. ' ' .. progress_bar
+            -- return ' ' .. current_line .. '/' .. total_lines .. '  ' .. column .. ' ' .. progress_bar
+          end
 
           -- Thêm recording macro minimal
           local recording = function()
@@ -492,18 +573,6 @@ return { -- Collection of various small independent plugins/modules
               return ''
             end
             return '%#MiniStatuslineRecording#Recording @' .. reg
-          end
-
-          -- Progress bar ngang màu đỏ (đẹp hơn, dài 8, chars mượt)
-          local progress = function()
-            local current_line = vim.fn.line '.'
-            local total_lines = vim.fn.line '$'
-            -- local percentage = math.floor((current_line / total_lines) * 100)
-            local bar_length = 5 -- Độ dài bar vừa phải
-            local filled_length = math.floor((current_line / total_lines) * bar_length)
-            local bar_filled = string.rep('█', filled_length)
-            local bar_empty = string.rep('░', bar_length - filled_length) -- Dùng '░' cho đẹp hơn '─'
-            return '%#MiniStatuslineProgress#' .. bar_filled .. bar_empty -- .. ' ' .. percentage .. '%'
           end
 
           local harpoon_status = function()
@@ -539,12 +608,11 @@ return { -- Collection of various small independent plugins/modules
             { hl = 'MiniStatuslineDevinfo', strings = { git } },
             { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics() } },
             '%<', -- Left truncate
-            { hl = 'MiniStatuslineFilename', strings = { filename } },
+            { hl = 'MiniStatuslineFilename', strings = { filename() } },
             '%=', -- Right align
             { strings = { recording() } },
             { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } }, -- Thêm Harpoon ở giữa
-            { hl = 'MiniStatuslineLocation', strings = { location } },
-            { strings = { progress() } }, -- Progress bar ngang bên phải
+            { hl = 'MiniStatuslineLocation', strings = { location() } },
           }
         end,
         inactive = function()

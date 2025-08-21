@@ -5,6 +5,8 @@ return {
       picker = {},
       statuscolumn = { enabled = true },
       input = { enabled = true },
+      bigfile = { enabled = true },
+      quickfile = { enabled = true },
       notifier = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = false },
@@ -109,7 +111,7 @@ return {
           {
             { section = 'header' },
             { icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1, layout = 'vertical' },
-            -- { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+            { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
             { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
             { section = 'startup' },
           },

@@ -7,10 +7,33 @@ local mini_extra = require 'mini.extra'
 local mini_starter = require 'mini.starter'
 local mini_map = require 'mini.map'
 
+-- NOTE: fold
+-- zc: Collapse the fold under the cursor.
+-- zo: Open the fold under the cursor.
+-- zM: Collapse all folds in the file.
+-- zR: Open all folds in the file.
+
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+map('n', 'j', 'gj', { noremap = true, silent = true })
+map('n', 'k', 'gk', { noremap = true, silent = true })
 
 -- Diagnostic keymaps
 map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+map('n', '<leader>td', function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+  else
+    vim.diagnostic.enable()
+  end
+end, { desc = 'Toggle diagnostics (Ctrl+x)' })
+map('n', '<C-x>', function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+  else
+    vim.diagnostic.enable()
+  end
+end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
@@ -26,8 +49,9 @@ map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
 map({ 'n', 'v' }, '<leader>a', '', { desc = '+ai' })
 map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
 map({ 'n', 'v' }, '<leader>g', '', { desc = '+git' })
-map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui and session' })
+map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })
 map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
+map({ 'n', 'v' }, '<leader>S', '', { desc = '+session' })
 map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
 
 -- Chế độ normal (Normal mode)
@@ -41,7 +65,6 @@ map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc 
 -- map("n", "<leader>r", ":'<,'>DB", { noremap = true, silent = true })
 
 -- Explore
--- map('n', '<leader>E', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
 map('n', '<leader>E', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
@@ -49,6 +72,21 @@ map('n', '<leader>o', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
 
 -- add keymap to remove trailing whitespace
 map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })
+
+-- Toggle terminal
+map({ 'n', 't' }, '<C-/>', function()
+  Snacks.terminal()
+end, { noremap = true, silent = true, desc = 'Toggle Terminal' })
+map({ 'n', 't' }, '<C-_>', function()
+  Snacks.terminal()
+end, { noremap = true, silent = true, desc = 'which_key_ignore' })
+
+map({ 'n', 't' }, ']]', function()
+  Snacks.words.jump(vim.v.count1)
+end, { desc = 'Next Reference' })
+map({ 'n', 't' }, '[[', function()
+  Snacks.words.jump(-vim.v.count1)
+end, { desc = 'Prev Reference' })
 
 -- Terminal
 map('t', '<ESC><ESC>', '<C-\\><C-n>', { noremap = true })
@@ -80,16 +118,16 @@ map('n', '<leader>gB', function()
   Snacks.picker.git_branches { layout = 'select', cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Pick and Change Git Branches' })
 
-map('n', '<leader>gs', function()
+map('n', '<leader>gh', function()
   vim.cmd('cd ' .. vim.fn.expand '%:p:h')
   vim.cmd 'Pick git_hunks'
 end, { desc = 'Open git hunks (cwd to file dir)' })
 
-map('n', '<leader>gT', function()
+map('n', '<leader>gS', function()
   Snacks.picker.git_stash { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git Stash' })
 
-map('n', '<leader>gS', function()
+map('n', '<leader>gs', function()
   Snacks.picker.git_status { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git Status' })
 
@@ -97,10 +135,16 @@ map('n', '<leader>gd', function()
   Snacks.picker.git_diff { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Git diff' })
 
+map('n', '<leader>gF', function()
+  Snacks.picker.git_log_file { cwd = vim.fn.expand '%:p:h' }
+end, { desc = 'Git Log File' })
+
 -- Quit
 map('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'quit all' })
 map('n', '<leader>qQ', '<CMD>qa!<CR>', { desc = 'quit all !' })
-map('n', '<leader>qb', '<CMD>bd<CR>', { desc = 'Quit Buffer (Keep Window)' })
+map('n', '<leader>qb', function()
+  Snacks.bufdelete()
+end, { desc = 'Delete Buffer' })
 map('n', '<leader>qB', '<CMD>bw<CR>', { desc = 'Quit Buffer and windows' })
 map('n', '<leader>qw', function()
   local session_file = 'Session.vim'
@@ -114,12 +158,13 @@ map('n', '<leader>qw', function()
   vim.cmd 'qa'
 end, { desc = 'Save session and quit' })
 
--- Window management
-map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })
-map('n', '<leader>_', '<CMD>split<CR>', { desc = 'Split window above' })
-map('n', '<leader>\\', '<CMD>vsplit<CR>', { desc = 'Split window right' })
-map('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Split window left' })
-map('n', '<leader>qd', '<CMD>close<CR>', { desc = 'Close Window (Keep Buffer)' })
+-- Window management all trash
+-- map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })
+-- map('n', '<leader>_', '<CMD>split<CR>', { desc = 'Split window above' })
+-- map('n', '<leader>\\', '<CMD>vsplit<CR>', { desc = 'Split window right' })
+-- map('n', '<leader>|', '<CMD>vsplit<CR>', { desc = 'Split window left' })
+map('n', '<leader>qd', '<C-w>q', { desc = 'Close Window (Keep Buffer)' })
+-- NOTE: use Ctrl-W for window management
 
 -- Resize window
 map('n', '<C-Up>', ':resize +1<CR>', { desc = 'Tăng chiều cao cửa sổ' })
@@ -133,7 +178,7 @@ map('n', '<leader>uw', function()
 end, { desc = 'Toggle Wrap Text' })
 
 -- Change color scheme
-map('n', '<leader>uc', '<CMD>Pick colorschemes<CR>', { desc = 'Change theme' })
+map('n', '<leader>uc', '<CMD>lua Snacks.picker.colorschemes()<CR>', { desc = 'Change theme' })
 
 -- Switch buffer
 map('n', '<Tab>', '<CMD>bnext<CR>', { desc = 'Next Buffer' })
@@ -141,22 +186,15 @@ map('n', '<S-Tab>', '<CMD>bprevious<CR>', { desc = 'Previous Buffer' })
 map('n', 'H', '<CMD>execute "silent! bprevious " . v:count1<CR>', { desc = 'Previous Buffer (with count)' })
 map('n', 'L', '<CMD>execute "silent! bnext " . v:count1<CR>', { desc = 'Next Buffer (with count)' })
 
--- Oil
--- map('n', '<leader>O', '<CMD>Oil<CR>', { noremap = true, silent = true, desc = 'Open Oil (cwd)' })
-
 -- Snacks picker
 map('n', '<leader>fb', function()
   picker.buffers()
 end, { desc = 'Buffers' })
 
--- map('n', '<leader>ff', function()
---   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
---   vim.cmd 'Pick files'
--- end, { desc = 'Find Files' })
-
--- map('n', '<leader>ff', function()
---   picker.files { live = true, prompt = 'Find Files> ' }
--- end, { desc = 'Find Files' })
+map('n', '<leader>ff', function()
+  vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
+  vim.cmd 'Pick files'
+end, { desc = 'Find Files' })
 
 map('n', '<leader>fr', function()
   picker.recent { live = true }
@@ -281,7 +319,7 @@ map('n', '<leader><leader>', function()
   local file = vim.api.nvim_buf_get_name(0)
   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
   mini_pick.builtin.files(nil, { source = { cwd = dir } })
-end, { desc = 'Search [F]iles in file root or cwd' })
+end, { desc = 'Search [F]iles in cwd' })
 
 map('n', '<leader>sG', function()
   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
@@ -294,7 +332,14 @@ map('n', '<leader>sg', function()
   mini_pick.builtin.grep_live(nil, { source = { cwd = dir } })
 end, { desc = 'Search by [G]rep in file root or cwd' })
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search [R]esume' })
-map('n', '<leader>r', '<CMD>Pick buffers<CR>', { desc = '[ ] Find existing buffers' })
+map('n', '<leader>r', function()
+  local wipeout_cur = function()
+    vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
+  end
+  local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
+  MiniPick.builtin.buffers({ include_current = true }, { mappings = buffer_mappings })
+end, { desc = 'Find existing buffers' })
+
 -- map('n', '<leader>sd', '<CMD>Pick diagnostic<CR>', { desc = 'Search [D]iagnostics' })
 map('n', '<leader>sw', function()
   mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }
@@ -351,34 +396,34 @@ map('n', '<leader>uM', function()
 end, { desc = 'Toggle Mini Map Focus' })
 
 -- Mini session
-map('n', '<leader>us', function()
+map('n', '<leader>Ss', function()
   require('mini.sessions').select()
 end, { desc = 'Open Session' })
-map('n', '<leader>usw', function()
+map('n', '<leader>Sw', function()
   require('mini.sessions').write()
 end, { desc = 'Write Session' })
-map('n', '<leader>usR', function()
+map('n', '<leader>Sd', function()
   require('mini.sessions').delete(nil, { force = true })
 end, { desc = 'Remove Session' })
-map('n', '<leader>usl', function()
-  require('mini.sessions').select()
-end, { desc = 'List Sessions' })
-map('n', '<leader>usL', function()
+map('n', '<leader>Sl', function()
   require('mini.sessions').read(nil, { force = true })
 end, { desc = 'Load Last Session (Current Project)' })
 map('n', '<leader>ql', function()
   require('mini.sessions').read(nil, { force = true })
 end, { desc = 'Load Last Session (Current Project)' })
 
-map('n', '<leader>usc', function()
+map('n', '<leader>Sc', function()
   vim.cmd 'mksession'
 end, { desc = 'Create Session (:mksession)' })
 
 -- Edit file
 map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
 
+-- Delete marks
+map('n', '<C-m>', ':delmarks<Space>', { desc = 'Delete marks' })
+
 -- Toggle dashboard
-map('n', '<leader>td', function()
+map('n', '<leader>tD', function()
   Snacks.dashboard()
 end, { desc = 'Toggle Dashboard' })
 
@@ -466,10 +511,9 @@ map('n', '<leader>su', function()
   Snacks.picker.undo()
 end, { desc = 'Undotree' })
 
-map('n', '<leader>ff', function()
-  Snacks.picker.buffers()
-end, { desc = 'Files buffers in Snacks' })
-
 map('n', '<leader>fF', function()
   Snacks.picker.buffers { hidden = true, nofile = true }
 end, { desc = 'Files buffers in Snacks (all)' })
+
+map('v', 'J', ":m'>+1<cr>gv=gv", { noremap = true })
+map('v', 'K', ":m'<-2<cr>gv=gv", { noremap = true })

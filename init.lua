@@ -8,6 +8,11 @@ vim.o.cmdheight = 0 -- Height of the command line, set to 1 to save space
 
 vim.o.mouse = 'a'
 
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldenable = true -- Enable folding by default
+vim.o.foldlevel = 99 -- Start with all folds open
+
 vim.o.showmode = false
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
@@ -533,11 +538,10 @@ require('lazy').setup({
 })
 
 require 'custom.keymaps'
-require 'custom.floaterminal'
 vim.opt.termguicolors = true
 if vim.g.neovide then
   vim.g.neovide_input_ime = true
-  vim.g.neovide_opacity = 0.6
+  vim.g.neovide_opacity = 0.8
   vim.g.neovide_padding_top = 0
   vim.g.neovide_padding_left = 0
   vim.g.neovide_padding_right = 0

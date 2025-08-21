@@ -499,6 +499,10 @@ return { -- Collection of various small independent plugins/modules
       content = {
         active = function()
           local mode, mode_hl = statusline.section_mode { trunc_width = 150 }
+          -- if vim.fn.mode() == 'n' and vim.fn.getcmdtype() == '' and vim.fn.getcharstr() == 'r' then
+          --   mode = 'REPLACE'
+          --   mode_hl = 'MiniStatuslineModeReplace'
+          -- end
           local git = statusline.section_git { trunc_width = 75 }
           local diagnostics = function() -- Thay icon diagnostics thành chữ với màu
             if not vim.diagnostic.is_enabled() then

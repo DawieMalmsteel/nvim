@@ -226,7 +226,7 @@ end, { desc = 'Toggle mini.diff overlay (cwd to file dir)' })
 
 map('n', '<leader>;', function()
   picker.command_history()
-end, { desc = 'Command History' })
+end, { desc = 'Search Command History' })
 
 map('n', '<leader>n', function()
   if Snacks.config.picker and Snacks.config.picker.enabled then
@@ -319,7 +319,7 @@ map('n', '<leader><leader>', function()
   local file = vim.api.nvim_buf_get_name(0)
   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
   mini_pick.builtin.files(nil, { source = { cwd = dir } })
-end, { desc = 'Search [F]iles in cwd' })
+end, { desc = 'Search Files in cwd' })
 
 map('n', '<leader>sG', function()
   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
@@ -344,7 +344,7 @@ end, { desc = 'Find existing buffers' })
 map('n', '<leader>sw', function()
   mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }
 end, { desc = 'Search current Word' })
-map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = '[/] Fuzzily search' })
+map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = 'Fuzzily search' })
 -- map('n', '<leader>sk', '<CMD>Pick keymaps<CR>', { desc = '[S]earch [K]eymaps' })
 
 -- LSP keymaps

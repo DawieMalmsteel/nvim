@@ -15,6 +15,9 @@ local mini_map = require 'mini.map'
 
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+map('n', 'j', 'gj', { noremap = true, silent = true })
+map('n', 'k', 'gk', { noremap = true, silent = true })
+
 -- Diagnostic keymaps
 map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 map('n', '<leader>td', function()
@@ -329,7 +332,14 @@ map('n', '<leader>sg', function()
   mini_pick.builtin.grep_live(nil, { source = { cwd = dir } })
 end, { desc = 'Search by [G]rep in file root or cwd' })
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search [R]esume' })
-map('n', '<leader>r', '<CMD>Pick buffers<CR>', { desc = '[ ] Find existing buffers' })
+map('n', '<leader>r', function()
+  local wipeout_cur = function()
+    vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
+  end
+  local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
+  MiniPick.builtin.buffers({ include_current = true }, { mappings = buffer_mappings })
+end, { desc = 'Find existing buffers' })
+
 -- map('n', '<leader>sd', '<CMD>Pick diagnostic<CR>', { desc = 'Search [D]iagnostics' })
 map('n', '<leader>sw', function()
   mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }

@@ -59,7 +59,7 @@ map('n', ';', ':', { desc = 'CMD enter command mode' })
 map('i', 'kj', '<ESC>')
 
 -- Save file
-map({ 'n', 'i' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
+map({ 'n', 'i', 'x' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 
 -- Sql query
 -- map("n", "<leader>r", ":'<,'>DB", { noremap = true, silent = true })

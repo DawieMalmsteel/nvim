@@ -347,8 +347,8 @@ require('lazy').setup({
             return require('lspconfig.util').root_pattern '.git'(...)
           end,
         },
-
-        jdtls = {},
+        cssls = {},
+        html = {},
 
         lua_ls = {
           -- cmd = { ... },

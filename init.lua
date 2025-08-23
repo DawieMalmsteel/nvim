@@ -342,6 +342,12 @@ require('lazy').setup({
 
         csharp_ls = {},
 
+        tailwindcss = {
+          root_dir = function(...)
+            return require('lspconfig.util').root_pattern '.git'(...)
+          end,
+        },
+
         jdtls = {},
 
         lua_ls = {

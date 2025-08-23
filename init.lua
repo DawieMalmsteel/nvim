@@ -320,22 +320,65 @@ require('lazy').setup({
           },
         },
 
-        intelephense = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
+        -- intelephense = {
+        --   settings = {
+        --     intellicode = {
+        --       enable = true,
+        --       suggest = {
+        --         autoImports = true,
+        --         localKeywords = true,
+        --         localVariables = true,
+        --       },
+        --     },
+        --     -- analysis = {
+        --     --   inlay_hints = {
+        --     --     parameterNames = true,
+        --     --     parameterTypes = true,
+        --     --     variableTypes = true,
+        --     --     functionLikeReturnTypes = true,
+        --     --     propertyDeclarationTypes = true,
+        --     --   },
+        --     -- },
+        --   },
+        -- },
+
+        phpactor = {},
+
+        basedpyright = {
+          before_init = function(_, c)
+            if not c.settings then
+              c.settings = {}
+            end
+            if not c.settings.python then
+              c.settings.python = {}
+            end
+            c.settings.python.pythonPath = vim.fn.exepath 'python'
+          end,
           settings = {
-            intellicode = {
-              enable = true,
-              suggest = {
-                autoImports = true,
-                localKeywords = true,
-                localVariables = true,
+            basedpyright = {
+              analysis = {
+                inlayHints = {
+                  functionLikeReturnTypes = true,
+                  variableTypes = true,
+                  parameterTypes = true,
+                  propertyDeclarationTypes = true,
+                },
+                typeCheckingMode = 'basic',
+                autoImportCompletions = true,
+                diagnosticSeverityOverrides = {
+                  reportUnusedImport = 'information',
+                  reportUnusedFunction = 'information',
+                  reportUnusedVariable = 'information',
+                  reportGeneralTypeIssues = 'none',
+                  reportOptionalMemberAccess = 'none',
+                  reportOptionalSubscript = 'none',
+                  reportPrivateImportUsage = 'none',
+                },
               },
             },
           },
         },
-        pyright = {},
+
         rust_analyzer = {},
         vtsls = {
           -- explicitly add default filetypes, so that we can extend

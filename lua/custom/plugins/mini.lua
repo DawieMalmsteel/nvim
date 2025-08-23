@@ -270,6 +270,15 @@ return { -- Collection of various small independent plugins/modules
 
     require('mini.sessions').setup()
 
+    -- local bracketed = require 'mini.bracketed' -- NOTE: this cool as f*ck should config this
+    -- bracketed.setup {
+    --   -- file = { suffix = '' },
+    --   -- window = { suffix = '' },
+    --   -- quickfix = { suffix = '' },
+    --   -- yank = { suffix = '' },
+    --   -- treesitter = { suffix = 'n' },
+    -- }
+
     require('mini.files').setup {
       windows = {
         -- Maximum number of windows to show side by side

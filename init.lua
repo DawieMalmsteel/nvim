@@ -188,6 +188,9 @@ require('lazy').setup({
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'saghen/blink.cmp',
     },
+    opts = {
+      inlay_hints = { enabled = true },
+    },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -280,45 +283,41 @@ require('lazy').setup({
         -- clangd = {},
 
         gopls = {
-          analyses = {
-            ST1003 = true,
-            fieldalignment = false,
-            fillreturns = true,
-            nilness = true,
-            nonewvars = true,
-            shadow = true,
-            undeclaredname = true,
-            unreachable = true,
-            unusedparams = true,
-            unusedwrite = true,
-            useany = true,
+          settings = {
+            gopls = {
+              gofumpt = true,
+              codelenses = {
+                gc_details = false,
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              analyses = {
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
+              },
+              usePlaceholders = true,
+              completeUnimported = true,
+              staticcheck = true,
+              directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
+              semanticTokens = true,
+            },
           },
-          codelenses = {
-            generate = true, -- show the `go generate` lens.
-            regenerate_cgo = true,
-            test = true,
-            tidy = true,
-            upgrade_dependency = true,
-            vendor = true,
-          },
-          hints = {
-            assignVariableTypes = true,
-            compositeLiteralFields = true,
-            compositeLiteralTypes = true,
-            constantValues = true,
-            functionTypeParameters = true,
-            parameterNames = true,
-            rangeVariableTypes = true,
-          },
-          buildFlags = { '-tags', 'integration' },
-          completeUnimported = true,
-          diagnosticsDelay = '500ms',
-          gofumpt = true,
-          matcher = 'Fuzzy',
-          semanticTokens = true,
-          staticcheck = true,
-          symbolMatcher = 'fuzzy',
-          usePlaceholders = true,
         },
 
         intelephense = {
@@ -338,7 +337,45 @@ require('lazy').setup({
         },
         pyright = {},
         rust_analyzer = {},
-        vtsls = {},
+        vtsls = {
+          -- explicitly add default filetypes, so that we can extend
+          -- them in related extras
+          filetypes = {
+            'javascript',
+            'javascriptreact',
+            'javascript.jsx',
+            'typescript',
+            'typescriptreact',
+            'typescript.tsx',
+          },
+          settings = {
+            complete_function_calls = true,
+            vtsls = {
+              enableMoveToFileCodeAction = true,
+              autoUseWorkspaceTsdk = true,
+              experimental = {
+                maxInlayHintLength = 30,
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = 'always' },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                parameterNames = { enabled = 'literals' },
+                parameterTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = true },
+              },
+            },
+          },
+        },
 
         csharp_ls = {},
 

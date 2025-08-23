@@ -578,6 +578,7 @@ require('lazy').setup({
 })
 
 require 'custom.keymaps'
+vim.treesitter.language.register('markdown', 'minifiles')
 vim.opt.termguicolors = true
 if vim.g.neovide then
   vim.g.neovide_input_ime = true

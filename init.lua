@@ -320,29 +320,18 @@ require('lazy').setup({
           },
         },
 
-        -- intelephense = {
-        --   settings = {
-        --     intellicode = {
-        --       enable = true,
-        --       suggest = {
-        --         autoImports = true,
-        --         localKeywords = true,
-        --         localVariables = true,
-        --       },
-        --     },
-        --     -- analysis = {
-        --     --   inlay_hints = {
-        --     --     parameterNames = true,
-        --     --     parameterTypes = true,
-        --     --     variableTypes = true,
-        --     --     functionLikeReturnTypes = true,
-        --     --     propertyDeclarationTypes = true,
-        --     --   },
-        --     -- },
-        --   },
-        -- },
-
-        phpactor = {},
+        intelephense = {
+          settings = {
+            intellicode = {
+              enable = true,
+              suggest = {
+                autoImports = true,
+                localKeywords = true,
+                localVariables = true,
+              },
+            },
+          },
+        },
 
         basedpyright = {
           before_init = function(_, c)

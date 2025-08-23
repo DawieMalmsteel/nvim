@@ -6,6 +6,15 @@ local mini_pick = require 'mini.pick'
 local mini_extra = require 'mini.extra'
 local mini_starter = require 'mini.starter'
 local mini_map = require 'mini.map'
+local ls = require 'luasnip'
+
+map({ 'i', 's' }, '<c-l>', function()
+  ls.jump(1)
+end, { silent = true })
+
+map({ 'i', 's' }, '<c-h>', function()
+  ls.jump(-1)
+end, { silent = true })
 
 -- NOTE: fold
 -- zc: Collapse the fold under the cursor.

@@ -183,7 +183,15 @@ require('lazy').setup({
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      { 'mason-org/mason.nvim', opts = {} },
+      {
+        'mason-org/mason.nvim',
+        opts = {
+          registries = {
+            'github:mason-org/mason-registry',
+            'github:Crashdummyy/mason-registry',
+          },
+        },
+      },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'saghen/blink.cmp',
@@ -346,14 +354,15 @@ require('lazy').setup({
           settings = {
             basedpyright = {
               analysis = {
-                inlayHints = {
-                  functionLikeReturnTypes = true,
-                  variableTypes = true,
-                  parameterTypes = true,
-                  propertyDeclarationTypes = true,
-                },
+                -- inlayHints = {
+                --   functionLikeReturnTypes = true,
+                --   variableTypes = true,
+                --   parameterTypes = true,
+                --   propertyDeclarationTypes = true,
+                -- },
                 typeCheckingMode = 'basic',
                 autoImportCompletions = true,
+                useLibraryCodeForTypes = true,
                 diagnosticSeverityOverrides = {
                   reportUnusedImport = 'information',
                   reportUnusedFunction = 'information',
@@ -409,8 +418,6 @@ require('lazy').setup({
           },
         },
 
-        csharp_ls = {},
-
         tailwindcss = {
           root_dir = function(...)
             return require('lspconfig.util').root_pattern '.git'(...)
@@ -439,7 +446,6 @@ require('lazy').setup({
         server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
         require('lspconfig')[server_name].setup(server_config)
       end
-      require('csharpls_extended').buf_read_cmd_bind()
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code

@@ -6,7 +6,7 @@ return {
         previewers = {
           git = {
             native = true,
-            args = { '-c', 'delta.line-numbers=true', '-c', 'delta.side-by-side=false' },
+            args = { '-c', 'delta.line-numbers=false', '-c', 'delta.side-by-side=false' },
           },
         },
       },

@@ -377,6 +377,8 @@ require('lazy').setup({
           },
         },
 
+        fsautocomplete = {},
+
         rust_analyzer = {},
         vtsls = {
           -- explicitly add default filetypes, so that we can extend

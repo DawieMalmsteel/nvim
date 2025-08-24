@@ -2,7 +2,15 @@ return {
   {
     'folke/snacks.nvim',
     opts = {
-      picker = {},
+      picker = {
+        previewers = {
+          git = {
+            native = true,
+
+            args = { '-c', 'delta.line-numbers=false', '-c', 'delta.side-by-side=false' },
+          },
+        },
+      },
       statuscolumn = { enabled = true },
       input = { enabled = true },
       bigfile = { enabled = true },

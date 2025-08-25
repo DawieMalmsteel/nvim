@@ -6,6 +6,15 @@ local mini_pick = require 'mini.pick'
 local mini_extra = require 'mini.extra'
 local mini_starter = require 'mini.starter'
 local mini_map = require 'mini.map'
+local ls = require 'luasnip'
+
+map({ 'i', 's' }, '<c-l>', function()
+  ls.jump(1)
+end, { silent = true })
+
+map({ 'i', 's' }, '<c-h>', function()
+  ls.jump(-1)
+end, { silent = true })
 
 -- NOTE: fold
 -- zc: Collapse the fold under the cursor.
@@ -53,6 +62,7 @@ map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })
 map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
 map({ 'n', 'v' }, '<leader>S', '', { desc = '+session' })
 map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
+map({ 'n', 'v' }, '<leader>m', '', { desc = '+mark group' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
@@ -333,6 +343,13 @@ map('n', '<leader>sg', function()
 end, { desc = 'Search by [G]rep in file root or cwd' })
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search [R]esume' })
 map('n', '<leader>r', function()
+  local wipeout_cur = function()
+    vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
+  end
+  local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
+  MiniPick.builtin.buffers({ include_current = true }, { mappings = buffer_mappings })
+end, { desc = 'Find existing buffers' })
+map('n', '<M-r>', function()
   local wipeout_cur = function()
     vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
   end

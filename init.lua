@@ -183,10 +183,21 @@ require('lazy').setup({
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      { 'mason-org/mason.nvim', opts = {} },
+      {
+        'mason-org/mason.nvim',
+        opts = {
+          registries = {
+            'github:mason-org/mason-registry',
+            'github:Crashdummyy/mason-registry',
+          },
+        },
+      },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       'saghen/blink.cmp',
+    },
+    opts = {
+      inlay_hints = { enabled = true },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -280,51 +291,44 @@ require('lazy').setup({
         -- clangd = {},
 
         gopls = {
-          analyses = {
-            ST1003 = true,
-            fieldalignment = false,
-            fillreturns = true,
-            nilness = true,
-            nonewvars = true,
-            shadow = true,
-            undeclaredname = true,
-            unreachable = true,
-            unusedparams = true,
-            unusedwrite = true,
-            useany = true,
+          settings = {
+            gopls = {
+              gofumpt = true,
+              codelenses = {
+                gc_details = false,
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              analyses = {
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
+              },
+              usePlaceholders = true,
+              completeUnimported = true,
+              staticcheck = true,
+              directoryFilters = { '-.git', '-.vscode', '-.idea', '-.vscode-test', '-node_modules' },
+              semanticTokens = true,
+            },
           },
-          codelenses = {
-            generate = true, -- show the `go generate` lens.
-            regenerate_cgo = true,
-            test = true,
-            tidy = true,
-            upgrade_dependency = true,
-            vendor = true,
-          },
-          hints = {
-            assignVariableTypes = true,
-            compositeLiteralFields = true,
-            compositeLiteralTypes = true,
-            constantValues = true,
-            functionTypeParameters = true,
-            parameterNames = true,
-            rangeVariableTypes = true,
-          },
-          buildFlags = { '-tags', 'integration' },
-          completeUnimported = true,
-          diagnosticsDelay = '500ms',
-          gofumpt = true,
-          matcher = 'Fuzzy',
-          semanticTokens = true,
-          staticcheck = true,
-          symbolMatcher = 'fuzzy',
-          usePlaceholders = true,
         },
 
         intelephense = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
           settings = {
             intellicode = {
               enable = true,
@@ -336,18 +340,114 @@ require('lazy').setup({
             },
           },
         },
-        pyright = {},
-        rust_analyzer = {},
-        vtsls = {},
 
-        csharp_ls = {},
+        basedpyright = {
+          before_init = function(_, c)
+            if not c.settings then
+              c.settings = {}
+            end
+            if not c.settings.python then
+              c.settings.python = {}
+            end
+            c.settings.python.pythonPath = vim.fn.exepath 'python'
+          end,
+          settings = {
+            basedpyright = {
+              analysis = {
+                -- inlayHints = {
+                --   functionLikeReturnTypes = true,
+                --   variableTypes = true,
+                --   parameterTypes = true,
+                --   propertyDeclarationTypes = true,
+                -- },
+                typeCheckingMode = 'basic',
+                autoImportCompletions = true,
+                useLibraryCodeForTypes = true,
+                diagnosticSeverityOverrides = {
+                  reportUnusedImport = 'information',
+                  reportUnusedFunction = 'information',
+                  reportUnusedVariable = 'information',
+                  reportGeneralTypeIssues = 'none',
+                  reportOptionalMemberAccess = 'none',
+                  reportOptionalSubscript = 'none',
+                  reportPrivateImportUsage = 'none',
+                },
+              },
+            },
+          },
+        },
+
+        fsautocomplete = {},
+
+        rust_analyzer = {},
+        vtsls = {
+          -- explicitly add default filetypes, so that we can extend
+          -- them in related extras
+          filetypes = {
+            'javascript',
+            'javascriptreact',
+            'javascript.jsx',
+            'typescript',
+            'typescriptreact',
+            'typescript.tsx',
+          },
+          settings = {
+            complete_function_calls = true,
+            vtsls = {
+              enableMoveToFileCodeAction = true,
+              autoUseWorkspaceTsdk = true,
+              experimental = {
+                maxInlayHintLength = 30,
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = 'always' },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                parameterNames = { enabled = 'literals' },
+                parameterTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = true },
+              },
+            },
+          },
+        },
+
+        tailwindcss = {
+          root_dir = function(...)
+            return require('lspconfig.util').root_pattern '.git'(...)
+          end,
+        },
+        cssls = {},
+        html = {},
+
+        lua_ls = {
+          -- cmd = { ... },
+          -- filetypes = { ... },
+          -- capabilities = {},
+          settings = {
+            Lua = {
+              completion = {
+                callSnippet = 'Replace',
+              },
+              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+              -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
       }
 
       for server_name, server_config in pairs(servers) do
         server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
         require('lspconfig')[server_name].setup(server_config)
       end
-      require('csharpls_extended').buf_read_cmd_bind()
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
@@ -404,7 +504,30 @@ require('lazy').setup({
         'giuxtaposition/blink-cmp-copilot',
       },
       {
-        'rafamadriz/friendly-snippets',
+        'L3MON4D3/LuaSnip',
+        version = '2.*',
+        build = (function()
+          -- Build Step is needed for regex support in snippets.
+          -- This step is not supported in many windows environments.
+          -- Remove the below condition to re-enable on windows.
+          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+            return
+          end
+          return 'make install_jsregexp'
+        end)(),
+        dependencies = {
+          -- `friendly-snippets` contains a variety of premade snippets.
+          --    See the README about individual language/framework/plugin snippets:
+          --    https://github.com/rafamadriz/friendly-snippets
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+              require('luasnip.loaders.from_vscode').lazy_load { paths = { vim.fn.stdpath 'config' .. '/snippets' } }
+            end,
+          },
+        },
+        opts = {},
       },
       'folke/lazydev.nvim',
     },
@@ -425,7 +548,7 @@ require('lazy').setup({
         ghost_text = { enabled = vim.g.ai_cmp },
       },
 
-      snippets = { preset = 'mini_snippets' },
+      snippets = { preset = 'luasnip' }, --mini_snippets
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'copilot' },
@@ -538,6 +661,7 @@ require('lazy').setup({
 })
 
 require 'custom.keymaps'
+vim.treesitter.language.register('markdown', 'minifiles')
 vim.opt.termguicolors = true
 if vim.g.neovide then
   vim.g.neovide_input_ime = true

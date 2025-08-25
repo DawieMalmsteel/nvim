@@ -62,6 +62,7 @@ map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })
 map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
 map({ 'n', 'v' }, '<leader>S', '', { desc = '+session' })
 map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
+map({ 'n', 'v' }, '<leader>m', '', { desc = '+mark group' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })

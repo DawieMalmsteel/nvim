@@ -349,6 +349,13 @@ map('n', '<leader>r', function()
   local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
   MiniPick.builtin.buffers({ include_current = true }, { mappings = buffer_mappings })
 end, { desc = 'Find existing buffers' })
+map('n', '<M-r>', function()
+  local wipeout_cur = function()
+    vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
+  end
+  local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
+  MiniPick.builtin.buffers({ include_current = true }, { mappings = buffer_mappings })
+end, { desc = 'Find existing buffers' })
 
 -- map('n', '<leader>sd', '<CMD>Pick diagnostic<CR>', { desc = 'Search [D]iagnostics' })
 map('n', '<leader>sw', function()

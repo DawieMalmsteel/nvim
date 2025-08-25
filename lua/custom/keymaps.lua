@@ -538,3 +538,6 @@ map('v', 'K', ":m'<-2<cr>gv=gv")
 map({ 'n', 'x' }, 'gi', '^')
 map({ 'n', 'x' }, 'ga', 'g_')
 map({ 'n', 'x' }, '<Tab>', '%')
+
+-- Cheat line
+map('n', '<S-Tab>', '<CMD>CheatLineToggle<CR>', { silent = false })

@@ -84,8 +84,8 @@ return {
         temperature = 0,
         sticky = '#buffers',
         headers = {
-          user = ' 👤 ',
-          assistant = ' 🤖 ',
+          user = '👤',
+          assistant = ' ', --🤖
           tool = ' 🛠️ ',
         },
         mappings = {

@@ -1,7 +1,7 @@
 -- TODO: Split code into multiple files for better organization and maintainability
 -- TODO: Add more plugins or modules as needed
 return { -- Collection of various small independent plugins/modules
-  'echasnovski/mini.nvim',
+  'nvim-mini/mini.nvim',
   config = function()
     -- Better Around/Inside textobjects
     --
@@ -10,6 +10,8 @@ return { -- Collection of various small independent plugins/modules
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
     --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup { n_lines = 500 }
+    require('mini.trailspace').setup {}
+    require('mini.jump2d').setup {}
 
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     --

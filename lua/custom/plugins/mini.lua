@@ -10,8 +10,8 @@ return { -- Collection of various small independent plugins/modules
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
     --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup { n_lines = 500 }
-    require('mini.trailspace').setup {}
-    require('mini.jump2d').setup {}
+    -- require('mini.trailspace').setup {}
+    -- require('mini.jump2d').setup {}
 
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     --
@@ -272,7 +272,7 @@ return { -- Collection of various small independent plugins/modules
 
     require('mini.sessions').setup()
 
-    -- local bracketed = require 'mini.bracketed' -- NOTE: this cool as f*ck should config this
+    -- local bracketed = require 'mini.bracketed'
     -- bracketed.setup {
     --   -- file = { suffix = '' },
     --   -- window = { suffix = '' },

@@ -540,4 +540,4 @@ map({ 'n', 'x' }, 'ga', 'g_')
 map({ 'n', 'x' }, '<S-Tab>', '%')
 
 -- Cheat line
-map('n', '<Tab>', '<CMD>CheatLineToggle<CR>', { silent = false })
+map('n', '<Tab>', ':CheatLineToggle<CR>|:Precognition toggle<CR>', { silent = false })

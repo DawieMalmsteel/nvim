@@ -1,4 +1,9 @@
 return {
   'kiddos/gemini.nvim',
-  opts = {},
+  opts = {
+    instruction = {
+      enabled = true,
+      menu_key = '<C-g>',
+    },
+  },
 }

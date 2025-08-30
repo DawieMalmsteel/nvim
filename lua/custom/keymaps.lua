@@ -63,6 +63,7 @@ map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
 map({ 'n', 'v' }, '<leader>S', '', { desc = '+session' })
 map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
 map({ 'n', 'v' }, '<leader>m', '', { desc = '+mark group' })
+map({ 'n', 'v' }, '<leader>b', '', { desc = '+buffers' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
@@ -167,6 +168,9 @@ map('n', '<leader>qw', function()
   end
   vim.cmd 'qa'
 end, { desc = 'Save session and quit' })
+map('n', '<leader>bd', function()
+  Snacks.bufdelete()
+end, { desc = 'Delete Buffer' })
 
 -- Window management all trash
 -- map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })

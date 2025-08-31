@@ -1,6 +1,6 @@
 return {
   'dmtrKovalenko/fff.nvim',
-  -- build = 'cargo build --release',
+  build = 'cargo build --release',
   -- or if you are using nixos
   -- build = "nix run .#release",
   opts = { -- (optional)
@@ -14,7 +14,7 @@ return {
   lazy = false,
   keys = {
     {
-      '<leader><CR>', -- try it if you didn't it is a banger keybinding for a picker
+      '<leader><leader>', -- try it if you didn't it is a banger keybinding for a picker
       function()
         require('fff').find_files()
       end,

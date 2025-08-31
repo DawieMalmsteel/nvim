@@ -549,3 +549,6 @@ map('n', '<Tab>', function()
   vim.cmd 'Precognition toggle'
   vim.api.nvim_win_set_cursor(0, cursor_pos) -- Khôi phục vị trí con trỏ
 end, { silent = false })
+
+map('n', "y'", "yi'", { noremap = true })
+map('n', 'y"', 'yi"', { noremap = true })

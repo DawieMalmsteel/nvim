@@ -561,7 +561,7 @@ map('n', '<leader>bh', function()
       require('mini.bufremove').delete(buf, false)
     end
   end
-end, { desc = 'Close Hidden Buffers' })
+end, { desc = 'Close Others Hidden Buffers' })
 
 -- Close Nameless Buffers
 map('n', '<leader>bu', function()

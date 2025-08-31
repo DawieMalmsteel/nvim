@@ -329,11 +329,11 @@ map('n', '<leader>fM', '<CMD>Pick marks<CR>', { desc = 'Open marks' })
 
 -- Keymaps adapted from Telescope, using command strings to avoid nil errors
 map('n', '<leader>sh', '<CMD>Pick help<CR>', { desc = 'Search [H]elp' })
-map('n', '<leader><leader>', function()
-  local file = vim.api.nvim_buf_get_name(0)
-  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
-  mini_pick.builtin.files(nil, { source = { cwd = dir } })
-end, { desc = 'Search Files in cwd' })
+-- map('n', '<leader><leader>', function()
+--   local file = vim.api.nvim_buf_get_name(0)
+--   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+--   mini_pick.builtin.files(nil, { source = { cwd = dir } })
+-- end, { desc = 'Search Files in cwd' })
 
 map('n', '<leader>sG', function()
   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
@@ -543,5 +543,9 @@ map({ 'n', 'x' }, 'gi', '^')
 map({ 'n', 'x' }, 'ga', 'g_')
 map({ 'n', 'x' }, '<S-Tab>', '%')
 
--- Cheat line
-map('n', '<Tab>', ':CheatLineToggle<CR>|:Precognition toggle<CR>', { silent = false })
+map('n', '<Tab>', function()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0) -- Lưu vị trí con trỏ
+  vim.cmd 'CheatLineToggle'
+  vim.cmd 'Precognition toggle'
+  vim.api.nvim_win_set_cursor(0, cursor_pos) -- Khôi phục vị trí con trỏ
+end, { silent = false })

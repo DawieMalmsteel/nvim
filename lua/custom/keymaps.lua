@@ -552,7 +552,10 @@ map('n', '<Tab>', function()
 end, { silent = false })
 
 map('n', "y'", "yi'", { noremap = true })
+map('n', "v'", "vi'", { noremap = true })
+
 map('n', 'y"', 'yi"', { noremap = true })
+map('n', 'v"', 'vi"', { noremap = true })
 
 -- Close Hidden Buffers
 map('n', '<leader>bh', function()

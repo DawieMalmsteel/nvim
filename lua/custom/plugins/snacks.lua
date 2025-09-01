@@ -70,7 +70,7 @@ return {
               icon = '',
               key = 's',
               desc = 'Session load latest',
-              action = ":lua require('mini.sessions').read(nil, { force = true })",
+              action = ':lua require("persistence").load()',
             },
             {
               icon = ' ',

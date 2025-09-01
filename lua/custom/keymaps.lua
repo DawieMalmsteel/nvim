@@ -60,7 +60,7 @@ map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
 map({ 'n', 'v' }, '<leader>g', '', { desc = '+git' })
 map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })
 map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
-map({ 'n', 'v' }, '<leader>S', '', { desc = '+session' })
+-- map({ 'n', 'v' }, '<leader>S', '', { desc = '+session' })
 map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
 map({ 'n', 'v' }, '<leader>m', '', { desc = '+mark group' })
 map({ 'n', 'v' }, '<leader>b', '', { desc = '+buffers' })
@@ -157,17 +157,17 @@ map('n', '<leader>qb', function()
   Snacks.bufdelete()
 end, { desc = 'Delete Buffer' })
 map('n', '<leader>qB', '<CMD>bw<CR>', { desc = 'Quit Buffer and windows' })
-map('n', '<leader>qw', function()
-  local session_file = 'Session.vim'
-  local uv = vim.loop
-  local stat = uv.fs_stat(session_file)
-  if stat then
-    vim.cmd('mksession! ' .. session_file)
-  else
-    vim.cmd('mksession ' .. session_file)
-  end
-  vim.cmd 'qa'
-end, { desc = 'Save session and quit' })
+-- map('n', '<leader>qw', function()
+--   local session_file = 'Session.vim'
+--   local uv = vim.loop
+--   local stat = uv.fs_stat(session_file)
+--   if stat then
+--     vim.cmd('mksession! ' .. session_file)
+--   else
+--     vim.cmd('mksession ' .. session_file)
+--   end
+--   vim.cmd 'qa'
+-- end, { desc = 'Save session and quit' })
 map('n', '<leader>bd', function()
   Snacks.bufdelete()
 end, { desc = 'Delete Buffer' })
@@ -418,25 +418,25 @@ map('n', '<leader>uM', function()
 end, { desc = 'Toggle Mini Map Focus' })
 
 -- Mini session
-map('n', '<leader>Ss', function()
-  require('mini.sessions').select()
-end, { desc = 'Open Session' })
-map('n', '<leader>Sw', function()
-  require('mini.sessions').write()
-end, { desc = 'Write Session' })
-map('n', '<leader>Sd', function()
-  require('mini.sessions').delete(nil, { force = true })
-end, { desc = 'Remove Session' })
-map('n', '<leader>Sl', function()
-  require('mini.sessions').read(nil, { force = true })
-end, { desc = 'Load Last Session (Current Project)' })
-map('n', '<leader>ql', function()
-  require('mini.sessions').read(nil, { force = true })
-end, { desc = 'Load Last Session (Current Project)' })
-
-map('n', '<leader>Sc', function()
-  vim.cmd 'mksession'
-end, { desc = 'Create Session (:mksession)' })
+-- map('n', '<leader>Ss', function()
+--   require('mini.sessions').select()
+-- end, { desc = 'Open Session' })
+-- map('n', '<leader>Sw', function()
+--   require('mini.sessions').write()
+-- end, { desc = 'Write Session' })
+-- map('n', '<leader>Sd', function()
+--   require('mini.sessions').delete(nil, { force = true })
+-- end, { desc = 'Remove Session' })
+-- map('n', '<leader>Sl', function()
+--   require('mini.sessions').read(nil, { force = true })
+-- end, { desc = 'Load Last Session (Current Project)' })
+-- map('n', '<leader>ql', function()
+--   require('mini.sessions').read(nil, { force = true })
+-- end, { desc = 'Load Last Session (Current Project)' })
+--
+-- map('n', '<leader>Sc', function()
+--   vim.cmd 'mksession'
+-- end, { desc = 'Create Session (:mksession)' })
 
 -- Edit file
 map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
@@ -574,3 +574,7 @@ map('n', '<leader>bu', function()
     end
   end
 end, { desc = 'Close Nameless Buffers' })
+
+map('n', '<leader>h', function()
+  require('mini.extra').pickers.visit_paths()
+end, { desc = 'mini.extra.visit_paths' })

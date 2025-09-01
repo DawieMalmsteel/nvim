@@ -271,7 +271,7 @@ return { -- Collection of various small independent plugins/modules
     --   },
     -- }
 
-    require('mini.sessions').setup()
+    -- require('mini.sessions').setup()
 
     -- MiniBracketed Keybindings:
     -- [B` `[b` `]b` `]B` - Buffer

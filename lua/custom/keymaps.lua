@@ -64,6 +64,7 @@ map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
 map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
 map({ 'n', 'v' }, '<leader>m', '', { desc = '+mark group' })
 map({ 'n', 'v' }, '<leader>b', '', { desc = '+buffers' })
+map({ 'n', 'v' }, '<leader>d', '', { desc = '+debug' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
@@ -79,7 +80,7 @@ map({ 'n', 'i', 'x' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, 
 map('n', '<leader>E', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
-map('n', '<leader>o', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
+map('n', '<leader>O', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
 
 -- add keymap to remove trailing whitespace
 map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })

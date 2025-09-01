@@ -542,14 +542,14 @@ map('v', 'K', ":m'<-2<cr>gv=gv")
 
 map({ 'n', 'x' }, 'gi', '^')
 map({ 'n', 'x' }, 'ga', 'g_')
-map({ 'n', 'x' }, '<S-Tab>', '%')
+map({ 'n', 'x' }, '<Tab>', '%')
 
-map('n', '<Tab>', function()
-  local cursor_pos = vim.api.nvim_win_get_cursor(0) -- Lưu vị trí con trỏ
-  vim.cmd 'CheatLineToggle'
-  vim.cmd 'Precognition toggle'
-  vim.api.nvim_win_set_cursor(0, cursor_pos) -- Khôi phục vị trí con trỏ
-end, { silent = false })
+-- map('n', '<Tab>', function()
+--   local cursor_pos = vim.api.nvim_win_get_cursor(0) -- Lưu vị trí con trỏ
+--   vim.cmd 'CheatLineToggle'
+--   vim.cmd 'Precognition toggle'
+--   vim.api.nvim_win_set_cursor(0, cursor_pos) -- Khôi phục vị trí con trỏ
+-- end, { silent = false })
 
 map('n', "y'", "yi'", { noremap = true })
 map('n', "v'", "vi'", { noremap = true })

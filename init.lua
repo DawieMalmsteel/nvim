@@ -637,7 +637,7 @@ require('lazy').setup({
   },
 
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   { import = 'custom.plugins' },
 }, {

@@ -78,22 +78,22 @@ return {
           highlight MiniStarterItemPrefix guibg=NONE guifg=#a3be8c
           highlight MiniStarterSection guibg=NONE guifg=#ebcb8b gui=bold
           highlight MiniStarterQuery guibg=NONE guifg=#b48ead
-        ]]
 
-      vim.api.nvim_set_hl(0, 'MiniStatuslineModeOther', { fg = '#b4befe', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineDevinfo', { fg = '#89b4fa', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnostics', { fg = '#f38ba8', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsError', { fg = '#f38ba8', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsWarn', { fg = '#f9e2af', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsInfo', { fg = '#89b4fa', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnosticsHint', { fg = '#a6e3a1', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { fg = '#cdd6f4', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineLocation', { fg = '#f38ba8', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineRecording', { fg = '#f38ba8', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineInactive', { fg = '#45475a', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineProgress', { fg = '#cba6f7', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineHarpoon', { fg = '#fab387', bg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'MiniStatuslineModified', { fg = '#e5c07b', bg = 'NONE' })
+          highlight MiniStatuslineModeOther guifg=#b4befe guibg=NONE
+          highlight MiniStatuslineDevinfo guifg=#89b4fa guibg=NONE
+          highlight MiniStatuslineDiagnostics guifg=#f38ba8 guibg=NONE
+          highlight MiniStatuslineDiagnosticsError guifg=#f38ba8 guibg=NONE
+          highlight MiniStatuslineDiagnosticsWarn guifg=#f9e2af guibg=NONE
+          highlight MiniStatuslineDiagnosticsInfo guifg=#89b4fa guibg=NONE
+          highlight MiniStatuslineDiagnosticsHint guifg=#a6e3a1 guibg=NONE
+          highlight MiniStatuslineFilename guifg=#cdd6f4 guibg=NONE
+          highlight MiniStatuslineLocation guifg=#f38ba8 guibg=NONE
+          highlight MiniStatuslineRecording guifg=#f38ba8 guibg=NONE
+          highlight MiniStatuslineInactive guifg=#45475a guibg=NONE
+          highlight MiniStatuslineProgress guifg=#cba6f7 guibg=NONE
+          highlight MiniStatuslineHarpoon guifg=#fab387 guibg=NONE
+          highlight MiniStatuslineModified guifg=#e5c07b guibg=NONE
+        ]]
     end,
   },
 }

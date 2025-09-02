@@ -20,9 +20,9 @@ return {
       }
     end,
   },
-  -- {
-  --   'nvim-treesitter/nvim-treesitter-textobjects',
-  --   after = 'nvim-treesitter',
-  --   requires = 'nvim-treesitter/nvim-treesitter',
-  -- },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+    requires = 'nvim-treesitter/nvim-treesitter',
+  },
 }

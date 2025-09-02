@@ -576,6 +576,26 @@ map('n', '<leader>bu', function()
   end
 end, { desc = 'Close Nameless Buffers' })
 
-map('n', '<leader>h', function()
-  require('mini.extra').pickers.visit_paths()
-end, { desc = 'mini.extra.visit_paths' })
+-- Function to toggle between start and end of the current Treesitter node
+local ts_utils = require 'nvim-treesitter.ts_utils'
+
+local toggle_position = 'start'
+function ToggleTreeBoundary()
+  local node = ts_utils.get_node_at_cursor()
+  if not node then
+    print 'No Treesitter node found at cursor'
+    return
+  end
+
+  local range = { node:range() } -- {start_row, start_col, end_row, end_col}
+  if toggle_position == 'start' then
+    vim.api.nvim_win_set_cursor(0, { range[1] + 1, range[2] })
+    toggle_position = 'end'
+  else
+    vim.api.nvim_win_set_cursor(0, { range[3] + 1, range[4] - 1 })
+    toggle_position = 'start'
+  end
+end
+
+-- Keymap for toggling Treesitter node boundaries
+map('n', '<S-Tab>', ToggleTreeBoundary, { desc = 'Toggle Treesitter node boundary' })

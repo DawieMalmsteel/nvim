@@ -4,6 +4,10 @@ return {
   -- or if you are using nixos
   -- build = "nix run .#release",
   opts = { -- (optional)
+    keymaps = {
+      close = '<c-c>',
+    },
+
     debug = {
       enabled = true, -- we expect your collaboration at least during the beta
       show_scores = true, -- to help us optimize the scoring system, feel free to share your scores!

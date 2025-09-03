@@ -137,6 +137,7 @@ return { -- Collection of various small independent plugins/modules
     require('mini.icons').setup()
     require('mini.git').setup()
     require('mini.bufremove').setup()
+    require('mini.cursorword').setup()
     require('mini.statusline').setup()
 
     -- require('mini.clue').setup()

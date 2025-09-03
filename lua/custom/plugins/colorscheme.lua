@@ -27,7 +27,7 @@ return {
       vim.g.zenbones_darken_comments = 45
       -- vim.opt.background = 'light' -- hoặc 'dark'
       vim.g.transparent_background = true
-      vim.cmd.colorscheme 'zenbones'
+      -- vim.cmd.colorscheme 'zenbones'
     end,
   },
   {
@@ -40,9 +40,9 @@ return {
         },
       }
 
-      -- vim.cmd.colorscheme 'monokai-nightasty'
+      -- vim.cmd.colorscheme 'nordic'
       -- vim.opt.background = 'light'
-      -- vim.cmd.colorscheme 'miniautumn'
+      vim.cmd.colorscheme 'miniautumn'
 
       vim.cmd [[
           highlight TabLine guibg=NONE guifg=#abb2bf

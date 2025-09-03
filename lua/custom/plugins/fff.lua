@@ -5,7 +5,9 @@ return {
   -- build = "nix run .#release",
   opts = { -- (optional)
     keymaps = {
-      close = '<c-c>',
+      close = '<C-c>',
+      move_up = { '<Up>', '<C-p>', '<C-k>' },
+      move_down = { '<Down>', '<C-n>', '<C-j>' },
     },
 
     debug = {

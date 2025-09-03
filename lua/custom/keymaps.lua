@@ -56,6 +56,7 @@ map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
 map({ 'n', 'v' }, '<leader>m', '', { desc = '+mark group' })
 map({ 'n', 'v' }, '<leader>b', '', { desc = '+buffers' })
 map({ 'n', 'v' }, '<leader>d', '', { desc = '+debug' })
+map({ 'n', 'v' }, '<leader>r', '', { desc = '+refactor' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
@@ -63,9 +64,6 @@ map('i', 'kj', '<ESC>')
 
 -- Save file
 map({ 'n', 'i', 'x' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
-
--- Sql query
--- map("n", "<leader>r", ":'<,'>DB", { noremap = true, silent = true })
 
 -- Explore
 map('n', '<leader>E', function()
@@ -338,7 +336,7 @@ map('n', '<leader>sg', function()
   mini_pick.builtin.grep_live(nil, { source = { cwd = dir } })
 end, { desc = 'Search by [G]rep in file root or cwd' })
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search [R]esume' })
-map('n', '<leader>r', function()
+map('n', '<leader>R', function()
   local wipeout_cur = function()
     vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
   end
@@ -570,3 +568,40 @@ end, { desc = 'Close Nameless Buffers' })
 -- map('n', '<leader>h', function()
 --   require('mini.extra').pickers.visit_paths()
 -- end, { desc = 'mini.extra.visit_paths' })
+
+map('n', '<leader>D', '<CMD>DBUIToggle<CR>', { desc = 'Toggle DB' })
+
+map({ 'n', 'x' }, '<leader>re', function()
+  return require('refactoring').refactor 'Extract Function'
+end, { expr = true, desc = 'Extract Function' })
+
+map({ 'n', 'x' }, '<leader>rf', function()
+  return require('refactoring').refactor 'Extract Function To File'
+end, { expr = true, desc = 'Extract Function To File' })
+
+map({ 'n', 'x' }, '<leader>rv', function()
+  return require('refactoring').refactor 'Extract Variable'
+end, { expr = true, desc = 'Extract Variable' })
+
+map({ 'n', 'x' }, '<leader>rI', function()
+  return require('refactoring').refactor 'Inline Function'
+end, { expr = true, desc = 'Inline Function' })
+
+map({ 'n', 'x' }, '<leader>ri', function()
+  return require('refactoring').refactor 'Inline Variable'
+end, { expr = true, desc = 'Inline Variable' })
+
+map({ 'n', 'x' }, '<leader>rbb', function()
+  return require('refactoring').refactor 'Extract Block'
+end, { expr = true, desc = 'Extract Block' })
+
+map({ 'n', 'x' }, '<leader>rbf', function()
+  return require('refactoring').refactor 'Extract Block To File'
+end, { expr = true, desc = 'Extract Block To File' })
+
+map({ 'n', 'x' }, '<leader>rr', function()
+  require('refactoring').select_refactor()
+end, { desc = 'Select Refactor' })
+
+local some_var = 'some var'
+print(some_var)

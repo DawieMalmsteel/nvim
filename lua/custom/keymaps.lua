@@ -602,6 +602,3 @@ end, { expr = true, desc = 'Extract Block To File' })
 map({ 'n', 'x' }, '<leader>rr', function()
   require('refactoring').select_refactor()
 end, { desc = 'Select Refactor' })
-
-local some_var = 'some var'
-print(some_var)

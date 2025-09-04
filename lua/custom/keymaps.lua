@@ -59,6 +59,8 @@ map({ 'n', 'v' }, '<leader>m', '', { desc = '+mark group' })
 map({ 'n', 'v' }, '<leader>b', '', { desc = '+buffers' })
 map({ 'n', 'v' }, '<leader>d', '', { desc = '+debug' })
 map({ 'n', 'v' }, '<leader>r', '', { desc = '+refactor' })
+map({ 'n', 'v' }, '<leader>N', '', { desc = '+notes' })
+map({ 'n', 'v' }, '<leader>O', '', { desc = '+obsidian' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
@@ -71,7 +73,7 @@ map({ 'n', 'i', 'x' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, 
 map('n', '<leader>E', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
-map('n', '<leader>O', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
+map('n', '<leader>o', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
 
 -- add keymap to remove trailing whitespace
 map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })
@@ -316,6 +318,9 @@ map(
   ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })<CR>",
   { desc = 'Open mini.picker (nvim config)' }
 )
+
+map('n', '<leader>Ne', ":lua require('mini.files').open(vim.fn.stdpath('config') .. '/notes', true)<CR>", { desc = 'Open notes folder' })
+
 map('n', '<leader>fR', '<CMD>Pick registers<CR>', { desc = 'Open register' })
 map('n', '<leader>fM', '<CMD>Pick marks<CR>', { desc = 'Open marks' })
 

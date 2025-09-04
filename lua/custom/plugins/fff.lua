@@ -20,7 +20,7 @@ return {
   lazy = false,
   keys = {
     {
-      '<leader><leader>', -- try it if you didn't it is a banger keybinding for a picker
+      '<leader>F', -- try it if you didn't it is a banger keybinding for a picker
       function()
         require('fff').find_files()
       end,

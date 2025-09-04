@@ -42,7 +42,7 @@ return {
 
       -- vim.cmd.colorscheme 'nordic'
       -- vim.opt.background = 'light'
-      vim.cmd.colorscheme 'miniautumn'
+      vim.cmd.colorscheme 'randomhue'
 
       vim.cmd [[
           highlight TabLine guibg=NONE guifg=#abb2bf

@@ -139,6 +139,7 @@ return { -- Collection of various small independent plugins/modules
     require('mini.bufremove').setup()
     require('mini.cursorword').setup()
     require('mini.statusline').setup()
+    require('mini.hues').setup { background = '#19213a', foreground = '#c0c8cc' }
 
     -- local function mode_nx(keys)
     --   return { mode = 'n', keys = keys }, { mode = 'x', keys = keys }

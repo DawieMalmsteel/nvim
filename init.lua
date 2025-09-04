@@ -621,7 +621,7 @@ require('lazy').setup({
           },
           goto_previous_start = {
             ['[f'] = '@function.outer',
-            ['[c'] = '@class.outer',
+            ['[l'] = '@class.outer',
             ['[a'] = '@parameter.inner',
           },
           goto_previous_end = {

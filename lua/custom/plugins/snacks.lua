@@ -58,35 +58,35 @@ return {
           ---@type snacks.dashboard.Item[]
           keys = {},
 
-          --           header = [[
-          -- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀
-          -- ⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟⠀
-          -- ⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀⠀
-          -- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-          --         @NeoVim của Dwcks 🦀        ]],
           header = [[
-          |  \ \ | |/ /
-          |  |\ `' ' /
-          |  ;'aorta \      / , pulmonary
-          | ;    _,   |    / / ,  arteries
- superior | |   (  `-.;_,-' '-' ,
-vena cava | `,   `-._       _,-'_
-          |,-`.    `.)    ,<_,-'_, pulmonary
-         ,'    `.   /   ,'  `;-' _,  veins
-        ;        `./   /`,    \-'
-        | right   /   |  ;\   |\
-        | atrium ;_,._|_,  `, ' \
-        |        \    \ `       `,
-        `      __ `    \   left  ;,
-         \   ,'  `      \,  ventricle
-          \_(            ;,      ;;
-          |  \           `;,     ;;
- inferior |  |`.          `;;,   ;'
-vena cava |  |  `-.        ;;;;,;'
-          |  |    |`-.._  ,;;;;;'
-          |  |    |   | ``';;;'
-                  aorta
-                    ]],
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀
+          ⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟⠀
+          ⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀⠀
+          ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                  @NeoVim của Dwcks 🦀        ]],
+          --           header = [[
+          --           |  \ \ | |/ /
+          --           |  |\ `' ' /
+          --           |  ;'aorta \      / , pulmonary
+          --           | ;    _,   |    / / ,  arteries
+          --  superior | |   (  `-.;_,-' '-' ,
+          -- vena cava | `,   `-._       _,-'_
+          --           |,-`.    `.)    ,<_,-'_, pulmonary
+          --          ,'    `.   /   ,'  `;-' _,  veins
+          --         ;        `./   /`,    \-'
+          --         | right   /   |  ;\   |\
+          --         | atrium ;_,._|_,  `, ' \
+          --         |        \    \ `       `,
+          --         `      __ `    \   left  ;,
+          --          \   ,'  `      \,  ventricle
+          --           \_(            ;,      ;;
+          --           |  \           `;,     ;;
+          --  inferior |  |`.          `;;,   ;'
+          -- vena cava |  |  `-.        ;;;;,;'
+          --           |  |    |`-.._  ,;;;;;'
+          --           |  |    |   | ``';;;'
+          --                   aorta
+          --                     ]],
         },
 
         sections = {
@@ -95,7 +95,7 @@ vena cava |  |  `-.        ;;;;,;'
             { pane = 2, icon = ' ', key = 'f', desc = 'Find File', action = ':Pick files' },
             { pane = 2, icon = '', key = 'n', desc = 'New File', action = ':ene | startinsert' },
             { pane = 2, icon = ' ', key = 'g', desc = 'Find Text', action = ':Pick grep_live' },
-            -- { pane = 2, icon = ' ', key = 'r', desc = 'Recent Files', action = ':Pick oldfiles' },
+            { pane = 2, icon = ' ', key = 'r', desc = 'Recent Files', action = ':Pick oldfiles' },
             {
               pane = 2,
               icon = ' ',
@@ -110,37 +110,6 @@ vena cava |  |  `-.        ;;;;,;'
               desc = 'Session load latest',
               action = ':lua require("persistence").load()',
             },
-            -- {
-            --   pane = 2,
-            --   icon = ' ',
-            --   key = 'p',
-            --   desc = 'Projects',
-            --   action = function()
-            --     local roots = { '~/Projects', '~/Projects-to-plays', '~/Playground' }
-            --     local projects = {}
-            --     for _, dir in ipairs(roots) do
-            --       local abs_dir = vim.fn.expand(dir)
-            --       local handle = vim.loop.fs_scandir(abs_dir)
-            --       if handle then
-            --         while true do
-            --           local name, t = vim.loop.fs_scandir_next(handle)
-            --           if not name then
-            --             break
-            --           end
-            --           if t == 'directory' then
-            --             table.insert(projects, abs_dir .. '/' .. name)
-            --           end
-            --         end
-            --       end
-            --     end
-            --     require('mini.pick').start {
-            --       source = { name = 'Projects', items = projects },
-            --       action = function(path)
-            --         vim.cmd('tabnew ' .. path)
-            --       end,
-            --     }
-            --   end,
-            -- },
             { pane = 2, icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
             { pane = 2, icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
             { pane = 2, icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1, layout = 'vertical' },

@@ -1,7 +1,7 @@
 -- TODO: Split code into multiple files for better organization and maintainability
 -- TODO: Add more plugins or modules as needed
 return { -- Collection of various small independent plugins/modules
-  'echasnovski/mini.nvim',
+  'nvim-mini/mini.nvim',
   config = function()
     -- Better Around/Inside textobjects
     --
@@ -10,6 +10,8 @@ return { -- Collection of various small independent plugins/modules
     --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
     --  - ci'  - [C]hange [I]nside [']quote
     require('mini.ai').setup { n_lines = 500 }
+    -- require('mini.trailspace').setup {}
+    -- require('mini.jump2d').setup {}
 
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     --
@@ -134,9 +136,80 @@ return { -- Collection of various small independent plugins/modules
     require('mini.visits').setup()
     require('mini.icons').setup()
     require('mini.git').setup()
+    require('mini.bufremove').setup()
+    require('mini.cursorword').setup()
     require('mini.statusline').setup()
+    -- require('mini.hues').setup { background = '#19213a', foreground = '#c0c8cc' }
 
-    -- require('mini.clue').setup()
+    local function mode_nx(keys)
+      return { mode = 'n', keys = keys }, { mode = 'x', keys = keys }
+    end
+
+    local clue = require 'mini.clue'
+    clue.setup {
+      triggers = {
+        -- Leader triggers
+        mode_nx '<leader>',
+
+        -- Built-in completion
+        { mode = 'i', keys = '<c-x>' },
+
+        -- `g` key
+        mode_nx 'g',
+
+        mode_nx 'd',
+
+        -- Marks
+        mode_nx "'",
+        mode_nx '`',
+
+        -- Registers
+        mode_nx '"',
+        { mode = 'i', keys = '<c-r>' },
+        { mode = 'c', keys = '<c-r>' },
+
+        -- Window commands
+        { mode = 'n', keys = '<c-w>' },
+
+        -- bracketed commands
+        { mode = 'n', keys = '[' },
+        { mode = 'n', keys = ']' },
+
+        -- `z` key
+        mode_nx 'z',
+
+        -- surround
+        mode_nx 's',
+
+        -- text object
+        { mode = 'x', keys = 'i' },
+        { mode = 'x', keys = 'a' },
+        { mode = 'o', keys = 'i' },
+        { mode = 'o', keys = 'a' },
+      },
+
+      clues = {
+        -- Enhance this by adding descriptions for <Leader> mapping groups
+        clue.gen_clues.builtin_completion(),
+        clue.gen_clues.square_brackets(),
+        clue.gen_clues.g(),
+        clue.gen_clues.marks(),
+        clue.gen_clues.registers { show_contents = true },
+        clue.gen_clues.windows { submode_resize = true, submode_move = true, submode_navigate = true },
+        clue.gen_clues.z(),
+      },
+      window = {
+        -- Floating window config
+        config = {},
+
+        -- Delay before showing clue window
+        delay = 0,
+
+        -- Keys to scroll inside the clue window
+        scroll_down = '<C-d>',
+        scroll_up = '<C-u>',
+      },
+    }
 
     require('mini.diff').setup {
       view = {
@@ -253,31 +326,41 @@ return { -- Collection of various small independent plugins/modules
     }
 
     -- Mini Snippets
-    -- local mini_snippets = require 'mini.snippets'
-    -- mini_snippets.setup {
-    --   snippets = { mini_snippets.gen_loader.from_lang() },
-    --   mappings = {
-    --     -- Expand snippet at cursor position. Created globally in Insert mode.
-    --     expand = '<C-a>',
-    --
-    --     -- Interact with default `expand.insert` session.
-    --     -- Created for the duration of active session(s)
-    --     jump_next = '<C-l>',
-    --     jump_prev = '<C-h>',
-    --     stop = '<C-c>',
-    --   },
+    local mini_snippets = require 'mini.snippets'
+    mini_snippets.setup {
+      snippets = { mini_snippets.gen_loader.from_lang() },
+      mappings = {
+        -- Expand snippet at cursor position. Created globally in Insert mode.
+        expand = '<C-a>',
+
+        -- Interact with default `expand.insert` session.
+        -- Created for the duration of active session(s)
+        jump_next = '<C-l>',
+        jump_prev = '<C-h>',
+        stop = '<C-c>',
+      },
+    }
+
+    -- require('mini.sessions').setup {
+    --   file = '',
     -- }
 
-    require('mini.sessions').setup()
-
-    -- local bracketed = require 'mini.bracketed' -- NOTE: this cool as f*ck should config this
-    -- bracketed.setup {
-    --   -- file = { suffix = '' },
-    --   -- window = { suffix = '' },
-    --   -- quickfix = { suffix = '' },
-    --   -- yank = { suffix = '' },
-    --   -- treesitter = { suffix = 'n' },
-    -- }
+    -- MiniBracketed Keybindings:
+    -- [B` `[b` `]b` `]B` - Buffer
+    -- [C` `[c` `]c` `]C` - Comment block
+    -- [X` `[x` `]x` `]X` - Conflict marker
+    -- [D` `[d` `]d` `]D` - Diagnostic
+    -- [F` `[f` `]f` `]F` - File on disk
+    -- [I` `[i` `]i` `]I` - Indent change
+    -- [J` `[j` `]j` `]J` - Jump inside current buffer
+    -- [L` `[l` `]l` `]L` - Location from location-list
+    -- [O` `[o` `]o` `]O` - Old files
+    -- [Q` `[q` `]q` `]Q` - Quickfix entry
+    -- [T` `[t` `]t` `]T` - Tree-sitter node and parents
+    -- [U` `[u` `]u` `]U` - Undo states
+    -- [W` `[w` `]w` `]W` - Window in current tab
+    -- [Y` `[y` `]y` `]Y` - Yank selection replacing latest put region
+    require('mini.bracketed').setup()
 
     require('mini.files').setup {
       windows = {

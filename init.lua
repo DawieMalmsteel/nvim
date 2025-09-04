@@ -118,53 +118,53 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    opts = {
-      delay = 0,
-      icons = {
-        mappings = vim.g.have_nerd_font,
-        keys = vim.g.have_nerd_font and {} or {
-          Up = '<Up> ',
-          Down = '<Down> ',
-          Left = '<Left> ',
-          Right = '<Right> ',
-          C = '<C-…> ',
-          M = '<M-…> ',
-          D = '<D-…> ',
-          S = '<S-…> ',
-          CR = '<CR> ',
-          Esc = '<Esc> ',
-          ScrollWheelDown = '<ScrollWheelDown> ',
-          ScrollWheelUp = '<ScrollWheelUp> ',
-          NL = '<NL> ',
-          BS = '<BS> ',
-          Space = '<Space> ',
-          Tab = '<Tab> ',
-          F1 = '<F1>',
-          F2 = '<F2>',
-          F3 = '<F3>',
-          F4 = '<F4>',
-          F5 = '<F5>',
-          F6 = '<F6>',
-          F7 = '<F7>',
-          F8 = '<F8>',
-          F9 = '<F9>',
-          F10 = '<F10>',
-          F11 = '<F11>',
-          F12 = '<F12>',
-        },
-      },
-
-      -- Document existing key chains
-      spec = {
-        { '<leader>s', group = 'Search' },
-        { '<leader>t', group = 'Toggle' },
-        -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-      },
-    },
-  },
+  -- { -- Useful plugin to show you pending keybinds.
+  --   'folke/which-key.nvim',
+  --   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+  --   opts = {
+  --     delay = 0,
+  --     icons = {
+  --       mappings = vim.g.have_nerd_font,
+  --       keys = vim.g.have_nerd_font and {} or {
+  --         Up = '<Up> ',
+  --         Down = '<Down> ',
+  --         Left = '<Left> ',
+  --         Right = '<Right> ',
+  --         C = '<C-…> ',
+  --         M = '<M-…> ',
+  --         D = '<D-…> ',
+  --         S = '<S-…> ',
+  --         CR = '<CR> ',
+  --         Esc = '<Esc> ',
+  --         ScrollWheelDown = '<ScrollWheelDown> ',
+  --         ScrollWheelUp = '<ScrollWheelUp> ',
+  --         NL = '<NL> ',
+  --         BS = '<BS> ',
+  --         Space = '<Space> ',
+  --         Tab = '<Tab> ',
+  --         F1 = '<F1>',
+  --         F2 = '<F2>',
+  --         F3 = '<F3>',
+  --         F4 = '<F4>',
+  --         F5 = '<F5>',
+  --         F6 = '<F6>',
+  --         F7 = '<F7>',
+  --         F8 = '<F8>',
+  --         F9 = '<F9>',
+  --         F10 = '<F10>',
+  --         F11 = '<F11>',
+  --         F12 = '<F12>',
+  --       },
+  --     },
+  --
+  --     -- Document existing key chains
+  --     spec = {
+  --       -- { '<leader>s', group = 'Search' },
+  --       -- { '<leader>t', group = 'Toggle' },
+  --       -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+  --     },
+  --   },
+  -- },
 
   -- LSP Plugins
   {
@@ -503,32 +503,7 @@ require('lazy').setup({
       {
         'giuxtaposition/blink-cmp-copilot',
       },
-      {
-        'L3MON4D3/LuaSnip',
-        version = '2.*',
-        build = (function()
-          -- Build Step is needed for regex support in snippets.
-          -- This step is not supported in many windows environments.
-          -- Remove the below condition to re-enable on windows.
-          if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-            return
-          end
-          return 'make install_jsregexp'
-        end)(),
-        dependencies = {
-          -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
-          {
-            'rafamadriz/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-              require('luasnip.loaders.from_vscode').lazy_load { paths = { vim.fn.stdpath 'config' .. '/snippets' } }
-            end,
-          },
-        },
-        opts = {},
-      },
+      { 'rafamadriz/friendly-snippets' },
       'folke/lazydev.nvim',
     },
     --- @module 'blink.cmp'
@@ -548,7 +523,7 @@ require('lazy').setup({
         ghost_text = { enabled = vim.g.ai_cmp },
       },
 
-      snippets = { preset = 'luasnip' }, --mini_snippets
+      snippets = { preset = 'mini_snippets' },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'copilot' },
@@ -622,7 +597,7 @@ require('lazy').setup({
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'ocaml', 'c_sharp' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'ocaml', 'c_sharp', 'sql' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -630,6 +605,32 @@ require('lazy').setup({
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+      textobjects = {
+        move = {
+          enable = true,
+          set_jumps = true, -- Enable jumps for visual mode
+          goto_next_start = {
+            [']f'] = '@function.outer',
+            [']l'] = '@class.outer',
+            [']a'] = '@parameter.inner',
+          },
+          goto_next_end = {
+            [']F'] = '@function.outer',
+            [']L'] = '@class.outer',
+            [']A'] = '@parameter.inner',
+          },
+          goto_previous_start = {
+            ['[f'] = '@function.outer',
+            ['[c'] = '@class.outer',
+            ['[a'] = '@parameter.inner',
+          },
+          goto_previous_end = {
+            ['[F'] = '@function.outer',
+            ['[L'] = '@class.outer',
+            ['[A'] = '@parameter.inner',
+          },
+        },
+      },
     },
     --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
@@ -637,7 +638,7 @@ require('lazy').setup({
   },
 
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   { import = 'custom.plugins' },
 }, {

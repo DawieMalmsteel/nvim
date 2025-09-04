@@ -6,15 +6,6 @@ local mini_pick = require 'mini.pick'
 local mini_extra = require 'mini.extra'
 local mini_starter = require 'mini.starter'
 local mini_map = require 'mini.map'
-local ls = require 'luasnip'
-
-map({ 'i', 's' }, '<c-l>', function()
-  ls.jump(1)
-end, { silent = true })
-
-map({ 'i', 's' }, '<c-h>', function()
-  ls.jump(-1)
-end, { silent = true })
 
 -- NOTE: fold
 -- zc: Collapse the fold under the cursor.
@@ -60,9 +51,14 @@ map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
 map({ 'n', 'v' }, '<leader>g', '', { desc = '+git' })
 map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })
 map({ 'n', 'v' }, '<leader>q', '', { desc = '+quit' })
-map({ 'n', 'v' }, '<leader>S', '', { desc = '+session' })
+map({ 'n', 'v' }, '<leader>t', '', { desc = '+toggles' })
+map({ 'n', 'v' }, '<leader>s', '', { desc = '+search' })
+-- map({ 'n', 'v' }, '<leader>S', '', { desc = '+session' })
 map({ 'n', 'v' }, 'gr', '', { desc = '+LSP' })
 map({ 'n', 'v' }, '<leader>m', '', { desc = '+mark group' })
+map({ 'n', 'v' }, '<leader>b', '', { desc = '+buffers' })
+map({ 'n', 'v' }, '<leader>d', '', { desc = '+debug' })
+map({ 'n', 'v' }, '<leader>r', '', { desc = '+refactor' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
@@ -71,14 +67,11 @@ map('i', 'kj', '<ESC>')
 -- Save file
 map({ 'n', 'i', 'x' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 
--- Sql query
--- map("n", "<leader>r", ":'<,'>DB", { noremap = true, silent = true })
-
 -- Explore
 map('n', '<leader>E', function()
   Snacks.explorer()
 end, { desc = 'Explorer Snacks (cwd)' })
-map('n', '<leader>o', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
+map('n', '<leader>O', '<CMD>Pick oldfiles<CR>', { desc = 'Open oldfiles' })
 
 -- add keymap to remove trailing whitespace
 map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })
@@ -156,17 +149,20 @@ map('n', '<leader>qb', function()
   Snacks.bufdelete()
 end, { desc = 'Delete Buffer' })
 map('n', '<leader>qB', '<CMD>bw<CR>', { desc = 'Quit Buffer and windows' })
-map('n', '<leader>qw', function()
-  local session_file = 'Session.vim'
-  local uv = vim.loop
-  local stat = uv.fs_stat(session_file)
-  if stat then
-    vim.cmd('mksession! ' .. session_file)
-  else
-    vim.cmd('mksession ' .. session_file)
-  end
-  vim.cmd 'qa'
-end, { desc = 'Save session and quit' })
+-- map('n', '<leader>qw', function()
+--   local session_file = 'Session.vim'
+--   local uv = vim.loop
+--   local stat = uv.fs_stat(session_file)
+--   if stat then
+--     vim.cmd('mksession! ' .. session_file)
+--   else
+--     vim.cmd('mksession ' .. session_file)
+--   end
+--   vim.cmd 'qa'
+-- end, { desc = 'Save session and quit' })
+map('n', '<leader>bd', function()
+  Snacks.bufdelete()
+end, { desc = 'Delete Buffer' })
 
 -- Window management all trash
 -- map('n', '<leader>-', '<CMD>split<CR>', { desc = 'Split window below' })
@@ -325,11 +321,11 @@ map('n', '<leader>fM', '<CMD>Pick marks<CR>', { desc = 'Open marks' })
 
 -- Keymaps adapted from Telescope, using command strings to avoid nil errors
 map('n', '<leader>sh', '<CMD>Pick help<CR>', { desc = 'Search [H]elp' })
-map('n', '<leader><leader>', function()
-  local file = vim.api.nvim_buf_get_name(0)
-  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
-  mini_pick.builtin.files(nil, { source = { cwd = dir } })
-end, { desc = 'Search Files in cwd' })
+-- map('n', '<leader><leader>', function()
+--   local file = vim.api.nvim_buf_get_name(0)
+--   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+--   mini_pick.builtin.files(nil, { source = { cwd = dir } })
+-- end, { desc = 'Search Files in cwd' })
 
 map('n', '<leader>sG', function()
   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
@@ -342,7 +338,7 @@ map('n', '<leader>sg', function()
   mini_pick.builtin.grep_live(nil, { source = { cwd = dir } })
 end, { desc = 'Search by [G]rep in file root or cwd' })
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search [R]esume' })
-map('n', '<leader>r', function()
+map('n', '<leader>R', function()
   local wipeout_cur = function()
     vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
   end
@@ -392,9 +388,10 @@ map('n', 'grN', function()
 end, { desc = 'Rename current file with mini.files' })
 
 -- Treesitter context keymaps
-map('n', '[c', function()
-  require('treesitter-context').go_to_context(vim.v.count1)
-end, { silent = true, desc = 'Go to upward Treesitter context' })
+-- map('n', '[c', function()
+--   require('treesitter-context').go_to_context(vim.v.count1)
+-- end, { silent = true, desc = 'Go to upward Treesitter context' })
+
 -- Toggle Treesitter context
 map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
 
@@ -413,31 +410,31 @@ map('n', '<leader>uM', function()
 end, { desc = 'Toggle Mini Map Focus' })
 
 -- Mini session
-map('n', '<leader>Ss', function()
-  require('mini.sessions').select()
-end, { desc = 'Open Session' })
-map('n', '<leader>Sw', function()
-  require('mini.sessions').write()
-end, { desc = 'Write Session' })
-map('n', '<leader>Sd', function()
-  require('mini.sessions').delete(nil, { force = true })
-end, { desc = 'Remove Session' })
-map('n', '<leader>Sl', function()
-  require('mini.sessions').read(nil, { force = true })
-end, { desc = 'Load Last Session (Current Project)' })
-map('n', '<leader>ql', function()
-  require('mini.sessions').read(nil, { force = true })
-end, { desc = 'Load Last Session (Current Project)' })
-
-map('n', '<leader>Sc', function()
-  vim.cmd 'mksession'
-end, { desc = 'Create Session (:mksession)' })
+-- map('n', '<leader>Ss', function()
+--   require('mini.sessions').select()
+-- end, { desc = 'Open Session' })
+-- map('n', '<leader>Sw', function()
+--   require('mini.sessions').write()
+-- end, { desc = 'Write Session' })
+-- map('n', '<leader>Sd', function()
+--   require('mini.sessions').delete(nil, { force = true })
+-- end, { desc = 'Remove Session' })
+-- map('n', '<leader>Sl', function()
+--   require('mini.sessions').read(nil, { force = true })
+-- end, { desc = 'Load Last Session (Current Project)' })
+-- map('n', '<leader>ql', function()
+--   require('mini.sessions').read(nil, { force = true })
+-- end, { desc = 'Load Last Session (Current Project)' })
+--
+-- map('n', '<leader>Sc', function()
+--   vim.cmd 'mksession'
+-- end, { desc = 'Create Session (:mksession)' })
 
 -- Edit file
 map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
 
 -- Delete marks
-map('n', '<C-m>', ':delmarks<Space>', { desc = 'Delete marks' })
+-- map('n', '<C-m>', ':delmarks<Space>', { desc = 'Delete marks' })
 
 -- Toggle dashboard
 map('n', '<leader>tD', function()
@@ -537,7 +534,73 @@ map('v', 'K', ":m'<-2<cr>gv=gv")
 
 map({ 'n', 'x' }, 'gi', '^')
 map({ 'n', 'x' }, 'ga', 'g_')
-map({ 'n', 'x' }, '<S-Tab>', '%')
+map({ 'n', 'x' }, '<Tab>', '%')
 
--- Cheat line
-map('n', '<Tab>', '<CMD>CheatLineToggle<CR>', { silent = false })
+-- map('n', '<Tab>', function()
+--   local cursor_pos = vim.api.nvim_win_get_cursor(0) -- Lưu vị trí con trỏ
+--   vim.cmd 'CheatLineToggle'
+--   vim.cmd 'Precognition toggle'
+--   vim.api.nvim_win_set_cursor(0, cursor_pos) -- Khôi phục vị trí con trỏ
+-- end, { silent = false })
+
+map('n', "y'", "yi'", { noremap = true })
+map('n', "v'", "vi'", { noremap = true })
+
+map('n', 'y"', 'yi"', { noremap = true })
+map('n', 'v"', 'vi"', { noremap = true })
+
+-- Close Hidden Buffers
+map('n', '<leader>bh', function()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.fn.buflisted(buf) == 1 and vim.fn.bufwinnr(buf) == -1 then
+      require('mini.bufremove').delete(buf, false)
+    end
+  end
+end, { desc = 'Close Others Hidden Buffers' })
+
+-- Close Nameless Buffers
+map('n', '<leader>bu', function()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.fn.buflisted(buf) == 1 and vim.api.nvim_buf_get_name(buf) == '' then
+      require('mini.bufremove').delete(buf, false)
+    end
+  end
+end, { desc = 'Close Nameless Buffers' })
+
+-- map('n', '<leader>h', function()
+--   require('mini.extra').pickers.visit_paths()
+-- end, { desc = 'mini.extra.visit_paths' })
+
+map('n', '<leader>D', '<CMD>DBUIToggle<CR>', { desc = 'Toggle DB' })
+
+map({ 'n', 'x' }, '<leader>re', function()
+  return require('refactoring').refactor 'Extract Function'
+end, { expr = true, desc = 'Extract Function' })
+
+map({ 'n', 'x' }, '<leader>rf', function()
+  return require('refactoring').refactor 'Extract Function To File'
+end, { expr = true, desc = 'Extract Function To File' })
+
+map({ 'n', 'x' }, '<leader>rv', function()
+  return require('refactoring').refactor 'Extract Variable'
+end, { expr = true, desc = 'Extract Variable' })
+
+map({ 'n', 'x' }, '<leader>rI', function()
+  return require('refactoring').refactor 'Inline Function'
+end, { expr = true, desc = 'Inline Function' })
+
+map({ 'n', 'x' }, '<leader>ri', function()
+  return require('refactoring').refactor 'Inline Variable'
+end, { expr = true, desc = 'Inline Variable' })
+
+map({ 'n', 'x' }, '<leader>rbb', function()
+  return require('refactoring').refactor 'Extract Block'
+end, { expr = true, desc = 'Extract Block' })
+
+map({ 'n', 'x' }, '<leader>rbf', function()
+  return require('refactoring').refactor 'Extract Block To File'
+end, { expr = true, desc = 'Extract Block To File' })
+
+map({ 'n', 'x' }, '<leader>rr', function()
+  require('refactoring').select_refactor()
+end, { desc = 'Select Refactor' })

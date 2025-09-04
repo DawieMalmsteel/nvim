@@ -15,6 +15,7 @@ return {
   },
   {
     'tiagovla/tokyodark.nvim',
+    lazy = false,
     opts = {
       -- transparent_background = true,
     },

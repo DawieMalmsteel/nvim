@@ -11,6 +11,7 @@ return {
         },
       },
       statuscolumn = { enabled = true },
+      image = { enabled = true },
       input = { enabled = true },
       bigfile = { enabled = true },
       quickfile = { enabled = true },

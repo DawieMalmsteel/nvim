@@ -14,6 +14,16 @@ return {
     },
   },
   {
+    'tiagovla/tokyodark.nvim',
+    opts = {
+      transparent_background = true,
+    },
+    config = function(_, opts)
+      require('tokyodark').setup(opts) -- calling setup is optional
+      vim.cmd [[colorscheme tokyodark]]
+    end,
+  },
+  {
     'zenbones-theme/zenbones.nvim',
     -- Optionally install Lush. Allows for more configuration or extending the colorscheme
     -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
@@ -41,8 +51,9 @@ return {
       }
 
       -- vim.cmd.colorscheme 'nordic'
+      vim.cmd.colorscheme 'tokyodark'
       -- vim.opt.background = 'light'
-      vim.cmd.colorscheme 'randomhue'
+      -- vim.cmd.colorscheme 'randomhue'
 
       vim.cmd [[
           highlight TabLine guibg=NONE guifg=#abb2bf

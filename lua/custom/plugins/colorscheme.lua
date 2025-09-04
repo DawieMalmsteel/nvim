@@ -79,9 +79,6 @@ return {
            highlight StatusLineTerm guibg=NONE
            highlight StatusLineTermNC guibg=NONE
 
-           highlight CopilotChatHeader guifg=#bb9af7 gui=bold
-           highlight CopilotChatSeparator guifg=#3b4261
-
            highlight MiniStarterItem guibg=NONE guifg=#c0caf5
            highlight MiniStarterFooter guibg=NONE guifg=#7dcfff
            highlight MiniStarterHeader guibg=NONE guifg=#7aa2f7 gui=bold

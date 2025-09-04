@@ -1,1 +1,1 @@
-[ ] Hiện tại chưa nghĩ ra nhiệm vụ cặc gì 
+- [ ] Hiện tại chưa nghĩ ra nhiệm vụ cặc gì 

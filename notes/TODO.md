@@ -1,6 +1,6 @@
-[ ] Thêm obsidian vào nvim
-[ ] Tìm hiểu về Obsidian
-[ ] Chuyển persistence về mini sessions
-[ ] Chuyển chuyển Which key thành mini clue (xong 80%)
-[ ] Set up codecompanion 
-[ ] set up mini visits và làm nó hiển thị trên mini.tavline
+- [ ] Thêm obsidian vào nvim
+- [ ] Tìm hiểu về Obsidian
+- [ ] Chuyển persistence về mini sessions
+- [ ] Chuyển chuyển Which key thành mini clue (xong 80%)
+- [ ] Set up codecompanion 
+- [ ] set up mini visits và làm nó hiển thị trên mini.tavline

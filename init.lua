@@ -430,6 +430,8 @@ require('lazy').setup({
         cssls = {},
         html = {},
 
+        marksman = {},
+
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },

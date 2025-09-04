@@ -19,7 +19,7 @@ return {
       scroll = { enabled = false },
       words = { enabled = true },
       indent = {
-        enabled = true,
+        enabled = false,
         scope = {
           enabled = true, -- enable highlighting the current scope
           priority = 200,

@@ -6,14 +6,20 @@ return {
     vim.g.language_path = {
       python = 'python',
       python3 = 'python3',
-      javascript = 'node',
       go = 'go',
       c = 'gcc -Wall',
       cpp = 'g++ -std=c++11 -Wall',
       bash = 'bash',
-      cs = 'tee temp.csx | dotnet-script temp.csx && rm temp.csx',
-      fsharp = 'tee temp.fsx | dotnet fsi temp.fsx && rm temp.fsx',
-      rust = 'tee temp.rs | rustc temp.rs -o temp && ./temp && rm temp temp.rs',
+
+      javascript = 'tee v21L0nKoNCkoz.js && bun run v21L0nKoNCkoz.js; rm -f v21L0nKoNCkoz.js',
+      js = 'tee v21L0nKoNCkoz.js && bun run v21L0nKoNCkoz.js; rm -f v21L0nKoNCkoz.js',
+      typescript = 'tee v21L0nKoNCkoz.ts && bun run v21L0nKoNCkoz.ts; rm -f v21L0nKoNCkoz.ts',
+      ts = 'tee v21L0nKoNCkoz.ts && bun run v21L0nKoNCkoz.ts; rm -f v21L0nKoNCkoz.ts',
+
+      cs = 'tee v21L0nKoNCkoz.csx | dotnet-script v21L0nKoNCkoz.csx; rm -f v21L0nKoNCkoz.csx',
+      fsharp = 'tee v21L0nKoNCkoz.fsx | dotnet fsi v21L0nKoNCkoz.fsx; rm -f v21L0nKoNCkoz.fsx',
+      rust = 'tee v21L0nKoNCkoz.rs | rustc v21L0nKoNCkoz.rs -o v21L0nKoNCkoz && ./v21L0nKoNCkoz; rm -f v21L0nKoNCkoz v21L0nKoNCkoz.rs',
+
       -- fsharp = 'dotnet fsi',
       ['c++'] = 'g++ -std=c++11 -Wall',
     }

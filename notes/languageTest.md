@@ -19,7 +19,9 @@ console.log("Hello, JavaScript!");
 
 ```ts
 let a: number = 5;
-console.log("Hello, TypeScript!",a);
+let b: number = 10;
+let sum: number = a + b;
+console.log("sum:",sum);
 ```
 
 

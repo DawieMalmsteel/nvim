@@ -8,6 +8,21 @@ greet()
 console.log("Hello, world!");
 ```
 
+
+```typescript
+console.log("Hello, TypeScript!");
+```
+
+```js
+console.log("Hello, JavaScript!");
+```
+
+```ts
+let a: number = 5;
+console.log("Hello, TypeScript!",a);
+```
+
+
 ```go
 package main
 

@@ -4,3 +4,4 @@
 - [ ] Chuyển chuyển Which key thành mini clue (xong 80%)
 - [ ] Set up codecompanion 
 - [ ] set up mini visits và làm nó hiển thị trên mini.tavline
+- [ ] viết issue trên [markdown-org](https://github.com/Kurama622/markdown-org/issues/new) về việc thêm support cho fish shell hoặc là folk mẹ sang cái plugins của mình để thêm support cho fish shell

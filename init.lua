@@ -668,6 +668,8 @@ require('lazy').setup({
 require 'custom.keymaps'
 vim.treesitter.language.register('markdown', 'minifiles')
 vim.opt.termguicolors = true
+vim.g.python3_host_prog = '/usr/bin/python3'
+vim.o.shell = 'bash' -- Replace '/bin/bash' with your preferred shell
 if vim.g.neovide then
   vim.g.neovide_input_ime = true
   vim.g.neovide_opacity = 0.8

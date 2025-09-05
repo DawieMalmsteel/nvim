@@ -118,53 +118,53 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- { -- Useful plugin to show you pending keybinds.
-  --   'folke/which-key.nvim',
-  --   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-  --   opts = {
-  --     delay = 0,
-  --     icons = {
-  --       mappings = vim.g.have_nerd_font,
-  --       keys = vim.g.have_nerd_font and {} or {
-  --         Up = '<Up> ',
-  --         Down = '<Down> ',
-  --         Left = '<Left> ',
-  --         Right = '<Right> ',
-  --         C = '<C-…> ',
-  --         M = '<M-…> ',
-  --         D = '<D-…> ',
-  --         S = '<S-…> ',
-  --         CR = '<CR> ',
-  --         Esc = '<Esc> ',
-  --         ScrollWheelDown = '<ScrollWheelDown> ',
-  --         ScrollWheelUp = '<ScrollWheelUp> ',
-  --         NL = '<NL> ',
-  --         BS = '<BS> ',
-  --         Space = '<Space> ',
-  --         Tab = '<Tab> ',
-  --         F1 = '<F1>',
-  --         F2 = '<F2>',
-  --         F3 = '<F3>',
-  --         F4 = '<F4>',
-  --         F5 = '<F5>',
-  --         F6 = '<F6>',
-  --         F7 = '<F7>',
-  --         F8 = '<F8>',
-  --         F9 = '<F9>',
-  --         F10 = '<F10>',
-  --         F11 = '<F11>',
-  --         F12 = '<F12>',
-  --       },
-  --     },
-  --
-  --     -- Document existing key chains
-  --     spec = {
-  --       -- { '<leader>s', group = 'Search' },
-  --       -- { '<leader>t', group = 'Toggle' },
-  --       -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-  --     },
-  --   },
-  -- },
+  { -- Useful plugin to show you pending keybinds.
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    opts = {
+      delay = 0,
+      icons = {
+        mappings = vim.g.have_nerd_font,
+        keys = vim.g.have_nerd_font and {} or {
+          Up = '<Up> ',
+          Down = '<Down> ',
+          Left = '<Left> ',
+          Right = '<Right> ',
+          C = '<C-…> ',
+          M = '<M-…> ',
+          D = '<D-…> ',
+          S = '<S-…> ',
+          CR = '<CR> ',
+          Esc = '<Esc> ',
+          ScrollWheelDown = '<ScrollWheelDown> ',
+          ScrollWheelUp = '<ScrollWheelUp> ',
+          NL = '<NL> ',
+          BS = '<BS> ',
+          Space = '<Space> ',
+          Tab = '<Tab> ',
+          F1 = '<F1>',
+          F2 = '<F2>',
+          F3 = '<F3>',
+          F4 = '<F4>',
+          F5 = '<F5>',
+          F6 = '<F6>',
+          F7 = '<F7>',
+          F8 = '<F8>',
+          F9 = '<F9>',
+          F10 = '<F10>',
+          F11 = '<F11>',
+          F12 = '<F12>',
+        },
+      },
+
+      -- Document existing key chains
+      spec = {
+        -- { '<leader>s', group = 'Search' },
+        -- { '<leader>t', group = 'Toggle' },
+        -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      },
+    },
+  },
 
   -- LSP Plugins
   {
@@ -209,8 +209,10 @@ require('lazy').setup({
           end
 
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>cr', vim.lsp.buf.rename, '[R]e[n]ame')
 
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+          map('<leader>ca', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -428,6 +430,8 @@ require('lazy').setup({
         cssls = {},
         html = {},
 
+        marksman = {},
+
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -621,7 +625,7 @@ require('lazy').setup({
           },
           goto_previous_start = {
             ['[f'] = '@function.outer',
-            ['[c'] = '@class.outer',
+            ['[l'] = '@class.outer',
             ['[a'] = '@parameter.inner',
           },
           goto_previous_end = {
@@ -664,6 +668,8 @@ require('lazy').setup({
 require 'custom.keymaps'
 vim.treesitter.language.register('markdown', 'minifiles')
 vim.opt.termguicolors = true
+vim.g.python3_host_prog = '/usr/bin/python3'
+vim.o.shell = 'bash' -- use this for markdown-org
 if vim.g.neovide then
   vim.g.neovide_input_ime = true
   vim.g.neovide_opacity = 0.8
@@ -671,6 +677,7 @@ if vim.g.neovide then
   vim.g.neovide_padding_left = 0
   vim.g.neovide_padding_right = 0
   vim.g.neovide_padding_bottom = 0
-  vim.o.guifont = 'Google Sans Code:h14'
+  -- vim.o.guifont = 'Google Sans Code:h14'
+  vim.o.guifont = 'Monolisa Variable-Script:h14'
   vim.g.neovide_fullscreen = true
 end

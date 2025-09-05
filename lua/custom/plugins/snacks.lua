@@ -11,6 +11,7 @@ return {
         },
       },
       statuscolumn = { enabled = true },
+      image = { enabled = true },
       input = { enabled = true },
       bigfile = { enabled = true },
       quickfile = { enabled = true },
@@ -19,7 +20,7 @@ return {
       scroll = { enabled = false },
       words = { enabled = true },
       indent = {
-        enabled = true,
+        enabled = false,
         scope = {
           enabled = true, -- enable highlighting the current scope
           priority = 200,
@@ -55,71 +56,78 @@ return {
           -- Set your custom keymaps here.
           -- When using a function, the `items` argument are the default keymaps.
           ---@type snacks.dashboard.Item[]
-          keys = {
-            { icon = ' ', key = 'f', desc = 'Find File', action = ':Pick files' },
-            { icon = '', key = 'n', desc = 'New File', action = ':ene | startinsert' },
-            { icon = ' ', key = 'g', desc = 'Find Text', action = ':Pick grep_live' },
-            { icon = ' ', key = 'r', desc = 'Recent Files', action = ':Pick oldfiles' },
+          keys = {},
+
+          -- header = [[
+          -- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀
+          -- ⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟⠀
+          -- ⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀⠀
+          -- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          --         @NeoVim của Dwcks 🦀        ]],
+          header = [[
+                    |  \ \ | |/ /                     
+                    |  |\ `' ' /                      
+                    |  ;'aorta \      / , pulmonary   
+                    | ;    _,   |    / / ,  arteries  
+           superior | |   (  `-.;_,-' '-' ,           
+          vena cava | `,   `-._       _,-'_           
+                    |,-`.    `.)    ,<_,-'_, pulmonary
+                   ,'    `.   /   ,'  `;-' _,  veins  
+                  ;        `./   /`,    \-'           
+                  | right   /   |  ;\   |\            
+                  | atrium ;_,._|_,  `, ' \           
+                  |        \    \ `       `,          
+                  `      __ `    \   left  ;,         
+                   \   ,'  `      \,  ventricle       
+                    \_(            ;,      ;;         
+                    |  \           `;,     ;;         
+           inferior |  |`.          `;;,   ;'         
+          vena cava |  |  `-.        ;;;;,;'          
+                    |  |    |`-.._  ,;;;;;'           
+                    |  |    |   | ``';;;'             
+                            aorta                   ]],
+        },
+
+        sections = {
+          {
+            { section = 'header' },
+            { pane = 2, icon = ' ', key = 'f', desc = 'Find File', action = ':Pick files' },
+            { pane = 2, icon = '', key = 'n', desc = 'New File', action = ':ene | startinsert' },
+            { pane = 2, icon = ' ', key = 'g', desc = 'Find Text', action = ':Pick grep_live' },
+            { pane = 2, icon = ' ', key = 'r', desc = 'Recent Files', action = ':Pick oldfiles' },
             {
+              pane = 2,
               icon = ' ',
               key = 'c',
               desc = 'Config',
               action = ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })",
             },
             {
+              pane = 2,
               icon = '',
               key = 's',
               desc = 'Session load latest',
               action = ':lua require("persistence").load()',
             },
-            {
-              icon = ' ',
-              key = 'p',
-              desc = 'Projects',
-              action = function()
-                local roots = { '~/Projects', '~/Projects-to-plays', '~/Playground' }
-                local projects = {}
-                for _, dir in ipairs(roots) do
-                  local abs_dir = vim.fn.expand(dir)
-                  local handle = vim.loop.fs_scandir(abs_dir)
-                  if handle then
-                    while true do
-                      local name, t = vim.loop.fs_scandir_next(handle)
-                      if not name then
-                        break
-                      end
-                      if t == 'directory' then
-                        table.insert(projects, abs_dir .. '/' .. name)
-                      end
-                    end
-                  end
-                end
-                require('mini.pick').start {
-                  source = { name = 'Projects', items = projects },
-                  action = function(path)
-                    vim.cmd('tabnew ' .. path)
-                  end,
-                }
-              end,
-            },
-            { icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
-            { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
-          },
-
-          header = [[
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀
-⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟⠀
-⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-        @NeoVim của Dwcks 🦀        ]],
-        },
-
-        sections = {
-          {
-            { section = 'header' },
-            { icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1, layout = 'vertical' },
-            { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
-            { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+            { pane = 2, icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+            { pane = 2, icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+            { pane = 2, icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1, layout = 'vertical' },
+            { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
+            { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+            -- {
+            --   pane = 2,
+            --   icon = ' ',
+            --   title = 'Git Status',
+            --   section = 'terminal',
+            --   enabled = function()
+            --     return Snacks.git.get_root() ~= nil
+            --   end,
+            --   cmd = 'git status --short --branch --renames',
+            --   height = 5,
+            --   padding = 1,
+            --   ttl = 5 * 60,
+            --   indent = 3,
+            -- },
             { section = 'startup' },
           },
         },

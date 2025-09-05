@@ -139,77 +139,90 @@ return { -- Collection of various small independent plugins/modules
     require('mini.bufremove').setup()
     require('mini.cursorword').setup()
     require('mini.statusline').setup()
+    require('mini.indentscope').setup {
+      mappings = {
+        object_scope = 'ii', -- Select the inner scope of the current block
+        object_scope_with_border = 'ai', -- Select the entire scope including its borders
+        goto_top = '[i', -- Jump to the top border line of the current scope
+        goto_bottom = ']i', -- Jump to the bottom border line of the current scope
+      },
+      symbol = '│',
+      options = { try_as_border = true },
+      draw = {
+        delay = 20,
+      },
+    }
     -- require('mini.hues').setup { background = '#19213a', foreground = '#c0c8cc' }
 
     local function mode_nx(keys)
       return { mode = 'n', keys = keys }, { mode = 'x', keys = keys }
     end
 
-    local clue = require 'mini.clue'
-    clue.setup {
-      triggers = {
-        -- Leader triggers
-        mode_nx '<leader>',
-
-        -- Built-in completion
-        { mode = 'i', keys = '<c-x>' },
-
-        -- `g` key
-        mode_nx 'g',
-
-        mode_nx 'd',
-
-        -- Marks
-        mode_nx "'",
-        mode_nx '`',
-
-        -- Registers
-        mode_nx '"',
-        { mode = 'i', keys = '<c-r>' },
-        { mode = 'c', keys = '<c-r>' },
-
-        -- Window commands
-        { mode = 'n', keys = '<c-w>' },
-
-        -- bracketed commands
-        { mode = 'n', keys = '[' },
-        { mode = 'n', keys = ']' },
-
-        -- `z` key
-        mode_nx 'z',
-
-        -- surround
-        mode_nx 's',
-
-        -- text object
-        { mode = 'x', keys = 'i' },
-        { mode = 'x', keys = 'a' },
-        { mode = 'o', keys = 'i' },
-        { mode = 'o', keys = 'a' },
-      },
-
-      clues = {
-        -- Enhance this by adding descriptions for <Leader> mapping groups
-        clue.gen_clues.builtin_completion(),
-        clue.gen_clues.square_brackets(),
-        clue.gen_clues.g(),
-        clue.gen_clues.marks(),
-        clue.gen_clues.registers { show_contents = true },
-        clue.gen_clues.windows { submode_resize = true, submode_move = true, submode_navigate = true },
-        clue.gen_clues.z(),
-      },
-      window = {
-        -- Floating window config
-        config = {},
-
-        -- Delay before showing clue window
-        delay = 0,
-
-        -- Keys to scroll inside the clue window
-        scroll_down = '<C-d>',
-        scroll_up = '<C-u>',
-      },
-    }
+    -- local clue = require 'mini.clue'
+    -- clue.setup {
+    --   triggers = {
+    --     -- Leader triggers
+    --     mode_nx '<leader>',
+    --
+    --     -- Built-in completion
+    --     { mode = 'i', keys = '<c-x>' },
+    --
+    --     -- `g` key
+    --     mode_nx 'g',
+    --
+    --     mode_nx 'd',
+    --
+    --     -- Marks
+    --     mode_nx "'",
+    --     mode_nx '`',
+    --
+    --     -- Registers
+    --     mode_nx '"',
+    --     { mode = 'i', keys = '<c-r>' },
+    --     { mode = 'c', keys = '<c-r>' },
+    --
+    --     -- Window commands
+    --     { mode = 'n', keys = '<c-w>' },
+    --
+    --     -- bracketed commands
+    --     { mode = 'n', keys = '[' },
+    --     { mode = 'n', keys = ']' },
+    --
+    --     -- `z` key
+    --     mode_nx 'z',
+    --
+    --     -- surround
+    --     mode_nx 's',
+    --
+    --     -- text object
+    --     { mode = 'x', keys = 'i' },
+    --     { mode = 'x', keys = 'a' },
+    --     { mode = 'o', keys = 'i' },
+    --     { mode = 'o', keys = 'a' },
+    --   },
+    --
+    --   clues = {
+    --     -- Enhance this by adding descriptions for <Leader> mapping groups
+    --     clue.gen_clues.builtin_completion(),
+    --     clue.gen_clues.square_brackets(),
+    --     clue.gen_clues.g(),
+    --     clue.gen_clues.marks(),
+    --     clue.gen_clues.registers { show_contents = true },
+    --     clue.gen_clues.windows { submode_resize = true, submode_move = true, submode_navigate = true },
+    --     clue.gen_clues.z(),
+    --   },
+    --   window = {
+    --     -- Floating window config
+    --     config = {},
+    --
+    --     -- Delay before showing clue window
+    --     delay = 0,
+    --
+    --     -- Keys to scroll inside the clue window
+    --     scroll_down = '<C-d>',
+    --     scroll_up = '<C-u>',
+    --   },
+    -- }
 
     require('mini.diff').setup {
       view = {

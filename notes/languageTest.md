@@ -56,3 +56,23 @@ fn main() {
     println!("Hello, Rust!");
 }
 ```
+
+```lua
+local message = "Hello, Lua!"
+local count = 3
+for i = 1, count do
+    print(i, message)
+end
+```
+
+```ocaml
+let () = print_endline "Hello, OCaml!"
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}
+```

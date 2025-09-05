@@ -10,6 +10,7 @@ return {
       c = 'gcc -Wall',
       cpp = 'g++ -std=c++11 -Wall',
       bash = 'bash',
+      lua = 'lua',
 
       javascript = 'tee v21L0nKoNCkoz.js && bun run v21L0nKoNCkoz.js; rm -f v21L0nKoNCkoz.js',
       js = 'tee v21L0nKoNCkoz.js && bun run v21L0nKoNCkoz.js; rm -f v21L0nKoNCkoz.js',
@@ -19,6 +20,8 @@ return {
       cs = 'tee v21L0nKoNCkoz.csx | dotnet-script v21L0nKoNCkoz.csx; rm -f v21L0nKoNCkoz.csx',
       fsharp = 'tee v21L0nKoNCkoz.fsx | dotnet fsi v21L0nKoNCkoz.fsx; rm -f v21L0nKoNCkoz.fsx',
       rust = 'tee v21L0nKoNCkoz.rs | rustc v21L0nKoNCkoz.rs -o v21L0nKoNCkoz && ./v21L0nKoNCkoz; rm -f v21L0nKoNCkoz v21L0nKoNCkoz.rs',
+      ocaml = 'tee v21L0nKoNCkoz.ml | ocaml v21L0nKoNCkoz.ml; rm -f v21L0nKoNCkoz.ml',
+      java = 'tee Main.java | javac Main.java && java Main; rm -f Main.java Main.class',
 
       -- fsharp = 'dotnet fsi',
       ['c++'] = 'g++ -std=c++11 -Wall',

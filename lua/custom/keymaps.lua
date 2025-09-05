@@ -319,7 +319,7 @@ map(
   { desc = 'Open mini.picker (nvim config)' }
 )
 
-map('n', '<leader>Ne', ":lua require('mini.files').open(vim.fn.stdpath('config') .. '/notes', true)<CR>", { desc = 'Open notes folder' })
+map('n', '<leader>N', ":lua require('mini.files').open(vim.fn.stdpath('config') .. '/notes', true)<CR>", { desc = 'Open notes folder' })
 
 map('n', '<leader>fR', '<CMD>Pick registers<CR>', { desc = 'Open register' })
 map('n', '<leader>fM', '<CMD>Pick marks<CR>', { desc = 'Open marks' })

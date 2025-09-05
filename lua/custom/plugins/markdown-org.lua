@@ -11,6 +11,9 @@ return {
       c = 'gcc -Wall',
       cpp = 'g++ -std=c++11 -Wall',
       bash = 'bash',
+      cs = 'tee temp.csx | dotnet-script temp.csx && rm temp.csx',
+      fsharp = 'tee temp.fsx | dotnet fsi temp.fsx && rm temp.fsx',
+      -- fsharp = 'dotnet fsi',
       ['c++'] = 'g++ -std=c++11 -Wall',
     }
     return {

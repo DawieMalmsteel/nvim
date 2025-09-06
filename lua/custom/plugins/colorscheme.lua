@@ -36,8 +36,6 @@ return {
 
            highlight StatusLine guibg=NONE
            highlight StatusLineNC guibg=NONE
-           highlight StatusLineTerm guibg=NONE
-           highlight StatusLineTermNC guibg=NONE
 
            highlight MiniStatuslineModeOther guifg=#bb9af7 guibg=NONE
            highlight MiniStatuslineDevinfo guifg=#7dcfff guibg=NONE

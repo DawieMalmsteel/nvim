@@ -120,7 +120,7 @@ return {
             end,
 
             get_models = function(headers)
-              local response, err = require('CopilotChat.utils').curl.get('https://generativelanguage.googleapis.com/v1beta/openai/models', {
+              local response, err = require('CopilotChat.utils.curl').get('https://generativelanguage.googleapis.com/v1beta/openai/models', {
                 headers = headers,
                 json_response = true,
               })

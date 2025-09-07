@@ -29,6 +29,7 @@ map('n', '<leader>td', function()
 end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 
 map('n', '<leader>tm', ':RenderMarkdown toggle<CR>', { desc = 'Toggle Markdown Preview' })
+map('n', '<leader>ti', ':InlineFoldToggle<CR>', { desc = 'Toggle Inline Fold Toggle ' })
 
 map('n', '<C-x>', function()
   if vim.diagnostic.is_enabled() then

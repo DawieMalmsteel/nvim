@@ -27,6 +27,9 @@ map('n', '<leader>td', function()
     vim.diagnostic.enable()
   end
 end, { desc = 'Toggle diagnostics (Ctrl+x)' })
+
+map('n', '<leader>tm', ':RenderMarkdown toggle<CR>', { desc = 'Toggle Markdown Preview' })
+
 map('n', '<C-x>', function()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)

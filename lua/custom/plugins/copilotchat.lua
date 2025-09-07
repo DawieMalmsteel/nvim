@@ -79,7 +79,7 @@ return {
         -- model = 'gpt-4o',
 
         provider = 'gemini',
-        model = 'gemini-2.0-flash',
+        model = 'gemini-2.5-flash',
         debug = false,
         temperature = 0,
         sticky = '#buffers',

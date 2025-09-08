@@ -3,6 +3,7 @@
 - [ ] Tìm hiểu về Obsidian
 - [ ] Chuyển chuyển Which key thành mini clue (xong 80%)
 - [ ] Set up codecompanion 
+- [ ] refactor lại keymaps.lua
 
 - [x] refactor lại mini.lua
 - [x] set up mini visits và làm nó hiển thị trên mini.tabline và mini.statusline

@@ -161,7 +161,7 @@ return { -- Collection of various small independent plugins/modules
         callback = function(args)
           vim.keymap.set('i', '>', function()
             local win = 0
-            local row, col = unpack(vim.api.nvim_win_get_cursor(win))
+            local _, col = unpack(vim.api.nvim_win_get_cursor(win))
             local line = vim.api.nvim_get_current_line()
             local before = line:sub(1, col)
 
@@ -440,7 +440,7 @@ return { -- Collection of various small independent plugins/modules
     -- Restore (default: local if exists else latest) with unsaved check
     map('n', '<leader>qs', function()
       for _, b in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.api.nvim_buf_get_option(b, 'modified') then
+        if vim.bo[b].modified then
           if vim.fn.confirm('Unsaved buffers detected. Continue loading session?', '&Yes\n&No', 2) ~= 1 then
             return
           end
@@ -475,7 +475,7 @@ return { -- Collection of various small independent plugins/modules
 
     -- Prompt for custom name (default suggestion)
     map('n', '<leader>qN', function()
-      local suggestion = vim.fn.fnamemodify(vim.loop.cwd(), ':t') .. '.vim'
+      local suggestion = vim.fn.fnamemodify(vim.loop.cwd() or vim.fn.getcwd(), ':t') .. '.vim'
       vim.ui.input({ prompt = 'Session name: ', default = suggestion }, function(input)
         if input and input ~= '' then
           sessions.write(input, { force = false })
@@ -610,7 +610,9 @@ return { -- Collection of various small independent plugins/modules
         local nlines = vim.api.nvim_buf_line_count(buf_id)
         local cwd = vim.fs.root(buf_id, '.git')
         local escapedcwd = cwd and vim.pesc(cwd)
-        escapedcwd = vim.fs.normalize(escapedcwd)
+        if escapedcwd ~= nil then
+          escapedcwd = vim.fs.normalize(escapedcwd)
+        end
 
         for i = 1, nlines do
           local entry = MiniFiles.get_fs_entry(buf_id, i)
@@ -683,11 +685,10 @@ return { -- Collection of various small independent plugins/modules
     ---@param buf_id integer
     ---@return nil
     local function updateGitStatus(buf_id)
-      if not vim.fs.root(buf_id, '.git') then
+      local cwd = vim.fs.root(buf_id, '.git')
+      if not cwd then
         return
       end
-      local cwd = vim.fs.root(buf_id, '.git')
-      -- local cwd = vim.fn.expand("%:p:h")
       local currentTime = os.time()
 
       if gitStatusCache[cwd] and currentTime - gitStatusCache[cwd].time < cacheTimeout then

@@ -65,6 +65,7 @@ map({ 'n', 'v' }, '<leader>d', '', { desc = '+debug' })
 map({ 'n', 'v' }, '<leader>r', '', { desc = '+refactor' })
 map({ 'n', 'v' }, '<leader>N', '', { desc = '+notes' })
 map({ 'n', 'v' }, '<leader>O', '', { desc = '+obsidian' })
+map({ 'n', 'v' }, '<leader>M', '', { desc = '+markdown org' })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })

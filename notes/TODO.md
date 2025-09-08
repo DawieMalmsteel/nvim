@@ -4,6 +4,7 @@
 - [ ] Chuyển chuyển Which key thành mini clue (xong 80%)
 - [ ] Set up codecompanion 
 
+- [x] refactor lại mini.lua
 - [x] set up mini visits và làm nó hiển thị trên mini.tabline và mini.statusline
 - [x] chuyển sang omarchy thay vì dùng end-4l
 - [x] Chuyển persistence về mini sessions

@@ -1080,7 +1080,7 @@ return { -- Collection of various small independent plugins/modules
 
           -- MiniVisits label status (show local vs truly global; show global even if not labeled in current cwd)
           local visits_status = function()
-            local ok, visits = pcall(require, 'mini.visits')
+            local ok, _ = pcall(require, 'mini.visits')
             if not ok then
               return ''
             end

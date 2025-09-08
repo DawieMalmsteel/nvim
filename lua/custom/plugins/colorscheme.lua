@@ -49,7 +49,7 @@ return {
            highlight MiniStatuslineRecording guifg=#f7768e guibg=NONE
            highlight MiniStatuslineInactive guifg=#545c7e guibg=NONE
            highlight MiniStatuslineProgress guifg=#bb9af7 guibg=NONE
-           highlight MiniStatuslineHarpoon guifg=#e0af68 guibg=NONE
+           highlight MiniStatuslineHarpoon guifg=#9ece6a guibg=NONE
            highlight MiniStatuslineModified guifg=#e0af68 guibg=NONE
          ]]
     end,

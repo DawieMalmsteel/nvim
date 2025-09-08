@@ -365,7 +365,7 @@ return { -- Collection of various small independent plugins/modules
         prompt_caret = '▏',
 
         -- String to use as prefix in prompt
-        prompt_prefix = '> ',
+        prompt_prefix = 'Search: ',
       },
     }
 

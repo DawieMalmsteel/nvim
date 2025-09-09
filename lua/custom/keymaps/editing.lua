@@ -47,4 +47,4 @@ map('n', 'y"', 'yi"')
 map('n', 'v"', 'vi"')
 
 -- Tạo file mới nhanh
-map('n', '<leader><Tab>', ':e <Space>', { desc = '+New file' })
+map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })

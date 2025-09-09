@@ -12,7 +12,21 @@ return {
       },
       statuscolumn = { enabled = true },
       image = { enabled = true },
-      input = { enabled = true },
+      -- Centered floating input
+      input = {
+        enabled = true,
+        win = {
+          relative = 'editor',
+          style = 'minimal',
+          border = 'rounded',
+          width = 60,
+          height = 1,
+          row = math.floor((vim.o.lines - 1) / 2.2),
+          -- center vertically
+          col = math.floor((vim.o.columns - 60) / 2), -- center horizontally
+          title = ' Input ',
+        },
+      },
       bigfile = { enabled = true },
       quickfile = { enabled = true },
       notifier = { enabled = true },

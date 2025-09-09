@@ -16,7 +16,7 @@ return {
       bigfile = { enabled = true },
       quickfile = { enabled = true },
       notifier = { enabled = true },
-      scope = { enabled = true },
+      scope = { enabled = false },
       scroll = { enabled = false },
       words = { enabled = true },
       indent = {

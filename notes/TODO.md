@@ -1,6 +1,7 @@
 - [ ] Thêm obsidian vào nvim
 - [ ] Tìm hiểu về Obsidian
 - [ ] Set up codecompanion với minuet
+- [ ] Tìm hiểu về atuin
 
 - [x] refactor lại keymaps.lua sử dụng cách tiếp cận khác tốt hơn đối với việc quản lý keymaps
 - [x] Chuyển chuyển Which key thành mini clue

@@ -7,51 +7,56 @@ local M = function()
   local function mode_nx(keys)
     return { mode = 'n', keys = keys }, { mode = 'x', keys = keys }
   end
+
+  local triggers = {}
+  local function add(...)
+    for i = 1, select('#', ...) do
+      table.insert(triggers, (select(i, ...)))
+    end
+  end
+
+  -- Leader triggers
+  add(mode_nx '<leader>')
+
+  -- Built-in completion
+  add { mode = 'i', keys = '<c-x>' }
+
+  -- `g` key
+  add(mode_nx 'g')
+
+  -- Marks
+  add(mode_nx "'")
+  add(mode_nx '`')
+
+  -- Registers
+  add(mode_nx '"')
+  add { mode = 'i', keys = '<c-r>' }
+  add { mode = 'c', keys = '<c-r>' }
+
+  -- Window commands
+  add { mode = 'n', keys = '<c-w>' }
+
+  -- bracketed commands
+  add { mode = 'n', keys = '[' }
+  add { mode = 'n', keys = ']' }
+
+  -- `z` key
+  add(mode_nx 'z')
+
+  -- surround
+  add(mode_nx 's')
+  add { mode = 'x', keys = 's' }
+
+  -- text object
+  add { mode = 'x', keys = 'i' }
+  add { mode = 'x', keys = 'a' }
+  add { mode = 'o', keys = 'i' }
+  add { mode = 'o', keys = 'a' }
+
   clue.setup {
-    triggers = {
-      -- Leader triggers
-      mode_nx '<leader>',
-
-      -- Built-in completion
-      { mode = 'i', keys = '<c-x>' },
-
-      -- `g` key
-      mode_nx 'g',
-
-      -- Marks
-      mode_nx "'",
-      mode_nx '`',
-
-      -- Registers
-      mode_nx '"',
-      { mode = 'i', keys = '<c-r>' },
-      { mode = 'c', keys = '<c-r>' },
-
-      -- Window commands
-      { mode = 'n', keys = '<c-w>' },
-
-      -- bracketed commands
-      { mode = 'n', keys = '[' },
-      { mode = 'n', keys = ']' },
-
-      -- `z` key
-      mode_nx 'z',
-
-      -- surround
-      mode_nx 's',
-
-      -- text object
-      { mode = 'x', keys = 'i' },
-      { mode = 'x', keys = 'a' },
-      { mode = 'o', keys = 'i' },
-      { mode = 'o', keys = 'a' },
-
-      -- option toggle (mini.basics)
-      -- { mode = 'n', keys = 'm' },
-    },
+    triggers = triggers,
 
     clues = {
-      -- Enhance this by adding descriptions for <Leader> mapping groups
       clue.gen_clues.builtin_completion(),
       clue.gen_clues.g(),
       clue.gen_clues.marks(),
@@ -62,16 +67,11 @@ local M = function()
 
     -- Clue window settings
     window = {
-      -- Floating window config
       config = {
         border = 'rounded',
         width = 'auto',
       },
-
-      -- Delay before showing clue window
       delay = 0,
-
-      -- Keys to scroll inside the clue window
       scroll_down = '<C-d>',
       scroll_up = '<C-u>',
     },

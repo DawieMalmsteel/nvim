@@ -2,6 +2,7 @@
 - [ ] Tìm hiểu về Obsidian
 - [ ] Chuyển chuyển Which key thành mini clue (xong 80%)
 - [ ] Set up codecompanion 
+- [ ] refactor lại keymaps.lua sử dụng cách tiếp cận khác tốt hơn đối với việc quản lý keymaps
 
 - [x] refactor lại keymaps.lua
 - [x] refactor lại init.lua

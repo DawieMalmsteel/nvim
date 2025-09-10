@@ -10,4 +10,4 @@ map('n', '<leader>e', function()
   else
     mini_files.open(current_file, true)
   end
-end, { desc = 'Open mini.files (Directory of Current File)' })
+end, { desc = 'Minifile cwd' })

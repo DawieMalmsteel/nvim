@@ -1,14 +1,25 @@
-local core = require 'custom.keymaps.core'
-local map = core.map
+local map = vim.keymap.set
 
--- Mason
-map('n', '<leader>cm', '<CMD>Mason<CR>', { desc = 'Mason' })
+-- add keymap to remove trailing whitespace
+map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })
 
--- DB UI
-map('n', '<leader>D', '<CMD>DBUIToggle<CR>', { desc = 'Toggle DB UI' })
+-- paste nhưng không thay đổi register
+map('x', '<leader>P', [["_dP]])
 
--- Thay đổi kích thước cửa sổ
-map('n', '<C-Up>', ':resize +1<CR>', { desc = 'Resize + height' })
-map('n', '<C-Down>', ':resize -1<CR>', { desc = 'Resize - height' })
-map('n', '<C-Right>', ':vertical resize +1<CR>', { desc = 'Resize + width' })
-map('n', '<C-Left>', ':vertical resize -1<CR>', { desc = 'Resize - width' })
+map({ 'n', 't' }, ']]', function()
+  local Snacks = require 'snacks'
+  Snacks.words.jump(vim.v.count1)
+end, { desc = 'Next Reference' })
+
+map({ 'n', 't' }, '[[', function()
+  local Snacks = require 'snacks'
+  Snacks.words.jump(-vim.v.count1)
+end, { desc = 'Prev Reference' })
+
+map('n', '<leader>;', function()
+  local picker = require 'snacks.picker'
+  picker.command_history()
+end, { desc = 'Search Command History' })
+
+-- Edit file
+map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })

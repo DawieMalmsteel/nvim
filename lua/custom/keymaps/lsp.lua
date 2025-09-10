@@ -1,17 +1,42 @@
-local core = require 'custom.keymaps.core'
-local map = core.map
+local map = vim.keymap.set
 
--- LSP picker scopes (mini.extra)
-local scopes = {
-  grd = { 'definition', '[G]oto [D]efinition' },
-  gri = { 'implementation', '[G]oto [I]mplementation' },
-  grr = { 'references', '[G]oto [R]eferences' },
-  grD = { 'declaration', '[G]oto [D]eclaration' },
-  gO = { 'document_symbol', 'Document Symbols' },
-  gW = { 'workspace_symbol', 'Workspace Symbols' },
-  grt = { 'type_definition', '[G]oto [T]ype Definition' },
-}
+-- LSP keymaps
+map('n', 'grd', function()
+  local mini_extra = require 'mini.extra'
+  mini_extra.pickers.lsp { scope = 'definition' }
+end, { desc = '[G]o to [D]efinition' })
 
-for lhs, spec in pairs(scopes) do
-  map('n', lhs, core.lsp_scope(spec[1]), { desc = spec[2] })
-end
+map('n', 'gri', function()
+  local mini_extra = require 'mini.extra'
+  mini_extra.pickers.lsp { scope = 'implementation' }
+end, { desc = '[G]oto [I]mplementation' })
+
+map('n', 'grr', function()
+  local mini_extra = require 'mini.extra'
+  mini_extra.pickers.lsp { scope = 'references' }
+end, { desc = '[G]oto [R]eferences' })
+
+map('n', 'grD', function()
+  local mini_extra = require 'mini.extra'
+  mini_extra.pickers.lsp { scope = 'declaration' }
+end, { desc = '[G]oto [D]eclaration' })
+
+map('n', 'gO', function()
+  local mini_extra = require 'mini.extra'
+  mini_extra.pickers.lsp { scope = 'document_symbol' }
+end, { desc = 'Open Document Symbols' })
+
+map('n', 'gW', function()
+  local mini_extra = require 'mini.extra'
+  mini_extra.pickers.lsp { scope = 'workspace_symbol' }
+end, { desc = 'Open Workspace Symbols' })
+
+map('n', 'grt', function()
+  local mini_extra = require 'mini.extra'
+  mini_extra.pickers.lsp { scope = 'type_definition' }
+end, { desc = '[G]oto [T]ype Definition' })
+
+map('n', 'grN', function()
+  local Snacks = require 'snacks'
+  Snacks.rename.rename_file()
+end, { desc = 'Rename current file with mini.files' })

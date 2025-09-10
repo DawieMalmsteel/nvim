@@ -1,27 +1,15 @@
-local core = require 'custom.keymaps.core'
-local map = core.map
+local map = vim.keymap.set
 
--- Toggle terminal (Snacks)
-map({ 'n', 't' }, '<C-/>', function()
-  local Snacks = core.sr 'snacks'
-  if Snacks and Snacks.terminal then
-    Snacks.terminal()
-  end
-end, { desc = 'Toggle Terminal' })
-
--- Jump references (Snacks words)
-map({ 'n', 't' }, ']]', function()
-  local Snacks = core.sr 'snacks'
-  if Snacks and Snacks.words then
-    Snacks.words.jump(vim.v.count1)
-  end
-end, { desc = 'Next Reference' })
-map({ 'n', 't' }, '[[', function()
-  local Snacks = core.sr 'snacks'
-  if Snacks and Snacks.words then
-    Snacks.words.jump(-vim.v.count1)
-  end
-end, { desc = 'Prev Reference' })
-
--- Thoát terminal nhanh
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Toggle terminal
+map({ 'n', 't' }, '<C-/>', function()
+  local Snacks = require 'snacks'
+  Snacks.terminal()
+end, { noremap = true, silent = true, desc = 'Toggle Terminal' })
+
+map({ 'n', 't' }, '<C-_>', function()
+  local Snacks = require 'snacks'
+  Snacks.terminal()
+end, { noremap = true, silent = true, desc = 'which_key_ignore' })

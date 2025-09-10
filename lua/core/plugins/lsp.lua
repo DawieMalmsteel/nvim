@@ -37,7 +37,7 @@ return {
           end
 
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('<leader>cr', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>cR', vim.lsp.buf.rename, '[R]e[n]ame')
 
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
           map('<leader>ca', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })

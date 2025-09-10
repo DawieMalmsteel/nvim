@@ -42,7 +42,7 @@ local function mini_buffers_with_delete()
     mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } },
   })
 end
-map('n', '<leader>R', mini_buffers_with_delete, { desc = 'Buffers (mini.pick) + delete' })
+map('n', '<leader>r', mini_buffers_with_delete, { desc = 'Buffers (mini.pick) + delete' })
 map('n', '<M-r>', mini_buffers_with_delete, { desc = 'Buffers (mini.pick) + delete' })
 
 -----------------------------------------------------------------------

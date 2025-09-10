@@ -56,3 +56,17 @@ map('n', '<leader>E', function()
     Snacks.explorer()
   end
 end, { desc = 'Snacks Explorer (cwd)' })
+
+map('n', '<leader>n', function()
+  local Snacks = core.sr 'snacks'
+  if Snacks.config.picker and Snacks.config.picker.enabled then
+    Snacks.picker.notifications()
+  else
+    Snacks.notifier.show_history()
+  end
+end, { desc = 'Notification History' })
+
+map('n', '<leader>un', function()
+  local Snacks = core.sr 'snacks'
+  Snacks.notifier.hide()
+end, { desc = 'Dismiss All Notifications' })

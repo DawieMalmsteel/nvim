@@ -8,7 +8,7 @@ map('n', 'k', 'gk', { silent = true })
 
 -- (Điều hướng cửa sổ đã chuyển sang extras.lua để tránh trùng)
 
-map('n', ';', ':', { desc = 'CMD mode' })
+map('n', ';', ':', { desc = 'CMD mode', nowait = true })
 map('i', 'kj', '<ESC>', { desc = 'Thoát insert' })
 
 -- Lưu file

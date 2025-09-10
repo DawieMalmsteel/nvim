@@ -37,7 +37,7 @@ return {
         local client = vim.lsp.get_client_by_id(event.data.client_id)
 
         -- Keymaps moved to a separate module
-        require('core.lsp_keymaps').apply(buf, client)
+        require('config.lsp_keymaps').apply(buf, client)
 
         -- Document highlight (kept here)
         if client_supports(client, Methods.textDocument_documentHighlight, buf) then

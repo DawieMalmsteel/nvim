@@ -70,3 +70,7 @@ map('n', '<leader>un', function()
   local Snacks = core.sr 'snacks'
   Snacks.notifier.hide()
 end, { desc = 'Dismiss All Notifications' })
+
+map('n', '<leader>tM', function()
+  require('mini.map').toggle()
+end)

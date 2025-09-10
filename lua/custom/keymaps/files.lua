@@ -25,14 +25,6 @@ map('n', '<leader>fC', function()
     vim.notify('Snacks not available', vim.log.levels.WARN)
   end
 end, { desc = 'Files (config)' })
-map('n', '<leader>fc', function()
-  local Snacks = core.sr 'snacks'
-  if Snacks then
-    Snacks.picker.files { cwd = vim.fn.stdpath 'config' }
-  else
-    vim.notify('Snacks not available', vim.log.levels.WARN)
-  end
-end, { desc = 'Files Snacks (config)' })
 
 map('n', '<leader>fc', function()
   require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })

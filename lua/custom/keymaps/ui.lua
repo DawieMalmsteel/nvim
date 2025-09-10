@@ -21,10 +21,10 @@ map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'TS Context toggle'
 
 -- Mini starter
 map('n', '<leader>uo', function()
-  local starter = core.sr 'mini.starter'
-  if starter then
-    starter.open()
-  end
+  -- local starter = core.sr 'mini.starter'
+  -- if starter then
+  --   starter.open()
+  -- end
 end, { desc = 'Mini Starter' })
 
 -- Mini map

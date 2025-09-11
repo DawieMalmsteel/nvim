@@ -56,9 +56,9 @@ return {
       }
     end,
     keys = {
-      { '<leader>ac', mode = 'n', '<cmd>LLMSessionToggle<cr>' },
-      { '<leader>ae', mode = 'v', '<cmd>LLMSelectedTextHandler Hãy giải thích đoạn mã sau<cr>' },
-      { '<leader>ts', mode = 'x', '<cmd>LLMSelectedTextHandler Dịch Anh sang Việt<cr>' },
+      { '<leader>ac', mode = 'n', '<cmd>LLMSessionToggle<cr>', desc = 'LLM Toggle Session' },
+      { '<leader>ae', mode = 'v', '<cmd>LLMSelectedTextHandler Hãy giải thích đoạn mã sau<cr>', desc = 'Explain Selected Code' },
+      { '<leader>at', mode = 'x', '<cmd>LLMSelectedTextHandler Dịch Anh sang Việt<cr>', desc = 'Translate EN -> VI' },
     },
   },
 }

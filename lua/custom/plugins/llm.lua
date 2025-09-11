@@ -5,7 +5,7 @@ return {
     cmd = { 'LLMSessionToggle', 'LLMSelectedTextHandler', 'LLMAppHandler' },
     config = function()
       require('llm').setup {
-        -- [[ GLM ]]
+        -- [[ GEMINI ]]
         url = 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
         model = 'gemini-2.5-flash',
         api_type = 'openai',

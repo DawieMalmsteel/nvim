@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 -- Diagnostic keymaps
-map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Diagnostic Quickfix list' })
+-- map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Diagnostic Quickfix list' })
 
 map('n', '<C-x>', function()
   if vim.diagnostic.is_enabled() then

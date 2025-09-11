@@ -69,7 +69,7 @@ local M = function()
     window = {
       config = {
         border = 'rounded',
-        width = 'auto',
+        -- width = 'auto',
       },
       delay = 0,
       scroll_down = '<C-d>',

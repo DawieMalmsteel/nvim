@@ -35,3 +35,7 @@ end, { desc = 'Git add all files in cwd' })
 map('n', '<leader>gr', function()
   vim.cmd 'Git reset'
 end, { desc = 'Git reset' })
+
+map('n', '<leader>gP', function()
+  vim.cmd 'Git push'
+end, { desc = 'Git push' })

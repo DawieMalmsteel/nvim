@@ -1,10 +1,11 @@
+-- filepath: buffer 6
 local M = function()
   local buffer_positions = {}
 
-  -- Hàm cập nhật danh sách buffer và vị trí
+  -- Update buffer positions safely
   local function update_buffer_positions()
     local listed_buffers = vim.tbl_filter(function(buf)
-      return vim.bo[buf.bufnr].buflisted
+      return vim.api.nvim_buf_is_valid(buf.bufnr) and vim.bo[buf.bufnr].buflisted
     end, vim.fn.getbufinfo())
 
     buffer_positions = {}
@@ -13,54 +14,31 @@ local M = function()
     end
   end
 
-  -- Cập nhật danh sách buffer khi có sự kiện liên quan
+  -- Update buffer positions on relevant events
   vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete', 'BufEnter' }, {
-    callback = update_buffer_positions,
+    callback = function()
+      update_buffer_positions()
+    end,
   })
 
-  -- Gọi cập nhật lần đầu khi khởi động
+  -- Initial update
   update_buffer_positions()
 
   require('mini.tabline').setup {
     format = function(buf_id, label)
       local current_buf = vim.api.nvim_get_current_buf()
-      local function visit_count(id)
-        local ok, visits = pcall(require, 'mini.visits')
-        if not ok then
-          return nil
-        end
-        local path = vim.api.nvim_buf_get_name(id)
-        if path == '' then
-          return nil
-        end
-        local cwd = vim.loop.cwd()
-        local index = visits.get_index()
-        local cwd_tbl = index[cwd]
-        if not cwd_tbl then
-          return nil
-        end
-        local entry = cwd_tbl[path]
-        if not entry then
-          return nil
-        end
-        return entry.count
-      end
-      local count = visit_count(buf_id)
       local current_index = buffer_positions[current_buf]
       local buf_index = buffer_positions[buf_id]
+      local tabline = require 'mini.tabline'
       if buf_id == current_buf then
-        local base = MiniTabline.default_format(buf_id, label)
-        if count and count > 0 then
-          base = base .. '' .. count
-        end
-        return base
+        return tabline.default_format(buf_id, label)
       else
-        local relative_number = math.abs((buf_index or 0) - (current_index or 0))
-        local short_label = label:sub(1, 5)
-        local count_part = (count and count > 0) and ('(' .. count .. ')') or ''
-        return ' ' .. relative_number .. ':' .. short_label .. count_part .. ' '
+        local relative_number = (buf_index and current_index) and math.abs(buf_index - current_index) or '?'
+        local short_label = (label and #label > 0) and label:sub(1, 5) or '[NoName]'
+        return ' ' .. relative_number .. ':' .. short_label .. ' '
       end
     end,
   }
 end
+
 return M

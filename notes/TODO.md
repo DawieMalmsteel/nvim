@@ -1,8 +1,8 @@
-- [ ] Thêm obsidian vào nvim
-- [ ] Tìm hiểu về Obsidian
-- [ ] Set up codecompanion với minuet
-- [ ] Tìm hiểu về atuin
-- [ ] Tìm hiểu về nwm nvim
+- [ ] Thêm obsidian vào nvim (1 tuần rồi clm)
+- [ ] Tìm hiểu về Obsidian (1 tuần rồi clm)
+- [ ] Set up codecompanion với ~minuet~
+- [ ] Tìm hiểu về atuin (4 ngày)
+- [ ] Tìm hiểu về nwm nvim (1 ngày)
 
 - [x] Set up llm
 - [x] refactor lại keymaps.lua sử dụng cách tiếp cận khác tốt hơn đối với việc quản lý keymaps

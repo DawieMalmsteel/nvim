@@ -12,7 +12,7 @@ return {
     },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    'saghen/blink.cmp',
+    -- 'saghen/blink.cmp',
   },
   opts = {
     inlay_hints = { enabled = true },
@@ -90,7 +90,8 @@ return {
       },
     }
 
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    -- local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local capabilities = require('mini.completion').get_lsp_capabilities()
     local servers = {
       gopls = {
         settings = {

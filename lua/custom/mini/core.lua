@@ -16,6 +16,7 @@ local modules = {
   'custom.mini.nav.files',
   'custom.mini.nav.pick',
   'custom.mini.productivity.snippets',
+  'custom.mini.editing.completion',
   'custom.mini.productivity.sessions',
   'custom.mini.productivity.git',
   'custom.mini.ui.statusline',

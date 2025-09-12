@@ -58,7 +58,7 @@ return {
     keys = {
       { '<leader>ac', mode = 'n', '<cmd>LLMSessionToggle<cr>', desc = 'LLM Toggle Session' },
       { '<leader>ae', mode = 'v', '<cmd>LLMSelectedTextHandler Hãy giải thích đoạn mã sau<cr>', desc = 'Explain Selected Code' },
-      { '<leader>at', mode = 'x', '<cmd>LLMSelectedTextHandler Dịch Anh sang Việt<cr>', desc = 'Translate EN -> VI' },
+      { '<leader>at', mode = 'x', '<cmd>LLMSelectedTextHandler Dịch Tiếng này sang Tiếng Việt<cr>', desc = 'Translate EN -> VI' },
     },
   },
 }

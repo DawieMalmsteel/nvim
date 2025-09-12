@@ -14,5 +14,6 @@ local M = function()
       stop = '<C-c>',
     },
   }
+  MiniSnippets.start_lsp_server()
 end
 return M

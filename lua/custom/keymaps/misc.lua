@@ -22,4 +22,12 @@ map('n', '<leader>;', function()
 end, { desc = 'Search Command History' })
 
 -- Edit file
-map('n', '<leader><Tab>', ':e<Space>', { desc = '+New file' })
+map('n', '<leader><Tab>', function()
+  local dir = vim.fn.expand '%:p:h' .. '/'
+  require('snacks').input({ prompt = 'New file: ', default = dir }, function(path)
+    if not path or path == '' or path == dir then
+      return
+    end
+    vim.cmd('edit ' .. vim.fn.fnameescape(path))
+  end)
+end, { desc = 'New file (curr dir)' })

@@ -1,3 +1,23 @@
+<!--toc:start-->
+- [1. **Tiêu đề (Headers)**](#1-tiêu-đề-headers)
+- [2. **Đoạn văn bản**](#2-đoạn-văn-bản)
+- [3. **In đậm và in nghiêng**](#3-in-đậm-và-in-nghiêng)
+- [4. **Danh sách**](#4-danh-sách)
+- [5. **Liên kết (Links)**](#5-liên-kết-links)
+- [6. **Hình ảnh (Images)**](#6-hình-ảnh-images)
+- [7. **Trích dẫn (Blockquotes)**](#7-trích-dẫn-blockquotes)
+- [8. **Đoạn mã (Code)**](#8-đoạn-mã-code)
+- [9. **Đường kẻ ngang (Horizontal Rules)**](#9-đường-kẻ-ngang-horizontal-rules)
+- [10. **Bảng (Tables)**](#10-bảng-tables)
+- [11. **Danh sách nhiệm vụ (Task Lists)**](#11-danh-sách-nhiệm-vụ-task-lists)
+- [12. **Chú thích (Footnotes)**](#12-chú-thích-footnotes)
+- [13. **Thoát ký tự đặc biệt**](#13-thoát-ký-tự-đặc-biệt)
+- [14. **HTML trong Markdown**](#14-html-trong-markdown)
+- [15. **Gạch ngang chữ (Strikethrough)**](#15-gạch-ngang-chữ-strikethrough)
+- [16. **Tạo danh mục (TOC - Table of Contents)**](#16-tạo-danh-mục-toc-table-of-contents)
+- [17. **Tích hợp với công cụ khác**](#17-tích-hợp-với-công-cụ-khác)
+<!--toc:end-->
+
 ### 1. **Tiêu đề (Headers)**
 Để tạo tiêu đề, sử dụng ký tự `#`. Số lượng `#` xác định cấp độ tiêu đề (từ 1 đến 6).
 

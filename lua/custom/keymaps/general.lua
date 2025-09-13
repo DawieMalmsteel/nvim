@@ -2,8 +2,8 @@ local map = vim.keymap.set
 
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-map('n', 'j', 'gj', { noremap = true, silent = true })
-map('n', 'k', 'gk', { noremap = true, silent = true })
+map({ 'n', 'x' }, 'j', 'gj', { noremap = true, silent = true })
+map({ 'n', 'x' }, 'k', 'gk', { noremap = true, silent = true })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })

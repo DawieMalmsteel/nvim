@@ -38,6 +38,11 @@ map('n', '<leader>tt', function()
     vim.g.minitabline_disable = nil
     local prev = vim.g.__showtabline_before_mini_toggle
     vim.o.showtabline = (prev and prev >= 0) and prev or 1
+    -- First-time enable: run setup with stored config
+    if not vim.g.__mini_tabline_initialized and vim.g.__mini_tabline_config then
+      require('mini.tabline').setup(vim.g.__mini_tabline_config)
+      vim.g.__mini_tabline_initialized = true
+    end
     vim.notify('Mini tabline: ON', vim.log.levels.INFO)
   else
     vim.g.minitabline_disable = true

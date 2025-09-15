@@ -1,7 +1,7 @@
 return {
-  'olimorris/codecompanion.nvim',
-  opts = {},
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-  },
+  -- 'olimorris/codecompanion.nvim',
+  -- opts = {},
+  -- dependencies = {
+  --   'nvim-lua/plenary.nvim',
+  -- },
 }

@@ -2,7 +2,7 @@ local modules = {
   'custom.mini.editing.ai',
   'custom.mini.editing.surround',
   'custom.mini.editing.pairs',
-  'custom.mini.editing.indentscope',
+  -- 'custom.mini.editing.indentscope',
   'custom.mini.editing.bracketed',
   'custom.mini.editing.bufremove',
   'custom.mini.ui.icons',

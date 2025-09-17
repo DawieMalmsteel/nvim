@@ -18,6 +18,7 @@ map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter 
 
 -- Toggle dashboard
 map('n', '<leader>tD', function()
+  local Snacks = require 'snacks'
   Snacks.dashboard()
 end, { desc = 'Toggle Dashboard' })
 

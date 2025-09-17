@@ -6,7 +6,7 @@ local M = function()
       goto_top = '[i', -- Jump to the top border line of the current scope
       goto_bottom = ']i', -- Jump to the bottom border line of the current scope
     },
-    symbol = '│',
+    symbol = '│', -- │
     options = { try_as_border = true },
     draw = {
       delay = 20,

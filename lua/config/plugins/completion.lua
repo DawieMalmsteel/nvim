@@ -23,6 +23,10 @@ return {
       ghost_text = { enabled = vim.g.ai_cmp },
     },
     -- snippets = { preset = 'mini_snippets' },
+    cmdline = {
+      keymap = { preset = 'inherit' },
+      completion = { menu = { auto_show = true } },
+    },
     sources = {
       compat = {},
       default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'copilot' },
@@ -75,7 +79,7 @@ return {
         },
       },
     },
-    fuzzy = { implementation = 'lua' },
+    fuzzy = { implementation = 'prefer_rust' },
     signature = { enabled = true },
   },
   ---@param opts blink.cmp.Config | { sources: { compat: string[] } }

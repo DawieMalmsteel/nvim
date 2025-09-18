@@ -3,6 +3,7 @@ return {
     'folke/snacks.nvim',
     opts = {
       picker = {
+        ui_select = false,
         previewers = {
           git = {
             native = true,

@@ -35,7 +35,7 @@ local M = function()
             table.insert(result, '%#MiniStatuslineDiagnosticsInfo# ' .. counts.I)
           end
           if counts.H > 0 then
-            table.insert(result, '%#MiniStatuslineDiagnosticsHint# ' .. counts.H)
+            table.insert(result, '%#MiniStatuslineDiagnosticsHint#󰌶 ' .. counts.H)
           end
           return table.concat(result, ' ')
         end

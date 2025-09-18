@@ -22,7 +22,7 @@ return {
       documentation = { auto_show = true, auto_show_delay_ms = 0 },
       ghost_text = { enabled = vim.g.ai_cmp },
     },
-    -- snippets = { preset = 'mini_snippets' },
+    snippets = { preset = 'mini_snippets' },
     cmdline = {
       keymap = { preset = 'inherit' },
       completion = {

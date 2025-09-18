@@ -110,3 +110,13 @@ map('n', '<leader>bE', function()
     vim.notify('Could not delete temp file: ' .. (err or ''), vim.log.levels.WARN)
   end
 end, { desc = 'Delete Temp File' })
+
+map('n', '<leader>bn', function()
+  local dir = vim.fn.expand '%:p:h' .. '/'
+  require('snacks').input({ prompt = 'New file: ', default = dir }, function(path)
+    if not path or path == '' or path == dir then
+      return
+    end
+    vim.cmd('edit ' .. vim.fn.fnameescape(path))
+  end)
+end, { desc = 'New file (curr dir)' })

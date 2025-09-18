@@ -7,7 +7,7 @@ return {
     },
     config = function(_, opts)
       require('tokyodark').setup(opts) -- calling setup is optional
-      vim.cmd [[colorscheme tokyodark]]
+      -- vim.cmd [[colorscheme tokyodark]]
     end,
   },
   {
@@ -19,6 +19,7 @@ return {
           float = true,
         },
       }
+      vim.cmd [[colorscheme nordic]]
     end,
   },
 }

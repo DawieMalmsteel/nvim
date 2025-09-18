@@ -25,7 +25,10 @@ return {
     -- snippets = { preset = 'mini_snippets' },
     cmdline = {
       keymap = { preset = 'inherit' },
-      completion = { menu = { auto_show = true } },
+      completion = {
+        menu = { auto_show = true },
+        completion = { ghost_text = { enabled = true } },
+      },
     },
     sources = {
       compat = {},

@@ -1,8 +1,7 @@
-- [ ] Thêm obsidian vào nvim (1 tuần rồi clm)
-- [ ] Tìm hiểu về Obsidian (1 tuần rồi clm)
+- [ ] Thêm obsidian vào nvim (2 tuần rồi clm)
+- [ ] Tìm hiểu về Obsidian (2 tuần rồi clm)
+- [ ] Tìm hiểu về blink compat và các keymaps của nó
 
-- [x] minimal is fun bro i think i dont need plugins
-- [x] Set up llm
 - [x] refactor lại keymaps.lua sử dụng cách tiếp cận khác tốt hơn đối với việc quản lý keymaps
 - [x] Chuyển chuyển Which key thành mini clue
 - [x] refactor lại keymaps.lua

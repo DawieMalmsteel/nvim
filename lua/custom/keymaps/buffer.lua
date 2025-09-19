@@ -110,3 +110,55 @@ map('n', '<leader>bE', function()
     vim.notify('Could not delete temp file: ' .. (err or ''), vim.log.levels.WARN)
   end
 end, { desc = 'Delete Temp File' })
+
+map('n', '<leader>bn', function()
+  local dir = vim.fn.expand '%:p:h' .. '/'
+  require('snacks').input({ prompt = 'New file: ', default = dir }, function(path)
+    if not path or path == '' or path == dir then
+      return
+    end
+    vim.cmd('edit ' .. vim.fn.fnameescape(path))
+  end)
+end, { desc = 'New file (curr dir)' })
+
+map('n', '<leader>bS', function()
+  local Snacks = require 'snacks'
+  Snacks.terminal.toggle('eza --icons=auto --tree -I "node_modules|vendor"', {
+    cwd = vim.fn.getcwd(), -- Set the current working directory to the project folder
+    start_insert = false, -- Start in insert mode
+    auto_close = false, -- Close the terminal when the process exits
+  })
+end, { desc = 'Show project folder tree' })
+
+map('n', '<leader>bs', function()
+  local file = vim.api.nvim_buf_get_name(0)
+  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+  local Snacks = require 'snacks'
+  Snacks.terminal.toggle('eza --icons=auto --tree -I "node_modules|vendor"', {
+    cwd = dir,
+    start_insert = false,
+    auto_close = false,
+  })
+end, { desc = 'Show file in current buffer folder' })
+
+-- eza -TaL1 --header --hyperlink --icons
+
+map('n', '<leader>bL', function()
+  local Snacks = require 'snacks'
+  Snacks.terminal.toggle('eza -TaL1 --header --hyperlink --icons', {
+    cwd = vim.fn.getcwd(), -- Set the current working directory to the project folder
+    start_insert = false, -- Start in insert mode
+    auto_close = false, -- Close the terminal when the process exits
+  })
+end, { desc = 'Show project folder list' })
+
+map('n', '<leader>bl', function()
+  local file = vim.api.nvim_buf_get_name(0)
+  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+  local Snacks = require 'snacks'
+  Snacks.terminal.toggle('eza -TaL1 --header --hyperlink --icons', {
+    cwd = dir,
+    start_insert = false,
+    auto_close = false,
+  })
+end, { desc = 'Show list file in current buffer folder' })

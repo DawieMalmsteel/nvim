@@ -3,6 +3,7 @@ return {
     'folke/snacks.nvim',
     opts = {
       picker = {
+        ui_select = false,
         previewers = {
           git = {
             native = true,
@@ -14,7 +15,7 @@ return {
       image = { enabled = true },
       -- Centered floating input
       input = {
-        enabled = true,
+        enabled = false,
         win = {
           relative = 'editor',
           style = 'minimal',
@@ -78,28 +79,29 @@ return {
           -- ⠀⠿⠁⠻⠐⢧⡽⠃⠳⠿⢷⠏⠀⠀⠀⠸⠾⠷⠟⠀⠟⠁⠻⠀⠿⠶⠻⠄⠸⠇⠀⠀⣡⠀⠀
           -- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
           --         @NeoVim của Dwcks 🦀        ]],
-          header = [[
-                    |  \ \ | |/ /                     
-                    |  |\ `' ' /                      
-                    |  ;'aorta \      / , pulmonary   
-                    | ;    _,   |    / / ,  arteries  
-           superior | |   (  `-.;_,-' '-' ,           
-          vena cava | `,   `-._       _,-'_           
-                    |,-`.    `.)    ,<_,-'_, pulmonary
-                   ,'    `.   /   ,'  `;-' _,  veins  
-                  ;        `./   /`,    \-'           
-                  | right   /   |  ;\   |\            
-                  | atrium ;_,._|_,  `, ' \           
-                  |        \    \ `       `,          
-                  `      __ `    \   left  ;,         
-                   \   ,'  `      \,  ventricle       
-                    \_(            ;,      ;;         
-                    |  \           `;,     ;;         
-           inferior |  |`.          `;;,   ;'         
-          vena cava |  |  `-.        ;;;;,;'          
-                    |  |    |`-.._  ,;;;;;'           
-                    |  |    |   | ``';;;'             
-                            aorta                   ]],
+          -- header = [[
+          --           |  \ \ | |/ /
+          --           |  |\ `' ' /
+          --           |  ;'aorta \      / , pulmonary
+          --           | ;    _,   |    / / ,  arteries
+          --  superior | |   (  `-.;_,-' '-' ,
+          -- vena cava | `,   `-._       _,-'_
+          --           |,-`.    `.)    ,<_,-'_, pulmonary
+          --          ,'    `.   /   ,'  `;-' _,  veins
+          --         ;        `./   /`,    \-'
+          --         | right   /   |  ;\   |\
+          --         | atrium ;_,._|_,  `, ' \
+          --         |        \    \ `       `,
+          --         `      __ `    \   left  ;,
+          --          \   ,'  `      \,  ventricle
+          --           \_(            ;,      ;;
+          --           |  \           `;,     ;;
+          --  inferior |  |`.          `;;,   ;'
+          -- vena cava |  |  `-.        ;;;;,;'
+          --           |  |    |`-.._  ,;;;;;'
+          --           |  |    |   | ``';;;'
+          --                   aorta                   ]],
+          header = [[]],
         },
 
         sections = {
@@ -121,27 +123,28 @@ return {
               icon = '',
               key = 's',
               desc = 'Session restore (mini)',
-              action = ':lua MiniSessions.read(nil, {})',
+              -- action = ':lua MiniSessions.read(nil, {})',
+              action = ':lua require("persistence").load()',
             },
             { pane = 2, icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
             { pane = 2, icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
             { pane = 2, icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1, layout = 'vertical' },
             { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
             { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-            -- {
-            --   pane = 2,
-            --   icon = ' ',
-            --   title = 'Git Status',
-            --   section = 'terminal',
-            --   enabled = function()
-            --     return Snacks.git.get_root() ~= nil
-            --   end,
-            --   cmd = 'git status --short --branch --renames',
-            --   height = 5,
-            --   padding = 1,
-            --   ttl = 5 * 60,
-            --   indent = 3,
-            -- },
+            {
+              pane = 2,
+              icon = ' ',
+              title = 'Git Status',
+              section = 'terminal',
+              enabled = function()
+                return Snacks.git.get_root() ~= nil
+              end,
+              cmd = 'git status --short --branch --renames',
+              height = 5,
+              padding = 1,
+              ttl = 5 * 60,
+              indent = 3,
+            },
             { section = 'startup' },
           },
         },

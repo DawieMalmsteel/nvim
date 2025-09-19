@@ -1,15 +1,15 @@
 local M = function()
   -- Disable mini.tabline by default (can enable later via <leader>tt)
-  if vim.g.minitabline_disable == nil then
-    vim.g.minitabline_disable = true
-  end
-
-  if vim.g.minitabline_disable then
-    if not vim.g.__showtabline_before_mini_toggle then
-      vim.g.__showtabline_before_mini_toggle = vim.o.showtabline
-    end
-    vim.o.showtabline = 0
-  end
+  -- if vim.g.minitabline_disable == nil then
+  --   vim.g.minitabline_disable = true
+  -- end
+  --
+  -- if vim.g.minitabline_disable then
+  --   if not vim.g.__showtabline_before_mini_toggle then
+  --     vim.g.__showtabline_before_mini_toggle = vim.o.showtabline
+  --   end
+  --   vim.o.showtabline = 0
+  -- end
 
   local buffer_positions = {}
 

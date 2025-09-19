@@ -1,10 +1,7 @@
-- [ ] Thêm obsidian vào nvim (1 tuần rồi clm)
-- [ ] Tìm hiểu về Obsidian (1 tuần rồi clm)
-- [ ] Set up codecompanion với ~minuet~
-- [ ] Tìm hiểu về atuin (4 ngày)
-- [ ] Tìm hiểu về nwm nvim (1 ngày)
+- [ ] Thêm obsidian vào nvim (2 tuần rồi clm)
+- [ ] Tìm hiểu về Obsidian (2 tuần rồi clm)
+- [ ] Tìm hiểu về blink compat và các keymaps của nó
 
-- [x] Set up llm
 - [x] refactor lại keymaps.lua sử dụng cách tiếp cận khác tốt hơn đối với việc quản lý keymaps
 - [x] Chuyển chuyển Which key thành mini clue
 - [x] refactor lại keymaps.lua
@@ -17,3 +14,6 @@
 ~- [ ] chuyển sang zsh thay vì fish shell~
 ~- [ ] viết issue trên [markdown-org](https://github.com/Kurama622/markdown-org/issues/new) về việc thêm support cho fish shell hoặc là folk mẹ sang cái plugins của mình để thêm support cho fish shell~
 ~- [ ] Set up bash autocomplete cho giống fish shell~
+~- [ ] Set up codecompanion với ~minuet~~
+~- [ ] Tìm hiểu về atuin (4 ngày)~
+~- [ ] Tìm hiểu về nwm nvim (1 ngày)~

@@ -26,4 +26,19 @@ vim.cmd [[
            highlight MiniStatuslineProgress guifg=#bb9af7 guibg=NONE
            highlight MiniStatuslineHarpoon guifg=#9ece6a guibg=NONE
            highlight MiniStatuslineModified guifg=#e0af68 guibg=NONE
+
+           highlight TabLine guibg=NONE guifg=#7e8294
+           highlight TabLineSel guibg=#7aa2f7 guifg=#1a1b26
+           highlight TabLineFill guibg=NONE guifg=#3b4261
+
+           highlight MiniTablineCurrent guibg=NONE guifg=#7aa2f7
+           highlight MiniTablineVisible guibg=NONE guifg=#7e8294
+           highlight MiniTablineHidden guibg=NONE guifg=#3b4261
+
+           highlight MiniTablineModifiedCurrent guibg=NONE guifg=#e0af68
+           highlight MiniTablineModifiedVisible guibg=NONE guifg=#f7768e
+           highlight MiniTablineModifiedHidden guibg=NONE guifg=#e0af68
+           highlight MiniTablineTabpagesection guibg=NONE guifg=#9ece6a
+           highlight MiniTablineFill guibg=NONE guifg=#3b4261
+           highlight MiniTablineTrunc guibg=NONE guifg=#3b4261
          ]]

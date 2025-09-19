@@ -38,3 +38,10 @@ map('n', "v'", "vi'", { noremap = true })
 
 map('n', 'y"', 'yi"', { noremap = true })
 map('n', 'v"', 'vi"', { noremap = true })
+
+map('n', '<leader><leader>', function()
+  local mini_pick = require 'mini.pick'
+  local file = vim.api.nvim_buf_get_name(0)
+  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+  mini_pick.builtin.files(nil, { source = { cwd = dir } })
+end, { desc = 'Search Files in cwd' })

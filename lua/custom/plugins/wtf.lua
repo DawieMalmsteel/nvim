@@ -9,7 +9,11 @@ return {
     'mini-nvim/mini.nvim',
     -- "ibhagwan/fzf-lua",
   },
-  opts = {},
+  opts = {
+    provider = 'copilot',
+    language = 'Vietnamese',
+    popup_type = 'popup',
+  },
   keys = {
     {
       '<leader>wd',

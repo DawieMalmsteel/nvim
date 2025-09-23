@@ -1,13 +1,149 @@
 local M = function()
   local statusline = require 'mini.statusline'
 
+  -- Buffer positions for mini-like tab display inside statusline
+  local buffer_positions = {}
+  local function update_buffer_positions()
+    local listed_buffers = vim.tbl_filter(function(buf)
+      return vim.api.nvim_buf_is_valid(buf.bufnr) and vim.bo[buf.bufnr].buflisted
+    end, vim.fn.getbufinfo())
+    buffer_positions = {}
+    for i, buf in ipairs(listed_buffers) do
+      buffer_positions[buf.bufnr] = i
+    end
+  end
+  vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete', 'BufEnter' }, {
+    callback = update_buffer_positions,
+  })
+  -- initial populate
+  update_buffer_positions()
+
+  -- Ensure highlight for current filename (white)
+  if not vim.g.__mini_status_current_name_hl then
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineCurrentName', { fg = '#ffffff' })
+    vim.g.__mini_status_current_name_hl = true
+  end
+
+  -- Ensure highlight for inactive tabs (gray)
+  if not vim.g.__mini_status_inactive_tab_hl then
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTab', { fg = '#808080' })
+    vim.g.__mini_status_inactive_tab_hl = true
+  end
+  -- Ensure highlight for modified inactive tabs (red)
+  if not vim.g.__mini_status_inactive_tab_modified_hl then
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabModified', { fg = '#ff0000' })
+    vim.g.__mini_status_inactive_tab_modified_hl = true
+  end
+  -- Ensure highlights for diagnostics in inactive tabs
+  if not vim.g.__mini_status_inactive_tab_diag_hl then
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagError', { fg = '#ff0000' }) -- red
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagWarn', { fg = '#ffff00' }) -- yellow
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagInfo', { fg = '#00ff00' }) -- green
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagHint', { fg = '#00ff00' }) -- green for hint too
+    vim.g.__mini_status_inactive_tab_diag_hl = true
+  end
+
+  -- Build a compact tab-like string (mini.tabline-like)
+  local function tabs_side()
+    local listed = vim.tbl_filter(function(buf)
+      return vim.api.nvim_buf_is_valid(buf.bufnr) and vim.bo[buf.bufnr].buflisted
+    end, vim.fn.getbufinfo())
+    if #listed == 0 then
+      return ''
+    end
+
+    local current_buf = vim.api.nvim_get_current_buf()
+    local current_index = buffer_positions[current_buf] or 1
+
+    local parts = {}
+    local max_show = 7
+    local start_i = 1
+    local total = #listed
+    if total > max_show then
+      start_i = math.max(1, math.min(total - max_show + 1, (current_index - math.floor(max_show / 2))))
+    end
+
+    for i = start_i, math.min(total, start_i + max_show - 1) do
+      local buf = listed[i]
+      local bufnr = buf.bufnr
+      local filepath = vim.api.nvim_buf_get_name(bufnr)
+      local name = vim.fn.fnamemodify(filepath, ':t')
+      if name == '' then
+        name = '[NoName]'
+      end
+
+      if bufnr == current_buf then
+        -- Current buffer: show full filename (no index), name in white
+        local flags = ''
+        if vim.bo[bufnr].modified then
+          flags = flags .. ' '
+        end
+        if vim.bo[bufnr].readonly then
+          flags = flags .. ' [RO]'
+        end
+        if not vim.bo[bufnr].modifiable then
+          flags = flags .. ' [-]'
+        end
+
+        table.insert(parts, '%#MiniStatuslineCurrentName#' .. name .. '%#MiniStatuslineFilename#' .. flags)
+      else
+        -- Non-current: compact diagnostics count + short name
+        local short = #name > 3 and name:sub(1, 3) or name
+        local counts = { E = 0, W = 0, I = 0, H = 0 }
+        local severities = vim.diagnostic.severity
+        for _, diag in ipairs(vim.diagnostic.get(bufnr)) do
+          if diag.severity == severities.ERROR then
+            counts.E = counts.E + 1
+          elseif diag.severity == severities.WARN then
+            counts.W = counts.W + 1
+          elseif diag.severity == severities.INFO then
+            counts.I = counts.I + 1
+          elseif diag.severity == severities.HINT then
+            counts.H = counts.H + 1
+          end
+        end
+        local diag_count = counts.E + counts.W + counts.I + counts.H
+        local hl
+        if counts.E > 0 then
+          hl = '%#MiniStatuslineInactiveTabDiagError#'
+        elseif counts.W > 0 then
+          hl = '%#MiniStatuslineInactiveTabDiagWarn#'
+        elseif counts.I > 0 then
+          hl = '%#MiniStatuslineInactiveTabDiagInfo#'
+        elseif counts.H > 0 then
+          hl = '%#MiniStatuslineInactiveTabDiagHint#'
+        else
+          hl = '%#MiniStatuslineInactiveTab#'
+        end
+        if vim.bo[bufnr].modified then
+          hl = '%#MiniStatuslineInactiveTabModified#'
+        end
+        if diag_count > 0 then
+          table.insert(parts, hl .. ' ' .. diag_count .. ':' .. short)
+        else
+          table.insert(parts, hl .. short)
+        end
+      end
+    end
+
+    if start_i > 1 then
+      table.insert(parts, 1, '…')
+    end
+    if start_i + max_show - 1 < total then
+      table.insert(parts, '…')
+    end
+
+    return '%#MiniStatuslineDevinfo# ' .. table.concat(parts, ' ') .. ' %#MiniStatuslineFilename#'
+  end
+
   statusline.setup {
-    use_icons = true, -- Giữ icons nếu có Nerd Font
+    use_icons = true,
     content = {
       active = function()
         local mode, mode_hl = statusline.section_mode { trunc_width = 150 }
         local git = statusline.section_git { trunc_width = 75 }
-        local diagnostics = function() -- Thay icon diagnostics thành chữ với màu
+
+        local diagnostics = function()
           if not vim.diagnostic.is_enabled() then
             return ''
           end
@@ -39,41 +175,18 @@ local M = function()
           end
           return table.concat(result, ' ')
         end
-        local filename = function()
-          -- Custom filename: relative path shortened with ~ for home, dynamic color if modified
-          local name = vim.fn.expand '%:~:.'
-          if name == '' then
-            name = '[No Name]'
-          end
-          -- Đổi màu toàn bộ filename nếu modified (sử dụng highlight MiniStatuslineModified)
-          local hl = vim.bo.modified and '%#MiniStatuslineModified#' or '%#MiniStatuslineFilename#'
-          -- Flags cho readonly/modifiable (không cần [+] vì đã đổi màu, giữ gọn)
-          local flags = ''
-          if vim.bo.modified then
-            flags = flags .. ' ' -- Thêm icon Nerd Font cho modified (pencil icon biểu thị chỉnh sửa)
-          end
-          if vim.bo.readonly then
-            flags = flags .. ' [RO]'
-          end
-          if not vim.bo.modifiable then
-            flags = flags .. ' [-]'
-          end
-          return hl .. name .. flags
-        end
+
         local location = function()
-          -- Kết hợp location đầy đủ (với tổng lines và column) + progress bar dọc (sử dụng ký tự tăng dần dọc để gọn và đẹp)
           local current_line = vim.fn.line '.'
           local total_lines = vim.fn.line '$'
           local column = vim.fn.col '.'
-          local fraction = math.floor((current_line / total_lines) * 8) -- 0 đến 8 cho các mức
-          local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' } -- Ký tự progress dọc (tăng từ dưới lên)
-          local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[math.max(1, math.min(#vbars, fraction or 1))] or '█') -- Chọn ký tự đại diện progress dọc
-
+          local fraction = total_lines > 0 and math.floor((current_line / total_lines) * 8) or 8
+          local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+          local idx = math.max(1, math.min(#vbars, (fraction or 1)))
+          local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[idx] or '█')
           return ' ' .. current_line .. '  ' .. column .. ' ' .. progress_bar
-          -- return ' ' .. current_line .. '/' .. total_lines .. '  ' .. column .. ' ' .. progress_bar
         end
 
-        -- Thêm recording macro minimal
         local recording = function()
           local reg = vim.fn.reg_recording()
           if reg == '' then
@@ -98,19 +211,18 @@ local M = function()
 
           for i, item in ipairs(list.items) do
             local file_path = vim.loop.fs_realpath(item.value)
-            local file_name = vim.fn.fnamemodify(file_path or '', ':t') or 'N/A' -- Lấy tên file hoặc gán giá trị mặc định
-            local short_name = file_name:sub(1, 2) -- Lấy 3 ký tự đầu tiên của tên file
+            local file_name = vim.fn.fnamemodify(file_path or '', ':t') or 'N/A'
+            local short_name = file_name:sub(1, 2)
             if file_path == vim.loop.fs_realpath(current_file) then
-              table.insert(harpoon_entries, '[' .. i .. ':' .. short_name .. ']') -- Đánh dấu file hiện tại bằng dấu ngoặc vuông
+              table.insert(harpoon_entries, '[' .. i .. ':' .. short_name .. ']')
             else
-              table.insert(harpoon_entries, i .. ':' .. short_name) -- Hiển thị index và tên file rút gọn
+              table.insert(harpoon_entries, i .. ':' .. short_name)
             end
           end
 
-          return table.concat(harpoon_entries, ' ') -- Ngăn cách các file bằng khoảng trắng
+          return table.concat(harpoon_entries, ' ')
         end
 
-        -- MiniVisits label status (show local vs truly global; show global even if not labeled in current cwd)
         local visits_status = function()
           local ok, visits = pcall(require, 'mini.visits')
           if not ok then
@@ -123,7 +235,6 @@ local M = function()
           local index = visits.get_index()
           local cwd = vim.loop.cwd()
 
-          -- Build label -> set(cwd) across ALL cwd for this path
           local label_cwds = {}
           for cwd_key, cwd_tbl in pairs(index) do
             local entry = cwd_tbl[path]
@@ -151,7 +262,6 @@ local M = function()
             if cset[cwd] and n == 1 then
               table.insert(local_labels, label)
             else
-              -- Appears in multiple cwd OR only in other cwd(s) -> treat as global
               table.insert(global_labels, label)
             end
           end
@@ -189,11 +299,12 @@ local M = function()
           { hl = 'MiniStatuslineDevinfo', strings = { git } },
           { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics() } },
           '%<', -- Left truncate
-          { hl = 'MiniStatuslineFilename', strings = { filename() } },
+          -- Only show the compact tabs list (current entry shows icon + name in white, no index)
+          { strings = { tabs_side() } },
           '%=', -- Right align
           { strings = { recording() } },
           { strings = { visits_status() } },
-          { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } }, -- Thêm Harpoon ở giữa
+          { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } },
           { hl = 'MiniStatuslineLocation', strings = { location() } },
         }
       end,

@@ -56,7 +56,7 @@ local M = function()
     local current_index = buffer_positions[current_buf] or 1
 
     local parts = {}
-    local max_show = 7
+    local max_show = 5
     local start_i = 1
     local total = #listed
     if total > max_show then

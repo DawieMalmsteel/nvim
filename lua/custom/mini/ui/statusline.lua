@@ -133,7 +133,7 @@ local M = function()
       table.insert(parts, '…')
     end
 
-    return '%#MiniStatuslineDevinfo# ' .. table.concat(parts, ' ') .. ' %#MiniStatuslineFilename#'
+    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, ' ') .. ' %#MiniStatuslineFilename#'
   end
 
   statusline.setup {
@@ -184,7 +184,7 @@ local M = function()
           local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
           local idx = math.max(1, math.min(#vbars, (fraction or 1)))
           local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[idx] or '█')
-          return ' ' .. current_line .. '  ' .. column .. ' ' .. progress_bar
+          return '' .. current_line .. ' ' .. column .. ' ' .. progress_bar
         end
 
         local recording = function()

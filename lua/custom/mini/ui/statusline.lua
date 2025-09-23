@@ -31,15 +31,15 @@ local M = function()
   end
   -- Ensure highlight for modified inactive tabs (red)
   if not vim.g.__mini_status_inactive_tab_modified_hl then
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabModified', { fg = '#ff0000' })
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabModified', { fg = '#f38ba8' })
     vim.g.__mini_status_inactive_tab_modified_hl = true
   end
   -- Ensure highlights for diagnostics in inactive tabs
   if not vim.g.__mini_status_inactive_tab_diag_hl then
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagError', { fg = '#ff0000' }) -- red
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagWarn', { fg = '#ffff00' }) -- yellow
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagInfo', { fg = '#00ff00' }) -- green
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagHint', { fg = '#00ff00' }) -- green for hint too
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagError', { link = 'DiagnosticError' })
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagWarn', { link = 'DiagnosticWarn' })
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagInfo', { link = 'DiagnosticInfo' })
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagHint', { link = 'DiagnosticHint' })
     vim.g.__mini_status_inactive_tab_diag_hl = true
   end
 

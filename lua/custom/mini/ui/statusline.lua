@@ -26,7 +26,7 @@ local M = function()
 
   -- Ensure highlight for inactive tabs (gray)
   if not vim.g.__mini_status_inactive_tab_hl then
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTab', { fg = '#808080' })
+    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTab', { fg = '#7e8294' })
     vim.g.__mini_status_inactive_tab_hl = true
   end
   -- Ensure highlight for modified inactive tabs (red)
@@ -88,7 +88,7 @@ local M = function()
         table.insert(parts, '%#MiniStatuslineCurrentName#' .. name .. '%#MiniStatuslineFilename#' .. flags)
       else
         -- Non-current: compact diagnostics count + short name
-        local short = #name > 5 and name:sub(1, 5) or name
+        local short = vim.fn.fnamemodify(name, ':r')
         local counts = { E = 0, W = 0, I = 0, H = 0 }
         local severities = vim.diagnostic.severity
         for _, diag in ipairs(vim.diagnostic.get(bufnr)) do
@@ -298,12 +298,12 @@ local M = function()
           { hl = mode_hl, strings = { mode } },
           { hl = 'MiniStatuslineDevinfo', strings = { git } },
           { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics() } },
+          { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } },
+          { strings = { visits_status() } },
           { strings = { recording() } },
           '%<', -- Left truncate
           -- Only show the compact tabs list (current entry shows icon + name in white, no index)
           '%=', -- Right align
-          { strings = { visits_status() } },
-          { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } },
           { hl = 'MiniStatuslineLocation', strings = { location() } },
           { strings = { tabs_side() } },
         }

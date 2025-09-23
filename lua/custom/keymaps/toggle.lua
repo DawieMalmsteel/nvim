@@ -53,3 +53,8 @@ map('n', '<leader>tt', function()
   end
   vim.cmd 'redraw!'
 end, { desc = 'Toggle Mini Tabline' })
+
+map('n', '<leader>tM', function()
+  local mini_map = require 'mini.map'
+  mini_map.toggle()
+end, { desc = 'Toggle Mini Map' })

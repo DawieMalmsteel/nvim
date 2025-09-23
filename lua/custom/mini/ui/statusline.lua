@@ -119,7 +119,7 @@ local M = function()
           hl = '%#MiniStatuslineInactiveTabModified#'
         end
         if diag_count > 0 then
-          table.insert(parts, hl .. ' ' .. diag_count .. ':' .. short)
+          table.insert(parts, hl .. diag_count .. ':' .. short)
         else
           table.insert(parts, hl .. short)
         end
@@ -298,14 +298,14 @@ local M = function()
           { hl = mode_hl, strings = { mode } },
           { hl = 'MiniStatuslineDevinfo', strings = { git } },
           { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics() } },
+          { strings = { recording() } },
           '%<', -- Left truncate
           -- Only show the compact tabs list (current entry shows icon + name in white, no index)
-          { strings = { tabs_side() } },
           '%=', -- Right align
-          { strings = { recording() } },
           { strings = { visits_status() } },
           { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } },
           { hl = 'MiniStatuslineLocation', strings = { location() } },
+          { strings = { tabs_side() } },
         }
       end,
       inactive = function()

@@ -88,7 +88,7 @@ local M = function()
         table.insert(parts, '%#MiniStatuslineCurrentName#' .. name .. '%#MiniStatuslineFilename#' .. flags)
       else
         -- Non-current: compact diagnostics count + short name
-        local short = #name > 3 and name:sub(1, 3) or name
+        local short = #name > 5 and name:sub(1, 5) or name
         local counts = { E = 0, W = 0, I = 0, H = 0 }
         local severities = vim.diagnostic.severity
         for _, diag in ipairs(vim.diagnostic.get(bufnr)) do

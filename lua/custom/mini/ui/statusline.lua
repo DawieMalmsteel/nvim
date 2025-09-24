@@ -85,7 +85,7 @@ local M = function()
           flags = flags .. ' [-]'
         end
 
-        table.insert(parts, '%#MiniStatuslineCurrentName#' .. name .. '%#MiniStatuslineFilename#' .. flags)
+        table.insert(parts, '%#MiniStatuslineCurrentName#' .. '(' .. name .. ')' .. '%#MiniStatuslineFilename#' .. flags)
       else
         -- Non-current: compact diagnostics count + short name
         local short = vim.fn.fnamemodify(name, ':r')
@@ -133,7 +133,7 @@ local M = function()
       table.insert(parts, '…')
     end
 
-    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, ' ') .. ' %#MiniStatuslineFilename#'
+    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, ' ') .. '%#MiniStatuslineFilename#'
   end
 
   statusline.setup {

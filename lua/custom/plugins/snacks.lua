@@ -15,7 +15,7 @@ return {
       image = { enabled = true },
       -- Centered floating input
       input = {
-        enabled = false,
+        enabled = true,
         win = {
           relative = 'editor',
           style = 'minimal',

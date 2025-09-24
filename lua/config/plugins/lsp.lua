@@ -4,6 +4,14 @@ return {
     {
       'mason-org/mason.nvim',
       opts = {
+        ui = {
+          border = 'rounded',
+          icons = {
+            package_installed = '󰄳 ',
+            package_pending = '󰄲 ',
+            package_uninstalled = '󰅚 ',
+          },
+        },
         registries = {
           'github:mason-org/mason-registry',
           'github:Crashdummyy/mason-registry',
@@ -227,7 +235,8 @@ return {
 
     for name, cfg in pairs(servers) do
       cfg.capabilities = vim.tbl_deep_extend('force', {}, capabilities, cfg.capabilities or {})
-      require('lspconfig')[name].setup(cfg)
+      vim.lsp.config(name, cfg) -- Configure the server
+      vim.lsp.enable(name) -- Enable the server
     end
 
     local ensure = vim.tbl_keys(servers)

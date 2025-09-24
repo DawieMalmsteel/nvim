@@ -11,6 +11,14 @@ return {
     end,
   },
   {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = true,
+    },
+  },
+  {
     'AlexvZyl/nordic.nvim',
     config = function()
       require('nordic').setup {
@@ -19,7 +27,7 @@ return {
           float = true,
         },
       }
-      vim.cmd [[colorscheme nordic]]
+      vim.cmd [[colorscheme tokyonight-night]]
     end,
   },
 }

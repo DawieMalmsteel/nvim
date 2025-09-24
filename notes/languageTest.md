@@ -58,11 +58,8 @@ fn main() {
 ```
 
 ```lua
-local message = "Hello, Lua!"
-local count = 3
-for i = 1, count do
-    print(i, message)
-end
+local env = os.getenv 'GEMINI_API_KEY'
+print("Hello, Lua!", env)
 ```
 
 ```ocaml

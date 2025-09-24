@@ -180,11 +180,12 @@ local M = function()
           local current_line = vim.fn.line '.'
           local total_lines = vim.fn.line '$'
           local column = vim.fn.col '.'
+          local total_column = vim.fn.col '$'
           local fraction = total_lines > 0 and math.floor((current_line / total_lines) * 8) or 8
           local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
           local idx = math.max(1, math.min(#vbars, (fraction or 1)))
           local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[idx] or '█')
-          return '' .. current_line .. ' ' .. column .. ' ' .. progress_bar
+          return ' ' .. current_line .. '|' .. total_lines .. '  ' .. column .. '|' .. total_column .. ' ' .. progress_bar
         end
 
         local recording = function()

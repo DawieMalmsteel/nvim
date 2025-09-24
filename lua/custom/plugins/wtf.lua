@@ -6,7 +6,7 @@ return {
     -- Optional: For WtfGrepHistory (pick one)
     -- 'nvim-telescope/telescope.nvim',
     -- "folke/snacks.nvim",
-    'mini-nvim/mini.nvim',
+    'nvim-mini/mini.nvim',
     -- "ibhagwan/fzf-lua",
   },
   opts = {

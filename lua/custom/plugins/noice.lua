@@ -57,6 +57,12 @@ return {
     --   },
     -- },
 
+    lsp = {
+      progress = {
+        enabled = false,
+      },
+    },
+
     cmdline = {
       format = {
         replace = {

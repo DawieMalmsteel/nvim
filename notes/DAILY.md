@@ -18,3 +18,6 @@
 # Jetson Nano Remote
 - example link: http://<your_p_address>:8080
 - get ip address jetson nano: ifconfig
+
+# Jetbot link
+- org: https://jetbot.org/

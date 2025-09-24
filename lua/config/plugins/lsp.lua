@@ -179,7 +179,51 @@ return {
       },
 
       fsautocomplete = {},
-      rust_analyzer = {},
+      rust_analyzer = {
+        settings = {
+          ['rust-analyzer'] = {
+            cargo = {
+              allFeatures = true,
+              loadOutDirsFromCheck = true,
+              buildScripts = {
+                enable = true,
+              },
+            },
+            -- Add clippy lints for Rust if using rust-analyzer
+            checkOnSave = {
+              enable = false,
+            },
+            -- Enable diagnostics if using rust-analyzer
+            diagnostics = {
+              enable = false,
+            },
+            procMacro = {
+              enable = true,
+              ignored = {
+                ['async-trait'] = { 'async_trait' },
+                ['napi-derive'] = { 'napi' },
+                ['async-recursion'] = { 'async_recursion' },
+              },
+            },
+            files = {
+              excludeDirs = {
+                '.direnv',
+                '.git',
+                '.github',
+                '.gitlab',
+                'bin',
+                'node_modules',
+                'target',
+                'venv',
+                '.venv',
+              },
+            },
+          },
+        },
+      },
+      bacon_ls = {
+        enabled = true,
+      },
       vtsls = {
         filetypes = {
           'javascript',

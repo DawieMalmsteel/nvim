@@ -1,3 +1,12 @@
+--  1. **Sử dụng cmdline-window (tích hợp sẵn trong Neovim)**
+--
+-- Bạn có thể nhấn tổ hợp phím `Ctrl-f` khi đang ở cmdline (`:`) để mở cmdline-window. Trong cửa sổ này, bạn có thể sử dụng các phím di chuyển và lệnh của Vim như trong chế độ Normal.
+--
+-- - **Cách sử dụng:**
+--   - Nhấn `:` để vào cmdline.
+--   - Nhấn `Ctrl-f` để mở cmdline-window.
+--   - Sử dụng các phím di chuyển và lệnh Vim như bình thường.
+--   - Nhấn `Enter` để thực thi lệnh hoặc `Ctrl-c` để thoát.
 return {
   'folke/noice.nvim',
   event = 'VeryLazy',

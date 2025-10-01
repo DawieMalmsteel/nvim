@@ -3,6 +3,7 @@ local map = vim.keymap.set
 -- Decriptions for keymaps
 map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
 map({ 'n', 'v' }, '<leader>a', '', { desc = '+ai' })
+map({ 'n', 'v' }, '<leader>A', '', { desc = '+AI cli' })
 map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
 map({ 'n', 'v' }, '<leader>g', '', { desc = '+git' })
 map({ 'n', 'v' }, '<leader>u', '', { desc = '+ui' })

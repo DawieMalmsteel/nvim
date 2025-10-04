@@ -35,7 +35,7 @@ return {
       -- refresh = "gr",
       -- open = "<M-CR>"
       keymap = {
-        open = '<S-Tab>',
+        open = '<M-r>',
       },
     },
     filetypes = {

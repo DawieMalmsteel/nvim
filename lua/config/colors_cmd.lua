@@ -18,7 +18,7 @@ vim.cmd [[
            highlight MiniStatuslineDiagnosticsError guifg=#f7768e guibg=NONE
            highlight MiniStatuslineDiagnosticsWarn guifg=#e0af68 guibg=NONE
            highlight MiniStatuslineDiagnosticsInfo guifg=#7dcfff guibg=NONE
-           highlight MiniStatuslineDiagnosticsHint guifg=#9ece6a guibg=NONE
+           highlight MiniStatuslineDiagnosticsHint guifg=#a6e22e guibg=NONE
            highlight MiniStatuslineFilename guifg=#c0caf5 guibg=NONE
            highlight MiniStatuslineLocation guifg=#f7768e guibg=NONE
            highlight MiniStatuslineRecording guifg=#f7768e guibg=NONE

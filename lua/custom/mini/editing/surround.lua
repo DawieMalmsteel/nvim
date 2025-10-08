@@ -21,6 +21,10 @@ local M = function()
       highlight = 'gsh', -- Highlight surrounding
       replace = 'gsr', -- Replace surrounding
       update_n_lines = 'gsn', -- Update `n_lines`
+
+      -- default
+      -- suffix_last = 'l', -- Suffix to search with "prev" method
+      -- suffix_next = 'n', -- Suffix to search with "next" method
     },
   }
 end

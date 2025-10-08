@@ -12,7 +12,7 @@ local M = function()
   map('n', 'gsn', '', { desc = 'Update `MiniSurround.config.n_lines`' })
 
   require('mini.surround').setup {
-    highlight_duration = 100,
+    highlight_duration = 1000,
     mappings = {
       add = 'gsa', -- Add surrounding in Normal and Visual modes
       delete = 'gsd', -- Delete surrounding

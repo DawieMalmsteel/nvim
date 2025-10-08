@@ -18,7 +18,7 @@ return {
           -- padding = { 1, 2 },
         },
         position = {
-          row = 15,
+          row = 12,
           col = '50%',
         },
         size = {

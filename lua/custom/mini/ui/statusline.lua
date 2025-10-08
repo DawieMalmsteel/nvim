@@ -214,10 +214,10 @@ local M = function()
           local harpoon_entries = {}
 
           for i, item in ipairs(list.items) do
-            local file_path = vim.loop.fs_realpath(item.value)
+            local file_path = vim.uv.fs_realpath(item.value)
             local file_name = vim.fn.fnamemodify(file_path or '', ':t') or 'N/A'
             local short_name = file_name:sub(1, 2)
-            if file_path == vim.loop.fs_realpath(current_file) then
+            if file_path == vim.uv.fs_realpath(current_file) then
               table.insert(harpoon_entries, '[' .. i .. ':' .. short_name .. ']')
             else
               table.insert(harpoon_entries, i .. ':' .. short_name)
@@ -237,7 +237,7 @@ local M = function()
             return ''
           end
           local index = visits.get_index()
-          local cwd = vim.loop.cwd()
+          local cwd = vim.uv.cwd()
 
           local label_cwds = {}
           for cwd_key, cwd_tbl in pairs(index) do

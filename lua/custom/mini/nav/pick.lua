@@ -92,7 +92,7 @@ local M = function()
       end,
 
       -- String to use as caret in prompt
-      prompt_caret = '▏',
+      prompt_caret = '👈',
 
       -- String to use as prefix in prompt
       prompt_prefix = 'Search: ',

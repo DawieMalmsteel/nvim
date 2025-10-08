@@ -31,7 +31,7 @@ map('v', 'K', ":m'<-2<cr>gv=gv")
 
 map({ 'n', 'x' }, 'gi', '^')
 map({ 'n', 'x' }, 'ga', 'g_')
-map({ 'n', 'x' }, '<Tab>', '%')
+-- map({ 'n', 'x' }, '<S-tab>', '%')
 
 map('n', "y'", "yi'", { noremap = true })
 map('n', "v'", "vi'", { noremap = true })

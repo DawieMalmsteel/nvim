@@ -6,3 +6,4 @@ require 'config.neovide'
 require 'config.colors_cmd'
 -- User keymaps (kept separate as before)
 require 'custom.keymaps'
+require 'custom.cli'

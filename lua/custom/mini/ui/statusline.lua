@@ -88,7 +88,10 @@ local M = function()
         table.insert(parts, '%#MiniStatuslineCurrentName#' .. '(' .. name .. ')' .. '%#MiniStatuslineFilename#' .. flags)
       else
         -- Non-current: compact diagnostics count + short name
-        local short = vim.fn.fnamemodify(name, ':r')
+        -- local short = vim.fn.fnamemodify(name, ':r')
+
+        local min_len = 3
+        local short = #name > min_len and name:sub(1, min_len) or name
         local counts = { E = 0, W = 0, I = 0, H = 0 }
         local severities = vim.diagnostic.severity
         for _, diag in ipairs(vim.diagnostic.get(bufnr)) do
@@ -305,7 +308,7 @@ local M = function()
           '%<', -- Left truncate
           -- Only show the compact tabs list (current entry shows icon + name in white, no index)
           '%=', -- Right align
-          { hl = 'MiniStatuslineLocation', strings = { location() } },
+          -- { hl = 'MiniStatuslineLocation', strings = { location() } },
           { strings = { tabs_side() } },
         }
       end,

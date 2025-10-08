@@ -3,7 +3,7 @@ return {
   event = 'VimEnter',
   version = '1.*',
   dependencies = {
-    'giuxtaposition/blink-cmp-copilot',
+    -- 'giuxtaposition/blink-cmp-copilot',
     'rafamadriz/friendly-snippets',
     'folke/lazydev.nvim',
     {
@@ -16,6 +16,16 @@ return {
     keymap = {
       preset = 'enter',
       ['<C-y>'] = { 'select_and_accept' },
+      ['<Tab>'] = {
+        'snippet_forward',
+        function() -- sidekick next edit suggestion
+          return require('sidekick').nes_jump_or_apply()
+        end,
+        function() -- if you are using Neovim's native inline completions
+          -- return vim.lsp.inline_completion.get()
+        end,
+        'fallback',
+      },
     },
     appearance = { nerd_font_variant = 'mono' },
     completion = {
@@ -35,21 +45,21 @@ return {
       default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'copilot' },
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-        copilot = {
-          name = 'copilot',
-          module = 'blink-cmp-copilot',
-          score_offset = 100,
-          async = true,
-          transform_items = function(_, items)
-            local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
-            local kind_idx = #CompletionItemKind + 1
-            CompletionItemKind[kind_idx] = 'Copilot'
-            for _, item in ipairs(items) do
-              item.kind = kind_idx
-            end
-            return items
-          end,
-        },
+        -- copilot = {
+        --   name = 'copilot',
+        --   module = 'blink-cmp-copilot',
+        --   score_offset = 100,
+        --   async = true,
+        --   transform_items = function(_, items)
+        --     local CompletionItemKind = require('blink.cmp.types').CompletionItemKind
+        --     local kind_idx = #CompletionItemKind + 1
+        --     CompletionItemKind[kind_idx] = 'Copilot'
+        --     for _, item in ipairs(items) do
+        --       item.kind = kind_idx
+        --     end
+        --     return items
+        --   end,
+        -- },
       },
       appearance = {
         kind_icons = {

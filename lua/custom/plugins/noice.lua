@@ -14,20 +14,20 @@ return {
     views = {
       cmdline_popup = {
         border = {
-          style = 'none',
-          padding = { 1, 2 },
+          style = 'rounded',
+          -- padding = { 1, 2 },
         },
         position = {
-          row = 15,
+          row = 12,
           col = '50%',
         },
         size = {
           width = 60,
           height = 'auto',
         },
-        win_options = {
-          winhighlight = { NormalFloat = 'NormalFloat' },
-        },
+        -- win_options = {
+        --   winhighlight = { NormalFloat = 'NormalFloat' },
+        -- },
       },
       popupmenu = {
         relative = 'editor',
@@ -40,8 +40,8 @@ return {
           height = 10,
         },
         border = {
-          style = 'none',
-          padding = { 1, 2 },
+          style = 'rounded',
+          -- padding = { 1, 2 },
         },
       },
     },

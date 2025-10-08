@@ -28,13 +28,13 @@ return {
     }
     return {
       default_quick_keys = 0,
-      vim.api.nvim_set_var('org#style#border', 2),
+      vim.api.nvim_set_var('org#style#border', 5),
       vim.api.nvim_set_var('org#style#bordercolor', 'FloatBorder'),
-      vim.api.nvim_set_var('org#style#color', 'String'),
+      vim.api.nvim_set_var('org#style#color', 'Number'),
     }
   end,
   keys = {
-    { '<leader>Mr', '<cmd>call org#main#runCodeBlock()<cr>', desc = 'Run code block' },
-    { '<leader>Ml', '<cmd>call org#main#runLanguage()<cr>', desc = 'Run code block language' },
+    { '<leader>mr', '<cmd>call org#main#runCodeBlock()<cr>', desc = 'Run code block' },
+    { '<leader>ml', '<cmd>call org#main#runLanguage()<cr>', desc = 'Run code block language' },
   },
 }

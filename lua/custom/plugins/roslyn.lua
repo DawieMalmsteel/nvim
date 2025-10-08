@@ -2,31 +2,63 @@ return {
   'seblyng/roslyn.nvim',
   ---@module 'roslyn.config'
   ---@type RoslynNvimConfig
-  opts = {
-    vim.lsp.config('roslyn', {
-      on_attach = function()
-        print 'This will run when the server attaches!'
-      end,
-      settings = {
-        ['csharp|inlay_hints'] = {
-          csharp_enable_inlay_hints_for_implicit_object_creation = true,
-          csharp_enable_inlay_hints_for_implicit_variable_types = true,
-          csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-          csharp_enable_inlay_hints_for_types = true,
-          dotnet_enable_inlay_hints_for_indexer_parameters = true,
-          dotnet_enable_inlay_hints_for_literal_parameters = true,
-          dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-          dotnet_enable_inlay_hints_for_other_parameters = true,
-          dotnet_enable_inlay_hints_for_parameters = true,
-          dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-          dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-          dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-        },
-
-        ['csharp|code_lens'] = {
-          dotnet_enable_references_code_lens = true,
-        },
-      },
-    }),
-  },
+  opts = {},
 }
+
+-- return {
+--   {
+--     enabled = vim.fn.executable "dotnet" == 1,
+--     "seblj/roslyn.nvim",
+--     ft = "cs",
+--     event = "BufReadPre",
+--     ---@module 'roslyn.config'
+--     ---@type RoslynNvimConfig
+--     opts = {},
+--     keys = {
+--       { "<leader>nl", "<cmd>Roslyn restart<cr>", desc = "restart roslyn lsp" },
+--     },
+--   },
+--   {
+--     "GustavEikaas/easy-dotnet.nvim",
+--     enabled = vim.fn.executable "dotnet" == 1,
+--     dependencies = { "nvim-lua/plenary.nvim" },
+--     ft = { "cs", "vb", "csproj", "sln", "slnx", "props", "csx", "targets" },
+--     cmd = "Dotnet",
+--     opts = {
+--       terminal = function(path, action)
+--         local commands = {
+--           run = function()
+--             return "dotnet run --project " .. path
+--           end,
+--           test = function()
+--             return "dotnet test " .. path
+--           end,
+--           restore = function()
+--             return "dotnet restore " .. path
+--           end,
+--           build = function()
+--             return "dotnet build " .. path
+--           end,
+--         }
+--         local cmd = commands[action]() .. "\r"
+--         Snacks.terminal.open(cmd)
+--       end,
+--       test_runner = {
+--         viewmode = "float",
+--         icons = {
+--           project = "󰗀",
+--         },
+--       },
+--     },
+--     keys = {
+--       -- stylua: ignore start
+--       { "<leader>nB", function() require("easy-dotnet").build_quickfix() end, desc = "build solution" },
+--       { "<leader>nr", function() require("easy-dotnet").run_default() end, desc = "run" },
+--       { "<leader>nR", function() require("easy-dotnet").run_solution() end, desc = "run solution" },
+--       { "<leader>nx", function() require("easy-dotnet").clean() end, desc = "clean solution" },
+--       { "<leader>na", "<cmd>Dotnet new<cr>", desc = "new item" },
+--       { "<leader>nt", "<cmd>Dotnet testrunner<cr>", desc = "open test runner" },
+--       -- stylua: ignore end
+--     },
+--   },
+-- }

@@ -34,7 +34,7 @@ return {
     }
   end,
   keys = {
-    { '<leader>Mr', '<cmd>call org#main#runCodeBlock()<cr>', desc = 'Run code block' },
-    { '<leader>Ml', '<cmd>call org#main#runLanguage()<cr>', desc = 'Run code block language' },
+    { '<leader>mr', '<cmd>call org#main#runCodeBlock()<cr>', desc = 'Run code block' },
+    { '<leader>ml', '<cmd>call org#main#runLanguage()<cr>', desc = 'Run code block language' },
   },
 }

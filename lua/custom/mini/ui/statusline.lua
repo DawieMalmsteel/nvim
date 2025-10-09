@@ -136,7 +136,7 @@ local M = function()
       table.insert(parts, '…')
     end
 
-    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, ' ') .. '%#MiniStatuslineFilename#'
+    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, '%#MiniStarterItemBullet#' .. '|') .. '%#MiniStatuslineFilename#'
   end
 
   statusline.setup {
@@ -188,7 +188,15 @@ local M = function()
           local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
           local idx = math.max(1, math.min(#vbars, (fraction or 1)))
           local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[idx] or '█')
-          return ' ' .. current_line .. '|' .. total_lines .. '  ' .. column .. '|' .. total_column .. ' ' .. progress_bar
+          -- return ' ' .. current_line .. '|' .. total_lines .. '  ' .. column .. '|' .. total_column .. ' ' .. progress_bar
+          return table.concat {
+            '%#MiniStatuslineDevinfo#' .. column, -- Highlight column
+            '',
+            '%#MiniStatuslineDevinfo#' .. total_column, -- Highlight total_column
+            '%#MiniStatuslineDiagnosticsWarn#' .. '|',
+            '%#MiniStatuslineDiagnostics#' .. total_lines,
+            progress_bar,
+          }
         end
 
         local recording = function()
@@ -308,7 +316,7 @@ local M = function()
           '%<', -- Left truncate
           -- Only show the compact tabs list (current entry shows icon + name in white, no index)
           '%=', -- Right align
-          -- { hl = 'MiniStatuslineLocation', strings = { location() } },
+          { hl = 'MiniStatuslineLocation', strings = { location() } },
           { strings = { tabs_side() } },
         }
       end,

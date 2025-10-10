@@ -56,7 +56,7 @@ local M = function()
     local current_index = buffer_positions[current_buf] or 1
 
     local parts = {}
-    local max_show = 5
+    local max_show = 3
     local start_i = 1
     local total = #listed
     if total > max_show then
@@ -85,13 +85,13 @@ local M = function()
           flags = flags .. ' [-]'
         end
 
-        table.insert(parts, '%#MiniStatuslineCurrentName#' .. '(' .. name .. ')' .. '%#MiniStatuslineFilename#' .. flags)
+        table.insert(parts, '%#MiniStatuslineCurrentName#' .. name .. '%#MiniStatuslineFilename#' .. flags)
       else
         -- Non-current: compact diagnostics count + short name
-        -- local short = vim.fn.fnamemodify(name, ':r')
+        -- local short = #name > min_len and name:sub(1, min_len) or name
 
-        local min_len = 3
-        local short = #name > min_len and name:sub(1, min_len) or name
+        -- local min_len = 3
+        local short = vim.fn.fnamemodify(name, ':r')
         local counts = { E = 0, W = 0, I = 0, H = 0 }
         local severities = vim.diagnostic.severity
         for _, diag in ipairs(vim.diagnostic.get(bufnr)) do

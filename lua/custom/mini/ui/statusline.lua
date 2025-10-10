@@ -85,7 +85,7 @@ local M = function()
           flags = flags .. ' [-]'
         end
 
-        table.insert(parts, '%#MiniStatuslineCurrentName#' .. name .. '%#MiniStatuslineFilename#' .. flags)
+        table.insert(parts, '%#MiniStatuslineFilename#' .. name .. flags)
       else
         -- Non-current: compact diagnostics count + short name
         -- local short = #name > min_len and name:sub(1, min_len) or name
@@ -136,7 +136,7 @@ local M = function()
       table.insert(parts, '…')
     end
 
-    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, '%#MiniStarterItemBullet#' .. '|') .. '%#MiniStatuslineFilename#'
+    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, '%#MiniStarterItemBullet#' .. ' ') .. '%#MiniStatuslineFilename#'
   end
 
   statusline.setup {

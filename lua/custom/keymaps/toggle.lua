@@ -58,3 +58,8 @@ map('n', '<leader>tM', function()
   local mini_map = require 'mini.map'
   mini_map.toggle()
 end, { desc = 'Toggle Mini Map' })
+
+map('n', '<leader>tl', '<CMD>ShowkeysToggle<CR>', { desc = 'Toggle showkeys' })
+
+map('n', '<leader>te', '<CMD>Typr<CR>', { desc = 'Toggle Typr' })
+map('n', '<leader>tE', '<CMD>TyprStats<CR>', { desc = 'Typr Stats' })

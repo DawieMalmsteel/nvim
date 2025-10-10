@@ -34,8 +34,9 @@ return {
       scope = { enabled = false },
       scroll = { enabled = false },
       words = { enabled = true },
+      zen = { enabled = true },
       indent = {
-        enabled = false,
+        enabled = true,
         scope = {
           enabled = true, -- enable highlighting the current scope
           priority = 200,
@@ -44,7 +45,7 @@ return {
           only_current = true, -- only show scope in the current window
         },
         chunk = {
-          enabled = true,
+          enabled = false,
           only_current = true,
           char = {
             corner_top = '╭',

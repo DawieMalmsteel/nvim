@@ -43,7 +43,7 @@ local M = function()
     if path == '' then
       return
     end
-    local cwd = vim.loop.cwd()
+    local cwd = vim.uv.cwd()
     local index = visits.get_index()
     local cwd_tbl = index[cwd]
     local entry = cwd_tbl and cwd_tbl[path]

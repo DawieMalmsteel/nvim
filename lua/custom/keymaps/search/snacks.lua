@@ -112,15 +112,4 @@ end, { desc = 'LSP Symbols' })
 
 map('n', '<leader>sS', function()
   local Snacks = require 'snacks'
-  Snacks.picker.lsp_workspace_symbols()
 end, { desc = 'LSP Workspace Symbols' })
-
-map('n', '<leader>z', function()
-  local Snacks = require 'snacks'
-  Snacks.zen()
-end, { desc = 'Toggle Zen Mode' })
-
-map('n', '<leader>Z', function()
-  local Snacks = require 'snacks'
-  Snacks.zen.zoom()
-end, { desc = 'Toggle Zoom' })

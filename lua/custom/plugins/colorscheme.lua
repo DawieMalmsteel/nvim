@@ -11,6 +11,18 @@ return {
     end,
   },
   {
+    'sainnhe/sonokai',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- Optionally configure and load the colorscheme
+      -- directly inside the plugin declaration.
+      vim.g.sonokai_enable_italic = true
+      vim.g.sonokai_transparent_background = 2
+      vim.cmd.colorscheme 'sonokai'
+    end,
+  },
+  {
     'folke/tokyonight.nvim',
     lazy = false,
     priority = 1000,
@@ -27,7 +39,7 @@ return {
           float = true,
         },
       }
-      vim.cmd [[colorscheme tokyonight-moon]]
+      -- vim.cmd [[colorscheme tokyonight-moon]]
     end,
   },
 }

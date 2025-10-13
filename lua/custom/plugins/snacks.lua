@@ -36,7 +36,7 @@ return {
       words = { enabled = true },
       zen = { enabled = true },
       indent = {
-        enabled = true,
+        enabled = false,
         scope = {
           enabled = true, -- enable highlighting the current scope
           priority = 200,

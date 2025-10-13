@@ -63,3 +63,19 @@ map('n', '<leader>tl', '<CMD>ShowkeysToggle<CR>', { desc = 'Toggle showkeys' })
 
 map('n', '<leader>te', '<CMD>Typr<CR>', { desc = 'Toggle Typr' })
 map('n', '<leader>tE', '<CMD>TyprStats<CR>', { desc = 'Typr Stats' })
+
+map('n', '<leader>tw', function()
+  if vim.wo.wrap then
+    vim.wo.wrap = false
+    vim.wo.linebreak = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = false
+    vim.notify('Wrap: OFF', vim.log.levels.INFO)
+  else
+    vim.wo.wrap = true
+    vim.wo.linebreak = true
+    vim.opt_local.relativenumber = true
+    vim.opt_local.number = true
+    vim.notify('Wrap: ON', vim.log.levels.INFO)
+  end
+end, { desc = 'Toggle Wrap' })

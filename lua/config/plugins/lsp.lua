@@ -247,6 +247,7 @@ return {
       bacon_ls = {
         enabled = true,
       },
+      zls = {},
       vtsls = {
         filetypes = {
           'javascript',

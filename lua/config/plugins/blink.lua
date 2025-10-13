@@ -43,7 +43,7 @@ return {
     },
     sources = {
       compat = {},
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'copilot', 'dadbod' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'dadbod' }, --copilot
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },

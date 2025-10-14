@@ -162,3 +162,7 @@ map('n', '<leader>bl', function()
     auto_close = false,
   })
 end, { desc = 'Show list file in current buffer folder' })
+
+map('n', '<leader>bs', function()
+  vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
+end, { desc = 'New Scratch Buffer' })

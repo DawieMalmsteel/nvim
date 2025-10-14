@@ -20,7 +20,7 @@ return {
       vim.g.sonokai_enable_italic = true
       vim.g.sonokai_style = 'andromeda'
       vim.g.sonokai_transparent_background = 2
-      -- vim.cmd.colorscheme 'sonokai'
+      vim.cmd.colorscheme 'sonokai'
     end,
   },
   {
@@ -33,7 +33,7 @@ return {
         options = { transparent = false },
       }
 
-      vim.cmd 'colorscheme github_dark_tritanopia'
+      -- vim.cmd 'colorscheme github_dark_tritanopia'
     end,
   },
   {

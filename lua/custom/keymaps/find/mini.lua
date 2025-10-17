@@ -27,3 +27,7 @@ map(
 map('n', '<leader>f"', '<CMD>Pick registers<CR>', { desc = 'Open register' })
 
 map('n', "<leader>f'", '<CMD>Pick marks<CR>', { desc = 'Open marks' })
+
+map('n', '<leader>f/', '<Cmd>Pick history scope="/"<CR>', { desc = 'Search history (/)' })
+map('n', '<leader>f:', '<Cmd>Pick history scope=":"<CR>', { desc = 'Search history (:)' })
+map('n', '<leader>f;', '<Cmd>Pick history scope=":"<CR>', { desc = 'Search history (:)' })

@@ -78,4 +78,4 @@ map('n', '<leader>tw', function()
   end
 end, { desc = 'Toggle Wrap' })
 
-map('n', '<leader>tt', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })
+map('n', '<leader>tT', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })

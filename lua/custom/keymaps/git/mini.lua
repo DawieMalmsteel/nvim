@@ -10,7 +10,7 @@ map('n', '<leader>gf', function()
   vim.cmd 'Pick git_files'
 end, { desc = 'Open git files (cwd to file dir)' })
 
-map('n', '<leader>gC', function()
+map('n', '<leader>gO', function()
   vim.cmd('cd ' .. vim.fn.expand '%:p:h')
   vim.cmd 'Pick git_commits'
 end, { desc = 'Open git commits (cwd to file dir)' })
@@ -23,6 +23,14 @@ end, { desc = 'Toggle mini.diff overlay (cwd to file dir)' })
 map('n', '<leader>gc', function()
   vim.cmd 'Git commit'
 end, { desc = 'Git commit' })
+
+map('n', '<leader>gC', function()
+  vim.cmd 'Git commit --amend'
+end, { desc = 'Git commit amend' })
+
+map('n', '<leader>gD', function()
+  vim.cmd 'Git diff -- %'
+end, { desc = 'Git diff buffer' })
 
 map('n', '<leader>ga', function()
   vim.cmd 'Git add %'

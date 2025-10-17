@@ -45,3 +45,5 @@ map('n', '<leader><leader>', function()
   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
   mini_pick.builtin.files(nil, { source = { cwd = dir } })
 end, { desc = 'Search Files in cwd' })
+
+map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = 'Fuzzily search' })

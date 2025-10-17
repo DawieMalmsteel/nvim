@@ -16,18 +16,7 @@ end, { desc = 'Search by Grep in file root or cwd' })
 
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search Resume' })
 
-map('n', '<leader>r', function()
-  local MiniPick = require 'mini.pick'
-  local wipeout_cur = function()
-    vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
-  end
-  local buffer_mappings = { wipeout = { char = '<c-d>', func = wipeout_cur } }
-  MiniPick.builtin.buffers({ include_current = true }, { mappings = buffer_mappings })
-end, { desc = 'Find existing buffers' })
-
 map('n', '<leader>sw', function()
   local mini_pick = require 'mini.pick'
   mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }
 end, { desc = 'Search current Word' })
-
-map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = 'Fuzzily search' })

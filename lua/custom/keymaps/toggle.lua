@@ -1,7 +1,5 @@
 local map = vim.keymap.set
 
-map('n', '<leader>D', '<CMD>DBUIToggle<CR>', { desc = 'Toggle DB' })
-
 map('n', '<leader>td', function()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)

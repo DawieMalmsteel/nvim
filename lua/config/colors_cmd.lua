@@ -26,7 +26,8 @@ vim.cmd [[
            highlight MiniStatuslineProgress guifg=#bb9af7 guibg=NONE
            highlight MiniStatuslineHarpoon guifg=#9ece6a guibg=NONE
            highlight MiniStatuslineModified guifg=#e0af68 guibg=NONE
-           highlight MiniStatuslineInactiveTab guifg=#313244 guibg=NONE
+           highlight MiniStatuslineInactiveTab guifg=#7e8294 guibg=NONE
+           "highlight MiniStatuslineInactiveTab guifg=#313244 guibg=NONE
 
            highlight TabLine guibg=NONE guifg=#7e8294
            highlight TabLineSel guibg=#7aa2f7 guifg=#1a1b26

@@ -289,7 +289,7 @@ return {
         end,
       },
       cssls = {},
-      html = {},
+      superhtml = {},
       marksman = {},
       lua_ls = {
         settings = {

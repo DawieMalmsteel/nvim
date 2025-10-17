@@ -47,3 +47,24 @@ end, { desc = 'Git reset' })
 map('n', '<leader>gP', function()
   vim.cmd 'Git push'
 end, { desc = 'Git push' })
+
+map('n', '<leader>gM', function()
+  vim.cmd 'Pick git_hunks'
+end, { desc = 'Modified hunks (all)' })
+
+map('n', '<leader>gm', function()
+  vim.cmd 'Pick git_hunks path="%"'
+end, { desc = 'Modified hunks (buffer)' })
+
+-- local git_log_cmd = [[Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order]]
+-- local git_log_buf_cmd = git_log_cmd .. ' --follow -- %'
+--
+-- local nmap_leader = function(suffix, rhs, desc)
+--   vim.keymap.set('n', '<Leader>' .. suffix, rhs, { desc = desc })
+-- end
+-- local xmap_leader = function(suffix, rhs, desc)
+--   vim.keymap.set('x', '<Leader>' .. suffix, rhs, { desc = desc })
+-- end
+-- nmap_leader('gv', '<Cmd>' .. git_log_cmd .. '<CR>', 'Log')
+-- nmap_leader('gV', '<Cmd>' .. git_log_buf_cmd .. '<CR>', 'Log buffer')
+-- xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')

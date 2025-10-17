@@ -13,3 +13,9 @@ map({ 'n', 't' }, '<C-_>', function()
   local Snacks = require 'snacks'
   Snacks.terminal()
 end, { noremap = true, silent = true, desc = 'which_key_ignore' })
+
+-- horizontal terminal
+-- map('n', '<leader>TT', '<Cmd>horizontal term<CR>', { noremap = true, silent = true, desc = 'Terminal (horizontal)' })
+
+-- vertical terminal
+map('n', '<leader>T', '<Cmd>vertical term<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })

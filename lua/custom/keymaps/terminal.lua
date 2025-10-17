@@ -18,4 +18,4 @@ end, { noremap = true, silent = true, desc = 'which_key_ignore' })
 -- map('n', '<leader>TT', '<Cmd>horizontal term<CR>', { noremap = true, silent = true, desc = 'Terminal (horizontal)' })
 
 -- vertical terminal
-map('n', '<leader>T', '<Cmd>vertical term<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })
+map('n', '<leader>T', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })

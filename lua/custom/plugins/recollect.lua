@@ -1,0 +1,125 @@
+-- return {
+--   'apdot/doodle',
+--   dependencies = {
+--     'kkharji/sqlite.lua',
+--     'nvim-lua/plenary.nvim',
+--     'nvim-telescope/telescope.nvim',
+--   },
+--   -- config = function()
+--   --   require('doodle').setup {
+--   --     settings = {
+--   --       -- This is the only required setting for sync to work.
+--   --       -- Set it to the absolute path of your private notes repository.
+--   --       git_repo = 'path/to/your/initialized/git/repository',
+--   --     },
+--   --   }
+--   -- end,
+--   keys = {
+--     {
+--       '<space>Df',
+--       function()
+--         require('doodle'):toggle_finder()
+--       end,
+--       desc = 'Doodle Finder',
+--     },
+--     {
+--       '<space>Ds',
+--       function()
+--         require('doodle'):sync()
+--       end,
+--       desc = 'Doodle Sync',
+--     },
+--     {
+--       '<space>Dl',
+--       function()
+--         require('doodle'):toggle_links()
+--       end,
+--       desc = 'Doodle Links',
+--     },
+--   },
+-- }
+
+-- ~/.config/nvim/lua/plugins/recollect.lua
+return {
+  --   'jbuck95/recollect.nvim',
+  --   dependencies = { 'nvim-lua/plenary.nvim' },
+  --   config = function()
+  --     require('recollect').setup {
+  --       -- All configuration options are optional.
+  --       -- Below are some examples you can override.
+  --
+  --       -- The start date for your grid.
+  --       birthday = '1990-01-01',
+  --
+  --       -- The path to your daily notes folder.
+  --       -- IMPORTANT: Make sure to change this to your actual notes path.
+  --       daily_notes_path = vim.fn.expand '~' .. '/Documents/Notes/Dailies',
+  --
+  --       -- A function to generate the content for a new daily note.
+  --       note_template = function(date_str)
+  --         local year, month, day = date_str:match '(%d+)-(%d+)-(%d+)'
+  --         local date_obj = os.time { year = tonumber(year), month = tonumber(month), day = tonumber(day) }
+  --
+  --         local weekdays = { 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' }
+  --         local months = { 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' }
+  --
+  --         local wday = tonumber(os.date('%w', date_obj)) + 1
+  --         local formatted_date = string.format('%s, %d %s %s', weekdays[wday], tonumber(day), months[tonumber(month)], year)
+  --
+  --         return string.format(
+  --           [[---
+  -- date: %s
+  -- ---
+  -- ### %s
+  --
+  --
+  -- ]],
+  --           date_str,
+  --           formatted_date
+  --         )
+  --       end,
+  --
+  --       -- You can define custom time periods that get highlighted in the grid.
+  --       periods = {
+  --         {
+  --           start = '2020-03-11',
+  --           finish = '2022-05-01',
+  --           color = 'red',
+  --           label = 'Pandemic',
+  --         },
+  --       },
+  --
+  --       -- Symbols used for notes that have a specific tag in their YAML frontmatter.
+  --       tag_symbols = {
+  --         birthday = '🎂',
+  --         event = '🎉',
+  --         gym = '💪🏼',
+  --         trip = '✈️',
+  --         holiday = '☘',
+  --         party = '🍻',
+  --         work = '💼',
+  --         project = '🛠️',
+  --         deadline = '❗',
+  --         health = '❤️',
+  --         special = '⭐',
+  --       },
+  --
+  --       -- Customize the colors of the grid.
+  --       colors = {
+  --         background = '#1e1e2e',
+  --         default_dot = '#45475a',
+  --         today_dot = '#f38ba8',
+  --         note_exists = '#a6e3a1',
+  --         grid_lines = '#313244',
+  --         text = '#cdd6f4',
+  --         year_header = '#89b4fa',
+  --         yellow = '#f9e2af',
+  --         blue = '#89b4fa',
+  --         green = '#a6e3a1',
+  --         red = '#f38ba8',
+  --         purple = '#cba6f7',
+  --         orange = '#fab387',
+  --       },
+  --     }
+  --   end,
+}

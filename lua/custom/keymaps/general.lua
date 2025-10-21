@@ -20,7 +20,7 @@ map('n', '<C-y>', '3<C-y>', { noremap = true, silent = true })
 map('v', 'c', [["_c]])
 map('n', 'c', [["_c]])
 map('n', 'x', [["_x]])
-map('n', '<S-X>', [["_dd]])
+map('n', 'X', [["_dd]])
 map('v', 'x', [["_x]])
 
 map('n', 'H', '<CMD>execute "silent! bprevious " . v:count1<CR>', { desc = 'Previous Buffer (with count)' })

@@ -4,15 +4,20 @@ local map = vim.keymap.set
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Toggle terminal
-map({ 'n', 't' }, '<C-/>', function()
-  local Snacks = require 'snacks'
-  Snacks.terminal()
-end, { noremap = true, silent = true, desc = 'Toggle Terminal' })
+-- map({ 'n', 't' }, '<C-/>', function()
+--   local Snacks = require 'snacks'
+--   Snacks.terminal()
+-- end, { noremap = true, silent = true, desc = 'Toggle Terminal' })
+--
+-- map({ 'n', 't' }, '<C-_>', function()
+--   local Snacks = require 'snacks'
+--   Snacks.terminal()
+-- end, { noremap = true, silent = true, desc = 'which_key_ignore' })
 
-map({ 'n', 't' }, '<C-_>', function()
-  local Snacks = require 'snacks'
-  Snacks.terminal()
-end, { noremap = true, silent = true, desc = 'which_key_ignore' })
+map('n', '<C-/>', ':FloatermToggle<CR>', { noremap = true, silent = true, desc = 'Toggle Terminal' })
+map('t', '<C-/>', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true, desc = 'Toggle Terminal' })
+
+map('t', '<C-_>', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true, desc = 'which_key_ignore' })
 
 -- horizontal terminal
 -- map('n', '<leader>TT', '<Cmd>horizontal term<CR>', { noremap = true, silent = true, desc = 'Terminal (horizontal)' })

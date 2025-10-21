@@ -20,8 +20,21 @@ return {
       vim.g.sonokai_enable_italic = true
       vim.g.sonokai_style = 'andromeda'
       vim.g.sonokai_transparent_background = 2
-      vim.cmd.colorscheme 'sonokai'
+      vim.cmd.colorscheme 'catppuccin'
     end,
+  },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    opts = {
+      flavour = 'macchiato', -- latte, frappe, macchiato, mocha
+      transparent_background = true, -- disables setting the background color.
+      float = {
+        transparent = true, -- enable transparent floating windows
+        solid = true, -- use solid styling for floating windows, see |winborder|
+      },
+    },
   },
   {
     -- 'projekt0n/github-nvim-theme',

@@ -15,6 +15,7 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 -- end, { noremap = true, silent = true, desc = 'which_key_ignore' })
 
 map('n', '<C-/>', ':FloatermToggle<CR>', { noremap = true, silent = true, desc = 'Toggle Terminal' })
+map('n', '<C-_>', ':FloatermToggle<CR>', { noremap = true, silent = true, desc = 'Toggle Terminal' })
 map('t', '<C-/>', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true, desc = 'Toggle Terminal' })
 
 map('t', '<C-_>', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true, desc = 'which_key_ignore' })

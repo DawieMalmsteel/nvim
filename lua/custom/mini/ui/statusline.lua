@@ -316,8 +316,8 @@ local M = function()
           '%<', -- Left truncate
           -- Only show the compact tabs list (current entry shows icon + name in white, no index)
           '%=', -- Right align
-          { hl = 'MiniStatuslineLocation', strings = { location() } },
           { strings = { tabs_side() } },
+          { hl = 'MiniStatuslineLocation', strings = { location() } },
         }
       end,
       inactive = function()

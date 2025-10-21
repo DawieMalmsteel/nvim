@@ -11,7 +11,7 @@ return {
           },
         },
       },
-      statuscolumn = { enabled = true },
+      statuscolumn = { enabled = false }, -- ERROR:this make error with default nvim statuscolumn, disable it
       image = { enabled = true },
       -- Centered floating input
       input = {

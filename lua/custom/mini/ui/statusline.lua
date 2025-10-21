@@ -1,5 +1,6 @@
 local M = function()
   local statusline = require 'mini.statusline'
+  local icons = require 'mini.icons'
 
   -- Buffer positions for mini-like tab display inside statusline
   local buffer_positions = {}
@@ -68,6 +69,8 @@ local M = function()
       local bufnr = buf.bufnr
       local filepath = vim.api.nvim_buf_get_name(bufnr)
       local name = vim.fn.fnamemodify(filepath, ':t')
+      local extension = vim.fn.fnamemodify(filepath, ':e')
+      local icon = icons.get('extension', extension)
       if name == '' then
         name = '[NoName]'
       end
@@ -85,7 +88,7 @@ local M = function()
           flags = flags .. ' [-]'
         end
 
-        table.insert(parts, '%#MiniStatuslineFilename#' .. name .. flags)
+        table.insert(parts, '%#MiniStatuslineFilename#' .. icon .. ' ' .. name .. flags)
       else
         -- Non-current: compact diagnostics count + short name
         -- local short = #name > min_len and name:sub(1, min_len) or name
@@ -106,6 +109,20 @@ local M = function()
           end
         end
         local diag_count = counts.E + counts.W + counts.I + counts.H
+        local mess = ''
+        if counts.E and counts.E > 0 then
+          mess = mess .. counts.E .. 'E'
+        end
+        if counts.W and counts.W > 0 then
+          mess = mess .. counts.W .. 'W'
+        end
+        if counts.I and counts.I > 0 then
+          mess = mess .. counts.I .. 'I'
+        end
+        if counts.H and counts.H > 0 then
+          mess = mess .. counts.H .. 'H'
+        end
+
         local hl
         if counts.E > 0 then
           hl = '%#MiniStatuslineInactiveTabDiagError#'
@@ -122,9 +139,9 @@ local M = function()
           hl = '%#MiniStatuslineInactiveTabModified#'
         end
         if diag_count > 0 then
-          table.insert(parts, hl .. diag_count .. ':' .. short)
+          table.insert(parts, hl .. mess .. ':' .. icon .. ' ' .. short)
         else
-          table.insert(parts, hl .. short)
+          table.insert(parts, hl .. icon .. ' ' .. short)
         end
       end
     end
@@ -136,7 +153,7 @@ local M = function()
       table.insert(parts, '…')
     end
 
-    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, '%#MiniStarterItemBullet#' .. ' ') .. '%#MiniStatuslineFilename#'
+    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, '%#MiniStarterItemBullet#' .. ' | ') .. '%#MiniStatuslineFilename#'
   end
 
   statusline.setup {
@@ -309,14 +326,14 @@ local M = function()
         return statusline.combine_groups {
           { hl = mode_hl, strings = { mode } },
           { hl = 'MiniStatuslineDevinfo', strings = { git } },
+          { strings = { tabs_side() } },
           { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics() } },
           { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } },
-          { strings = { visits_status() } },
-          { strings = { recording() } },
           '%<', -- Left truncate
           -- Only show the compact tabs list (current entry shows icon + name in white, no index)
           '%=', -- Right align
-          { strings = { tabs_side() } },
+          { strings = { recording() } },
+          { strings = { visits_status() } },
           { hl = 'MiniStatuslineLocation', strings = { location() } },
         }
       end,

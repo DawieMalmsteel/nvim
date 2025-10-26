@@ -29,9 +29,9 @@ map('n', 'L', '<CMD>execute "silent! bnext " . v:count1<CR>', { desc = 'Next Buf
 map('v', 'J', ":m'>+1<cr>gv=gv")
 map('v', 'K', ":m'<-2<cr>gv=gv")
 
-map({ 'n', 'x' }, '-', 'g_')
+-- map({ 'n', 'x' }, '-', 'g_')
 -- map({ 'n', 'x' }, '+', 'g_')
-map({ 'n', 'x' }, '<S-tab>', '%')
+-- map({ 'n', 'x' }, '<S-tab>', '%')
 
 map('n', "y'", "yi'", { noremap = true })
 map('n', "v'", "vi'", { noremap = true })

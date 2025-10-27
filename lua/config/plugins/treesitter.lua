@@ -23,6 +23,7 @@ return {
         'c_sharp',
         'sql',
         'java',
+        'solidity',
       },
       auto_install = true,
       highlight = {

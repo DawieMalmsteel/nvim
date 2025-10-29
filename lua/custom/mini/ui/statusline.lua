@@ -69,6 +69,9 @@ local M = function()
       local bufnr = buf.bufnr
       local filepath = vim.api.nvim_buf_get_name(bufnr)
       local name = vim.fn.fnamemodify(filepath, ':t')
+      if #name > 20 then
+        name = '•' .. name:sub(-19)
+      end
       local extension = vim.fn.fnamemodify(filepath, ':e')
       local icon = icons.get('extension', extension)
       if name == '' then

@@ -6,7 +6,7 @@ return {
     -- 'giuxtaposition/blink-cmp-copilot',
     'rafamadriz/friendly-snippets',
     'folke/lazydev.nvim',
-    'kristijanhusak/vim-dadbod-completion',
+    -- 'kristijanhusak/vim-dadbod-completion',
     {
       'saghen/blink.compat',
       optional = true, -- make optional so it's only enabled if any extras need it
@@ -43,7 +43,7 @@ return {
     },
     sources = {
       compat = {},
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'dadbod' }, --copilot
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' }, --copilot, 'dadbod'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },

@@ -1,48 +1,48 @@
 return {
-  {
-    'kristijanhusak/vim-dadbod-ui',
-    dependencies = {
-      { 'tpope/vim-dadbod', lazy = true },
-      {
-        'kristijanhusak/vim-dadbod-completion',
-        ft = { 'sql', 'mysql', 'plsql' },
-        lazy = true,
-        init = function()
-          vim.api.nvim_create_autocmd('BufEnter', {
-            pattern = 'dbui://*',
-            callback = function()
-              vim.bo.filetype = 'sql' -- Đặt filetype là sql khi mở DBUI
-            end,
-          })
-        end,
-      },
-    },
-    cmd = {
-      'DBUI',
-      'DBUIToggle',
-      'DBUIAddConnection',
-      'DBUIFindBuffer',
-    },
-    init = function()
-      -- Your DBUI configuration
-      vim.g.db_ui_use_nerd_fonts = 1
-    end,
-  },
-  -- { -- optional saghen/blink.cmp completion source
-  --   'saghen/blink.cmp',
-  --   opts = {
-  --     sources = {
-  --       default = { 'lsp', 'path', 'snippets', 'buffer' },
-  --       per_filetype = {
-  --         sql = { 'snippets', 'dadbod', 'buffer' },
-  --         mysql = { 'snippets', 'dadbod', 'buffer' },
-  --         mariadb = { 'snippets', 'dadbod', 'buffer' },
-  --       },
-  --       -- add vim-dadbod-completion to your completion providers
-  --       providers = {
-  --         dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
-  --       },
+  -- {
+  --   'kristijanhusak/vim-dadbod-ui',
+  --   dependencies = {
+  --     { 'tpope/vim-dadbod', lazy = true },
+  --     {
+  --       'kristijanhusak/vim-dadbod-completion',
+  --       ft = { 'sql', 'mysql', 'plsql' },
+  --       lazy = true,
+  --       init = function()
+  --         vim.api.nvim_create_autocmd('BufEnter', {
+  --           pattern = 'dbui://*',
+  --           callback = function()
+  --             vim.bo.filetype = 'sql' -- Đặt filetype là sql khi mở DBUI
+  --           end,
+  --         })
+  --       end,
   --     },
   --   },
+  --   cmd = {
+  --     'DBUI',
+  --     'DBUIToggle',
+  --     'DBUIAddConnection',
+  --     'DBUIFindBuffer',
+  --   },
+  --   init = function()
+  --     -- Your DBUI configuration
+  --     vim.g.db_ui_use_nerd_fonts = 1
+  --   end,
   -- },
+  -- -- { -- optional saghen/blink.cmp completion source
+  -- --   'saghen/blink.cmp',
+  -- --   opts = {
+  -- --     sources = {
+  -- --       default = { 'lsp', 'path', 'snippets', 'buffer' },
+  -- --       per_filetype = {
+  -- --         sql = { 'snippets', 'dadbod', 'buffer' },
+  -- --         mysql = { 'snippets', 'dadbod', 'buffer' },
+  -- --         mariadb = { 'snippets', 'dadbod', 'buffer' },
+  -- --       },
+  -- --       -- add vim-dadbod-completion to your completion providers
+  -- --       providers = {
+  -- --         dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
+  -- --       },
+  -- --     },
+  -- --   },
+  -- -- },
 }

@@ -14,6 +14,8 @@ return {
         'markdown',
         'markdown_inline',
         'query',
+        'python',
+        'fsharp',
         'javascript',
         'typescript',
         'vim',

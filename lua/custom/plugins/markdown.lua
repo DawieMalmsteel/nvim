@@ -6,6 +6,18 @@ return {
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {
+    code = {
+      sign = true,
+      width = 'block',
+      right_pad = 1,
+    },
+    heading = {
+      sign = true,
+      icons = {},
+    },
+    checkbox = {
+      enabled = true,
+    },
     completions = { lsp = { enabled = true } },
   },
 }

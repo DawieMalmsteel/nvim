@@ -248,6 +248,7 @@ return {
         enabled = true,
       },
       jdtls = {},
+      solidity_ls = {},
       zls = {},
       vtsls = {
         filetypes = {

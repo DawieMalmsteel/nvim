@@ -52,11 +52,11 @@ int main() {
 }
 ```
 
-```csharp
+```cs
 Console.WriteLine("Hello, .NET!");
 ```
 
-```fs
+```fsharp
 printfn "Hello, FSharp!"
 ```
 

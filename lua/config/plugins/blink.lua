@@ -6,7 +6,7 @@ return {
     -- 'giuxtaposition/blink-cmp-copilot',
     'rafamadriz/friendly-snippets',
     'folke/lazydev.nvim',
-    'kristijanhusak/vim-dadbod-completion',
+    -- 'kristijanhusak/vim-dadbod-completion',
     {
       'saghen/blink.compat',
       optional = true, -- make optional so it's only enabled if any extras need it
@@ -43,7 +43,7 @@ return {
     },
     sources = {
       compat = {},
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'dadbod' }, --copilot
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' }, --copilot, 'dadbod'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
@@ -94,7 +94,14 @@ return {
         },
       },
     },
-    fuzzy = { implementation = 'prefer_rust' },
+    fuzzy = {
+      implementation = 'prefer_rust',
+      sorts = {
+        'score', -- Primary sort: by fuzzy matching score
+        'sort_text', -- Secondary sort: by sortText field if scores are equal
+        'label', -- Tertiary sort: by label if still tied
+      },
+    },
     signature = { enabled = true },
   },
   ---@param opts blink.cmp.Config | { sources: { compat: string[] } }

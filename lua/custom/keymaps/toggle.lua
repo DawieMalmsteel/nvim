@@ -77,3 +77,5 @@ map('n', '<leader>tw', function()
     vim.notify('Wrap: ON', vim.log.levels.INFO)
   end
 end, { desc = 'Toggle Wrap' })
+
+map('n', '<leader>tT', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })

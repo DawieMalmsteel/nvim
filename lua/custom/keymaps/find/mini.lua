@@ -27,3 +27,12 @@ map(
 map('n', '<leader>f"', '<CMD>Pick registers<CR>', { desc = 'Open register' })
 
 map('n', "<leader>f'", '<CMD>Pick marks<CR>', { desc = 'Open marks' })
+
+map('n', '<leader>f/', '<Cmd>Pick history scope="/"<CR>', { desc = 'Search history (/)' })
+map('n', '<leader>f:', '<Cmd>Pick history scope=":"<CR>', { desc = 'Search history (:)' })
+map('n', '<leader>f;', '<Cmd>Pick history scope=":"<CR>', { desc = 'Search history (:)' })
+
+map('n', '<leader>fp', '<Cmd>Pick projects<CR>', { desc = 'Projects' })
+map('n', '<leader>fR', '<Cmd>Pick lsp scope="references"<CR>', { desc = 'References (LSP)' })
+map('n', '<leader>fs', '<Cmd>Pick lsp scope="workspace_symbol"<CR>', { desc = 'Symbols workspace' })
+map('n', '<leader>fS', '<Cmd>Pick lsp scope="document_symbol"<CR>', { desc = 'Symbols document' })

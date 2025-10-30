@@ -1,4 +1,4 @@
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 
 -- Core Commands
 map('n', '<leader>Cb', '<CMD>CargoBench<CR>', { desc = '📊 Run benchmarks' })

@@ -20,7 +20,7 @@ map('n', '<C-y>', '3<C-y>', { noremap = true, silent = true })
 map('v', 'c', [["_c]])
 map('n', 'c', [["_c]])
 map('n', 'x', [["_x]])
-map('n', '<S-X>', [["_dd]])
+map('n', 'X', [["_dd]])
 map('v', 'x', [["_x]])
 
 map('n', 'H', '<CMD>execute "silent! bprevious " . v:count1<CR>', { desc = 'Previous Buffer (with count)' })
@@ -29,9 +29,9 @@ map('n', 'L', '<CMD>execute "silent! bnext " . v:count1<CR>', { desc = 'Next Buf
 map('v', 'J', ":m'>+1<cr>gv=gv")
 map('v', 'K', ":m'<-2<cr>gv=gv")
 
-map({ 'n', 'x' }, 'gi', '^')
-map({ 'n', 'x' }, 'ga', 'g_')
-map({ 'n', 'x' }, '<S-tab>', '%')
+-- map({ 'n', 'x' }, '-', 'g_')
+-- map({ 'n', 'x' }, '+', 'g_')
+-- map({ 'n', 'x' }, '<S-tab>', '%')
 
 map('n', "y'", "yi'", { noremap = true })
 map('n', "v'", "vi'", { noremap = true })
@@ -45,3 +45,5 @@ map('n', '<leader><leader>', function()
   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
   mini_pick.builtin.files(nil, { source = { cwd = dir } })
 end, { desc = 'Search Files in cwd' })
+
+map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = 'Fuzzily search' })

@@ -9,7 +9,6 @@ vim.o.relativenumber = false
 vim.o.cmdheight = 0
 
 vim.o.mouse = 'a'
-vim.o.wrap = true
 
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

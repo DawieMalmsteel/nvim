@@ -17,7 +17,7 @@ console.log("Hello, TypeScript!");
 console.log("Hello, JavaScript!");
 ```
 
-```ts
+```typescript
 let a: number = 5;
 let b: number = 10;
 let sum: number = a + b;
@@ -28,10 +28,19 @@ console.log("sum:",sum);
 ```go
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "net/http"
+    "time"
+)
+
+func greet(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello World! %s", time.Now())
+}
 
 func main() {
-    fmt.Println("Đây là Go!")
+    http.HandleFunc("/", greet)
+    http.ListenAndServe(":8080", nil)
 }
 ```
 

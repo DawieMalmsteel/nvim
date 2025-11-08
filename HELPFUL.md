@@ -1,2 +1,2 @@
-helpful app:
-    -foliate
+- helpful app:
+    - foliate

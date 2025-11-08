@@ -46,4 +46,4 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 vim.o.scrolloff = 8
 vim.o.confirm = true
-vim.o.showtabline = 2
+-- vim.o.showtabline = 2

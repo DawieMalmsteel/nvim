@@ -7,7 +7,7 @@ local modules = {
   'custom.mini.editing.bufremove',
   'custom.mini.ui.icons',
   'custom.mini.ui.cursorword',
-  'custom.mini.ui.tabline',
+  -- 'custom.mini.ui.tabline',
   'custom.mini.ui.hipatterns',
   'custom.mini.ui.map',
   'custom.mini.ui.diff',

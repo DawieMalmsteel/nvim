@@ -47,5 +47,3 @@ map('n', '<leader><leader>', function()
 end, { desc = 'Search Files in cwd' })
 
 map('n', '<leader>/', "<CMD>Pick buf_lines scope='current'<CR>", { desc = 'Fuzzily search' })
-
-map('n', '<leader>cn', '<CMD>Navbuddy<CR>', { desc = 'Navbuddy' })

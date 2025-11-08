@@ -18,5 +18,3 @@
 ~- [ ] Set up codecompanion với ~minuet~~
 ~- [ ] Tìm hiểu về atuin (4 ngày)~
 ~- [ ] Tìm hiểu về nwm nvim (1 ngày)~
-
-rồi giờ hãy tiến hành viết mail chuyên nghiệp trình bày ý tưởng cho tôi

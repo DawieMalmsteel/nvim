@@ -1,7 +1,7 @@
-- [ ] Thêm obsidian vào nvim (2 tuần rồi clm)
-- [ ] Tìm hiểu về Obsidian (2 tuần rồi clm)
-- [ ] Tìm hiểu về blink compat và các keymaps của nó
+- [ ] Thêm obsidian vào nvim 
+- [ ] Tìm hiểu về Obsidian 
 
+- [x] Tìm hiểu về blink compat và các keymaps của nó
 - [x] refactor lại keymaps.lua sử dụng cách tiếp cận khác tốt hơn đối với việc quản lý keymaps
 - [x] Chuyển chuyển Which key thành mini clue
 - [x] refactor lại keymaps.lua
@@ -17,3 +17,5 @@
 ~- [ ] Set up codecompanion với ~minuet~~
 ~- [ ] Tìm hiểu về atuin (4 ngày)~
 ~- [ ] Tìm hiểu về nwm nvim (1 ngày)~
+
+rồi giờ hãy tiến hành viết mail chuyên nghiệp trình bày ý tưởng cho tôi

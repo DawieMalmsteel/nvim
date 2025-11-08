@@ -1,6 +1,7 @@
 - [ ] Thêm obsidian vào nvim 
 - [ ] Tìm hiểu về Obsidian 
 
+- [x] Chuyển từ markdown org sang snip run quyết định đúng đắn vcl
 - [x] Tìm hiểu về blink compat và các keymaps của nó
 - [x] refactor lại keymaps.lua sử dụng cách tiếp cận khác tốt hơn đối với việc quản lý keymaps
 - [x] Chuyển chuyển Which key thành mini clue

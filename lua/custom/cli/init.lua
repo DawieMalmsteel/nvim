@@ -1,1 +1,1 @@
-require 'custom.cli.scooter' -- https://github.com/thomasschafer/scooter
+-- require 'custom.cli.scooter' -- https://github.com/thomasschafer/scooter

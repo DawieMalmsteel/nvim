@@ -7,11 +7,13 @@ return {
     },
     config = function(_, opts)
       require('tokyodark').setup(opts) -- calling setup is optional
-      vim.cmd [[colorscheme tokyodark]]
+      -- vim.cmd [[colorscheme tokyodark]]
+      vim.cmd [[colorscheme nord]]
       -- vim.cmd [[colorscheme nightfly]]
     end,
   },
   { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },
+  { 'shaunsingh/nord.nvim' },
   {
     -- 'sainnhe/sonokai',
     -- lazy = false,

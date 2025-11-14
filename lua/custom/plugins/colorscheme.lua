@@ -8,14 +8,16 @@ return {
     config = function(_, opts)
       require('tokyodark').setup(opts) -- calling setup is optional
       -- vim.cmd [[colorscheme tokyodark]]
-      vim.g.nord_disable_background = true
-      vim.cmd [[colorscheme nord]]
-      vim.g.nightflyTransparent = true
+      -- vim.g.nord_disable_background = true
+      vim.cmd [[colorscheme nightcity]]
+      -- vim.cmd [[set background=dark]]
+      -- vim.g.nightflyTransparent = true
       -- vim.cmd [[colorscheme nightfly]]
     end,
   },
   { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },
   { 'shaunsingh/nord.nvim' },
+  { 'cryptomilk/nightcity.nvim', version = '*', opts = { style = 'afterlife' } },
   {
     -- 'sainnhe/sonokai',
     -- lazy = false,

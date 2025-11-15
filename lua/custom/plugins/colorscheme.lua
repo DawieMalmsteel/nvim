@@ -9,10 +9,10 @@ return {
       require('tokyodark').setup(opts) -- calling setup is optional
       -- vim.cmd [[colorscheme tokyodark]]
       -- vim.g.nord_disable_background = true
-      vim.cmd [[colorscheme nightcity]]
+      -- vim.cmd [[colorscheme nightcity]]
       -- vim.cmd [[set background=dark]]
-      -- vim.g.nightflyTransparent = true
-      -- vim.cmd [[colorscheme nightfly]]
+      vim.g.nightflyTransparent = true
+      vim.cmd [[colorscheme nightfly]]
     end,
   },
   { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },

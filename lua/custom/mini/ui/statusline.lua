@@ -156,7 +156,7 @@ local M = function()
       table.insert(parts, '…')
     end
 
-    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, '%#MiniStarterItemBullet#' .. ' | ') .. '%#MiniStatuslineFilename#'
+    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, '%#MiniStarterItemBullet#' .. ' ') .. '%#MiniStatuslineFilename#'
   end
 
   statusline.setup {

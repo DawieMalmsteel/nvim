@@ -1,49 +1,65 @@
-vim.cmd [[
-           highlight MiniTablineModifiedCurrent guifg=#e0af68
-           highlight MiniTablineModifiedVisible guifg=#f7768e
-           highlight MiniTablineModifiedHidden guifg=#e0af68
-           highlight MiniTablineTabpagesection guifg=#9ece6a
-           highlight MiniTablineFill guifg=#3b4261
-           highlight MiniTablineTrunc guifg=#3b4261
-           highlight MiniStarterItemBullet guifg=#7aa2f7
-           highlight MiniHipatterns_abb2bf_bg guifg=#7e8294
-           highlight MiniHipatterns_61afef_bg guifg=#7aa2f7
+local function set(name, opts)
+  opts = opts or {}
+  if opts.bg == nil then
+    opts.bg = 'NONE'
+  end
+  pcall(vim.api.nvim_set_hl, 0, name, opts)
+end
 
-           highlight StatusLine guibg=NONE
-           highlight StatusLineNC guibg=NONE
+-- -------------------------
+-- MiniTabline (All)
+-- -------------------------
+set('MiniTablineCurrent', { fg = '#7aa2f7' })
+set('MiniTablineVisible', { fg = '#7e8294' })
+set('MiniTablineHidden', { fg = '#3b4261' })
 
-           highlight MiniStatuslineModeOther guifg=#bb9af7 guibg=NONE
-           highlight MiniStatuslineDevinfo guifg=#7dcfff guibg=NONE
-           highlight MiniStatuslineDiagnostics guifg=#f7768e guibg=NONE
-           highlight MiniStatuslineDiagnosticsError guifg=#f7768e guibg=NONE
-           highlight MiniStatuslineDiagnosticsWarn guifg=#e0af68 guibg=NONE
-           highlight MiniStatuslineDiagnosticsInfo guifg=#7dcfff guibg=NONE
-           highlight MiniStatuslineDiagnosticsHint guifg=#a6e22e guibg=NONE
-           highlight MiniStatuslineFilename guifg=#f5e0dc guibg=NONE
-           highlight MiniStatuslineLocation guifg=#f7768e guibg=NONE
-           highlight MiniStatuslineRecording guifg=#f7768e guibg=NONE
-           highlight MiniStatuslineInactive guifg=#545c7e guibg=NONE
-           highlight MiniStatuslineProgress guifg=#bb9af7 guibg=NONE
-           highlight MiniStatuslineHarpoon guifg=#9ece6a guibg=NONE
-           highlight MiniStatuslineModified guifg=#e0af68 guibg=NONE
-           highlight MiniStatuslineInactiveTab guifg=#7e8294 guibg=NONE
-           "highlight MiniStatuslineInactiveTab guifg=#313244 guibg=NONE
+set('MiniTablineModifiedCurrent', { fg = '#e0af68' })
+set('MiniTablineModifiedVisible', { fg = '#f7768e' })
+set('MiniTablineModifiedHidden', { fg = '#e0af68' })
 
-           highlight TabLine guibg=NONE guifg=#7e8294
-           highlight TabLineSel guibg=#7aa2f7 guifg=#1a1b26
-           highlight TabLineFill guibg=NONE guifg=#3b4261
+set('MiniTablineTabpagesection', { fg = '#9ece6a' })
+set('MiniTablineFill', { fg = '#3b4261' })
+set('MiniTablineTrunc', { fg = '#3b4261' })
 
-           highlight MiniTablineCurrent guibg=NONE guifg=#7aa2f7
-           highlight MiniTablineVisible guibg=NONE guifg=#7e8294
-           highlight MiniTablineHidden guibg=NONE guifg=#3b4261
+-- -------------------------
+-- MiniStarter & MiniHipatterns
+-- -------------------------
+set('MiniStarterItemBullet', { fg = '#7aa2f7' })
+set('MiniHipatterns_abb2bf_bg', { fg = '#7e8294' })
+set('MiniHipatterns_61afef_bg', { fg = '#7aa2f7' })
 
-           highlight MiniTablineModifiedCurrent guibg=NONE guifg=#e0af68
-           highlight MiniTablineModifiedVisible guibg=NONE guifg=#f7768e
-           highlight MiniTablineModifiedHidden guibg=NONE guifg=#e0af68
-           highlight MiniTablineTabpagesection guibg=NONE guifg=#9ece6a
-           highlight MiniTablineFill guibg=NONE guifg=#3b4261
-           highlight MiniTablineTrunc guibg=NONE guifg=#3b4261
-         ]]
+-- -------------------------
+-- StatusLine
+-- -------------------------
+set('StatusLine', { fg = nil })
+set('StatusLineNC', { fg = nil })
+
+-- MiniStatusline groups
+set('MiniStatuslineModeOther', { fg = '#bb9af7' })
+set('MiniStatuslineDevinfo', { fg = '#7dcfff' })
+
+set('MiniStatuslineDiagnostics', { fg = '#f7768e' })
+set('MiniStatuslineDiagnosticsError', { fg = '#f7768e' })
+set('MiniStatuslineDiagnosticsWarn', { fg = '#e0af68' })
+set('MiniStatuslineDiagnosticsInfo', { fg = '#7dcfff' })
+set('MiniStatuslineDiagnosticsHint', { fg = '#a6e22e' })
+
+set('MiniStatuslineFilename', { fg = '#f5e0dc' })
+set('MiniStatuslineLocation', { fg = '#f7768e' })
+set('MiniStatuslineRecording', { fg = '#f7768e' })
+set('MiniStatuslineProgress', { fg = '#bb9af7' })
+set('MiniStatuslineHarpoon', { fg = '#9ece6a' })
+set('MiniStatuslineModified', { fg = '#e0af68' })
+
+set('MiniStatuslineInactive', { fg = '#545c7e' })
+set('MiniStatuslineInactiveTab', { fg = '#7e8294' })
+
+-- -------------------------
+-- TabLine
+-- -------------------------
+set('TabLine', { fg = '#7e8294' })
+set('TabLineSel', { fg = '#1a1b26', bg = '#7aa2f7' }) -- Selected tab
+set('TabLineFill', { fg = '#3b4261' })
 
 -- transparent background
 -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })

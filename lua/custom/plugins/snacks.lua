@@ -3,7 +3,7 @@ return {
     'folke/snacks.nvim',
     opts = {
       picker = {
-        ui_select = false,
+        ui_select = true,
         previewers = {
           git = {
             native = true,
@@ -12,7 +12,7 @@ return {
         },
       },
       statuscolumn = { enabled = false }, -- ERROR:this make error with default nvim statuscolumn, disable it
-      image = { enabled = true },
+      image = { enabled = true, doc = { inline = false } },
       -- Centered floating input
       input = {
         enabled = true,

@@ -24,52 +24,72 @@ return {
     {
       '<c-.>',
       function()
-        require('sidekick.cli').focus()
+        require('sidekick.cli').toggle()
       end,
-      mode = { 'n', 'x', 'i', 't' },
-      desc = 'Sidekick Switch Focus',
+      desc = 'Sidekick Toggle',
+      mode = { 'n', 't', 'i', 'x' },
     },
     {
-      '<leader>Aa',
+      '<leader>aa',
       function()
         require('sidekick.cli').toggle()
       end,
       desc = 'Sidekick Toggle CLI',
-      mode = { 'n', 'v' },
     },
     {
-      '<leader>As',
+      '<leader>as',
       function()
         require('sidekick.cli').select()
-        -- Or to select only installed tools:
-        -- require("sidekick.cli").select({ filter = { installed = true } })
       end,
-      desc = 'Sidekick Select CLI',
-      mode = { 'n', 'v' },
+      -- Or to select only installed tools:
+      -- require("sidekick.cli").select({ filter = { installed = true } })
+      desc = 'Select CLI',
     },
     {
-      '<leader>Ac',
+      '<leader>ad',
       function()
-        require('sidekick.cli').toggle { name = 'copilot', focus = true }
+        require('sidekick.cli').close()
       end,
-      desc = 'Sidekick Copilot Toggle',
-      mode = { 'n', 'v' },
+      desc = 'Detach a CLI Session',
     },
     {
-      '<leader>Ag',
+      '<leader>at',
       function()
-        require('sidekick.cli').toggle { name = 'gemini', focus = true }
+        require('sidekick.cli').send { msg = '{this}' }
       end,
-      desc = 'Sidekick Gemini Toggle',
-      mode = { 'n', 'v' },
+      mode = { 'x', 'n' },
+      desc = 'Send This',
     },
     {
-      '<leader>Ap',
+      '<leader>af',
+      function()
+        require('sidekick.cli').send { msg = '{file}' }
+      end,
+      desc = 'Send File',
+    },
+    {
+      '<leader>av',
+      function()
+        require('sidekick.cli').send { msg = '{selection}' }
+      end,
+      mode = { 'x' },
+      desc = 'Send Visual Selection',
+    },
+    {
+      '<leader>ap',
       function()
         require('sidekick.cli').prompt()
       end,
-      desc = 'Sidekick Ask Prompt',
-      mode = { 'n', 'v' },
+      mode = { 'n', 'x' },
+      desc = 'Sidekick Select Prompt',
+    },
+    -- Example of a keybinding to open Gemini directly
+    {
+      '<leader>ag',
+      function()
+        require('sidekick.cli').toggle { name = 'gemini', focus = true }
+      end,
+      desc = 'Sidekick Toggle Gemini',
     },
   },
 }

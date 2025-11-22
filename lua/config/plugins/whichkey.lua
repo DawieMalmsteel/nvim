@@ -37,6 +37,11 @@ return {
         F12 = '<F12>',
       },
     },
+    keys = {
+      -- Use Ctrl-j/k to scroll default Ctrl-d/u behavior not workking fine in visual mode
+      scroll_down = '<c-j>',
+      scroll_up = '<c-k>',
+    },
     spec = {},
   },
 }

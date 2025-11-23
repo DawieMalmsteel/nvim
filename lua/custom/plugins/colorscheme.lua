@@ -9,8 +9,6 @@ return {
       require('tokyodark').setup(opts) -- calling setup is optional
       -- vim.cmd [[colorscheme tokyodark]]
       vim.cmd [[colorscheme tokyonight-night]]
-      vim.g.nord_disable_background = true
-      -- vim.cmd [[set background=dark]]
       vim.g.nightflyTransparent = true
       -- vim.cmd [[colorscheme nightfly]]
     end,
@@ -21,7 +19,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      transparent = false,
+      transparent = true,
     },
   },
 }

@@ -15,7 +15,7 @@ return {
   },
   opts = {
     keymap = {
-      preset = 'enter',
+      -- preset = 'enter',
       ['<C-y>'] = { 'select_and_accept' },
       ['<Tab>'] = {
         'snippet_forward',
@@ -46,7 +46,7 @@ return {
       default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' }, --copilot, 'dadbod'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-        dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
+        -- dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
         -- copilot = {
         --   name = 'copilot',
         --   module = 'blink-cmp-copilot',

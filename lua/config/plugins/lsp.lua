@@ -201,7 +201,7 @@ return {
         },
       },
 
-      fsautocomplete = {},
+      -- fsautocomplete = {},
       rust_analyzer = {
         settings = {
           ['rust-analyzer'] = {
@@ -247,9 +247,9 @@ return {
       bacon_ls = {
         enabled = true,
       },
-      jdtls = {},
+      -- jdtls = {},
       solidity_ls = {},
-      zls = {},
+      -- harper_ls = {},
       vtsls = {
         filetypes = {
           'javascript',

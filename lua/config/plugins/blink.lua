@@ -15,7 +15,7 @@ return {
   },
   opts = {
     keymap = {
-      -- preset = 'enter',
+      preset = 'enter',
       ['<C-y>'] = { 'select_and_accept' },
       ['<Tab>'] = {
         'snippet_forward',
@@ -35,7 +35,7 @@ return {
     },
     snippets = { preset = 'mini_snippets' },
     cmdline = {
-      keymap = { preset = 'inherit' },
+      keymap = { preset = 'default' },
       completion = {
         menu = { auto_show = true },
         completion = { ghost_text = { enabled = true } },

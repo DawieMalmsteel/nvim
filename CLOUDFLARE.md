@@ -1,3 +1,5 @@
+https://pranavk-official.gitlab.io/posts/post-2/
+
 Install Cloudflare on Arch
 
 To install Cloudflare-related tools on Arch Linux, the method depends on the specific product you need.

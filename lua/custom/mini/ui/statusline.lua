@@ -215,7 +215,7 @@ local M = function()
             '%#MiniStatuslineDevinfo#' .. total_column, -- Highlight total_column
             '%#MiniStatuslineDiagnosticsWarn#' .. '|',
             '%#MiniStatuslineDiagnostics#' .. total_lines,
-            progress_bar,
+            -- progress_bar,
           }
         end
 

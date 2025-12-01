@@ -11,6 +11,7 @@ local modules = {
   'custom.mini.ui.hipatterns',
   'custom.mini.ui.map',
   'custom.mini.ui.diff',
+  'custom.mini.ui.splitjoin',
   -- 'custom.mini.ui.clue',
   'custom.mini.nav.visits',
   'custom.mini.nav.files',

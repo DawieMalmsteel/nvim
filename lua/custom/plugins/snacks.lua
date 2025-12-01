@@ -20,11 +20,11 @@ return {
           relative = 'editor',
           style = 'minimal',
           border = 'rounded',
-          width = 60,
+          width = 100,
           height = 1,
           row = math.floor((vim.o.lines - 1) / 2.2),
           -- center vertically
-          col = math.floor((vim.o.columns - 60) / 2), -- center horizontally
+          col = math.floor((vim.o.columns - 100) / 2), -- center horizontally
           title = ' Input ',
         },
       },

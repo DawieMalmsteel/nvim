@@ -8,59 +8,14 @@ map('n', '<leader>td', function()
   end
 end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 
-map('n', '<leader>tm', ':RenderMarkdown toggle<CR>', { desc = 'Toggle Markdown Preview' })
-
-map('n', '<leader>ti', ':InlineFoldToggle<CR>', { desc = 'Toggle Inline Fold Toggle ' })
-
 map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
 
--- Toggle dashboard
-map('n', '<leader>tD', function()
-  local Snacks = require 'snacks'
-  Snacks.dashboard()
-end, { desc = 'Toggle Dashboard' })
-
-map('n', '<leader>ts', function()
-  if vim.g.ministatusline_disable then
-    vim.g.ministatusline_disable = nil
-    vim.notify('Mini statusline: ON', vim.log.levels.INFO)
-  else
-    vim.g.ministatusline_disable = true
-    vim.notify('Mini statusline: OFF', vim.log.levels.INFO)
-  end
-  vim.cmd.redrawstatus()
-end, { desc = 'Toggle Mini Statusline' })
-
--- Toggle mini.tabline (also hide actual tabline UI)
-map('n', '<leader>tt', function()
-  if vim.g.minitabline_disable then
-    vim.g.minitabline_disable = nil
-    local prev = vim.g.__showtabline_before_mini_toggle
-    vim.o.showtabline = (prev and prev >= 0) and prev or 1
-    -- First-time enable: run setup with stored config
-    if not vim.g.__mini_tabline_initialized and vim.g.__mini_tabline_config then
-      require('mini.tabline').setup(vim.g.__mini_tabline_config)
-      vim.g.__mini_tabline_initialized = true
-    end
-    vim.notify('Mini tabline: ON', vim.log.levels.INFO)
-  else
-    vim.g.minitabline_disable = true
-    vim.g.__showtabline_before_mini_toggle = vim.o.showtabline
-    vim.o.showtabline = 0
-    vim.notify('Mini tabline: OFF', vim.log.levels.INFO)
-  end
-  vim.cmd 'redraw!'
-end, { desc = 'Toggle Mini Tabline' })
-
-map('n', '<leader>tM', function()
+map('n', '<leader>tm', function()
   local mini_map = require 'mini.map'
   mini_map.toggle()
 end, { desc = 'Toggle Mini Map' })
 
-map('n', '<leader>tl', '<CMD>ShowkeysToggle<CR>', { desc = 'Toggle showkeys' })
-
-map('n', '<leader>te', '<CMD>Typr<CR>', { desc = 'Toggle Typr' })
-map('n', '<leader>tE', '<CMD>TyprStats<CR>', { desc = 'Typr Stats' })
+map('n', '<leader>ts', '<CMD>ShowkeysToggle<CR>', { desc = 'Toggle showkeys' })
 
 map('n', '<leader>tw', function()
   if vim.wo.wrap then
@@ -78,4 +33,25 @@ map('n', '<leader>tw', function()
   end
 end, { desc = 'Toggle Wrap' })
 
-map('n', '<leader>tT', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })
+-- map('n', '<leader>tT', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })
+
+map('n', '<leader>tn', function()
+  -- :set laststatus=0
+  -- :set nonumber=0
+  -- :set statuscolumn=""
+  -- :set signcolumn=no
+  if vim.o.number == false then
+    vim.o.laststatus = 2
+    vim.wo.number = true
+    -- vim.wo.relativenumber = true
+    vim.wo.signcolumn = 'yes'
+    vim.notify('Numbers: ON', vim.log.levels.INFO)
+  else
+    vim.o.laststatus = 0
+    vim.wo.number = false
+    -- vim.wo.relativenumber = false
+    vim.wo.signcolumn = 'no'
+    vim.wo.statuscolumn = ''
+    vim.notify('Numbers: OFF', vim.log.levels.INFO)
+  end
+end, { desc = 'Toggle Wrap' })

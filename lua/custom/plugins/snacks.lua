@@ -12,6 +12,7 @@ return {
         },
       },
       statuscolumn = {
+        enabled = true,
         left = {
           'mark',
           'git',

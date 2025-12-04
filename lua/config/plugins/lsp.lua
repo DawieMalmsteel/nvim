@@ -152,31 +152,33 @@ return {
         },
       },
 
-      basedpyright = {
-        before_init = function(_, c)
-          c.settings = c.settings or {}
-          c.settings.python = c.settings.python or {}
-          c.settings.python.pythonPath = vim.fn.exepath 'python'
-        end,
-        settings = {
-          basedpyright = {
-            analysis = {
-              typeCheckingMode = 'basic',
-              autoImportCompletions = true,
-              useLibraryCodeForTypes = true,
-              diagnosticSeverityOverrides = {
-                reportUnusedImport = 'information',
-                reportUnusedFunction = 'information',
-                reportUnusedVariable = 'information',
-                reportGeneralTypeIssues = 'none',
-                reportOptionalMemberAccess = 'none',
-                reportOptionalSubscript = 'none',
-                reportPrivateImportUsage = 'none',
-              },
-            },
-          },
-        },
-      },
+      -- basedpyright = {
+      --   before_init = function(_, c)
+      --     c.settings = c.settings or {}
+      --     c.settings.python = c.settings.python or {}
+      --     c.settings.python.pythonPath = vim.fn.exepath 'python'
+      --   end,
+      --   settings = {
+      --     basedpyright = {
+      --       analysis = {
+      --         typeCheckingMode = 'basic',
+      --         autoImportCompletions = true,
+      --         useLibraryCodeForTypes = true,
+      --         diagnosticSeverityOverrides = {
+      --           reportUnusedImport = 'information',
+      --           reportUnusedFunction = 'information',
+      --           reportUnusedVariable = 'information',
+      --           reportGeneralTypeIssues = 'none',
+      --           reportOptionalMemberAccess = 'none',
+      --           reportOptionalSubscript = 'none',
+      --           reportPrivateImportUsage = 'none',
+      --         },
+      --       },
+      --     },
+      --   },
+      -- },
+
+      pyrefly = {},
 
       tsgo = {},
 

@@ -2,7 +2,12 @@ local M = function()
   require('mini.diff').setup {
     view = {
       style = 'sign',
-      signs = { add = '+', change = '~', delete = '-' },
+      signs = {
+        add = '┆',
+        -- add = '▍',
+        change = '┃',
+        delete = '',
+      },
     },
     mappings = {
       goto_first = '[G',

@@ -12,6 +12,7 @@ return {
     'nvzone/floaterm',
     dependencies = 'nvzone/volt',
     opts = {
+      size = { h = 80, w = 95 },
       border = true,
       terminals = {
         { name = 'Terminal', cmd = 'fish' },

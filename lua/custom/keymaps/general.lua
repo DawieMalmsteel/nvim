@@ -7,7 +7,7 @@ map({ 'n', 'x' }, 'k', 'gk', { noremap = true, silent = true })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
--- map('i', 'kj', '<ESC>')
+map('i', 'kj', '<ESC>')
 
 -- Save file
 map({ 'n', 'i', 'x' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })

@@ -3,24 +3,24 @@ local M = function()
 
   -- Keymap descriptions
   local map = vim.keymap.set
-  map({ 'n', 'v' }, 'gsa', '', { desc = 'Add Surrounding' })
-  map('n', 'gsd', '', { desc = 'Delete Surrounding' })
-  map('n', 'gsf', '', { desc = 'Find Right Surrounding' })
-  map('n', 'gsF', '', { desc = 'Find Left Surrounding' })
-  map('n', 'gsh', '', { desc = 'Highlight Surrounding' })
-  map('n', 'gsr', '', { desc = 'Replace Surrounding' })
-  map('n', 'gsn', '', { desc = 'Update `MiniSurround.config.n_lines`' })
+  map({ 'n', 'v' }, 'sa', '', { desc = 'Add Surrounding' })
+  map('n', 'sd', '', { desc = 'Delete Surrounding' })
+  map('n', 'sf', '', { desc = 'Find Right Surrounding' })
+  map('n', 'sF', '', { desc = 'Find Left Surrounding' })
+  map('n', 'sh', '', { desc = 'Highlight Surrounding' })
+  map('n', 'sr', '', { desc = 'Replace Surrounding' })
+  map('n', 'sn', '', { desc = 'Update `MiniSurround.config.n_lines`' })
 
   require('mini.surround').setup {
     highlight_duration = 1000,
     mappings = {
-      add = 'gsa', -- Add surrounding in Normal and Visual modes
-      delete = 'gsd', -- Delete surrounding
-      find = 'gsf', -- Find surrounding (to the right)
-      find_left = 'gsF', -- Find surrounding (to the left)
-      highlight = 'gsh', -- Highlight surrounding
-      replace = 'gsr', -- Replace surrounding
-      update_n_lines = 'gsn', -- Update `n_lines`
+      add = 'sa', -- Add surrounding in Normal and Visual modes
+      delete = 'sd', -- Delete surrounding
+      find = 'sf', -- Find surrounding (to the right)
+      find_left = 'sF', -- Find surrounding (to the left)
+      highlight = 'sh', -- Highlight surrounding
+      replace = 'sr', -- Replace surrounding
+      update_n_lines = 'sn', -- Update `n_lines`
 
       -- default
       -- suffix_last = 'l', -- Suffix to search with "prev" method

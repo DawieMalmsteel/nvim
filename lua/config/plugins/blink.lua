@@ -13,6 +13,10 @@ return {
       optional = true, -- make optional so it's only enabled if any extras need it
       opts = {},
     },
+    {
+      'mikavilpas/blink-ripgrep.nvim',
+      version = '*', -- use the latest stable version
+    },
   },
   opts = {
     keymap = {
@@ -44,10 +48,18 @@ return {
     },
     sources = {
       compat = {},
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev', 'avante' }, --copilot, 'dadbod'
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep', 'lazydev', 'avante' }, --copilot, 'dadbod'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         avante = { module = 'blink-cmp-avante', name = 'Avante' },
+        ripgrep = {
+          module = 'blink-ripgrep',
+          name = 'Ripgrep',
+          -- see the full configuration below for all available options
+          ---@module "blink-ripgrep"
+          ---@type blink-ripgrep.Options
+          opts = {},
+        },
         -- dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink },
         -- copilot = {
         --   name = 'copilot',

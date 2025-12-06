@@ -1,16 +1,4 @@
 local M = function()
-  -- Add/delete/replace surroundings (brackets, quotes, etc.)
-
-  -- Keymap descriptions
-  local map = vim.keymap.set
-  map({ 'n', 'v' }, 'sa', '', { desc = 'Add Surrounding' })
-  map('n', 'sd', '', { desc = 'Delete Surrounding' })
-  map('n', 'sf', '', { desc = 'Find Right Surrounding' })
-  map('n', 'sF', '', { desc = 'Find Left Surrounding' })
-  map('n', 'sh', '', { desc = 'Highlight Surrounding' })
-  map('n', 'sr', '', { desc = 'Replace Surrounding' })
-  map('n', 'sn', '', { desc = 'Update `MiniSurround.config.n_lines`' })
-
   require('mini.surround').setup {
     highlight_duration = 1000,
     mappings = {

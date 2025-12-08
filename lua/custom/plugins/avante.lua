@@ -27,7 +27,7 @@ return {
     'AvanteToggle',
   },
   keys = {
-    { '<leader>aa', '<cmd>AvanteAsk<CR>', desc = 'Ask Avante', mode = { 'n', 'v' } },
+    { '<leader>at', '<cmd>AvanteAsk<CR>', desc = 'Ask Avante', mode = { 'n', 'v' } },
     { '<leader>ac', '<cmd>AvanteChat<CR>', desc = 'Chat with Avante', mode = { 'n', 'v' } },
     { '<leader>ae', '<cmd>AvanteEdit<CR>', desc = 'Edit Avante', mode = { 'n', 'v' } },
     { '<leader>af', '<cmd>AvanteFocus<CR>', desc = 'Focus Avante', mode = { 'n', 'v' } },
@@ -37,6 +37,6 @@ return {
     { '<leader>ap', '<cmd>AvanteSwitchProvider<CR>', desc = 'Switch Avante Provider', mode = { 'n', 'v' } },
     { '<leader>ar', '<cmd>AvanteRefresh<CR>', desc = 'Refresh Avante', mode = { 'n', 'v' } },
     { '<leader>as', '<cmd>AvanteStop<CR>', desc = 'Stop Avante', mode = { 'n', 'v' } },
-    { '<leader>at', '<cmd>AvanteToggle<CR>', desc = 'Toggle Avante', mode = { 'n', 'v' } },
+    { '<leader>aa', '<cmd>AvanteToggle<CR>', desc = 'Toggle Avante', mode = { 'n', 'v' } },
   },
 }

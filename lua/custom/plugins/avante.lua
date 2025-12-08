@@ -8,7 +8,7 @@ return {
       hint_display = 'none',
     },
     behaviour = {
-      auto_set_keymaps = false,
+      auto_set_keymaps = true,
     },
   },
   cmd = {
@@ -28,15 +28,15 @@ return {
   },
   keys = {
     { '<leader>at', '<cmd>AvanteAsk<CR>', desc = 'Ask Avante', mode = { 'n', 'v' } },
-    { '<leader>ac', '<cmd>AvanteChat<CR>', desc = 'Chat with Avante', mode = { 'n', 'v' } },
-    { '<leader>ae', '<cmd>AvanteEdit<CR>', desc = 'Edit Avante', mode = { 'n', 'v' } },
-    { '<leader>af', '<cmd>AvanteFocus<CR>', desc = 'Focus Avante', mode = { 'n', 'v' } },
-    { '<leader>ah', '<cmd>AvanteHistory<CR>', desc = 'Avante History', mode = { 'n', 'v' } },
-    { '<leader>am', '<cmd>AvanteModels<CR>', desc = 'Select Avante Model', mode = { 'n', 'v' } },
-    { '<leader>an', '<cmd>AvanteChatNew<CR>', desc = 'New Avante Chat', mode = { 'n', 'v' } },
-    { '<leader>ap', '<cmd>AvanteSwitchProvider<CR>', desc = 'Switch Avante Provider', mode = { 'n', 'v' } },
-    { '<leader>ar', '<cmd>AvanteRefresh<CR>', desc = 'Refresh Avante', mode = { 'n', 'v' } },
-    { '<leader>as', '<cmd>AvanteStop<CR>', desc = 'Stop Avante', mode = { 'n', 'v' } },
     { '<leader>aa', '<cmd>AvanteToggle<CR>', desc = 'Toggle Avante', mode = { 'n', 'v' } },
+    -- { '<leader>ac', '<cmd>AvanteChat<CR>', desc = 'Chat with Avante', mode = { 'n', 'v' } },
+    -- { '<leader>ae', '<cmd>AvanteEdit<CR>', desc = 'Edit Avante', mode = { 'n', 'v' } },
+    -- { '<leader>af', '<cmd>AvanteFocus<CR>', desc = 'Focus Avante', mode = { 'n', 'v' } },
+    -- { '<leader>ah', '<cmd>AvanteHistory<CR>', desc = 'Avante History', mode = { 'n', 'v' } },
+    -- { '<leader>am', '<cmd>AvanteModels<CR>', desc = 'Select Avante Model', mode = { 'n', 'v' } },
+    -- { '<leader>an', '<cmd>AvanteChatNew<CR>', desc = 'New Avante Chat', mode = { 'n', 'v' } },
+    -- { '<leader>ap', '<cmd>AvanteSwitchProvider<CR>', desc = 'Switch Avante Provider', mode = { 'n', 'v' } },
+    -- { '<leader>ar', '<cmd>AvanteRefresh<CR>', desc = 'Refresh Avante', mode = { 'n', 'v' } },
+    -- { '<leader>as', '<cmd>AvanteStop<CR>', desc = 'Stop Avante', mode = { 'n', 'v' } },
   },
 }

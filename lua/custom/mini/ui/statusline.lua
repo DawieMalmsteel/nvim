@@ -117,7 +117,7 @@ local M = function()
       local icon, icon_hl_group = icons.get('file', path)
       local icon_str = string.format('%%#%s#%s', icon_hl_group, icon)
 
-      local text_hl = 'MiniStatuslineFilenameInactive'
+      local text_hl = 'MiniStatuslineInactive'
       local status_icon = ''
 
       local errs = #diagnostic.get(bid, { severity = diagnostic.severity.ERROR })

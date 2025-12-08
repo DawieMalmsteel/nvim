@@ -1,351 +1,197 @@
 local M = function()
   local statusline = require 'mini.statusline'
   local icons = require 'mini.icons'
+  local diagnostic = vim.diagnostic
 
-  -- Buffer positions for mini-like tab display inside statusline
-  local buffer_positions = {}
-  local function update_buffer_positions()
-    local listed_buffers = vim.tbl_filter(function(buf)
-      return vim.api.nvim_buf_is_valid(buf.bufnr) and vim.bo[buf.bufnr].buflisted
-    end, vim.fn.getbufinfo())
-    buffer_positions = {}
-    for i, buf in ipairs(listed_buffers) do
-      buffer_positions[buf.bufnr] = i
+  -- 1. SETUP MÀU SẮC
+  local function setup_custom_highlights()
+    local p = function(name, opts)
+      vim.api.nvim_set_hl(0, name, opts)
     end
-  end
-  vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete', 'BufEnter' }, {
-    callback = update_buffer_positions,
-  })
-  -- initial populate
-  update_buffer_positions()
 
-  -- Ensure highlight for current filename (white)
-  if not vim.g.__mini_status_current_name_hl then
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineCurrentName', { fg = '#ffffff' })
-    vim.g.__mini_status_current_name_hl = true
+    p('MiniStatuslineFilenameActive', { fg = '#ffffff', bold = true })
+    p('MiniStatuslineFilenameInactive', { fg = '#7e8294' })
+    p('MiniStatuslineFilenameError', { link = 'DiagnosticError' })
+    p('MiniStatuslineFilenameWarn', { link = 'DiagnosticWarn' })
+    p('MiniStatuslineFilenameMod', { fg = '#7aa2f7' })
+
+    p('MiniStatuslineDiagError', { link = 'DiagnosticError' })
+    p('MiniStatuslineDiagWarn', { link = 'DiagnosticWarn' })
+    p('MiniStatuslineDiagInfo', { link = 'DiagnosticInfo' })
+    p('MiniStatuslineDiagHint', { link = 'DiagnosticHint' })
+  end
+  setup_custom_highlights()
+
+  -- 2. DIAGNOSTICS
+  local function section_diagnostics()
+    if not diagnostic.is_enabled() then
+      return ''
+    end
+    local count = diagnostic.count(0)
+    local t = {}
+
+    if (count[diagnostic.severity.ERROR] or 0) > 0 then
+      table.insert(t, '%#MiniStatuslineDiagError# ' .. count[diagnostic.severity.ERROR])
+    end
+    if (count[diagnostic.severity.WARN] or 0) > 0 then
+      table.insert(t, '%#MiniStatuslineDiagWarn# ' .. count[diagnostic.severity.WARN])
+    end
+    -- Bạn có thể bỏ comment nếu muốn hiện Info/Hint
+    if (count[diagnostic.severity.INFO] or 0) > 0 then
+      table.insert(t, '%#MiniStatuslineDiagInfo# ' .. count[diagnostic.severity.INFO])
+    end
+    if (count[diagnostic.severity.HINT] or 0) > 0 then
+      table.insert(t, '%#MiniStatuslineDiagHint#󰌶 ' .. count[diagnostic.severity.HINT])
+    end
+
+    if #t == 0 then
+      return ''
+    end
+    -- QUAN TRỌNG: Thêm %#StatusLine# vào cuối để reset màu, tránh lem màu sang khoảng trắng kế tiếp
+    return table.concat(t, ' ') .. '%#StatusLine#'
   end
 
-  -- Ensure highlight for inactive tabs (gray)
-  if not vim.g.__mini_status_inactive_tab_hl then
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTab', { fg = '#7e8294' })
-    vim.g.__mini_status_inactive_tab_hl = true
-  end
-  -- Ensure highlight for modified inactive tabs (red)
-  if not vim.g.__mini_status_inactive_tab_modified_hl then
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabModified', { fg = '#f38ba8' })
-    vim.g.__mini_status_inactive_tab_modified_hl = true
-  end
-  -- Ensure highlights for diagnostics in inactive tabs
-  if not vim.g.__mini_status_inactive_tab_diag_hl then
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagError', { link = 'DiagnosticError' })
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagWarn', { link = 'DiagnosticWarn' })
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagInfo', { link = 'DiagnosticInfo' })
-    pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineInactiveTabDiagHint', { link = 'DiagnosticHint' })
-    vim.g.__mini_status_inactive_tab_diag_hl = true
+  -- 3. HARPOON
+  local function section_harpoon()
+    local ok, harpoon = pcall(require, 'harpoon')
+    if not ok then
+      return ''
+    end
+    local list = harpoon:list()
+    if not list or #list.items == 0 then
+      return ''
+    end
+    local current_path = vim.uv.fs_realpath(vim.fn.expand '%:p')
+    local parts = {}
+    for i, item in ipairs(list.items) do
+      local is_curr = (vim.uv.fs_realpath(item.value) == current_path)
+      local n = vim.fn.fnamemodify(item.value, ':t'):sub(1, 2)
+      local fmt = is_curr and '[%d:%s]' or '%d:%s'
+      table.insert(parts, string.format(fmt, i, n))
+    end
+    -- Reset màu cuối chuỗi
+    return '%#MiniStatuslineHarpoon#' .. table.concat(parts, ' ') .. '%#StatusLine#'
   end
 
-  -- Build a compact tab-like string (mini.tabline-like)
-  local function tabs_side()
-    local listed = vim.tbl_filter(function(buf)
-      return vim.api.nvim_buf_is_valid(buf.bufnr) and vim.bo[buf.bufnr].buflisted
+  -- 4. TABS LIST
+  local function section_tabs_list()
+    local buffers = vim.tbl_filter(function(b)
+      return vim.api.nvim_buf_is_valid(b.bufnr) and vim.bo[b.bufnr].buflisted
     end, vim.fn.getbufinfo())
-    if #listed == 0 then
+    if #buffers == 0 then
       return ''
     end
 
-    local current_buf = vim.api.nvim_get_current_buf()
-    local current_index = buffer_positions[current_buf] or 1
-
-    local parts = {}
-    local max_show = 3
-    local start_i = 1
-    local total = #listed
-    if total > max_show then
-      start_i = math.max(1, math.min(total - max_show + 1, (current_index - math.floor(max_show / 2))))
+    local cur_buf = vim.api.nvim_get_current_buf()
+    local max_view = 3
+    local cur_idx = 1
+    for i, b in ipairs(buffers) do
+      if b.bufnr == cur_buf then
+        cur_idx = i
+        break
+      end
     end
 
-    for i = start_i, math.min(total, start_i + max_show - 1) do
-      local buf = listed[i]
-      local bufnr = buf.bufnr
-      local filepath = vim.api.nvim_buf_get_name(bufnr)
-      local name = vim.fn.fnamemodify(filepath, ':t')
-      if #name > 20 then
-        name = '•' .. name:sub(-19)
-      end
-      local extension = vim.fn.fnamemodify(filepath, ':e')
-      local icon = icons.get('extension', extension)
-      if name == '' then
-        name = '[NoName]'
+    local start_i = math.max(1, cur_idx - math.floor(max_view / 2))
+    local end_i = math.min(#buffers, start_i + max_view - 1)
+    if end_i - start_i + 1 < max_view and end_i == #buffers then
+      start_i = math.max(1, end_i - max_view + 1)
+    end
+
+    local parts = {}
+    for i = start_i, end_i do
+      local b = buffers[i]
+      local bid = b.bufnr
+      local path = b.name
+      local is_active = (bid == cur_buf)
+      local is_mod = vim.bo[bid].modified
+
+      local name = (path == '') and '[No Name]' or vim.fn.fnamemodify(path, ':t')
+      if not is_active then
+        name = vim.fn.fnamemodify(name, ':r')
+        if #name > 8 then
+          name = name:sub(1, 7) .. '…'
+        end
       end
 
-      if bufnr == current_buf then
-        -- Current buffer: show full filename (no index), name in white
-        local flags = ''
-        if vim.bo[bufnr].modified then
-          flags = flags .. ' '
-        end
-        if vim.bo[bufnr].readonly then
-          flags = flags .. ' [RO]'
-        end
-        if not vim.bo[bufnr].modifiable then
-          flags = flags .. ' [-]'
-        end
+      local icon, icon_hl_group = icons.get('file', path)
+      local icon_str = string.format('%%#%s#%s', icon_hl_group, icon)
 
-        table.insert(parts, '%#MiniStatuslineFilename#' .. icon .. ' ' .. name .. flags)
+      local text_hl = 'MiniStatuslineFilenameInactive'
+      local status_icon = ''
+
+      local errs = #diagnostic.get(bid, { severity = diagnostic.severity.ERROR })
+      local warns = #diagnostic.get(bid, { severity = diagnostic.severity.WARN })
+
+      if is_active then
+        text_hl = 'MiniStatuslineFilenameActive'
+        if is_mod then
+          status_icon = ' ●'
+        end
       else
-        -- Non-current: compact diagnostics count + short name
-        -- local short = #name > min_len and name:sub(1, min_len) or name
-
-        -- local min_len = 3
-        local short = vim.fn.fnamemodify(name, ':r')
-        local counts = { E = 0, W = 0, I = 0, H = 0 }
-        local severities = vim.diagnostic.severity
-        for _, diag in ipairs(vim.diagnostic.get(bufnr)) do
-          if diag.severity == severities.ERROR then
-            counts.E = counts.E + 1
-          elseif diag.severity == severities.WARN then
-            counts.W = counts.W + 1
-          elseif diag.severity == severities.INFO then
-            counts.I = counts.I + 1
-          elseif diag.severity == severities.HINT then
-            counts.H = counts.H + 1
-          end
-        end
-        local diag_count = counts.E + counts.W + counts.I + counts.H
-        local mess = ''
-        if counts.E and counts.E > 0 then
-          mess = mess .. counts.E .. 'E'
-        end
-        if counts.W and counts.W > 0 then
-          mess = mess .. counts.W .. 'W'
-        end
-        if counts.I and counts.I > 0 then
-          mess = mess .. counts.I .. 'I'
-        end
-        if counts.H and counts.H > 0 then
-          mess = mess .. counts.H .. 'H'
-        end
-
-        local hl
-        if counts.E > 0 then
-          hl = '%#MiniStatuslineInactiveTabDiagError#'
-        elseif counts.W > 0 then
-          hl = '%#MiniStatuslineInactiveTabDiagWarn#'
-        elseif counts.I > 0 then
-          hl = '%#MiniStatuslineInactiveTabDiagInfo#'
-        elseif counts.H > 0 then
-          hl = '%#MiniStatuslineInactiveTabDiagHint#'
-        else
-          hl = '%#MiniStatuslineInactiveTab#'
-        end
-        if vim.bo[bufnr].modified then
-          hl = '%#MiniStatuslineInactiveTabModified#'
-        end
-        if diag_count > 0 then
-          table.insert(parts, hl .. mess .. ':' .. icon .. ' ' .. short)
-        else
-          table.insert(parts, hl .. icon .. ' ' .. short)
+        if errs > 0 then
+          text_hl = 'MiniStatuslineFilenameError'
+        elseif warns > 0 then
+          text_hl = 'MiniStatuslineFilenameWarn'
+        elseif is_mod then
+          text_hl = 'MiniStatuslineFilenameMod'
+          status_icon = ' ●'
         end
       end
+
+      local item = string.format('%s %%#%s#%s%s', icon_str, text_hl, name, status_icon)
+      table.insert(parts, item)
     end
 
     if start_i > 1 then
-      table.insert(parts, 1, '…')
+      table.insert(parts, 1, '%#MiniStatuslineFilenameInactive#')
     end
-    if start_i + max_show - 1 < total then
-      table.insert(parts, '…')
+    if end_i < #buffers then
+      table.insert(parts, '%#MiniStatuslineFilenameInactive#')
     end
 
-    return '%#MiniStatuslineDevinfo#' .. table.concat(parts, '%#MiniStarterItemBullet#' .. ' ') .. '%#MiniStatuslineFilename#'
+    -- QUAN TRỌNG:
+    -- 1. Separator giữa các tab dùng màu Inactive (xám nhạt) thay vì space trắng bệch
+    -- 2. Kết thúc chuỗi bằng %#StatusLine# để reset màu
+    return table.concat(parts, '%#MiniStatuslineFilenameInactive# ') .. '%#StatusLine#'
   end
 
+  -- 5. CONFIG CHÍNH
   statusline.setup {
     use_icons = true,
     content = {
       active = function()
-        local mode, mode_hl = statusline.section_mode { trunc_width = 150 }
-        local git = statusline.section_git { trunc_width = 75 }
+        local mode, mode_hl = statusline.section_mode { trunc_width = 100 }
+        local git = statusline.section_git { trunc_width = 40 }
 
-        local diagnostics = function()
-          if not vim.diagnostic.is_enabled() then
-            return ''
-          end
-          local counts = { E = 0, W = 0, I = 0, H = 0 }
-          local severities = vim.diagnostic.severity
-          for _, diag in ipairs(vim.diagnostic.get(0)) do
-            if diag.severity == severities.ERROR then
-              counts.E = counts.E + 1
-            elseif diag.severity == severities.WARN then
-              counts.W = counts.W + 1
-            elseif diag.severity == severities.INFO then
-              counts.I = counts.I + 1
-            elseif diag.severity == severities.HINT then
-              counts.H = counts.H + 1
-            end
-          end
-          local result = {}
-          if counts.E > 0 then
-            table.insert(result, '%#MiniStatuslineDiagnosticsError# ' .. counts.E)
-          end
-          if counts.W > 0 then
-            table.insert(result, '%#MiniStatuslineDiagnosticsWarn# ' .. counts.W)
-          end
-          if counts.I > 0 then
-            table.insert(result, '%#MiniStatuslineDiagnosticsInfo# ' .. counts.I)
-          end
-          if counts.H > 0 then
-            table.insert(result, '%#MiniStatuslineDiagnosticsHint#󰌶 ' .. counts.H)
-          end
-          return table.concat(result, ' ')
-        end
-
-        local location = function()
-          local current_line = vim.fn.line '.'
-          local total_lines = vim.fn.line '$'
-          local column = vim.fn.col '.'
-          local total_column = vim.fn.col '$'
-          local fraction = total_lines > 0 and math.floor((current_line / total_lines) * 8) or 8
-          local vbars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
-          local idx = math.max(1, math.min(#vbars, (fraction or 1)))
-          local progress_bar = '%#MiniStatuslineProgress#' .. (vbars[idx] or '█')
-          -- return ' ' .. current_line .. '|' .. total_lines .. '  ' .. column .. '|' .. total_column .. ' ' .. progress_bar
-          return table.concat {
-            '%#MiniStatuslineDevinfo#' .. column, -- Highlight column
-            '',
-            '%#MiniStatuslineDevinfo#' .. total_column, -- Highlight total_column
-            '%#MiniStatuslineDiagnosticsWarn#' .. '|',
-            '%#MiniStatuslineDiagnostics#' .. current_line,
-            '',
-            total_lines,
-            -- progress_bar,
-          }
-        end
-
-        local recording = function()
-          local reg = vim.fn.reg_recording()
-          if reg == '' then
-            return ''
-          end
-          return '%#MiniStatuslineRecording#Recording @' .. reg
-        end
-
-        local harpoon_status = function()
-          local ok, harpoon = pcall(require, 'harpoon')
-          if not ok then
-            return ''
-          end
-
-          local list = harpoon:list()
-          if not list or #list.items == 0 then
-            return ''
-          end
-
-          local current_file = vim.fn.expand '%:p'
-          local harpoon_entries = {}
-
-          for i, item in ipairs(list.items) do
-            local file_path = vim.uv.fs_realpath(item.value)
-            local file_name = vim.fn.fnamemodify(file_path or '', ':t') or 'N/A'
-            local short_name = file_name:sub(1, 2)
-            if file_path == vim.uv.fs_realpath(current_file) then
-              table.insert(harpoon_entries, '[' .. i .. ':' .. short_name .. ']')
-            else
-              table.insert(harpoon_entries, i .. ':' .. short_name)
-            end
-          end
-
-          return table.concat(harpoon_entries, ' ')
-        end
-
-        local visits_status = function()
-          local ok, visits = pcall(require, 'mini.visits')
-          if not ok then
-            return ''
-          end
-          local path = vim.api.nvim_buf_get_name(0)
-          if path == '' then
-            return ''
-          end
-          local index = visits.get_index()
-          local cwd = vim.uv.cwd()
-
-          local label_cwds = {}
-          for cwd_key, cwd_tbl in pairs(index) do
-            local entry = cwd_tbl[path]
-            if entry and entry.labels then
-              for label, _ in pairs(entry.labels) do
-                local set = label_cwds[label]
-                if not set then
-                  set = {}
-                  label_cwds[label] = set
-                end
-                set[cwd_key] = true
-              end
-            end
-          end
-          if not next(label_cwds) then
-            return ''
-          end
-
-          local local_labels, global_labels = {}, {}
-          for label, cset in pairs(label_cwds) do
-            local n = 0
-            for _ in pairs(cset) do
-              n = n + 1
-            end
-            if cset[cwd] and n == 1 then
-              table.insert(local_labels, label)
-            else
-              table.insert(global_labels, label)
-            end
-          end
-
-          table.sort(local_labels)
-          table.sort(global_labels)
-          if #local_labels == 0 and #global_labels == 0 then
-            return ''
-          end
-
-          if not vim.g.__mini_visits_status_hl then
-            pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineVisitLocal', { link = 'MiniStatuslineDevinfo' })
-            pcall(vim.api.nvim_set_hl, 0, 'MiniStatuslineVisitGlobal', { link = 'Title' })
-            vim.g.__mini_visits_status_hl = true
-          end
-
-          local parts = {}
-          if #local_labels > 0 then
-            for i, l in ipairs(local_labels) do
-              local_labels[i] = '' .. l
-            end
-            table.insert(parts, '%#MiniStatuslineVisitLocal#' .. table.concat(local_labels, ','))
-          end
-          if #global_labels > 0 then
-            for i, l in ipairs(global_labels) do
-              global_labels[i] = '' .. l
-            end
-            table.insert(parts, '%#MiniStatuslineVisitGlobal#' .. table.concat(global_labels, ','))
-          end
-          return table.concat(parts, ' ')
-        end
+        -- SỬA RECORD MODE:
+        -- Reset màu (%#StatusLine#) ngay cuối chuỗi.
+        -- Nếu không reset, khoảng trắng sau chữ "@reg" sẽ bị dính màu nền xanh/hồng.
+        local rec = vim.fn.reg_recording()
+        local rec_str = (rec ~= '') and ('%#MiniStatuslineFilenameMod#@' .. rec .. '%#StatusLine#') or ''
 
         return statusline.combine_groups {
           { hl = mode_hl, strings = { mode } },
           { hl = 'MiniStatuslineDevinfo', strings = { git } },
-          { strings = { tabs_side() } },
-          { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics() } },
-          { hl = 'MiniStatuslineHarpoon', strings = { harpoon_status() } },
-          '%<', -- Left truncate
-          -- Only show the compact tabs list (current entry shows icon + name in white, no index)
-          '%=', -- Right align
-          { strings = { recording() } },
-          { strings = { visits_status() } },
-          { hl = 'MiniStatuslineLocation', strings = { location() } },
+          { strings = { section_tabs_list() } },
+          { strings = { section_diagnostics() } },
+          { strings = { section_harpoon() } },
+          '%<',
+          '%=',
+          { strings = { rec_str } }, -- Đã fix khoảng trắng thừa do lem màu
+          -- '%S', -- Show command
+          { hl = 'MiniStatuslinePosition', strings = { '%l:%v' } },
+          { hl = 'MiniStatuslineFileinfo', strings = { statusline.section_fileinfo { trunc_width = 80 } } },
         }
       end,
       inactive = function()
-        return '%#MiniStatuslineInactive#' .. statusline.section_filename {}
+        return '%#MiniStatuslineInactive#%f'
       end,
     },
   }
 end
+
+-- Bật hiển thị command
+-- vim.opt.showcmdloc = 'statusline'
+
 return M

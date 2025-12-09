@@ -5,4 +5,3 @@ vim.opt.termguicolors = true
 vim.g.python3_host_prog = '/usr/bin/python3'
 vim.o.shell = 'fish'
 vim.o.swapfile = false
-vim.opt.fillchars:append { eob = ' ' }

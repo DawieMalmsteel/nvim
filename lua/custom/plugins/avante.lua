@@ -4,6 +4,11 @@ return {
   event = 'VeryLazy',
   opts = {
     provider = 'copilot',
+    providers = {
+      copilot = {
+        disable_tools = true, -- Tool trong avante quá ngu
+      },
+    },
     selection = {
       hint_display = 'none',
     },

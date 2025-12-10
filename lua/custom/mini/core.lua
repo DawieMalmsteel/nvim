@@ -13,7 +13,7 @@ local modules = {
   'custom.mini.ui.diff',
   'custom.mini.ui.splitjoin',
   -- 'custom.mini.ui.clue',
-  'custom.mini.nav.visits',
+  -- 'custom.mini.nav.visits',
   'custom.mini.nav.files',
   'custom.mini.nav.pick',
   'custom.mini.productivity.snippets',

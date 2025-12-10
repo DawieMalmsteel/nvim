@@ -252,7 +252,7 @@ return {
         enabled = true,
       },
       -- jdtls = {},
-      solidity_ls = {},
+      -- solidity_ls = {},
       -- harper_ls = {},
       -- vtsls = {
       --   filetypes = {

@@ -1,6 +1,3 @@
-- [ ] Thêm obsidian vào nvim 
-- [ ] Tìm hiểu về Obsidian 
-
 - [x] Chuyển từ markdown org sang snip run quyết định đúng đắn vcl
 - [x] Tìm hiểu về blink compat và các keymaps của nó
 - [x] refactor lại keymaps.lua sử dụng cách tiếp cận khác tốt hơn đối với việc quản lý keymaps
@@ -18,3 +15,5 @@
 ~- [ ] Set up codecompanion với ~minuet~~
 ~- [ ] Tìm hiểu về atuin (4 ngày)~
 ~- [ ] Tìm hiểu về nwm nvim (1 ngày)~
+~- [ ] Thêm obsidian vào nvim~
+~- [ ] Tìm hiểu về Obsidian~ 

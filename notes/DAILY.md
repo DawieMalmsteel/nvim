@@ -1,3 +1,0 @@
-- [ ] học cách dùng jj ha
-- [x] ~config lại minifiles~
-- [-] tạo blog app bằng dioxus 

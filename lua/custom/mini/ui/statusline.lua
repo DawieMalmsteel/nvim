@@ -107,7 +107,13 @@ local M = function()
       local is_mod = vim.bo[bid].modified
 
       local name = (path == '') and '[No Name]' or vim.fn.fnamemodify(path, ':t')
-      if not is_active then
+
+      if is_active then
+        local max_active_len = 20
+        if #name > max_active_len then
+          name = '…' .. name:sub(-(max_active_len - 1))
+        end
+      else
         name = vim.fn.fnamemodify(name, ':r')
         if #name > 8 then
           name = name:sub(1, 7) .. '…'
@@ -150,9 +156,6 @@ local M = function()
       table.insert(parts, '%#MiniStatuslineFilenameInactive#')
     end
 
-    -- QUAN TRỌNG:
-    -- 1. Separator giữa các tab dùng màu Inactive (xám nhạt) thay vì space trắng bệch
-    -- 2. Kết thúc chuỗi bằng %#StatusLine# để reset màu
     return table.concat(parts, '%#MiniStatuslineFilenameInactive# ') .. '%#StatusLine#'
   end
 

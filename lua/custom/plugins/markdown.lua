@@ -7,12 +7,12 @@ return {
   ---@type render.md.UserConfig
   opts = {
     code = {
-      sign = true,
+      sign = false,
       width = 'block',
       right_pad = 1,
     },
     heading = {
-      sign = true,
+      sign = false,
       icons = {},
     },
     checkbox = {

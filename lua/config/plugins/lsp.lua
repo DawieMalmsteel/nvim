@@ -5,7 +5,7 @@ return {
       'mason-org/mason.nvim',
       opts = {
         ui = {
-          border = 'rounded',
+          border = 'single',
           icons = {
             package_installed = '󰄳 ',
             package_pending = '󰑓 ',

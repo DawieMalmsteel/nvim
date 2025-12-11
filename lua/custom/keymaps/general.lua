@@ -13,8 +13,8 @@ map('i', 'kj', '<ESC>')
 map({ 'n', 'i', 'x' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })
 
 -- Tăng tốc độ cuộn của Ctrl-E và Ctrl-Y
-map('n', '<C-e>', '3<C-e>', { noremap = true, silent = true })
-map('n', '<C-y>', '3<C-y>', { noremap = true, silent = true })
+map('n', '<C-e>', '2<C-e>', { noremap = true, silent = true })
+map('n', '<C-y>', '2<C-y>', { noremap = true, silent = true })
 
 -- Xóa dòng nhưng không thay đổi register
 map('v', 'c', [["_c]])

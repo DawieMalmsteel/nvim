@@ -4,6 +4,9 @@ return {
     keymaps = {
       ['<tab>'] = { 'actions.parent', mode = 'n' },
     },
+    view_options = {
+      show_hidden = true,
+    },
   },
   lazy = false,
   keys = {

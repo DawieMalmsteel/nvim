@@ -3,6 +3,6 @@ return {
   opts = {},
   lazy = false,
   keys = {
-    { '<leader>o', '<cmd>Oil<CR>', desc = 'Oil', mode = { 'n' } },
+    { '<leader>e', '<cmd>Oil<CR>', desc = 'Oil', mode = { 'n' } },
   },
 }

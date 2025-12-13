@@ -8,7 +8,7 @@ return {
     config = function(_, opts)
       require('tokyodark').setup(opts) -- calling setup is optional
       -- vim.cmd [[colorscheme tokyodark]]
-      vim.cmd [[colorscheme onedark_dark]]
+      vim.cmd [[colorscheme tokyonight]]
       vim.g.nightflyTransparent = true
       -- vim.cmd [[colorscheme nightfly]]
     end,

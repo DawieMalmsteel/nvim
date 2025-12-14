@@ -2,7 +2,6 @@ return {
   'olimorris/codecompanion.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-treesitter/nvim-treesitter',
   },
   opts = {
     -- NOTE: The log_level is in `opts.opts`
@@ -13,8 +12,20 @@ return {
   keys = {
     {
       '<leader>aa',
-      '<cmd>CodeCompanionActions<CR>',
-      desc = 'Code Companion actions',
+      '<cmd>CodeCompanionChat Toggle<CR>',
+      desc = 'CodeCompanion chat',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>ae',
+      '<cmd>CodeCompanion<CR>',
+      desc = 'CodeCompanion inline',
+      mode = { 'n', 'v' },
+    },
+    {
+      '<leader>ac',
+      '<cmd>CodeCompanionCmd<CR>',
+      desc = 'CodeCompanion command',
       mode = { 'n', 'v' },
     },
   },

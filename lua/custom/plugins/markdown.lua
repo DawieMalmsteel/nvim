@@ -20,5 +20,5 @@ return {
     },
     completions = { lsp = { enabled = true } },
   },
-  ft = { 'markdown', 'Avante' },
+  ft = { 'markdown', 'Avante', 'codecompanion' },
 }

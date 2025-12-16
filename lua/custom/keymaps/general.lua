@@ -26,8 +26,8 @@ map('v', 'x', [["_x]])
 map('n', 'H', '<CMD>execute "silent! bprevious " . v:count1<CR>', { desc = 'Previous Buffer (with count)' })
 map('n', 'L', '<CMD>execute "silent! bnext " . v:count1<CR>', { desc = 'Next Buffer (with count)' })
 
-map('v', 'J', ":m'>+1<cr>gv=gv")
-map('v', 'K', ":m'<-2<cr>gv=gv")
+-- map('v', 'J', ":m'>+1<cr>gv=gv")
+-- map('v', 'K', ":m'<-2<cr>gv=gv")
 
 map({ 'n', 'x' }, '-', '_')
 -- map({ 'n', 'x' }, '+', 'g_')

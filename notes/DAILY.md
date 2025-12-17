@@ -4,6 +4,8 @@
 - [x] check X phần tim và phần repost xem đã bỏ lỡ cái nào 
 - [x] check config codecompanion (thêm được sơ sơ đủ dùng rồi nhưng mà nó có bản mới đâm ra phải đọc docs lại xíu)
 - [x] hoàn thành video go routine (tí tối khó ngủ đọc sách về go concurrency sau ha)
-- [ ] hoàn thành sách về go concurrency
 ~- [ ] download coding interview prep~
+- [ ] hoàn thành sách về go concurrency
 - [ ] refactor treesitter config [blog](https://mhpark.me/posts/update-treesitter-main/) 
+- [ ] implement spector [blog](https://jovianmoon.io/posts/svelte-inspector-with-neovim) 
+

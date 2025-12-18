@@ -8,4 +8,4 @@
 - [ ] hoàn thành sách về go concurrency
 - [ ] refactor treesitter config [blog](https://mhpark.me/posts/update-treesitter-main/) 
 - [ ] implement spector [blog](https://jovianmoon.io/posts/svelte-inspector-with-neovim) 
-
+- [ ] tạo extension tổng hợp nội dung trên trang hiện tại như bài viết comment các thứ dùng gemini API và n8n (maybe vì cái hỗ trợ lũ lụt làm được thì sao lại không nhỉ) 

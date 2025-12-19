@@ -178,7 +178,7 @@ return {
       --   },
       -- },
 
-      pyrefly = {},
+      ty = {},
 
       tsgo = {},
 

@@ -2,7 +2,7 @@ return {
   'saghen/blink.cmp',
   event = 'VimEnter',
   version = '1.*',
-  specs = { 'Kaiser-Yang/blink-cmp-avante' },
+  -- specs = { 'Kaiser-Yang/blink-cmp-avante' },
   dependencies = {
     -- 'giuxtaposition/blink-cmp-copilot',
     'rafamadriz/friendly-snippets',
@@ -48,10 +48,9 @@ return {
     },
     sources = {
       compat = {},
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep', 'lazydev', 'avante' }, --copilot, 'dadbod'
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep', 'lazydev' }, --copilot, 'dadbod', 'avante'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-        avante = { module = 'blink-cmp-avante', name = 'Avante' },
         ripgrep = {
           module = 'blink-ripgrep',
           name = 'Ripgrep',
@@ -60,6 +59,7 @@ return {
           ---@type blink-ripgrep.Options
           opts = {},
         },
+        -- avante = { module = 'blink-cmp-avante', name = 'Avante' },
         -- dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink },
         -- copilot = {
         --   name = 'copilot',

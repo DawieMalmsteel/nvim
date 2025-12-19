@@ -14,9 +14,14 @@ return {
     end,
   },
   {
-    'olimorris/onedarkpro.nvim',
+    -- 'olimorris/onedarkpro.nvim',
   },
-  { 'bluz71/vim-nightfly-colors', name = 'nightfly', lazy = false, priority = 1000 },
+  {
+    -- 'bluz71/vim-nightfly-colors',
+    -- name = 'nightfly',
+    -- lazy = false,
+    -- priority = 1000,
+  },
   {
     'folke/tokyonight.nvim',
     lazy = false,

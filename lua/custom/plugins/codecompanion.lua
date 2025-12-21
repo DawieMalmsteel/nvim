@@ -9,6 +9,7 @@ return {
     --   log_level = 'DEBUG', -- or "TRACE"
     -- },
   },
+  cmd = { 'CodeCompanion', 'CodeCompanionActions', 'CodeCompanionToggle', 'CodeCompanionAdd', 'CodeCompanionChat' },
   keys = {
     {
       '<leader>aa',

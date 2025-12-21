@@ -23,6 +23,12 @@ return {
       mode = { 'n', 'v' },
     },
     {
+      '<leader>aA',
+      '<cmd>CodeCompanionActions<CR>',
+      desc = 'Code Companion actions',
+      mode = { 'n', 'v' },
+    },
+    {
       '<leader>ac',
       '<cmd>CodeCompanionCmd<CR>',
       desc = 'CodeCompanion command',

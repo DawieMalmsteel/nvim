@@ -1,8 +1,26 @@
 return {
   'stevearc/oil.nvim',
   opts = {
+    use_default_keymaps = false,
     keymaps = {
       ['<tab>'] = { 'actions.parent', mode = 'n' },
+      ['g?'] = { 'actions.show_help', mode = 'n' },
+      ['<CR>'] = 'actions.select',
+      -- ['<C-s>'] = { 'actions.select', opts = { vertical = true } },
+      ['<C-l>'] = { 'actions.select', mode = 'n' },
+      ['<C-h>'] = { 'actions.parent', mode = 'n' },
+      ['<C-r>'] = 'actions.refresh',
+      ['<C-p>'] = 'actions.preview',
+      ['<C-t>'] = { 'actions.select', opts = { tab = true } },
+      ['<C-c>'] = { 'actions.close', mode = 'n' },
+      ['-'] = { 'actions.parent', mode = 'n' },
+      ['_'] = { 'actions.open_cwd', mode = 'n' },
+      ['`'] = { 'actions.cd', mode = 'n' },
+      ['g~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
+      ['gs'] = { 'actions.change_sort', mode = 'n' },
+      ['gx'] = 'actions.open_external',
+      ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
+      ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
     },
     view_options = {
       show_hidden = true,

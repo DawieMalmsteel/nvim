@@ -1,3 +1,4 @@
+# Example 1
 ```lua
 -- Example configuration with custom slash commands and copilot adapter
 return {
@@ -125,6 +126,8 @@ return {
 }
 ```
 
+
+# Example 2
 ```lua
 --Example configuration with Deepseek and Ollama adapters
 local prefix = "<leader>a"
@@ -250,6 +253,7 @@ return {
 }
 ```
 
+# Example 3
 ```lua
 -- Example configuration with history extension and custom chat opener
 -- Credits to https://github.com/franco-ruggeri

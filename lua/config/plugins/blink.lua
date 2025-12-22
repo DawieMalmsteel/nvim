@@ -111,6 +111,7 @@ return {
     fuzzy = {
       implementation = 'rust',
       sorts = {
+        'exact',
         'label', -- Primary sort: by label if still tied
         'sort_text', -- Secondary sort: by sortText field if scores are equal
         'score', -- Tertiary sort: by fuzzy matching score

@@ -251,6 +251,7 @@ return {
       bacon_ls = {
         enabled = true,
       },
+      move_analyzer = {},
       -- jdtls = {},
       -- solidity_ls = {},
       -- harper_ls = {},

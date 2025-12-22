@@ -110,11 +110,11 @@ return {
     },
     fuzzy = {
       implementation = 'rust',
-      -- sorts = {
-      --   'score', -- Primary sort: by fuzzy matching score
-      --   'sort_text', -- Secondary sort: by sortText field if scores are equal
-      --   'label', -- Tertiary sort: by label if still tied
-      -- },
+      sorts = {
+        'label', -- Primary sort: by label if still tied
+        'score', -- Secondary sort: by fuzzy matching score
+        'sort_text', -- Tertiary sort: by sortText field if scores are equal
+      },
     },
     signature = { enabled = true },
   },

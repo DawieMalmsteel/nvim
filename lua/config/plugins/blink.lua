@@ -43,7 +43,7 @@ return {
       keymap = { preset = 'default' },
       completion = {
         menu = { auto_show = true },
-        completion = { ghost_text = { enabled = true } },
+        completion = { ghost_text = { enabled = false } },
       },
     },
     sources = {

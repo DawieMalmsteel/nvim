@@ -112,8 +112,8 @@ return {
       implementation = 'rust',
       sorts = {
         'label', -- Primary sort: by label if still tied
-        'score', -- Secondary sort: by fuzzy matching score
-        'sort_text', -- Tertiary sort: by sortText field if scores are equal
+        'sort_text', -- Secondary sort: by sortText field if scores are equal
+        'score', -- Tertiary sort: by fuzzy matching score
       },
     },
     signature = { enabled = true },

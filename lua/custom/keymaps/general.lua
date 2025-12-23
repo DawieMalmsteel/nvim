@@ -9,7 +9,7 @@ map({ 'n', 'x' }, 'k', 'gk', { noremap = true, silent = true })
 map('n', ';', ':', { desc = 'CMD enter command mode' })
 map('i', 'kj', '<ESC>')
 map('i', '<C-l>', '<C-o>a')
--- map('i', '<C-h>', '<C-o>h') -- Maybe not need
+map('i', '<C-h>', '<C-o>h') -- Maybe not need
 
 -- Save file
 map({ 'n', 'i', 'x' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = 'Save file' })

@@ -58,6 +58,11 @@ return {
     -- },
 
     lsp = {
+      signature = {
+        auto_open = {
+          enabled = false,
+        },
+      },
       progress = {
         enabled = false,
       },

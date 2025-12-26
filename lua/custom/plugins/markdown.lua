@@ -39,7 +39,7 @@ return {
       ---@return string?
       icons = function(ctx)
         return (''):rep(ctx.level) .. ''
-        -- return (''):rep(ctx.level) .. ''
+        -- return '' .. (''):rep(ctx.level)
       end,
     },
   },

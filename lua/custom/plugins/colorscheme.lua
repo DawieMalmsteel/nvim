@@ -22,7 +22,7 @@ return {
         light = 'latte',
         dark = 'mocha',
       },
-      transparent_background = true,
+      transparent_background = false,
       float = {
         transparent = true, -- enable transparent floating windows
         solid = true, -- use solid styling for floating windows, see |winborder|
@@ -79,7 +79,7 @@ return {
         cmp = true,
         gitsigns = true,
         nvimtree = true,
-        notify = false,
+        notify = true,
         mini = {
           enabled = true,
           indentscope_color = '',

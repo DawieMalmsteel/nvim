@@ -18,6 +18,7 @@ console.log("Hello, JavaScript!");
 ```
 
 ```typescript
+// TypeScript code to add two numbers
 let a: number = 5;
 let b: number = 10;
 let sum: number = a + b;

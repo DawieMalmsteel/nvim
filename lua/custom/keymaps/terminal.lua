@@ -24,4 +24,4 @@ map('t', '<C-_>', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = t
 -- map('n', '<leader>TT', '<Cmd>horizontal term<CR>', { noremap = true, silent = true, desc = 'Terminal (horizontal)' })
 
 -- vertical terminal
-map('n', '<leader>T', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })
+-- map('n', '<leader>T', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })

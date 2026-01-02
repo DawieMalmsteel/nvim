@@ -7,6 +7,8 @@ map({ 'n', 'x' }, 'k', 'gk', { noremap = true, silent = true })
 
 -- Chế độ normal (Normal mode)
 map('n', ';', ':', { desc = 'CMD enter command mode' })
+
+-- Chế độ insert (Insert mode)
 map('i', 'kj', '<ESC>')
 map('i', '<C-l>', '<C-o>a')
 map('i', '<C-h>', '<C-o>h') -- Maybe not need

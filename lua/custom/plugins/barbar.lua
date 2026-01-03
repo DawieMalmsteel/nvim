@@ -10,8 +10,8 @@ return {
     map('n', 'L', '<CMD>execute "silent! BufferNext " . v:count1<CR>', { desc = 'Next Buffer (with count)' })
 
     -- Re-order to previous/next
-    map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
-    map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+    map('n', '<A-[>', '<Cmd>BufferMovePrevious<CR>', opts)
+    map('n', '<A-]>', '<Cmd>BufferMoveNext<CR>', opts)
 
     -- Goto buffer in position...
     map('n', '<leader>1', '<Cmd>BufferGoto 1<CR>', opts)

@@ -50,7 +50,7 @@ return {
 
     -- Magic buffer-picking mode
     map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
-    map('n', '<C-s-p>', '<Cmd>BufferPickDelete<CR>', opts)
+    map('n', '<C-P>', '<Cmd>BufferPickDelete<CR>', opts)
 
     -- Sort automatically by...
     map('n', '<Space>bsb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)

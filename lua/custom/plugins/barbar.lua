@@ -6,8 +6,8 @@ return {
     local opts = { noremap = true, silent = true }
 
     -- Move to previous/next
-    map('n', 'H', '<Cmd>BufferPrevious<CR>', opts)
-    map('n', 'L', '<Cmd>BufferNext<CR>', opts)
+    map('n', 'H', '<CMD>execute "silent! BufferPrevious " . v:count1<CR>', { desc = 'Previous Buffer (with count)' })
+    map('n', 'L', '<CMD>execute "silent! BufferNext " . v:count1<CR>', { desc = 'Next Buffer (with count)' })
 
     -- Re-order to previous/next
     map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)

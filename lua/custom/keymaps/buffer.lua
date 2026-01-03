@@ -121,48 +121,46 @@ map('n', '<leader>bn', function()
   end)
 end, { desc = 'New file (curr dir)' })
 
+-- map('n', '<leader>bS', function()
+--   local Snacks = require 'snacks'
+--   Snacks.terminal.toggle('eza --icons=auto --tree -I "node_modules|vendor"', {
+--     cwd = vim.fn.getcwd(), -- Set the current working directory to the project folder
+--     start_insert = false, -- Start in insert mode
+--     auto_close = false, -- Close the terminal when the process exits
+--   })
+-- end, { desc = 'Show project folder tree' })
+
+-- map('n', '<leader>bs', function()
+--   local file = vim.api.nvim_buf_get_name(0)
+--   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+--   local Snacks = require 'snacks'
+--   Snacks.terminal.toggle('eza --icons=auto --tree -I "node_modules|vendor"', {
+--     cwd = dir,
+--     start_insert = false,
+--     auto_close = false,
+--   })
+-- end, { desc = 'Show file in current buffer folder' })
+
+-- map('n', '<leader>bL', function()
+--   local Snacks = require 'snacks'
+--   Snacks.terminal.toggle('eza -TaL1 --header --hyperlink --icons', {
+--     cwd = vim.fn.getcwd(), -- Set the current working directory to the project folder
+--     start_insert = false, -- Start in insert mode
+--     auto_close = false, -- Close the terminal when the process exits
+--   })
+-- end, { desc = 'Show project folder list' })
+
+-- map('n', '<leader>bl', function()
+--   local file = vim.api.nvim_buf_get_name(0)
+--   local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+--   local Snacks = require 'snacks'
+--   Snacks.terminal.toggle('eza -TaL1 --header --hyperlink --icons', {
+--     cwd = dir,
+--     start_insert = false,
+--     auto_close = false,
+--   })
+-- end, { desc = 'Show list file in current buffer folder' })
+
 map('n', '<leader>bS', function()
-  local Snacks = require 'snacks'
-  Snacks.terminal.toggle('eza --icons=auto --tree -I "node_modules|vendor"', {
-    cwd = vim.fn.getcwd(), -- Set the current working directory to the project folder
-    start_insert = false, -- Start in insert mode
-    auto_close = false, -- Close the terminal when the process exits
-  })
-end, { desc = 'Show project folder tree' })
-
-map('n', '<leader>bs', function()
-  local file = vim.api.nvim_buf_get_name(0)
-  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
-  local Snacks = require 'snacks'
-  Snacks.terminal.toggle('eza --icons=auto --tree -I "node_modules|vendor"', {
-    cwd = dir,
-    start_insert = false,
-    auto_close = false,
-  })
-end, { desc = 'Show file in current buffer folder' })
-
--- eza -TaL1 --header --hyperlink --icons
-
-map('n', '<leader>bL', function()
-  local Snacks = require 'snacks'
-  Snacks.terminal.toggle('eza -TaL1 --header --hyperlink --icons', {
-    cwd = vim.fn.getcwd(), -- Set the current working directory to the project folder
-    start_insert = false, -- Start in insert mode
-    auto_close = false, -- Close the terminal when the process exits
-  })
-end, { desc = 'Show project folder list' })
-
-map('n', '<leader>bl', function()
-  local file = vim.api.nvim_buf_get_name(0)
-  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
-  local Snacks = require 'snacks'
-  Snacks.terminal.toggle('eza -TaL1 --header --hyperlink --icons', {
-    cwd = dir,
-    start_insert = false,
-    auto_close = false,
-  })
-end, { desc = 'Show list file in current buffer folder' })
-
-map('n', '<leader>bs', function()
   vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
 end, { desc = 'New Scratch Buffer' })

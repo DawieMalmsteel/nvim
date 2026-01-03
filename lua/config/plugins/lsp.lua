@@ -139,19 +139,6 @@ return {
         },
       },
 
-      intelephense = {
-        settings = {
-          intellicode = {
-            enable = true,
-            suggest = {
-              autoImports = true,
-              localKeywords = true,
-              localVariables = true,
-            },
-          },
-        },
-      },
-
       -- basedpyright = {
       --   before_init = function(_, c)
       --     c.settings = c.settings or {}
@@ -205,7 +192,6 @@ return {
       --   },
       -- },
 
-      -- fsautocomplete = {},
       rust_analyzer = {
         settings = {
           ['rust-analyzer'] = {
@@ -251,9 +237,6 @@ return {
       bacon_ls = {
         enabled = true,
       },
-      -- jdtls = {},
-      -- solidity_ls = {},
-      -- harper_ls = {},
       -- vtsls = {
       --   filetypes = {
       --     'javascript',
@@ -312,6 +295,8 @@ return {
       vim.lsp.config(name, cfg) -- Configure the server
       vim.lsp.enable(name) -- Enable the server
     end
+
+    vim.lsp.enable 'gleam'
 
     local ensure = vim.tbl_keys(servers)
     vim.list_extend(ensure, { 'stylua' })

@@ -11,14 +11,6 @@ return { -- Collection of various small independent plugins/modules
     -- }
 
     require('mini.extra').setup()
-    require('mini.misc').setup()
-
-    MiniMisc.setup_auto_root()
-
-    MiniMisc.setup_restore_cursor()
-
-    MiniMisc.setup_termbg_sync()
-
     require 'custom.mini.core'
   end,
 }

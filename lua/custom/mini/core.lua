@@ -21,6 +21,7 @@ local modules = {
   -- 'custom.mini.productivity.sessions',
   'custom.mini.productivity.git',
   'custom.mini.ui.statusline',
+  'custom.mini.misc',
 }
 
 for _, m in ipairs(modules) do

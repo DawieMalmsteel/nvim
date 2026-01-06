@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 -- Mini Files
-map('n', '<leader>o', function()
+map('n', '<leader>i', function()
   local mini_files = require 'mini.files'
   local current_file = vim.api.nvim_buf_get_name(0)
   -- Check for special buffers first - only check specific known protocols

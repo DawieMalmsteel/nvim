@@ -17,5 +17,5 @@ end, { desc = 'Resize window' })
 
 map('n', '<leader>Z', function()
   local Snacks = require 'snacks'
-  Snacks.zen.zoom()
-end, { desc = 'Toggle Zoom' })
+  Snacks.zen()
+end, { desc = 'Toggle Zen' })

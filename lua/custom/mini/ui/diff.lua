@@ -1,7 +1,7 @@
 local M = function()
   require('mini.diff').setup {
     view = {
-      style = 'number',
+      style = 'sign',
       signs = {
         add = '┆',
         -- add = '▍',

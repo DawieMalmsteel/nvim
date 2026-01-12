@@ -1,5 +1,6 @@
 return {
-  dir = '~/Projects/gtranslate',
+  -- dir = '~/Projects/gtranslate',
+  'DawieMalmsteel/gtranslate',
   -- this is for local plugin development
   name = 'gtranslate',
   config = function()

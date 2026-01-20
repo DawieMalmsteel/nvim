@@ -20,6 +20,8 @@ map('t', '<C-/>', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = t
 
 map('t', '<C-_>', '<C-\\><C-n>:FloatermToggle<CR>', { noremap = true, silent = true, desc = 'which_key_ignore' })
 
+map('t', '<C-z>', '<Nop>', { desc = 'Disable Ctrl-Z in terminal mode' })
+
 -- horizontal terminal
 -- map('n', '<leader>TT', '<Cmd>horizontal term<CR>', { noremap = true, silent = true, desc = 'Terminal (horizontal)' })
 

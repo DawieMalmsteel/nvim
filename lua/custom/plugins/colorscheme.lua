@@ -9,8 +9,8 @@ return {
       require('tokyodark').setup(opts) -- calling setup is optional
       -- vim.cmd [[colorscheme tokyodark]]
       -- vim.cmd [[colorscheme tokyonight-night]]
-      -- vim.cmd [[colorscheme catppuccin]]
-      vim.cmd [[colorscheme night-owl]]
+      vim.cmd [[colorscheme catppuccin]]
+      -- vim.cmd [[colorscheme night-owl]]
     end,
   },
   'oxfist/night-owl.nvim',

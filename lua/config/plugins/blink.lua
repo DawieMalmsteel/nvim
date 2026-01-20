@@ -14,8 +14,8 @@ return {
       opts = {},
     },
     {
-      'mikavilpas/blink-ripgrep.nvim',
-      version = '*', -- use the latest stable version
+      -- 'mikavilpas/blink-ripgrep.nvim',
+      -- version = '*', -- use the latest stable version
     },
   },
   opts = {
@@ -48,17 +48,17 @@ return {
     },
     sources = {
       compat = {},
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep', 'lazydev' }, --copilot, 'dadbod', 'avante'
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' }, --copilot, 'dadbod', 'avante', 'ripgrep'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-        ripgrep = {
-          module = 'blink-ripgrep',
-          name = 'Ripgrep',
-          -- see the full configuration below for all available options
-          ---@module "blink-ripgrep"
-          ---@type blink-ripgrep.Options
-          opts = {},
-        },
+        -- ripgrep = {
+        --   module = 'blink-ripgrep',
+        --   name = 'Ripgrep',
+        --   -- see the full configuration below for all available options
+        --   ---@module "blink-ripgrep"
+        --   ---@type blink-ripgrep.Options
+        --   opts = {},
+        -- },
         -- avante = { module = 'blink-cmp-avante', name = 'Avante' },
         -- dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink },
         -- copilot = {

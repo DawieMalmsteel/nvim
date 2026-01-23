@@ -26,7 +26,7 @@ return {
     map('n', '<leader>0', '<Cmd>BufferLast<CR>', opts)
 
     -- Pin/unpin buffer
-    map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+    map('n', '<A-i>', '<Cmd>BufferPin<CR>', opts)
 
     -- Goto pinned/unpinned buffer
     --                 :BufferGotoPinned
@@ -49,7 +49,7 @@ return {
     --                 :BufferCloseBuffersRight
 
     -- Magic buffer-picking mode
-    map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+    map('n', '<A-p>', '<Cmd>BufferPick<CR>', opts)
     map('n', '<C-]>', '<Cmd>BufferPickDelete<CR>', opts)
 
     -- Sort automatically by...

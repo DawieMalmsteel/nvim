@@ -48,7 +48,7 @@ return {
     },
     sources = {
       compat = {},
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' }, --copilot, 'dadbod', 'avante', 'ripgrep'
+      default = { 'lsp', 'snippets', 'path', 'buffer', 'lazydev' }, --copilot, 'dadbod', 'avante', 'ripgrep'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         -- ripgrep = {
@@ -110,12 +110,12 @@ return {
     },
     fuzzy = {
       implementation = 'rust',
-      sorts = {
-        'exact',
-        'label', -- Primary sort: by label if still tied
-        'sort_text', -- Secondary sort: by sortText field if scores are equal
-        'score', -- Tertiary sort: by fuzzy matching score
-      },
+      -- sorts = {
+      --   'exact',
+      --   'label', -- Primary sort: by label if still tied
+      --   'sort_text', -- Secondary sort: by sortText field if scores are equal
+      --   'score', -- Tertiary sort: by fuzzy matching score
+      -- },
     },
     signature = { enabled = true },
   },

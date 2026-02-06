@@ -11,6 +11,11 @@ return {
           },
         },
       },
+      terminal = {
+        win = {
+          position = 'float',
+        },
+      },
       statuscolumn = {
         enabled = true,
         left = {

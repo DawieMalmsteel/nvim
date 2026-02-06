@@ -41,9 +41,9 @@ return {
       matchparen = {
         enabled = true,
         -- known issue where typing won't update matchparen highlight, disabled by default
-        cmdline = false,
+        cmdline = true,
         -- also include pairs not on top of the cursor, but surrounding the cursor
-        include_surrounding = false,
+        include_surrounding = true,
         group = 'BlinkPairsMatchParen',
         priority = 250,
       },

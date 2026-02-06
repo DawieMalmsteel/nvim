@@ -17,7 +17,12 @@ return {
         -- component direction. "col" or "row"
         dir = 'col',
         -- keymap for selection component: https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/menu#keymap
-        keymap = nil,
+        keymap = {
+          close = { '<Esc>', '<C-c>', 'q' },
+          focus_next = { 'j', '<Down>', '<Tab>' },
+          focus_prev = { 'k', '<Up>', '<S-Tab>' },
+          submit = { '<CR>' },
+        },
         -- options for nui Layout component: https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/layout
         layout = {
           position = '50%',

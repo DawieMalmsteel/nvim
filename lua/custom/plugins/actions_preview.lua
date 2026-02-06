@@ -5,7 +5,7 @@ return {
     require('actions-preview').setup {
       -- priority list of preferred backend
       -- backend = { 'minipick', 'nui', 'snacks' },
-      backend = { 'nui' },
+      backend = { 'nui', 'minipick', 'snacks' },
 
       highlight_command = {
         require('actions-preview.highlight').delta(),

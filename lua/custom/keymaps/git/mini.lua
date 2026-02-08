@@ -5,11 +5,6 @@ map('n', '<leader>gh', function()
   vim.cmd 'Pick git_hunks'
 end, { desc = 'Open git hunks (cwd to file dir)' })
 
-map('n', '<leader>gf', function()
-  vim.cmd('cd ' .. vim.fn.expand '%:p:h')
-  vim.cmd 'Pick git_files'
-end, { desc = 'Open git files (cwd to file dir)' })
-
 map('n', '<leader>gO', function()
   vim.cmd('cd ' .. vim.fn.expand '%:p:h')
   vim.cmd 'Pick git_commits'
@@ -27,10 +22,6 @@ end, { desc = 'Git commit' })
 map('n', '<leader>gC', function()
   vim.cmd 'Git commit --amend'
 end, { desc = 'Git commit amend' })
-
-map('n', '<leader>gD', function()
-  vim.cmd 'Git diff -- %'
-end, { desc = 'Git diff buffer' })
 
 map('n', '<leader>ga', function()
   vim.cmd 'Git add %'
@@ -55,16 +46,3 @@ end, { desc = 'Modified hunks (all)' })
 map('n', '<leader>gm', function()
   vim.cmd 'Pick git_hunks path="%"'
 end, { desc = 'Modified hunks (buffer)' })
-
--- local git_log_cmd = [[Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order]]
--- local git_log_buf_cmd = git_log_cmd .. ' --follow -- %'
---
--- local nmap_leader = function(suffix, rhs, desc)
---   vim.keymap.set('n', '<Leader>' .. suffix, rhs, { desc = desc })
--- end
--- local xmap_leader = function(suffix, rhs, desc)
---   vim.keymap.set('x', '<Leader>' .. suffix, rhs, { desc = desc })
--- end
--- nmap_leader('gv', '<Cmd>' .. git_log_cmd .. '<CR>', 'Log')
--- nmap_leader('gV', '<Cmd>' .. git_log_buf_cmd .. '<CR>', 'Log buffer')
--- xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')

@@ -2,6 +2,15 @@ return {
   'folke/which-key.nvim',
   event = 'VimEnter',
   opts = {
+    -- win.height.max = math.huge,
+    win = {
+      height = {
+        max = math.huge,
+      },
+      width = {
+        max = math.huge,
+      },
+    },
     preset = 'helix',
     delay = 0,
     icons = {

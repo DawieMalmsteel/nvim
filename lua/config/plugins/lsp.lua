@@ -296,7 +296,7 @@ return {
       vim.lsp.enable(name) -- Enable the server
     end
 
-    vim.lsp.enable 'gleam'
+    -- vim.lsp.enable 'gleam'
 
     local ensure = vim.tbl_keys(servers)
     vim.list_extend(ensure, { 'stylua' })

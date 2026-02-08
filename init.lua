@@ -8,4 +8,3 @@ require 'config.colors_cmd'
 -- User keymaps (kept separate as before)
 require 'custom.keymaps'
 require 'custom.cli'
-vim.cmd [[colorscheme catppuccin]]

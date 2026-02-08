@@ -88,6 +88,11 @@ return {
         },
       },
     },
+
+    config = function(_, opts)
+      require('catppuccin').setup(opts) -- calling setup is optional
+      vim.cmd [[colorscheme catppuccin]]
+    end,
   },
   {
     -- 'folke/tokyonight.nvim',

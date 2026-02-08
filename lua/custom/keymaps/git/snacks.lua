@@ -18,26 +18,26 @@ end, { desc = 'Pick and Change Git Branches' })
 
 map('n', '<leader>gS', function()
   Snacks.picker.git_stash { cwd = vim.fn.expand '%:p:h' }
-end, { desc = 'Git Stash' })
+end, { desc = 'Stash' })
 
 map('n', '<leader>gs', function()
   Snacks.picker.git_status { cwd = vim.fn.expand '%:p:h' }
-end, { desc = 'Git Status' })
+end, { desc = 'Status' })
 
 map('n', '<leader>gd', function()
   Snacks.picker.git_diff { cwd = vim.fn.expand '%:p:h' }
-end, { desc = 'Git diff' })
+end, { desc = 'diff' })
 
 map('n', '<leader>gF', function()
   Snacks.picker.git_log_file { cwd = vim.fn.expand '%:p:h' }
-end, { desc = 'Git Log File' })
+end, { desc = 'Log %' })
 
 map('n', '<leader>gb', function()
   local picker = require 'snacks.picker'
   picker.git_branches()
-end, { desc = 'Git Branches' })
+end, { desc = 'Branches' })
 
 map('n', '<leader>gL', function()
   local picker = require 'snacks.picker'
   picker.git_log_line()
-end, { desc = 'Git Log Line' })
+end, { desc = 'Log Line' })

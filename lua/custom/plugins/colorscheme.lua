@@ -70,7 +70,7 @@ return {
           ok = { 'underline' },
         },
         inlay_hints = {
-          background = false,
+          background = true,
         },
       },
       color_overrides = {},

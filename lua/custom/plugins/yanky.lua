@@ -9,7 +9,8 @@ return {
     {
       '<leader>p',
       function()
-        vim.cmd [[YankyRingHistory]]
+        local Snacks = require 'snacks'
+        Snacks.picker.yanky()
       end,
       mode = { 'n', 'x' },
       desc = 'Open Yank History',

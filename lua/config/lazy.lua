@@ -12,7 +12,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   { import = 'config.plugins' },
-  require 'kickstart.plugins.debug',
+  -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.gitsigns',
   { import = 'custom.plugins' },
 }, {

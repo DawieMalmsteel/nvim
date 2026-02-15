@@ -24,7 +24,7 @@ return {
         light = 'latte',
         dark = 'mocha',
       },
-      transparent_background = false,
+      transparent_background = true,
       float = {
         transparent = false, -- enable transparent floating windows
         solid = true, -- use solid styling for floating windows, see |winborder|

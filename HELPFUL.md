@@ -1,2 +1,4 @@
 - helpful app:
     - foliate
+    - cli tools:
+        - duf

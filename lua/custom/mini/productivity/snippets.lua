@@ -2,7 +2,17 @@ local M = function()
   -- Mini Snippets
   local mini_snippets = require 'mini.snippets'
   mini_snippets.setup {
-    snippets = { mini_snippets.gen_loader.from_lang() },
+    snippets = {
+      mini_snippets.gen_loader.from_lang(),
+
+      function(context)
+        local rel_path = '~/.config/nvim/snippets/' .. context.lang
+        if vim.fn.filereadable(rel_path) == 0 then
+          return
+        end
+        return MiniSnippets.read_file(rel_path)
+      end,
+    },
     mappings = {
       -- Expand snippet at cursor position. Created globally in Insert mode.
       expand = '<C-e>',

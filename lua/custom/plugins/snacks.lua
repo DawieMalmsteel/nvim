@@ -10,7 +10,7 @@ return {
           },
           layout = {
             box = 'horizontal',
-            backdrop = false,
+            backdrop = true,
             width = 0.8,
             height = 0.9,
             border = 'none',

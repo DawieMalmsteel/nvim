@@ -4,6 +4,13 @@ local M = function()
   mini_snippets.setup {
     snippets = {
       mini_snippets.gen_loader.from_lang(),
+      -- Example of friendly snippets
+      -- MiniSnippets.gen_loader.from_lang({
+      --     lang_patterns = {
+      --         tex = { 'latex.json' },
+      --         plaintex = { 'latex.json' },
+      --     },
+      -- }
 
       function(context)
         local rel_path = '~/.config/nvim/snippets/' .. context.lang

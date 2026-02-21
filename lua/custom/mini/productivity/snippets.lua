@@ -5,13 +5,14 @@ local M = function()
     snippets = {
       mini_snippets.gen_loader.from_lang(),
       -- Example of friendly snippets
-      -- MiniSnippets.gen_loader.from_lang({
-      --     lang_patterns = {
-      --         tex = { 'latex.json' },
-      --         plaintex = { 'latex.json' },
-      --     },
-      -- }
+      -- mini_snippets.gen_loader.from_lang {
+      --   lang_patterns = {
+      --     cs = { 'csharp.json' },
+      --     plaintex = { 'latex.json' },
+      --   },
+      -- },
 
+      -- custom loader for snippets stored in `~/.config/nvim/snippets/`
       function(context)
         local rel_path = '~/.config/nvim/snippets/' .. context.lang
         if vim.fn.filereadable(rel_path) == 0 then

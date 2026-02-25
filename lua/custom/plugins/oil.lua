@@ -12,7 +12,7 @@ return {
       ['<C-r>'] = 'actions.refresh',
       ['<C-p>'] = 'actions.preview',
       ['<C-t>'] = { 'actions.select', opts = { tab = true } },
-      ['<C-c>'] = { 'actions.close', mode = 'n' },
+      ['q'] = { 'actions.close', mode = 'n' },
       ['-'] = { 'actions.parent', mode = 'n' },
       ['_'] = { 'actions.open_cwd', mode = 'n' },
       ['`'] = { 'actions.cd', mode = 'n' },

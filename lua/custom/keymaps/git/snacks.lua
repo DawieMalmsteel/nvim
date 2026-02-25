@@ -6,7 +6,7 @@ map('n', '<leader>gl', function()
   Snacks.lazygit.log { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Lazygit Logs' })
 
-map('n', '<leader>gg', function()
+map('n', '<leader>gG', function()
   local Snacks = require 'snacks'
   Snacks.lazygit { cwd = vim.fn.expand '%:p:h' }
 end, { desc = 'Lazygit' })

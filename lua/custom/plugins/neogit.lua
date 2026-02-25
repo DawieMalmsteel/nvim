@@ -3,8 +3,6 @@ return {
   lazy = true,
   dependencies = {
     'nvim-lua/plenary.nvim', -- required
-
-    'esmuellert/codediff.nvim', -- optional
   },
   cmd = 'Neogit',
   keys = {

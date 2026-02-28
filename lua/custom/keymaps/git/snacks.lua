@@ -41,3 +41,8 @@ map('n', '<leader>gL', function()
   local picker = require 'snacks.picker'
   picker.git_log_line()
 end, { desc = 'Log Line' })
+
+map('n', '<leader>go', function()
+  vim.cmd('cd ' .. vim.fn.expand '%:p:h')
+  require('mini.diff').toggle_overlay(0)
+end, { desc = 'overlay' })

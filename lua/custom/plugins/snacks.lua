@@ -183,6 +183,84 @@ return {
         end,
         desc = 'C[a]lls Outgoing',
       },
+      {
+        '<leader>sb',
+        function()
+          local curr_path = vim.fn.expand '%:p'
+          Snacks.picker.todo_comments { ---@diagnostic disable-line: undefined-field
+            transform = function(item)
+              local item_path = vim.fn.fnamemodify(item.cwd .. '/' .. item.file, ':p')
+              return item_path == curr_path
+            end,
+          }
+        end,
+        desc = 'buffer Todo',
+      },
+      {
+        '<leader>sa',
+        function()
+          Snacks.picker.todo_comments()
+        end,
+        desc = 'All Todo',
+      },
+      {
+        '<leader>st',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'TODO' } }
+        end,
+        desc = 'Todo',
+      },
+      {
+        '<leader>se',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'ERROR' } }
+        end,
+        desc = 'ERROR',
+      },
+      {
+        '<leader>sn',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'NOTE' } }
+        end,
+        desc = 'NOTE',
+      },
+      {
+        '<leader>sf',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'FIX' } }
+        end,
+        desc = 'FIX',
+      },
+      {
+        '<leader>sw',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'WARN' } }
+        end,
+        desc = 'WARN',
+      },
+
+      {
+        '<leader>sp',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'PERF' } }
+        end,
+        desc = 'PERF',
+      },
+
+      {
+        '<leader>sh',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'HACK' } }
+        end,
+        desc = 'HACK',
+      },
+      {
+        '<leader>sT',
+        function()
+          Snacks.picker.todo_comments { keywords = { 'TEST' } }
+        end,
+        desc = 'TEST',
+      },
     },
   },
 }

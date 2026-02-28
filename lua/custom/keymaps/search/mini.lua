@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
-map('n', '<leader>sh', '<CMD>Pick help<CR>', { desc = 'Search [H]elp' })
+map('n', '<leader>sH', '<CMD>Pick help<CR>', { desc = 'Search [H]elp' })
 
 map('n', '<leader>sG', function()
   vim.cmd('cd ' .. vim.env.PWD or vim.fn.getcwd())
@@ -16,7 +16,7 @@ end, { desc = 'Search by Grep in file root or cwd' })
 
 map('n', '<leader>sr', '<CMD>Pick resume<CR>', { desc = 'Search Resume' })
 
-map('n', '<leader>sw', function()
+map('n', '<leader>sW', function()
   local mini_pick = require 'mini.pick'
   mini_pick.builtin.grep { pattern = vim.fn.expand '<cword>' }
 end, { desc = 'Search current Word' })

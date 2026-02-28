@@ -5,8 +5,8 @@ return {
     keymaps = {
       view = {
         quit = 'q', -- Close diff tab
-        toggle_explorer = '<leader>tb', -- Toggle explorer visibility (explorer mode only)
-        focus_explorer = '<leader>te', -- Focus explorer panel (explorer mode only)
+        toggle_explorer = '<leader>Tb', -- Toggle explorer visibility (explorer mode only)
+        focus_explorer = '<leader>Te', -- Focus explorer panel (explorer mode only)
         next_hunk = ']c', -- Jump to next change
         prev_hunk = '[c', -- Jump to previous change
         next_file = '<C-n>', -- Next file in explorer/history mode

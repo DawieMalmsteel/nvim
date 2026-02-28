@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
-map('n', '<leader>td', function()
+map('n', '<leader>Td', function()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)
   else
@@ -8,16 +8,16 @@ map('n', '<leader>td', function()
   end
 end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 
-map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
+map('n', '<leader>Tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
 
-map('n', '<leader>tm', function()
+map('n', '<leader>Tm', function()
   local mini_map = require 'mini.map'
   mini_map.toggle()
 end, { desc = 'Toggle Mini Map' })
 
-map('n', '<leader>ts', '<CMD>ShowkeysToggle<CR>', { desc = 'Toggle showkeys' })
+map('n', '<leader>Ts', '<CMD>ShowkeysToggle<CR>', { desc = 'Toggle showkeys' })
 
--- map('n', '<leader>tw', function()
+-- map('n', '<leader>Tw', function()
 --   if vim.wo.wrap then
 --     vim.wo.wrap = false
 --     vim.wo.linebreak = false
@@ -33,9 +33,9 @@ map('n', '<leader>ts', '<CMD>ShowkeysToggle<CR>', { desc = 'Toggle showkeys' })
 --   end
 -- end, { desc = 'Toggle Wrap' })
 
--- map('n', '<leader>tT', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })
+-- map('n', '<leader>TT', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })
 
-map('n', '<leader>tn', function()
+map('n', '<leader>Tn', function()
   -- :set laststatus=0
   -- :set nonumber=0
   -- :set statuscolumn=""

@@ -2,11 +2,23 @@ local M = function()
   local statusline = require 'mini.statusline'
   local icons = require 'mini.icons'
 
+  local function get_scheme_bg()
+    -- Lấy thông tin highlight của nhóm 'Normal'
+    local hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
+    -- hl.bg là một số thập phân, ta cần chuyển sang hex
+    if hl and hl.bg then
+      return string.format('#%06x', hl.bg)
+    end
+    return 'NONE' -- Trả về NONE nếu theme trong suốt
+  end
+
   -- 1. ĐỊNH NGHĨA MÀU SẮC (HIGHLIGHTS)
   local function setup_colors()
     local p = function(name, opts)
       vim.api.nvim_set_hl(0, name, opts)
     end
+    local theme_bg = get_scheme_bg()
+    local root_bg = '#89b4fa' -- Màu xanh của viên thuốc 1
 
     -- Git & Diff colors
     p('StatusLineGitBranch', { fg = '#b4befe', bold = true })
@@ -19,6 +31,20 @@ local M = function()
     p('StatusLineSubtle', { fg = '#585b70' })
     p('StatusLineFilename', { fg = '#cdd6f4', bold = true })
     p('StatusLineHarpoonActive', { fg = '#89dceb', bold = true })
+
+    -- Ký tự  thứ nhất:
+    -- FG là màu nền của Khối 1 (Xanh)
+    -- BG là màu nền của Theme (theme_bg) -> Tạo ra viên thuốc nằm trên nền theme
+    p('StatusLineSep1', { fg = theme_bg, bg = root_bg })
+
+    -- Khối 2 (Viên thuốc 2):
+    -- Nền là màu của Theme, FG là màu Xanh để hiện icon
+    p('StatusLineRootSub', { fg = theme_bg, bg = root_bg })
+
+    -- Ký tự  thứ hai:
+    -- FG là màu của Theme (theme_bg)
+    -- BG là NONE (trong suốt) để kết thúc
+    p('StatusLineSep2', { fg = root_bg, bg = theme_bg })
   end
   setup_colors()
 
@@ -40,7 +66,14 @@ local M = function()
   -- Project Root
   local function get_root()
     local cwd = vim.fn.getcwd()
-    return string.format('%%#StatusLineRoot#󱉭 %s %%#StatusLineRoot#|', vim.fs.basename(cwd))
+    local base = vim.fs.basename(cwd)
+
+    return table.concat {
+      '%#StatusLineRoot#󱉭 ' .. base .. ' ', -- Nội dung viên thuốc 1 (Nền Xanh)
+      '%#StatusLineSep1#', --  thứ nhất (Nối Xanh sang Cam)
+      -- '%#StatusLineRootSub#  ', -- Nội dung viên thuốc 2 (Nền Cam)
+      '%#StatusLineSep2#', --  thứ hai (Kết thúc Cam sang nền Statusline)
+    }
   end
 
   -- Diagnostics (Không có khoảng trắng thừa)

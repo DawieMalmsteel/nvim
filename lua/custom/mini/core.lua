@@ -19,7 +19,7 @@ local modules = {
   'custom.mini.productivity.snippets',
   -- 'custom.mini.editing.completion',
   -- 'custom.mini.productivity.sessions',
-  -- 'custom.mini.productivity.git',
+  'custom.mini.productivity.git',
   'custom.mini.ui.statusline',
   'custom.mini.misc',
 }

@@ -76,7 +76,7 @@ local M = function()
         table.insert(nodes, is_cur and ('%#StatusLineHarpoonActive#' .. i) or ('%#StatusLineSubtle#' .. i))
       end
     end
-    return '%#StatusLineGitBranch#󰃀 ' .. table.concat(nodes, ' ')
+    return '%#StatusLineHarpoonActive#󰃀 ' .. table.concat(nodes, ' ')
   end
 
   -- Git & Diff (Cần mini.git)

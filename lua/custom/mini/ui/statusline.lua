@@ -76,6 +76,9 @@ local M = function()
         table.insert(nodes, is_cur and ('%#StatusLineHarpoonActive#' .. i) or ('%#StatusLineSubtle#' .. i))
       end
     end
+    if #nodes == 0 then
+      return ''
+    end
     return '%#StatusLineHarpoonActive#󰃀 ' .. table.concat(nodes, ' ')
   end
 

@@ -40,7 +40,7 @@ local M = function()
   -- Project Root
   local function get_root()
     local cwd = vim.fn.getcwd()
-    return string.format('%%#StatusLineRoot#󱉭 %s %%#StatusLineRoot#)', vim.fs.basename(cwd))
+    return string.format('%%#StatusLineRoot#󱉭 %s %%#StatusLineRoot#|', vim.fs.basename(cwd))
   end
 
   -- Diagnostics (Không có khoảng trắng thừa)

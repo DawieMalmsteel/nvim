@@ -95,24 +95,58 @@ local M = function()
     if not ok then
       return ''
     end
+
     local list = harpoon:list()
-    if list:length() == 0 then
+    local current_path = vim.api.nvim_buf_get_name(0)
+
+    local valid_items = {} -- Chứa các file thực sự có dữ liệu
+    local active_slot = nil -- Slot của file hiện tại (nếu có)
+
+    -- 1. Quét TOÀN BỘ danh sách Harpoon (không dừng lại giữa chừng)
+    for i = 1, list:length() do
+      local item = list:get(i)
+      -- Kiểm tra: item tồn tại VÀ có đường dẫn VÀ đường dẫn không rỗng
+      if item and item.value and item.value ~= '' then
+        table.insert(valid_items, { slot = i, value = item.value })
+
+        -- Kiểm tra xem file hiện tại có nằm ở slot 'i' này không
+        if vim.fn.fnamemodify(item.value, ':p') == current_path then
+          active_slot = i
+        end
+      end
+    end
+
+    -- Nếu không có file nào hợp lệ thì biến mất luôn
+    if #valid_items == 0 then
       return ''
     end
 
-    local cur_path = vim.api.nvim_buf_get_name(0)
+    -- 2. Xây dựng danh sách hiển thị (Tối đa 4 item đầu tiên)
     local nodes = {}
-    for i = 1, list:length() do
-      local item = list:get(i)
-      if item then
-        local is_cur = (vim.fn.fnamemodify(item.value, ':p') == cur_path)
-        table.insert(nodes, is_cur and ('%#StatusLineHarpoonActive#' .. i) or ('%#StatusLineSubtle#' .. i))
+    local max_view = 4
+    for i = 1, math.min(#valid_items, max_view) do
+      local item = valid_items[i]
+      if item.slot == active_slot then
+        -- File đang mở: Hiện số slot của nó
+        table.insert(nodes, '%#StatusLineHarpoonActive#' .. item.slot)
+      else
+        -- File khác: Hiện số slot mờ
+        table.insert(nodes, '%#StatusLineSubtle#' .. item.slot)
       end
     end
-    if #nodes == 0 then
-      return ''
+
+    -- -- 3. Nếu tổng số file hợp lệ > 4, thêm dấu ba chấm để báo hiệu còn nữa
+    -- if #valid_items > max_view then
+    --   table.insert(nodes, '%#StatusLineSubtle#…')
+    -- end
+
+    -- 3. Nếu tổng số file hợp lệ < 4 return
+    if #valid_items <= max_view then
+      return string.format('%%#StatusLineHarpoonActive#󰃀:%s ', table.concat(nodes, ' '), #valid_items)
     end
-    return '%#StatusLineHarpoonActive#󰃀 ' .. table.concat(nodes, ' ')
+
+    -- 4. Trả về chuỗi: Icon + List 4 số + (Tổng số file hợp lệ)
+    return string.format('%%#StatusLineHarpoonActive#󰃀⋮%s %%#StatusLineSubtle#(%d)', table.concat(nodes, ' '), #valid_items)
   end
 
   -- Git & Diff (Cần mini.git)

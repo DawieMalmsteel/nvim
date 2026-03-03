@@ -73,7 +73,7 @@ local M = function()
       local item = list:get(i)
       if item then
         local is_cur = (vim.fn.fnamemodify(item.value, ':p') == cur_path)
-        table.insert(nodes, is_cur and ('%#StatusLineHarpoonActive#󰐊' .. i) or ('%#StatusLineSubtle#' .. i))
+        table.insert(nodes, is_cur and ('%#StatusLineHarpoonActive#' .. i) or ('%#StatusLineSubtle#' .. i))
       end
     end
     return '%#StatusLineGitBranch#󰃀 ' .. table.concat(nodes, ' ')

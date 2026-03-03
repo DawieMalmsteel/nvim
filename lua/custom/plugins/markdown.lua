@@ -38,8 +38,8 @@ return {
       ---@param ctx render.md.heading.Context
       ---@return string?
       icons = function(ctx)
-        return (''):rep(ctx.level) .. ''
-        -- return '' .. (''):rep(ctx.level)
+        -- return (''):rep(ctx.level) .. ''
+        return '' .. (''):rep(ctx.level)
       end,
     },
   },

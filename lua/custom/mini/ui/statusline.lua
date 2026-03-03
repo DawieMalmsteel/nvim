@@ -69,7 +69,7 @@ local M = function()
     local base = vim.fs.basename(cwd)
 
     return table.concat {
-      '%#StatusLineRoot#󱉭 ' .. base .. ' ', -- Nội dung viên thuốc 1 (Nền Xanh)
+      '%#StatusLineRoot#󱉭 ' .. base, -- Nội dung viên thuốc 1 (Nền Xanh)
       '%#StatusLineSep1#', --  thứ nhất (Nối Xanh sang Cam)
       -- '%#StatusLineRootSub#  ', -- Nội dung viên thuốc 2 (Nền Cam)
       '%#StatusLineSep2#', --  thứ hai (Kết thúc Cam sang nền Statusline)

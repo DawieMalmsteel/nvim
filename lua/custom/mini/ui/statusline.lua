@@ -114,7 +114,7 @@ local M = function()
     end
     local icon, icon_hl = icons.get('file', path)
     local name = vim.fn.expand '%:t'
-    local mod = vim.bo.modified and ' ●' or ''
+    local mod = vim.bo.modified and '[+]' or ''
     return string.format('%%#%s#%s %%#StatusLineFilename#%s%s', icon_hl or 'Normal', icon or '', name, mod)
   end
 
@@ -137,7 +137,7 @@ local M = function()
         local mode_r = string.format(' %%#%s# %s ', mode_hl, mode_c)
 
         -- XỬ LÝ KHỐI LEFT: Lọc bỏ các thành phần rỗng để tránh thừa dấu cách
-        local left_components = { get_root(), get_diag(), get_harpoon(), get_recording() }
+        local left_components = { get_root(), get_harpoon(), get_diag(), get_recording() }
         local valid_left = {}
         for _, comp in ipairs(left_components) do
           if comp ~= '' then

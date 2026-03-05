@@ -195,7 +195,8 @@ local M = function()
       display_name = vim.fn.fnamemodify(oil_path, ':~')
       -- icon = '󰉋' -- Icon folder
       -- icon_hl = 'MiniIconsAzure' -- Màu xanh cho folder
-      icon, icon_hl = icons.get('file', buf_name)
+      icon = icons.get('file', buf_name)
+      icon_hl = 'MiniIconsAzure' -- Màu xanh cho folder
     else
       -- Nếu là file bình thường
       display_name = vim.fn.fnamemodify(buf_name, ':t')

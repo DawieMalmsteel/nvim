@@ -211,7 +211,7 @@ local M = function()
   -- Recording status
   local function get_recording()
     local reg = vim.fn.reg_recording()
-    return reg ~= '' and ('%#StatusLineFilename#recording @' .. reg) or ''
+    return reg ~= '' and ('%#StatusLineGitDel#@' .. reg) or ''
   end
 
   -- 4. CẤU HÌNH CHÍNH

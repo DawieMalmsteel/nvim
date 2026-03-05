@@ -178,14 +178,33 @@ local M = function()
 
   -- Center: Tên File
   local function get_center_file()
-    local path = vim.fn.expand '%:p'
-    if path == '' then
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    if buf_name == '' then
       return '[No Name]'
     end
-    local icon, icon_hl = icons.get('file', path)
-    local name = vim.fn.expand '%:t'
-    local mod = vim.bo.modified and '[+]' or ''
-    return string.format('%%#%s#%s %%#StatusLineFilename#%s%s', icon_hl or 'Normal', icon or '', name, mod)
+
+    local display_name = ''
+    local icon = ''
+    local icon_hl = ''
+
+    if vim.bo.filetype == 'oil' then
+      -- Nếu là Oil, lấy đường dẫn thư mục và hiển thị icon folder
+      -- Loại bỏ tiền tố oil://
+      local oil_path = buf_name:gsub('^oil://', '')
+      -- Rút gọn đường dẫn (ví dụ: /home/user -> ~)
+      display_name = vim.fn.fnamemodify(oil_path, ':~')
+      -- icon = '󰉋' -- Icon folder
+      -- icon_hl = 'MiniIconsAzure' -- Màu xanh cho folder
+      icon, icon_hl = icons.get('file', buf_name)
+    else
+      -- Nếu là file bình thường
+      display_name = vim.fn.fnamemodify(buf_name, ':t')
+      icon, icon_hl = icons.get('file', buf_name)
+    end
+
+    local mod = vim.bo.modified and ' %#StatusLineGitMod#[+]' or ''
+
+    return string.format('%%#%s#%s %%#StatusLineFilename#%s%s', icon_hl or 'Normal', icon or '', display_name, mod)
   end
 
   -- Recording status

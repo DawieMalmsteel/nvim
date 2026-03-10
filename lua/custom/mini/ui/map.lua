@@ -2,7 +2,8 @@ local M = function()
   local mini_map = require 'mini.map'
   mini_map.setup {
     symbols = {
-      encode = mini_map.gen_encode_symbols.dot '4x2',
+      encode = mini_map.gen_encode_symbols.dot '3x2',
+      -- encode = nil,
     },
     integrations = {
       mini_map.gen_integration.builtin_search(),

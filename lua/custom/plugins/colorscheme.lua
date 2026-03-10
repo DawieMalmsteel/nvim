@@ -76,7 +76,11 @@ return {
 
     config = function(_, opts)
       require('catppuccin').setup(opts) -- calling setup is optional
-      vim.cmd [[colorscheme catppuccin]]
+      vim.cmd [[colorscheme monokai-night]]
     end,
+  },
+  {
+    'ZzurabSiprashvili/monokai-night.nvim',
+    priority = 1000,
   },
 }

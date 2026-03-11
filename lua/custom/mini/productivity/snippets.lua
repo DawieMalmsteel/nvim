@@ -32,5 +32,38 @@ local M = function()
     },
   }
   -- MiniSnippets.start_lsp_server()
+
+  -- Override default_select to inject kind + filetype into vim.ui.select
+  -- (default_select hardcodes its own opts table, so we must replicate the call)
+  MiniSnippets.default_select = function(snippets, insert, opts)
+    insert = insert or MiniSnippets.default_insert
+    opts = opts or {}
+
+    -- Same single-snippet shortcut as the original
+    if #snippets == 1 and (opts.insert_single == nil or opts.insert_single == true) then
+      insert(snippets[1])
+      return
+    end
+
+    -- Replicate format_item from the original default_select
+    local prefix_width = 0
+    for _, s in ipairs(snippets) do
+      prefix_width = math.max(prefix_width, vim.fn.strdisplaywidth(s.prefix or '<No prefix>'))
+    end
+    local format_item = function(s)
+      local prefix = s.prefix or '<No prefix>'
+      local desc = s.desc or s.description or '<No description>'
+      local pad = string.rep(' ', prefix_width - vim.fn.strdisplaywidth(prefix))
+      return prefix .. pad .. ' │ ' .. desc
+    end
+
+    local on_choice = vim.schedule_wrap(function(item, _) insert(item) end)
+    vim.ui.select(snippets, {
+      prompt = 'Snippets',
+      format_item = format_item,
+      kind = 'minisnippets',
+      snacks = { _snippet_ft = vim.bo.filetype },
+    }, on_choice)
+  end
 end
 return M

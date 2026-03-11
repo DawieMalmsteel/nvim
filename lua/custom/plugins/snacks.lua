@@ -6,6 +6,27 @@ return {
         ui_select = true,
         -- Override preview for vim.ui.select kinds that don't have item.file
         kinds = {
+          -- mini.snippets: preview snippet body with current buffer's filetype highlighting
+          minisnippets = {
+            preview = function(ctx)
+              local snippet = ctx.item and ctx.item.item
+              if type(snippet) ~= 'table' then
+                return
+              end
+              local body = snippet.body
+              if type(body) == 'table' then
+                body = table.concat(body, '\n')
+              end
+              if type(body) ~= 'string' or body == '' then
+                ctx.preview:reset()
+                ctx.preview:set_lines { '(No body)' }
+                return
+              end
+              local ft = ctx.picker.opts._snippet_ft or ''
+              ctx.item.preview = { text = body, ft = ft, loc = false }
+              Snacks.picker.preview.preview(ctx)
+            end,
+          },
           -- LSP code actions: build a real unified diff from action.edit
           -- vim.ui.select items for codeaction have shape: {action: lsp.CodeAction, ctx: lsp.HandlerContext}
           codeaction = {

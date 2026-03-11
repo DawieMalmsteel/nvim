@@ -77,12 +77,15 @@ return {
 
     config = function(_, opts)
       require('catppuccin').setup(opts) -- calling setup is optional
-      -- vim.cmd [[colorscheme monokai-night]]
-      vim.cmd [[colorscheme catppuccin]]
+      vim.cmd [[colorscheme oxocarbon]]
+      -- vim.cmd [[colorscheme catppuccin]]
     end,
   },
   {
     'ZzurabSiprashvili/monokai-night.nvim',
     priority = 1000,
+  },
+  {
+    'nyoom-engineering/oxocarbon.nvim',
   },
 }

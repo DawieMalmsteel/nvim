@@ -77,7 +77,7 @@ return {
 
     config = function(_, opts)
       require('catppuccin').setup(opts) -- calling setup is optional
-      vim.cmd [[colorscheme oxocarbon]]
+      vim.cmd [[colorscheme vscode]]
       -- vim.cmd [[colorscheme catppuccin]]
     end,
   },
@@ -87,5 +87,8 @@ return {
   },
   {
     'nyoom-engineering/oxocarbon.nvim',
+  },
+  {
+    'Mofiqul/vscode.nvim',
   },
 }

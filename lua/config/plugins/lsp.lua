@@ -237,7 +237,7 @@ return {
       bacon_ls = {
         enabled = true,
       },
-      solargraph = {},
+      -- solargraph = {},
       -- vtsls = {
       --   filetypes = {
       --     'javascript',

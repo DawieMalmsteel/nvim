@@ -24,20 +24,21 @@ return {
       no_italic = false, -- Force no italic
       no_bold = false, -- Force no bold
       no_underline = false, -- Force no underline
-      styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-        comments = {}, -- Change the style of comments
+      styles = {
+        comments = { 'italic' },
         conditionals = { 'italic' },
         loops = { 'italic' },
-        functions = { 'italic' },
-        keywords = { 'italic' },
-        strings = { 'italic' },
-        variables = { 'italic' },
-        numbers = { 'italic' },
-        booleans = { 'italic' },
-        properties = { 'italic' },
-        types = { 'italic' },
-        operators = { 'italic' },
-        miscs = { 'italic' }, -- Uncomment to turn off hard-coded styles
+        keywords = { 'italic', 'bold' },
+
+        functions = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+        miscs = {},
       },
       lsp_styles = { -- Handles the style of specific lsp hl groups (see `:h lsp-highlight`).
         virtual_text = {
@@ -76,7 +77,8 @@ return {
 
     config = function(_, opts)
       require('catppuccin').setup(opts) -- calling setup is optional
-      vim.cmd [[colorscheme monokai-night]]
+      -- vim.cmd [[colorscheme monokai-night]]
+      vim.cmd [[colorscheme catppuccin]]
     end,
   },
   {

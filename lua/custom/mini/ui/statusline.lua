@@ -17,7 +17,8 @@ local M = function()
     local p = function(name, opts)
       vim.api.nvim_set_hl(0, name, opts)
     end
-    local theme_bg = get_scheme_bg()
+    -- local theme_bg = get_scheme_bg()
+    local theme_bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg
     local root_bg = '#89b4fa' -- Màu xanh của viên thuốc 1
 
     -- Git & Diff colors

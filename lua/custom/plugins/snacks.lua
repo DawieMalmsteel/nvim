@@ -4,6 +4,141 @@ return {
     opts = {
       picker = {
         ui_select = true,
+        -- Override preview for vim.ui.select kinds that don't have item.file
+        kinds = {
+          -- LSP code actions: build a real unified diff from action.edit
+          -- vim.ui.select items for codeaction have shape: {action: lsp.CodeAction, ctx: lsp.HandlerContext}
+          codeaction = {
+            preview = function(ctx)
+              local raw = ctx.item and ctx.item.item
+              if type(raw) ~= 'table' then
+                ctx.preview:notify('No action data', 'warn', { item = false })
+                return
+              end
+              local action = raw.action
+              local lsp_ctx = raw.ctx
+              if type(action) ~= 'table' then
+                ctx.preview:notify('No action data', 'warn', { item = false })
+                return
+              end
+
+              local client = lsp_ctx and vim.lsp.get_client_by_id(lsp_ctx.client_id)
+              local enc = client and client.offset_encoding or 'utf-16'
+
+              -- Build diff from a resolved action that has .edit
+              local function render_edit(resolved)
+                local edit = resolved.edit
+                if not edit then
+                  -- Command-only action — show command info
+                  local lines = {
+                    'Title:   ' .. (resolved.title or '?'),
+                    'Kind:    ' .. (resolved.kind or '?'),
+                    '',
+                  }
+                  if resolved.command then
+                    local cmd = type(resolved.command) == 'table' and resolved.command or resolved
+                    lines[#lines + 1] = 'Command: ' .. (cmd.command or '?')
+                    if cmd.arguments then
+                      lines[#lines + 1] = ''
+                      vim.list_extend(lines, vim.split(vim.inspect(cmd.arguments), '\n', { plain = true }))
+                    end
+                  end
+                  ctx.preview:reset()
+                  ctx.preview:set_lines(lines)
+                  return
+                end
+
+                -- Collect (uri, TextEdit[]) pairs — skip file-op entries (create/rename/delete)
+                local file_edits = {}
+                if edit.changes then
+                  for uri, edits in pairs(edit.changes) do
+                    file_edits[#file_edits + 1] = { uri = uri, edits = edits }
+                  end
+                elseif edit.documentChanges then
+                  for _, change in ipairs(edit.documentChanges) do
+                    -- no .kind means TextDocumentEdit; .kind means CreateFile/RenameFile/DeleteFile
+                    if not change.kind and change.textDocument then
+                      file_edits[#file_edits + 1] = { uri = change.textDocument.uri, edits = change.edits }
+                    end
+                  end
+                end
+
+                if #file_edits == 0 then
+                  ctx.preview:reset()
+                  ctx.preview:set_lines { '(No text edits)' }
+                  return
+                end
+
+                local diff_parts = {}
+                for _, fe in ipairs(file_edits) do
+                  local fname = vim.uri_to_fname(fe.uri)
+                  -- Use vim.uri_to_bufnr + bufload so we always have a valid buffer
+                  local file_bufnr = vim.uri_to_bufnr(fe.uri)
+                  vim.fn.bufload(file_bufnr)
+                  local original = vim.api.nvim_buf_get_lines(file_bufnr, 0, -1, false)
+
+                  -- Apply edits on a scratch buffer (correct encoding, handles overlaps)
+                  local scratch = vim.api.nvim_create_buf(false, true)
+                  vim.api.nvim_buf_set_lines(scratch, 0, -1, false, original)
+                  vim.lsp.util.apply_text_edits(fe.edits, scratch, enc)
+                  local modified = vim.api.nvim_buf_get_lines(scratch, 0, -1, false)
+                  vim.api.nvim_buf_delete(scratch, { force = true })
+
+                  local diff = vim.diff(table.concat(original, '\n') .. '\n', table.concat(modified, '\n') .. '\n', { ctxlen = 3 })
+                  if diff and diff ~= '' then
+                    local short = vim.fn.fnamemodify(fname, ':~:.')
+                    diff_parts[#diff_parts + 1] = '--- a/' .. short .. '\n+++ b/' .. short .. '\n' .. vim.trim(diff)
+                  end
+                end
+
+                if #diff_parts == 0 then
+                  ctx.preview:reset()
+                  ctx.preview:set_lines { '(No changes)' }
+                  return
+                end
+
+                ctx.item.diff = table.concat(diff_parts, '\n')
+                Snacks.picker.preview.diff(ctx)
+              end
+
+              -- 1. Already resolved and cached on the item → skip network round-trip
+              if ctx.item._resolved then
+                render_edit(ctx.item._resolved)
+                return
+              end
+
+              -- 2. Action already has .edit → no need to resolve
+              if action.edit then
+                ctx.item._resolved = action
+                render_edit(action)
+                return
+              end
+
+              -- 3. Need codeAction/resolve (e.g. rust-analyzer refactors)
+              if client and client:supports_method 'codeAction/resolve' then
+                ctx.preview:reset()
+                ctx.preview:set_lines { 'Resolving ' .. (action.title or '') .. '...' }
+
+                client:request('codeAction/resolve', action, function(err, resolved)
+                  vim.schedule(function()
+                    if ctx.picker.closed then
+                      return
+                    end
+                    ctx.item._resolved = (not err and resolved) or action
+                    -- Clear cached preview item so snacks re-runs the previewer
+                    ctx.picker.preview.item = nil
+                    ctx.picker:show_preview()
+                  end)
+                end, lsp_ctx.bufnr)
+                return
+              end
+
+              -- 4. Server does not support resolve — command-only action
+              ctx.item._resolved = action
+              render_edit(action)
+            end,
+          },
+        },
         layout = {
           select = {
             layout = 'ivy',
@@ -33,6 +168,15 @@ return {
             native = true,
             args = { '-c', 'delta.line-numbers=false', '-c', 'delta.side-by-side=false' },
           },
+          diff = {
+            style = 'fancy',
+            cmd = { 'delta' },
+          },
+        },
+        file = {
+          max_size = 1024 * 1024, -- 1MB
+          max_line_length = 500, -- max line length
+          ft = nil, ---@type string? filetype for highlighting. Use `nil` for auto detect
         },
       },
       terminal = {

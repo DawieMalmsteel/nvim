@@ -23,8 +23,20 @@ return {
                 return
               end
               local ft = ctx.picker.opts._snippet_ft or ''
-              ctx.item.preview = { text = body, ft = ft, loc = false }
-              Snacks.picker.preview.preview(ctx)
+              -- Build lines: desc + separator + blank + body
+              local lines = {}
+              local desc = snippet.desc or snippet.description or ''
+              if desc ~= '' then
+                vim.list_extend(lines, vim.split(desc, '\n', { plain = true }))
+                lines[#lines + 1] = string.rep('─', 40)
+                lines[#lines + 1] = ''
+              end
+              vim.list_extend(lines, vim.split(body, '\n', { plain = true }))
+              ctx.preview:reset()
+              ctx.preview:set_lines(lines)
+              if ft ~= '' then
+                ctx.preview:highlight({ ft = ft })
+              end
             end,
           },
           -- LSP code actions: build a real unified diff from action.edit

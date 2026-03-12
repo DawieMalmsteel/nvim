@@ -75,11 +75,11 @@ return {
       },
     },
 
-    config = function(_, opts)
-      require('catppuccin').setup(opts) -- calling setup is optional
-      vim.cmd [[colorscheme vscode]]
-      -- vim.cmd [[colorscheme catppuccin]]
-    end,
+    -- config = function(_, opts)
+    --   require('catppuccin').setup(opts) -- calling setup is optional
+    --   vim.cmd [[colorscheme vscode]]
+    --   vim.cmd [[colorscheme catppuccin]]
+    -- end,
   },
   {
     'ZzurabSiprashvili/monokai-night.nvim',
@@ -90,5 +90,15 @@ return {
   },
   {
     'Mofiqul/vscode.nvim',
+  },
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require('onedark').setup {
+        style = 'cool',
+      }
+      require('onedark').load()
+    end,
   },
 }

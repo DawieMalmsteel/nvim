@@ -35,7 +35,7 @@ return {
               ctx.preview:reset()
               ctx.preview:set_lines(lines)
               if ft ~= '' then
-                ctx.preview:highlight({ ft = ft })
+                ctx.preview:highlight { ft = ft }
               end
             end,
           },

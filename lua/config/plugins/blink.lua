@@ -41,6 +41,7 @@ return {
       default = { 'lsp', 'snippets', 'path', 'buffer', 'lazydev' }, --copilot, 'dadbod', 'avante', 'ripgrep'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        dadbod_grip = { name = 'Grip SQL', module = 'dadbod-grip.completion.blink' },
         -- ripgrep = {
         --   module = 'blink-ripgrep',
         --   name = 'Ripgrep',

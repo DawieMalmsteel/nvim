@@ -118,7 +118,7 @@ Giải thích từng file
 
 - todo.lua
   - folke/todo-comments.nvim: tô sáng TODO/FIXME/…; tắt signs (gọn hơn).
-  - Tìm TODO: :TodoTelescope (nếu dùng telescope) hoặc :TodoQuickFix.
+  - Tìm to do: :TodoTelescope (nếu dùng telescope) hoặc :TodoQuickFix.
 
 - treesitter.lua
   - nvim-treesitter: highlight, indent, và textobjects di chuyển.

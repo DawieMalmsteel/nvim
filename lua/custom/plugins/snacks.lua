@@ -227,7 +227,7 @@ return {
           'sign',
           'fold',
         },
-      }, -- ERROR:this make error with default nvim statuscolumn, disable it
+      },
       image = { enabled = true, doc = { inline = false } },
       -- Centered floating input
       input = {

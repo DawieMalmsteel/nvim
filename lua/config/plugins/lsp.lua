@@ -195,6 +195,9 @@ return {
       rust_analyzer = {
         settings = {
           ['rust-analyzer'] = {
+            cachePriming = {
+              enable = false,
+            },
             cargo = {
               allFeatures = true,
               loadOutDirsFromCheck = true,

@@ -92,8 +92,14 @@ return {
 
     config = function(_, opts)
       -- vim.cmd [[colorscheme kanagawa-paper]]
-      vim.cmd [[colorscheme kanso-zen]]
+      vim.cmd [[colorscheme jellybeans-muted]]
     end,
+  },
+  {
+    'wtfox/jellybeans.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {}, -- Optional
   },
   {
     'navarasu/onedark.nvim',
@@ -104,10 +110,5 @@ return {
     --   }
     --   require('onedark').load()
     -- end,
-  },
-  {
-    'webhooked/kanso.nvim',
-    lazy = false,
-    priority = 1000,
   },
 }

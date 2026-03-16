@@ -86,9 +86,6 @@ return {
     priority = 1000,
   },
   {
-    'nyoom-engineering/oxocarbon.nvim',
-  },
-  {
     'Mofiqul/vscode.nvim',
   },
   {
@@ -98,9 +95,12 @@ return {
     opts = {},
 
     config = function(_, opts)
-      vim.cmd [[colorscheme kanagawa-paper]]
+      -- vim.cmd [[colorscheme kanagawa-paper]]
+      -- vim.cmd [[colorscheme kanso-zen]]
+      vim.cmd [[colorscheme everforest]]
     end,
   },
+  { 'sainnhe/everforest' },
   {
     'navarasu/onedark.nvim',
     priority = 1000, -- make sure to load this before all the other start plugins
@@ -110,5 +110,10 @@ return {
     --   }
     --   require('onedark').load()
     -- end,
+  },
+  {
+    'webhooked/kanso.nvim',
+    lazy = false,
+    priority = 1000,
   },
 }

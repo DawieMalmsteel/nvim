@@ -82,10 +82,6 @@ return {
     -- end,
   },
   {
-    'ZzurabSiprashvili/monokai-night.nvim',
-    priority = 1000,
-  },
-  {
     'Mofiqul/vscode.nvim',
   },
   {
@@ -96,11 +92,9 @@ return {
 
     config = function(_, opts)
       -- vim.cmd [[colorscheme kanagawa-paper]]
-      -- vim.cmd [[colorscheme kanso-zen]]
-      vim.cmd [[colorscheme everforest]]
+      vim.cmd [[colorscheme kanso-zen]]
     end,
   },
-  { 'sainnhe/everforest' },
   {
     'navarasu/onedark.nvim',
     priority = 1000, -- make sure to load this before all the other start plugins

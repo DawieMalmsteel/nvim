@@ -92,7 +92,7 @@ return {
 
     config = function(_, opts)
       -- vim.cmd [[colorscheme kanagawa-paper]]
-      vim.cmd [[colorscheme jellybeans-muted]]
+      vim.cmd [[colorscheme jellybeans]]
     end,
   },
   {

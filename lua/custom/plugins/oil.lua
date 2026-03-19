@@ -30,9 +30,29 @@ return {
     },
     delete_to_trash = true,
     skip_confirm_for_simple_edits = true,
+    float = {
+      -- Padding around the floating window
+      padding = 1,
+      -- max_width and max_height can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+      max_width = 0.8,
+      max_height = 0.8,
+      border = 'solid', -- Border style. Can be 'none', 'single', 'double', 'rounded', 'solid', or 'shadow'.
+      win_options = {
+        winblend = 1,
+      },
+      -- optionally override the oil buffers window title with custom function: fun(winid: integer): string
+      get_win_title = nil,
+      -- preview_split: Split direction: "auto", "left", "right", "above", "below".
+      preview_split = 'right',
+      -- This is the config that will be passed to nvim_open_win.
+      -- Change values here to customize the layout
+      override = function(conf)
+        return conf
+      end,
+    },
   },
   lazy = false,
   keys = {
-    { '<leader>e', '<cmd>Oil<CR>', desc = 'Oil', mode = { 'n' } },
+    { '<leader>e', "<cmd>lua require('oil').open_float()<CR>", desc = 'Oil', mode = { 'n' } },
   },
 }

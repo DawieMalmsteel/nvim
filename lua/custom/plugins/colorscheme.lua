@@ -97,7 +97,7 @@ return {
     opts = {}, -- Optional
     config = function(_, opts)
       -- vim.cmd [[colorscheme kanagawa-paper]]
-      vim.cmd [[colorscheme kanagawa-paper]]
+      vim.cmd [[colorscheme jellybeans-hc]]
     end,
   },
   {

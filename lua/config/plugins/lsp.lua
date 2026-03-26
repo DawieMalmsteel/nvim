@@ -283,7 +283,7 @@ return {
       },
       cssls = {},
       superhtml = {},
-      marksman = {},
+      markdown_oxide = {},
       lua_ls = {
         settings = {
           Lua = {

@@ -97,17 +97,15 @@ return {
     opts = {}, -- Optional
     config = function(_, opts)
       -- vim.cmd [[colorscheme kanagawa-paper]]
-      vim.cmd [[colorscheme jellybeans-hc]]
+      vim.cmd [[colorscheme pastel]]
+      -- vim.cmd [[colorscheme jellybeans-hc]]
     end,
   },
   {
-    'navarasu/onedark.nvim',
-    priority = 1000, -- make sure to load this before all the other start plugins
-    -- config = function()
-    --   require('onedark').setup {
-    --     style = 'deep',
-    --   }
-    --   require('onedark').load()
-    -- end,
+    'ankushbhagats/pastel.nvim',
+    lazy = false, -- disable lazy loading
+    priority = 1000, -- load immediately at startup
+    opts = {}, -- your configuration comes here
+    config = true, -- call setup function with provided opts
   },
 }

@@ -96,9 +96,9 @@ return {
     priority = 1000,
     opts = {}, -- Optional
     config = function(_, opts)
-      -- vim.cmd [[colorscheme kanagawa-paper]]
+      -- -- vim.cmd [[colorscheme kanagawa-paper]]
       vim.cmd [[colorscheme pastel]]
-      -- vim.cmd [[colorscheme jellybeans-muted-light]]
+      -- -- vim.cmd [[colorscheme jellybeans-muted-light]]
     end,
   },
   {

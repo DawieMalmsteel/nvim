@@ -97,18 +97,8 @@ return {
     opts = {}, -- Optional
     config = function(_, opts)
       -- vim.cmd [[colorscheme kanagawa-paper]]
-      -- vim.cmd [[colorscheme pastel]]
+      vim.cmd [[colorscheme pastel]]
       -- vim.cmd [[colorscheme jellybeans-hc]]
-    end,
-  },
-  {
-    'Aejkatappaja/sora',
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function(_, opts)
-      require('sora').setup(opts)
-      vim.cmd 'colorscheme catppuccin'
     end,
   },
   {

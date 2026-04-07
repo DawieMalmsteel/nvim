@@ -4,10 +4,10 @@ return {
     name = 'catppuccin',
     priority = 1000,
     opts = {
-      flavour = 'mocha', -- latte, frappe, macchiato, mocha
+      flavour = 'frappe', -- latte, frappe, macchiato, mocha
       background = { -- :h background
         light = 'latte',
-        dark = 'mocha',
+        dark = 'frappe',
       },
       transparent_background = false,
       float = {
@@ -97,7 +97,7 @@ return {
     opts = {}, -- Optional
     config = function(_, opts)
       -- vim.cmd [[colorscheme kanagawa-paper]]
-      vim.cmd [[colorscheme pastel]]
+      vim.cmd [[colorscheme catppuccin]]
       -- vim.cmd [[colorscheme jellybeans-hc]]
     end,
   },

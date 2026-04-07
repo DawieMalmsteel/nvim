@@ -1,5 +1,3 @@
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#1c1c1c', underline = false })
-
 local function set(name, opts)
   opts = opts or {}
   if opts.bg == nil then

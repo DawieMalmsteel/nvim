@@ -75,11 +75,11 @@ return {
       },
     },
 
-    -- config = function(_, opts)
-    --   require('catppuccin').setup(opts) -- calling setup is optional
-    --   vim.cmd [[colorscheme vscode]]
-    --   vim.cmd [[colorscheme catppuccin]]
-    -- end,
+    config = function(_, opts)
+      require('catppuccin').setup(opts) -- calling setup is optional
+      -- vim.cmd [[colorscheme vscode]]
+      vim.cmd [[colorscheme jellybeans-hc]]
+    end,
   },
   {
     'Mofiqul/vscode.nvim',
@@ -94,12 +94,12 @@ return {
     'wtfox/jellybeans.nvim',
     lazy = false,
     priority = 1000,
-    opts = {}, -- Optional
-    config = function(_, opts)
-      -- vim.cmd [[colorscheme kanagawa-paper]]
-      -- vim.cmd [[colorscheme catppuccin]]
-      vim.cmd [[colorscheme jellybeans-hc]]
-    end,
+    opts = {
+      transparent = true,
+      flat_ui = true,
+      italics = true,
+      bold = true,
+    }, -- Optional
   },
   {
     'ankushbhagats/pastel.nvim',

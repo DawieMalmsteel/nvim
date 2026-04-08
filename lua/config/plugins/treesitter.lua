@@ -15,9 +15,33 @@ return {
       })
 
       local ensureInstalled = {
+        'c',
+        'cpp',
+        'go',
         'lua',
         'python',
+        'rust',
+        'tsx',
+        'javascript',
         'typescript',
+        'vimdoc',
+        'vim',
+        'bash',
+        'json',
+        'markdown',
+        'html',
+        'http',
+        'regex',
+        'markdown_inline',
+        'yaml',
+        'ini',
+        'templ',
+        'c_sharp',
+        'gomod',
+        'gosum',
+        'gowork',
+        'gotmpl',
+        'sql',
       }
       local alreadyInstalled = require('nvim-treesitter.config').get_installed()
       local parsersToInstall = vim

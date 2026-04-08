@@ -80,10 +80,6 @@ return {
       -- vim.cmd [[colorscheme vscode]]
       vim.cmd [[colorscheme jellybeans-hc]]
       vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#241b20', underline = false })
-      vim.api.nvim_set_hl(0, 'BufferCurrentSignRight', { bg = 'none' })
-      vim.api.nvim_set_hl(0, 'BufferCurrentSign', { bg = 'none' })
-      vim.api.nvim_set_hl(0, 'BufferDefaultInactiveSign', { bg = 'none' })
-      vim.api.nvim_set_hl(0, 'BufferInactive', { bg = 'none' })
     end,
   },
   {

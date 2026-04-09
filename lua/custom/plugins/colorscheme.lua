@@ -83,9 +83,6 @@ return {
     end,
   },
   {
-    'Mofiqul/vscode.nvim',
-  },
-  {
     'thesimonho/kanagawa-paper.nvim',
     lazy = false,
     priority = 1000,

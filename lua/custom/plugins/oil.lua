@@ -54,5 +54,13 @@ return {
   lazy = false,
   keys = {
     { '<leader>e', "<cmd>lua require('oil').open_float()<CR>", desc = 'Oil', mode = { 'n' } },
+    {
+      '<leader>E',
+      function()
+        require('oil').open_float(vim.env.PWD)
+      end,
+      desc = 'Oil',
+      mode = { 'n' },
+    },
   },
 }

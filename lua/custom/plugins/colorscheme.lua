@@ -79,7 +79,7 @@ return {
       require('catppuccin').setup(opts) -- calling setup is optional
       -- vim.cmd [[colorscheme vscode]]
       vim.cmd [[colorscheme jellybeans-hc]]
-      vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#241b20', underline = false })
+      -- vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#241b20', underline = false })
     end,
   },
   {

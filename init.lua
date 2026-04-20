@@ -9,7 +9,8 @@ require 'config.neovide'
 require 'custom.keymaps'
 require 'custom.cli'
 
-vim.api.nvim_set_hl(0, 'BufferCurrentSignRight', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'BufferCurrentSign', { bg = '#24273a' })
-vim.api.nvim_set_hl(0, 'BufferDefaultInactiveSign', { bg = 'none' })
-vim.api.nvim_set_hl(0, 'BufferInactive', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'BufferCurrentSignRight', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'BufferCurrentSign', { bg = '#24273a' })
+-- vim.api.nvim_set_hl(0, 'BufferCurrentSign', { bg = '#a6e3a1' }) -- Green from Catppuccin
+-- vim.api.nvim_set_hl(0, 'BufferDefaultInactiveSign', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'BufferInactive', { bg = 'none' })

@@ -2,52 +2,84 @@ local M = function()
   local statusline = require 'mini.statusline'
   local icons = require 'mini.icons'
 
-  local function get_scheme_bg()
-    -- Lấy thông tin highlight của nhóm 'Normal'
+  local function get_theme_bg()
     local hl = vim.api.nvim_get_hl(0, { name = 'Normal' })
-    -- hl.bg là một số thập phân, ta cần chuyển sang hex
     if hl and hl.bg then
       return string.format('#%06x', hl.bg)
     end
-    return 'NONE' -- Trả về NONE nếu theme trong suốt
+    return nil
   end
 
-  -- 1. ĐỊNH NGHĨA MÀU SẮC (HIGHLIGHTS)
+  local function is_dark_theme()
+    local bg = get_theme_bg()
+    if not bg then
+      return true
+    end
+    local r = tonumber(bg:sub(2, 3), 16)
+    local g = tonumber(bg:sub(4, 5), 16)
+    local b = tonumber(bg:sub(6, 7), 16)
+    local brightness = (r * 299 + g * 587 + b * 114) / 1000
+    return brightness < 128
+  end
+
+  local function get_palette()
+    if is_dark_theme() then
+      return {
+        root = '#89b4fa',
+        subtle = '#585b70',
+        filename = '#cdd6f4',
+        harpoon = '#89dceb',
+        git_branch = '#b4befe',
+        git_add = '#a6e3a1',
+        git_mod = '#f9e2af',
+        git_del = '#f38ba8',
+      }
+    else
+      return {
+        root = '#1e66f5',
+        subtle = '#8c8c8c',
+        filename = '#4c4f69',
+        harpoon = '#179299',
+        git_branch = '#7287fd',
+        git_add = '#40a02b',
+        git_mod = '#df8e1d',
+        git_del = '#d20f39',
+      }
+    end
+  end
+
   local function setup_colors()
     local p = function(name, opts)
       vim.api.nvim_set_hl(0, name, opts)
     end
-    -- local theme_bg = get_scheme_bg()
-    local theme_bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg
-    local root_bg = '#89b4fa' -- Màu xanh của viên thuốc 1
+    local theme_hl = vim.api.nvim_get_hl(0, { name = 'StatusLine' })
+    local theme_bg = theme_hl.bg and string.format('#%06x', theme_hl.bg) or nil
+    local palette = get_palette()
 
-    -- Git & Diff colors
-    p('StatusLineGitBranch', { fg = '#b4befe', bold = true })
-    p('StatusLineGitAdd', { fg = '#a6e3a1' })
-    p('StatusLineGitMod', { fg = '#f9e2af' })
-    p('StatusLineGitDel', { fg = '#f38ba8' })
+    p('StatusLineGitBranch', { fg = palette.git_branch, bold = true })
+    p('StatusLineGitAdd', { fg = palette.git_add })
+    p('StatusLineGitMod', { fg = palette.git_mod })
+    p('StatusLineGitDel', { fg = palette.git_del })
 
-    -- Các thành phần khác
-    p('StatusLineRoot', { fg = '#89b4fa', bold = true })
-    p('StatusLineSubtle', { fg = '#585b70' })
-    p('StatusLineFilename', { fg = '#cdd6f4', bold = true })
-    p('StatusLineHarpoonActive', { fg = '#89dceb', bold = true })
+    p('StatusLineRoot', { fg = palette.root, bold = true })
+    p('StatusLineSubtle', { fg = palette.subtle })
+    p('StatusLineFilename', { fg = palette.filename, bold = true })
+    p('StatusLineHarpoonActive', { fg = palette.harpoon, bold = true })
 
-    -- Ký tự  thứ nhất:
-    -- FG là màu nền của Khối 1 (Xanh)
-    -- BG là màu nền của Theme (theme_bg) -> Tạo ra viên thuốc nằm trên nền theme
-    p('StatusLineSep1', { fg = theme_bg, bg = root_bg })
-
-    -- Khối 2 (Viên thuốc 2):
-    -- Nền là màu của Theme, FG là màu Xanh để hiện icon
-    p('StatusLineRootSub', { fg = theme_bg, bg = root_bg })
-
-    -- Ký tự  thứ hai:
-    -- FG là màu của Theme (theme_bg)
-    -- BG là NONE (trong suốt) để kết thúc
-    p('StatusLineSep2', { fg = root_bg, bg = theme_bg })
+    p('StatusLineSep1', { fg = theme_bg, bg = palette.root })
+    p('StatusLineRootSub', { fg = theme_bg, bg = palette.root })
+    p('StatusLineSep2', { fg = palette.root, bg = theme_bg })
   end
+
+  local function setup_colorscheme_autocmd()
+    vim.api.nvim_create_autocmd('Colorscheme', {
+      pattern = '*',
+      callback = setup_colors,
+    })
+  end
+
   setup_colors()
+  setup_colorscheme_autocmd()
 
   -- 2. HELPER: Tính độ rộng chuẩn xác (Tránh lỗi E5108 và khoảng trắng ma)
   local function get_width(str)

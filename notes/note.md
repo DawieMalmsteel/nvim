@@ -5,11 +5,11 @@ keywords bài học:
 -  sentence embedding
 -  lexical search (từ vựng hoá giảm không gian tìm kiếm)
 
-using raw data
-pdf 
-word
-txt
-Phải có benchmark
 
 test driven
 spec driven
+
+keywords Monitors:
+- Metrics
+- Traces
+- Logs

@@ -53,7 +53,7 @@ return {
   },
   lazy = false,
   keys = {
-    { '<leader>e', "<cmd>lua require('oil').open_float()<CR>", desc = 'Oil', mode = { 'n' } },
+    { '<leader>e', "<cmd>lua require('oil').open()<CR>", desc = 'Oil', mode = { 'n' } },
     {
       '<leader>E',
       function()

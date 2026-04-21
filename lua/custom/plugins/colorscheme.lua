@@ -11,7 +11,7 @@ return {
     priority = 1000,
     config = function()
       require('nightingale').setup {
-        transparent = false, -- set to true for transparent background
+        transparent = true, -- set to true for transparent background
       }
       vim.cmd 'colorscheme nightingale'
     end,

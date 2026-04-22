@@ -164,7 +164,7 @@ return {
       --     },
       --   },
       -- },
-
+      copilot = {},
       ty = {},
 
       tsgo = {},

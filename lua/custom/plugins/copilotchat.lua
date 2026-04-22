@@ -76,13 +76,13 @@ return {
       return {
         -- model = 'claude-sonnet-4',
         -- model = 'gpt-5',
-        model = 'auto',
+        model = 'gpt-4o',
 
         -- provider = 'gemini',
         -- model = 'gemini-2.5-flash',
         debug = false,
         temperature = 0,
-        sticky = '#buffers',
+        -- sticky = '#buffers',
         headers = {
           user = '👤',
           assistant = ' ', --🤖
@@ -91,7 +91,7 @@ return {
         mappings = {
           reset = false,
           complete = {
-            insert = '<Tab>',
+            insert = '<S-Tab>',
           },
           show_diff = {
             full_diff = true,

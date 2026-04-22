@@ -42,6 +42,7 @@ return {
         'gowork',
         'gotmpl',
         'sql',
+        'tmux',
       }
       local alreadyInstalled = require('nvim-treesitter.config').get_installed()
       local parsersToInstall = vim

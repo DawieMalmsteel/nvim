@@ -4,9 +4,11 @@ return {
   version = '1.*',
   -- specs = { 'Kaiser-Yang/blink-cmp-avante' },
   dependencies = {
-    -- 'giuxtaposition/blink-cmp-copilot',
+    'fang2hou/blink-copilot',
     'rafamadriz/friendly-snippets',
     'folke/lazydev.nvim',
+    'Kaiser-Yang/blink-cmp-git',
+    'marcoSven/blink-cmp-yanky',
     -- 'kristijanhusak/vim-dadbod-completion',
     {
       'saghen/blink.compat',
@@ -26,7 +28,7 @@ return {
     appearance = { nerd_font_variant = 'mono' },
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 0 },
-      ghost_text = { enabled = vim.g.ai_cmp },
+      ghost_text = { enabled = true },
     },
     snippets = { preset = 'mini_snippets' },
     cmdline = {
@@ -37,11 +39,31 @@ return {
       },
     },
     sources = {
-      compat = {},
-      default = { 'lsp', 'snippets', 'path', 'buffer', 'lazydev' }, --copilot, 'dadbod', 'avante', 'ripgrep'
+      -- compat = {},
+      default = { 'lsp', 'git', 'snippets', 'path', 'buffer', 'copilot', 'yank', 'lazydev' }, --copilot, 'dadbod', 'avante', 'ripgrep'
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         dadbod_grip = { name = 'Grip SQL', module = 'dadbod-grip.completion.blink' },
+        copilot = {
+          name = 'copilot',
+          module = 'blink-copilot',
+          async = true,
+        },
+        git = {
+          module = 'blink-cmp-git',
+          name = 'Git',
+          opts = {},
+        },
+        yank = {
+          name = 'yank',
+          module = 'blink-yanky',
+          opts = {
+            minLength = 5,
+            onlyCurrentFiletype = false,
+            trigger_characters = { '"' },
+            kind_icon = '󰅍',
+          },
+        },
         -- ripgrep = {
         --   module = 'blink-ripgrep',
         --   name = 'Ripgrep',
@@ -100,7 +122,7 @@ return {
       },
     },
     fuzzy = {
-      implementation = 'rust',
+      implementation = 'lua',
       -- sorts = {
       --   'exact',
       --   'label', -- Primary sort: by label if still tied

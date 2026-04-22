@@ -29,6 +29,12 @@ return {
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 0 },
       ghost_text = { enabled = true },
+      list = {
+        selection = {
+          preselect = true,
+          auto_insert = false,
+        },
+      },
     },
     snippets = { preset = 'mini_snippets' },
     cmdline = {
@@ -58,7 +64,8 @@ return {
           name = 'yank',
           module = 'blink-yanky',
           opts = {
-            minLength = 5,
+            minLength = 3,
+            insert = true,
             onlyCurrentFiletype = false,
             trigger_characters = { '"' },
             kind_icon = '󰅍',

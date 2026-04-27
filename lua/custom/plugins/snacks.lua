@@ -215,6 +215,7 @@ return {
             ft = nil, ---@type string? filetype for highlighting. Use `nil` for auto detect
           },
         },
+        explorer = {},
         terminal = {
           win = {
             position = 'float',

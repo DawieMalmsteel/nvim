@@ -3,7 +3,7 @@ return {
     'folke/snacks.nvim',
     dependencies = { 'amansingh-afk/milli.nvim' },
     opts = function()
-      local splash = require('milli').load { splash = 'lighningtornado' }
+      local splash = require('milli').load { splash = 'cactus' }
       return {
         picker = {
           ui_select = true,
@@ -320,21 +320,21 @@ return {
           sections = {
             {
               { section = 'header' },
-              { icon = ' ', key = 'f', desc = 'Find File', action = ':Pick files' },
+              -- { icon = ' ', key = 'f', desc = 'Find File', action = ':Pick files' },
               -- { pane = 2, icon = '', key = 'n', desc = 'New File', action = ':ene | startinsert' },
               -- { pane = 2, icon = ' ', key = 'g', desc = 'Find Text', action = ':Pick grep_live' },
               -- { pane = 2, icon = ' ', key = 'r', desc = 'Recent Files', action = ':Pick oldfiles' },
               {
                 -- pane = 2,
-                -- icon = ' ',
-                -- key = 'c',
-                -- desc = 'Config',
-                -- action = ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })",
+                icon = ' ',
+                key = 'c',
+                desc = 'Config',
+                action = ":lua require('mini.pick').builtin.files(nil, { source = { cwd = vim.fn.stdpath 'config' } })",
               },
               {
                 icon = '',
                 key = 's',
-                desc = 'Session restore (mini)',
+                desc = 'Session restore',
                 -- action = ':lua MiniSessions.read(nil, {})',
                 action = ':lua require("persistence").load()',
               },
@@ -351,7 +351,7 @@ return {
     end,
     config = function(_, opts)
       require('snacks').setup(opts)
-      require('milli').snacks { splash = 'lighningtornado', loop = true }
+      require('milli').snacks { splash = 'cactus', loop = true }
     end,
     keys = {
       {

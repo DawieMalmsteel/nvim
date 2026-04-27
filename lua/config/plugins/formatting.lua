@@ -8,7 +8,23 @@ return {
       function()
         require('conform').format { async = true, lsp_format = 'fallback' }
       end,
-      mode = '',
+      mode = { 'n' },
+      desc = '[F]ormat buffer',
+    },
+    {
+      '<leader>F',
+      function()
+        require('conform').format { async = true, lsp_format = 'fallback' }
+      end,
+      mode = { 'n' },
+      desc = '[F]ormat buffer',
+    },
+    {
+      '<c-v>',
+      function()
+        require('conform').format { async = true, lsp_format = 'fallback' }
+      end,
+      mode = { 'i', 'n' },
       desc = '[F]ormat buffer',
     },
   },

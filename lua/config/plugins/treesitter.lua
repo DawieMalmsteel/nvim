@@ -43,6 +43,8 @@ return {
         'gotmpl',
         'sql',
         'tmux',
+        'terraform',
+        'hcl',
       }
       local alreadyInstalled = require('nvim-treesitter.config').get_installed()
       local parsersToInstall = vim

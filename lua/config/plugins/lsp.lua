@@ -165,9 +165,12 @@ return {
       --   },
       -- },
       copilot = {},
-      ty = {},
+      ty = {
+        root_markers = { 'uv.lock' },
+      },
 
       tsgo = {},
+      terraformls = {},
 
       -- roslyn = {
       --   settings = {

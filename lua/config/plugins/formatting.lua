@@ -12,7 +12,7 @@ return {
       desc = '[F]ormat buffer',
     },
     {
-      '<leader>F',
+      '<leader>us',
       function()
         require('conform').format { async = true, lsp_format = 'fallback' }
       end,
@@ -20,11 +20,11 @@ return {
       desc = '[F]ormat buffer',
     },
     {
-      '<c-v>',
+      '<leader>F',
       function()
         require('conform').format { async = true, lsp_format = 'fallback' }
       end,
-      mode = { 'i', 'n' },
+      mode = { 'n' },
       desc = '[F]ormat buffer',
     },
   },

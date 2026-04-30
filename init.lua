@@ -14,3 +14,7 @@ require 'custom.cli'
 -- vim.api.nvim_set_hl(0, 'BufferCurrentSign', { bg = '#a6e3a1' }) -- Green from Catppuccin
 -- vim.api.nvim_set_hl(0, 'BufferDefaultInactiveSign', { bg = 'none' })
 -- vim.api.nvim_set_hl(0, 'BufferInactive', { bg = 'none' })
+-- vim.api.nvim_set_hl(0, 'BlinkCmpKindYank', { fg = '#a6e3a1', bold = true })
+-- vim.cmd 'set background=light'
+-- vim.cmd 'colorscheme paper'
+vim.cmd 'colorscheme  base46-rxyhn'

@@ -3,7 +3,7 @@ return {
     'folke/snacks.nvim',
     dependencies = { 'amansingh-afk/milli.nvim' },
     opts = function()
-      local splash = require('milli').load { splash = 'cactus' }
+      local splash = require('milli').load { splash = 'dancer' }
       return {
         picker = {
           ui_select = true,
@@ -351,7 +351,7 @@ return {
     end,
     config = function(_, opts)
       require('snacks').setup(opts)
-      require('milli').snacks { splash = 'cactus', loop = true }
+      require('milli').snacks { splash = 'dancer', loop = true }
     end,
     keys = {
       {

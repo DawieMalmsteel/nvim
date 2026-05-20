@@ -5,6 +5,18 @@ return {
     opts = function()
       local splash = require('milli').load { splash = 'lighningtornado' }
       return {
+        scratch = {
+          width = 100,
+          height = 30,
+          bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
+          minimal = false,
+          noautocmd = false,
+          position = "right",
+          zindex = 20,
+          wo = { winhighlight = 'NormalFloat:Normal' },
+          footer_keys = true,
+          border = true,
+        },
         picker = {
           ui_select = true,
           -- Override preview for vim.ui.select kinds that don't have item.file
@@ -354,6 +366,20 @@ return {
       require('milli').snacks { splash = 'lighningtornado', loop = true }
     end,
     keys = {
+      {
+        '<leader>.',
+        function()
+          Snacks.scratch()
+        end,
+        desc = 'Toggle Scratch Buffer',
+      },
+      {
+        '<leader>,',
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = 'Select Scratch Buffer',
+      },
       {
         'grI',
         function()

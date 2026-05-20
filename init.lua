@@ -9,4 +9,7 @@ require 'config.neovide'
 require 'custom.keymaps'
 require 'custom.cli'
 
-vim.cmd 'colorscheme  base46-ayu_dark'
+-- vim.cmd 'colorscheme  base46-ayu_dark'
+-- vim.cmd.colorscheme 'solarized'
+-- vim.cmd 'colorscheme base46-solarized_light
+-- vim.cmd 'colorscheme paper'

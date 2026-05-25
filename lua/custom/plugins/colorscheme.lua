@@ -2,28 +2,18 @@ return {
   {
     'AvengeMedia/base46',
     lazy = true,
-    opts = {},
-  },
-  {
-    'maxmx03/solarized.nvim',
-    lazy = false,
-    priority = 1000,
-    ---@type solarized.config
-    opts = {},
-    config = function(_, opts)
-      vim.o.termguicolors = true
-      vim.o.background = 'light'
-      require('solarized').setup(opts)
-      -- vim.cmd.colorscheme 'solarized'
-    end,
+    opts = {
+      transparency = true,
+    },
   },
   {
     'oskarnurm/koda.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      -- require("koda").setup({ transparent = true })
-      vim.cmd 'colorscheme koda'
+      require('koda').setup { transparent = true }
+      vim.cmd 'colorscheme base46-gruvbox'
+      -- vim.cmd 'colorscheme koda-dark'
     end,
   },
 }

@@ -27,3 +27,26 @@ phân loại request:
     - goodrail
     - question classifier
     - intent classifier
+
+
+Lệnh đã dùng để cấu hình Wi‑Fi Vingroup_Staff:                                                                                      
+```bash                                                                                                                             
+nmcli connection add type wifi ifname wlan0 con-name '$NAME' ssid '$NAME'                                       
+                                                                                                                             
+nmcli connection modify '$NAME' \                                                                                        
+wifi-sec.key-mgmt wpa-eap \                                                                                                     
+802-1x.eap peap \                                                                                                               
+802-1x.identity '$username' \                                                                                                    
+802-1x.password '$password' \                                                                                              
+802-1x.phase2-auth mschapv2 \                                                                                                   
+802-1x.system-ca-certs no \                                                                                                     
+connection.autoconnect yes                                                                                                      
+                                                                                                                             
+nmcli connection up '$NAME'                                                                                              
+```                                                                                                                                 
+                                                                                                                             
+Nếu lần sau chỉ cần kết nối lại:                                                                                                    
+                                                                                                                             
+```bash                                                                                                                             
+nmcli connection up '$NAME'                                                                                              
+```       

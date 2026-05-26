@@ -8,8 +8,3 @@ require 'config.neovide'
 -- User keymaps (kept separate as before)
 require 'custom.keymaps'
 require 'custom.cli'
-
--- vim.cmd 'colorscheme  base46-ayu_dark'
--- vim.cmd.colorscheme 'solarized'
--- vim.cmd 'colorscheme base46-solarized_light
--- vim.cmd 'colorscheme paper'

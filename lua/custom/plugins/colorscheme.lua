@@ -3,7 +3,7 @@ return {
     'AvengeMedia/base46',
     lazy = true,
     opts = {
-      transparency = true,
+      transparency = false,
     },
   },
   {
@@ -12,7 +12,7 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('koda').setup { transparent = true }
-      vim.cmd 'colorscheme base46-tokyonight'
+      vim.cmd 'colorscheme base46-monochrome'
       -- vim.cmd 'colorscheme koda-dark'
     end,
   },

@@ -44,7 +44,7 @@ vim.o.list = false
 
 vim.o.inccommand = 'split'
 vim.o.cursorline = true
-vim.o.scrolloff = 8
+vim.o.scrolloff = 15
 vim.o.confirm = true
 -- vim.o.showtabline = 2
 -- function _G.MyTabline()

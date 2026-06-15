@@ -349,6 +349,20 @@ local M = function()
 		return '%#StatuslineTextMain#' .. spaces
 	end
 
+
+  -- Diagnostics (Không có khoảng trắng thừa)
+  local function get_diag()
+    local count = vim.diagnostic.count(0)
+    local parts = {}
+    if (count[1] or 0) > 0 then
+      table.insert(parts, '%#DiagnosticError# ' .. count[1])
+    end
+    if (count[2] or 0) > 0 then
+      table.insert(parts, '%#DiagnosticWarn# ' .. count[2])
+    end
+    return #parts > 0 and table.concat(parts, ' ') or ''
+  end
+
 	local function ModeColor()
 		local current_mode = vim.api.nvim_get_mode().mode
 		local higroup = "%#StatuslineModeCommand#"
@@ -495,6 +509,8 @@ local M = function()
 					Harpoon(),
 					_Spacer(2),
 					'%=',
+          get_diag(),
+          ' ',
 					Percentage(),
 					Filetype(),
 					'%<',

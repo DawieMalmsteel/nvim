@@ -1,3 +1,6 @@
+Minitririto
+M1nitr!rit0
+
 harness engineering
 
 keywords bài học:
@@ -31,22 +34,22 @@ phân loại request:
 
 Lệnh đã dùng để cấu hình Wi‑Fi Vingroup_Staff:                                                                                      
 ```bash                                                                                                                             
-nmcli connection add type wifi ifname wlan0 con-name '$NAME' ssid '$NAME'                                       
+nmcli connection add type wifi ifname wlan0 con-name 'Vingroup_Staff' ssid 'Vingroup_Staff'                                       
                                                                                                                              
-nmcli connection modify '$NAME' \                                                                                        
+nmcli connection modify 'Vingroup_Staff' \                                                                                        
 wifi-sec.key-mgmt wpa-eap \                                                                                                     
 802-1x.eap peap \                                                                                                               
-802-1x.identity '$username' \                                                                                                    
-802-1x.password '$password' \                                                                                              
+802-1x.identity 'vsf.tts1' \                                                                                                    
+802-1x.password 'Mnbvc@118@1726' \                                                                                              
 802-1x.phase2-auth mschapv2 \                                                                                                   
 802-1x.system-ca-certs no \                                                                                                     
 connection.autoconnect yes                                                                                                      
                                                                                                                              
-nmcli connection up '$NAME'                                                                                              
+nmcli connection up 'Vingroup_Staff'                                                                                              
 ```                                                                                                                                 
                                                                                                                              
 Nếu lần sau chỉ cần kết nối lại:                                                                                                    
                                                                                                                              
 ```bash                                                                                                                             
-nmcli connection up '$NAME'                                                                                              
+nmcli connection up 'Vingroup_Staff'                                                                                              
 ```       

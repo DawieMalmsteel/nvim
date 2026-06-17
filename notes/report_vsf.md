@@ -26,5 +26,28 @@
 - Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
 - Kết quả thực đạt: fix bug và update report và chuyển dữ liệu tĩnh từ file parquet sang lưu trong MinIO
 
+
 - Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
 - Kết quả thực đạt: Fix bug đoạn stream data bằng debezium và kafka cải thiện hiệu suất stream để phục vụ cho việc giả lập giữ liệu hợp lí hơn
+
+
+- Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
+- Kết quả thực đạt: Tiến hành migrate hệ thống bằng terraform chạy local bằng các sử dụng ministack để giả lập aws
+
+
+- Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
+- Kết quả thực đạt: Loại bỏ kafka producer đọc trực tiếp file parquet vì nó không hiệu quả, giờ kafka chỉ để nhận data từ debezium 
+
+
+- Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
+- Kết quả thực đạt: Migrate hệ thống từ dùng makefile sang sử dụng airflow để điều phối pipeline (trước đây airflow chỉ là optional) và fix lỗi spark đọc batch file (trước đây thì hệ thống phải chạy từng pods để đọc các batch file rất không ổn) giờ spark có thể đọc file batch theo group đỡ tốn tài nguyên hơn. Đồng thời cũng fix bug resource khi chạy airflow, fix lỗi MinIO không nhận file khi chạy bằng k8s
+
+
+- Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
+- Kết quả thực đạt: Migrate hệ thống từ dùng makefile truyền thống sang dùng helm và skaffold để quản lý và điều phối k8s, chuyển airflow từ chạy docker in docker sang KubernetesPodOperator
+
+- Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
+- Kết quả thực đạt: Fix bug ở spark pipeline và apply pipeline mới ở đây pipeline mới sẽ tạo ra golden dataset lưu trong minIO đồng thời cũng import vào postgres để export ra superset cho các team khác
+
+- Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
+- Kết quả thực đạt: Fix bug superset để render được chart của golden dataset và sửa lại dbt để loại bỏ các edge case dữ liệu không hợp lí

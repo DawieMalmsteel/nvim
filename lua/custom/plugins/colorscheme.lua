@@ -12,8 +12,17 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require('koda').setup { transparent = true }
-      vim.cmd 'colorscheme base46-monochrome'
+      -- vim.cmd 'colorscheme base46-monochrome'
+      -- vim.cmd 'colorscheme  base46-ayu_dark'
       -- vim.cmd 'colorscheme koda-dark'
+    end,
+  },
+  {
+    'marekh19/meowsoot.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'meowsoot'
     end,
   },
 }

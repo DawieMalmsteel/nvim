@@ -34,6 +34,10 @@ map('v', 'x', [["_x]])
 -- map('v', 'K', ":m'<-2<cr>gv=gv")
 
 map({ 'n', 'x' }, '-', '_')
+
+-- Visual mode: > / < nhiều lần (giữ nguyên selection để ấn tiếp)
+map('x', '>', '>gv', { desc = 'Indent và giữ selection' })
+map('x', '<', '<gv', { desc = 'Unindent và giữ selection' })
 -- map({ 'n', 'x' }, '+', 'g_')
 -- map({ 'n', 'x' }, '<S-tab>', '%')
 

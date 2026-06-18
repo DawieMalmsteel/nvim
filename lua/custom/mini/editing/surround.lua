@@ -1,6 +1,7 @@
 local M = function()
   require('mini.surround').setup {
     highlight_duration = 1000,
+    -- Use ), }, ] instead. Those will not add space. It's mentioned in the docs. 
     mappings = {
       add = 'sa', -- Add surrounding in Normal and Visual modes
       delete = 'sd', -- Delete surrounding

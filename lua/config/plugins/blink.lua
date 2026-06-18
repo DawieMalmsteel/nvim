@@ -11,9 +11,9 @@ return {
     'marcoSven/blink-cmp-yanky',
     -- 'kristijanhusak/vim-dadbod-completion',
     {
-      'saghen/blink.compat',
-      optional = true, -- make optional so it's only enabled if any extras need it
-      opts = {},
+      -- 'saghen/blink.compat',
+      -- optional = true, -- make optional so it's only enabled if any extras need it
+      -- opts = {},
     },
     {
       -- 'mikavilpas/blink-ripgrep.nvim',
@@ -27,7 +27,7 @@ return {
     },
     appearance = { nerd_font_variant = 'mono' },
     completion = {
-      documentation = { auto_show = true, auto_show_delay_ms = 0 },
+      documentation = { auto_show = false, auto_show_delay_ms = 0 },
       ghost_text = { enabled = true },
       list = {
         selection = {
@@ -38,7 +38,7 @@ return {
     },
     snippets = { preset = 'mini_snippets' },
     cmdline = {
-      keymap = { preset = 'default' },
+      keymap = { preset = 'inherit' },
       completion = {
         menu = { auto_show = true },
         ghost_text = { enabled = true },

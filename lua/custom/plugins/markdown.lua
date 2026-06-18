@@ -10,7 +10,7 @@ return {
     code = {
       sign = false,
       border = 'thin',
-      position = 'right',
+      position = 'left',
       width = 'block',
       above = '▁',
       below = '▔',

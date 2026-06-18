@@ -168,6 +168,7 @@ return {
       ty = {
         root_markers = { 'uv.lock' },
       },
+      -- lean_ls= {},
 
       tsgo = {},
       terraformls = {},

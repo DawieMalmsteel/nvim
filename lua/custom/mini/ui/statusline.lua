@@ -468,6 +468,65 @@ local M = function()
 		end
 	end
 
+  local function get_harpoon()
+    local ok, harpoon = pcall(require, 'harpoon')
+    if not ok then
+      return ''
+    end
+
+    local list = harpoon:list()
+    local current_path = vim.api.nvim_buf_get_name(0)
+
+    local valid_items = {} -- Chứa các file thực sự có dữ liệu
+    local active_slot = nil -- Slot của file hiện tại (nếu có)
+
+    -- 1. Quét TOÀN BỘ danh sách Harpoon (không dừng lại giữa chừng)
+    for i = 1, list:length() do
+      local item = list:get(i)
+      -- Kiểm tra: item tồn tại VÀ có đường dẫn VÀ đường dẫn không rỗng
+      if item and item.value and item.value ~= '' then
+        table.insert(valid_items, { slot = i, value = item.value })
+
+        -- Kiểm tra xem file hiện tại có nằm ở slot 'i' này không
+        if vim.fn.fnamemodify(item.value, ':p') == current_path then
+          active_slot = i
+        end
+      end
+    end
+
+    -- Nếu không có file nào hợp lệ thì biến mất luôn
+    if #valid_items == 0 then
+      return ''
+    end
+
+    -- 2. Xây dựng danh sách hiển thị (Tối đa 4 item đầu tiên)
+    local nodes = {}
+    local max_view = 4
+    for i = 1, math.min(#valid_items, max_view) do
+      local item = valid_items[i]
+      if item.slot == active_slot then
+        -- File đang mở: Hiện số slot của nó
+        table.insert(nodes, '%#StatuslineHarpoon#' .. item.slot)
+      else
+        -- File khác: Hiện số slot mờ
+        table.insert(nodes, '%#StatuslineTextAccent#' .. item.slot)
+      end
+    end
+
+    -- -- 3. Nếu tổng số file hợp lệ > 4, thêm dấu ba chấm để báo hiệu còn nữa
+    -- if #valid_items > max_view then
+    --   table.insert(nodes, '%#StatusLineSubtle#…')
+    -- end
+
+    -- 3. Nếu tổng số file hợp lệ < 4 return
+    if #valid_items <= max_view then
+      return string.format('%%#StatuslineHarpoon#󰃀:%s ', table.concat(nodes, ' '), #valid_items)
+    end
+
+    -- 4. Trả về chuỗi: Icon + List 4 số + (Tổng số file hợp lệ)
+    return string.format('%%#StatuslineHarpoon#󰃀⋮%s %%#StatuslineTextAccent#(%d)', table.concat(nodes, ' '), #valid_items)
+  end
+
 	local function Percentage()
 		local current_line = vim.fn.line('.')
 		local total_lines = vim.fn.line('$')
@@ -510,7 +569,7 @@ local M = function()
 					_Spacer(2),
 					'%=',
           get_diag(),
-          ' ',
+          get_harpoon(),
 					Percentage(),
 					Filetype(),
 					'%<',

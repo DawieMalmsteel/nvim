@@ -51,3 +51,12 @@
 
 - Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
 - Kết quả thực đạt: Fix bug superset để render được chart của golden dataset và sửa lại dbt để loại bỏ các edge case dữ liệu không hợp lí
+
+
+- Đề bài thực hiện: Tìm hiểu về data xe tự hành của NYC và tìm cách xử lí data pipeline để clean data và tạo ra golden dataset
+- Kết quả thực đạt: 
+
+
+
+
+

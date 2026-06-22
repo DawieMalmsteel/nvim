@@ -3,5 +3,5 @@
 vim.treesitter.language.register('markdown', 'minifiles')
 vim.opt.termguicolors = true
 vim.g.python3_host_prog = '/usr/bin/python3'
-vim.o.shell = 'fish'
+vim.o.shell = 'bash'
 vim.o.swapfile = false

@@ -129,7 +129,7 @@ return {
       },
     },
     fuzzy = {
-      implementation = 'lua',
+      implementation = 'rust',
       -- sorts = {
       --   'exact',
       --   'label', -- Primary sort: by label if still tied

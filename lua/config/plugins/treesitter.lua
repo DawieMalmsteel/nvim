@@ -16,6 +16,7 @@ return {
 
       local ensureInstalled = {
         'c',
+        'diff',
         'cpp',
         'go',
         'lua',

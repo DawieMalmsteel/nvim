@@ -555,6 +555,13 @@ local M = function()
 			return higroup .. filetype .. _Spacer(2)
 		end
 	end
+  
+
+  -- Recording status
+  local function get_recording()
+    local reg = vim.fn.reg_recording()
+    return reg ~= '' and ('%#StatusLineGitDel#@' .. reg) or ''
+  end
 
 	-- --- Setup Mini.statusline ---
 	statusline.setup({
@@ -568,6 +575,7 @@ local M = function()
 					Harpoon(),
 					_Spacer(2),
 					'%=',
+          get_recording(),
           get_diag(),
           get_harpoon(),
 					Percentage(),

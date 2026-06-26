@@ -1,10 +1,8 @@
 return {
-  "axsaucedo/neovim-power-mode",
+  'axsaucedo/neovim-power-mode',
   config = function()
-    require("power-mode").setup({
-      particles = { preset = "fountain" },
-    })
+    require('power-mode').setup {
+      particles = { preset = 'fountain' },
+    }
   end,
 }
-
-

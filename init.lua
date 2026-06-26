@@ -9,4 +9,4 @@ require 'config.neovide'
 require 'custom.keymaps'
 require 'custom.cli'
 
-vim.cmd [[highlight Normal guibg=#0d0f18 guifg=NONE]]
+-- vim.cmd [[highlight Normal guibg=#0d0f18 guifg=NONE]]

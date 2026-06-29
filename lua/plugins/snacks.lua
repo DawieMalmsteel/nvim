@@ -98,6 +98,7 @@ return {
 
     -- lsp/navigation
     { 'grd', function() Snacks.picker.lsp_definitions() end, desc = 'LSP Definitions' },
+    { '<M-CR>', function() Snacks.picker.lsp_definitions() end, desc = 'LSP Definitions' },
     { 'grD', function() Snacks.picker.lsp_declarations() end, desc = 'LSP Declarations' },
     { 'gri', function() Snacks.picker.lsp_implementations() end, desc = 'LSP Implementations' },
     { 'grr', function() Snacks.picker.lsp_references() end, desc = 'LSP References' },

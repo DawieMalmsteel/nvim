@@ -11,10 +11,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  { import = 'config.plugins' },
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.gitsigns',
-  { import = 'custom.plugins' },
+  { import = 'plugins' },
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

@@ -57,8 +57,26 @@ map('n', '<leader>be', function()
 end, { desc = 'Open Temp File' })
 
 map('n', '<leader>bn', function()
-  vim.cmd.enew()
-end, { desc = 'Open New File' })
+  local file = vim.api.nvim_buf_get_name(0)
+  local dir = (file ~= '' and vim.fn.filereadable(file) == 1) and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+
+  vim.ui.input({ prompt = 'New file: ', default = dir .. '/' }, function(path)
+    if not path or path == '' or path == dir .. '/' then
+      return
+    end
+
+    path = vim.fn.fnamemodify(path, ':p')
+    if vim.fn.filereadable(path) == 1 then
+      vim.cmd.edit(vim.fn.fnameescape(path))
+      return
+    end
+
+    vim.fn.mkdir(vim.fn.fnamemodify(path, ':h'), 'p')
+    vim.cmd.enew()
+    vim.cmd.file(vim.fn.fnameescape(path))
+    vim.cmd.startinsert()
+  end)
+end, { desc = 'New Named File' })
 
 -- Open a split window on the right (20% width)
 vim.keymap.set('n', '<leader>bv', function()
@@ -402,3 +420,10 @@ map('n', '<leader>CD', '<CMD>CargoAutodd<CR>', { desc = '🤖 Automatically mana
 map({ 'n', 'v' }, '<leader>mr', '<plug>SnipRun', { silent = true, desc = 'Run code block' })
 map('n', '<leader>mc', '<CMD>SnipClose<CR>', { silent = true, desc = 'Close code block' })
 map('n', '<leader>mC', '<cmd>SnipReplMemoryClean<cr>', { silent = true, desc = 'REPL memory clean' })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function(ev)
+    map('x', '<C-k>', '2sa]', { buffer = ev.buf, remap = true, desc = 'Wrap as wiki link' })
+  end,
+})

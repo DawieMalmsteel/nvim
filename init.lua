@@ -1,6 +1,9 @@
+vim.loader.enable()
+vim.g.nvim_start_time = vim.uv.hrtime()
+
 require 'config.options'
 require 'config.autocmds'
-require 'config.lazy'
+require 'config.pack'
 require 'config.misc'
 require 'config.neovide'
 -- require 'config.colors_cmd'

@@ -9,7 +9,13 @@ return {
   config = function()
     ---@type opencode.Opts
     vim.g.opencode_opts = {
-      -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+      -- ponytail: fixed port avoids opencode.nvim's lsof-based discovery.
+      server = {
+        url = 'http://127.0.0.1:4096',
+        start = function()
+          vim.cmd 'vsplit term://opencode --port 4096 | wincmd p'
+        end,
+      },
     }
 
     -- Required for `opts.events.reload`.

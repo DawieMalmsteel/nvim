@@ -2,7 +2,7 @@ return {
   'dmtrKovalenko/fff.nvim',
   build = function()
     -- this will download prebuild binary or try to use existing rustup toolchain to build from source
-    -- (if you are using lazy you can use gb for rebuilding a plugin if needed)
+    -- Re-run manually or via PackChanged hook when needed.
     require('fff.download').download_or_build_binary()
   end,
   -- if you are using nixos
@@ -16,7 +16,7 @@ return {
       close = { '<C-c>', '<Esc>' },
     },
   },
-  -- No need to lazy-load with lazy.nvim.
+  -- No need for plugin-manager lazy-loading.
   -- This plugin initializes itself lazily.
   lazy = false,
   keys = {

@@ -1,9 +1,7 @@
 return {
   {
     'folke/snacks.nvim',
-    dependencies = { 'amansingh-afk/milli.nvim' },
     opts = function()
-      local splash = require('milli').load { splash = 'lighningtornado' }
       return {
         scratch = {
           width = 100,
@@ -298,7 +296,13 @@ return {
           preset = {
             pick = nil,
             keys = {},
-            header = table.concat(splash.frames[1], '\n'),
+            header = [[
+███╗   ██╗██╗   ██╗██╗███╗   ███╗
+████╗  ██║██║   ██║██║████╗ ████║
+██╔██╗ ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝]],
             -- header = [[
             -- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀
             -- ⢀⣀⣀⡀⠀⣀⡀⠀⡀⠀⠀⣀⠀⠀⠀⣀⠀⠀⢠⡘⣇⣤⣄⠀⢀⡤⣄⢀⣼⣤⡄⠈⣹⠟⠀
@@ -350,20 +354,42 @@ return {
                 -- action = ':lua MiniSessions.read(nil, {})',
                 action = ':lua require("persistence").load()',
               },
-              { icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+              { icon = '󰒲 ', key = 'p', desc = 'Pack update', action = ':lua vim.pack.update()' },
               { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
               -- { pane = 2, icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1, layout = 'vertical' },
               -- { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
               -- { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-              { section = 'startup' },
+              function()
+                local count = #vim.pack.get(nil, { info = false })
+                local ms = (vim.uv.hrtime() - vim.g.nvim_start_time) / 1e6
+                return {
+                  align = 'center',
+                  text = {
+                    { '⚡ Neovim loaded ', hl = 'footer' },
+                    { tostring(count), hl = 'special' },
+                    { ' plugins in ', hl = 'footer' },
+                    { ('%.2fms'):format(ms), hl = 'special' },
+                    { ' with vim.pack', hl = 'footer' },
+                  },
+                }
+              end,
             },
           },
         },
       }
     end,
     config = function(_, opts)
-      require('snacks').setup(opts)
-      require('milli').snacks { splash = 'lighningtornado', loop = true }
+      local Snacks = require 'snacks'
+      Snacks.setup(opts)
+      Snacks.input.enable()
+      Snacks.picker.setup()
+      if #vim.api.nvim_list_uis() == 0 then
+        Snacks.dashboard.setup()
+        -- ponytail: image protocol checks need a real UI; headless health is noise.
+        Snacks.image.health = function()
+          Snacks.health.warn 'image health skipped in headless'
+        end
+      end
     end,
     keys = {
       {

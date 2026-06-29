@@ -9,5 +9,11 @@ vim.g.diffs = {
 
 return {
   'barrettruth/diffs.nvim',
-  'justinmk/guh.nvim',
+  keys = {
+    {
+      '<leader>go',
+      '<cmd>Diff<cr>',
+      desc = 'Diff current file',
+    },
+  },
 }

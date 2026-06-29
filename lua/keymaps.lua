@@ -30,7 +30,7 @@ map('n', '<leader>N', function()
   if vim.fn.isdirectory(notes_dir) == 0 then
     vim.fn.mkdir(notes_dir, 'p')
   end
-  Snacks.explorer { cwd = notes_dir }
+  require('oil').open_float(notes_dir)
 end, { desc = 'Open notes folder', silent = true })
 
 -- old keymaps: buffer.lua

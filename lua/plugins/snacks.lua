@@ -44,7 +44,6 @@ return {
     { '<leader>/', function() Snacks.picker.lines() end, desc = 'Buffer Lines' },
     { '<leader>;', function() Snacks.picker.command_history() end, desc = 'Command History' },
     { '<leader>T', function() Snacks.explorer() end, desc = 'Explorer' },
-    { '<leader>e', function() Snacks.explorer() end, desc = 'Explorer' },
     { '<leader>O', function() Snacks.picker.recent() end, desc = 'Recent Files' },
     { '<leader>r', function() Snacks.picker.buffers() end, desc = 'Buffers' },
 

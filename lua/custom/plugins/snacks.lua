@@ -1,6 +1,8 @@
 return {
   {
     'folke/snacks.nvim',
+    lazy = false,
+    priority = 1000,
     dependencies = { 'amansingh-afk/milli.nvim' },
     opts = function()
       local splash = require('milli').load { splash = 'lighningtornado' }

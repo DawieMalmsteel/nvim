@@ -40,6 +40,13 @@ return {
   },
   config = function(_, opts)
     require('barbar').setup(opts)
+    local visible = false
     vim.opt.showtabline = 0
+
+    vim.keymap.set('n', '<leader>ub', function()
+      visible = not visible
+      vim.opt.showtabline = visible and 2 or 0
+      vim.cmd 'redrawtabline'
+    end, { desc = 'Toggle tabline' })
   end,
 }

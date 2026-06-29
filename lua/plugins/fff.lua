@@ -8,6 +8,12 @@ return {
   -- if you are using nixos
   -- build = "nix run .#release",
   opts = { -- (optional)
+    mode = 'mixed',
+    layout = {
+      height = 0.9,
+      width = 0.9,
+      prompt_position = 'top',
+    },
     debug = {
       enabled = false, -- we expect your collaboration at least during the beta
       show_scores = true, -- to help us optimize the scoring system, feel free to share your scores!

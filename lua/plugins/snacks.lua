@@ -39,7 +39,7 @@ return {
   },
   keys = {
     -- top-level picker/explorer
-    { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
+    -- { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
     -- { '<leader><leader>', function() Snacks.picker.files { cwd = cwd() } end, desc = 'Files Near Buffer' },
     { '<leader>/', function() Snacks.picker.lines() end, desc = 'Buffer Lines' },
     { '<leader>;', function() Snacks.picker.command_history() end, desc = 'Command History' },

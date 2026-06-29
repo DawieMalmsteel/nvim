@@ -1,5 +1,8 @@
 return {
   'romgrk/barbar.nvim',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+  },
   init = function()
     vim.g.barbar_auto_setup = true
     local map = vim.api.nvim_set_keymap
@@ -37,5 +40,6 @@ return {
   },
   config = function(_, opts)
     require('barbar').setup(opts)
+    vim.opt.showtabline = 0
   end,
 }

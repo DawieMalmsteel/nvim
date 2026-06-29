@@ -287,7 +287,7 @@ return {
       },
       cssls = {},
       superhtml = {},
-      markdown_oxide = {},
+      -- markdown_oxide = {},
       lua_ls = {
         settings = {
           Lua = {

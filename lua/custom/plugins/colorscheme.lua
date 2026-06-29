@@ -15,12 +15,10 @@ return {
       -- vim.cmd 'colorscheme base46-monochrome'
       -- vim.cmd 'colorscheme  base46-ayu_dark'
       -- vim.cmd 'colorscheme  base46-tokyodark'
-      vim.cmd 'set background=light'
-      vim.cmd 'colorscheme  flexoki'
-      -- vim.cmd 'colorscheme koda-dark'
+      -- vim.cmd 'set background=light'
+      vim.cmd 'colorscheme  koda'
     end,
   },
-{ 'kepano/flexoki-neovim', as = 'flexoki' },
   {
     'marekh19/meowsoot.nvim',
     lazy = false,

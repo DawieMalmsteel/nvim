@@ -1,6 +1,5 @@
 return {
   'folke/trouble.nvim',
-  version = '*', -- ensure latest (v3)
   cmd = 'Trouble',
   opts = {
     modes = {

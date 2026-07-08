@@ -16,7 +16,9 @@ return {
       -- vim.cmd 'colorscheme  base46-ayu_dark'
       -- vim.cmd 'colorscheme  base46-tokyodark'
       -- vim.cmd 'set background=light'
-      vim.cmd 'colorscheme  koda'
+      -- vim.cmd 'colorscheme  koda'
+      -- vim.cmd 'colorscheme base46-kanagawa'
+      vim.cmd 'colorscheme base46-eldritch'
     end,
   },
 }

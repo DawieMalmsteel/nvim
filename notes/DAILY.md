@@ -1,4 +1,4 @@
-Best YouTube Channels To Learn AI in 2026 (No BS)
+# Best YouTube Channels To Learn AI in 2026 (No BS)
 
 1. Fundamentals – 3Blue1Brown  
 2. Deep Learning – Andrej Karpathy  
@@ -14,3 +14,33 @@ Best YouTube Channels To Learn AI in 2026 (No BS)
 12. Math for ML – Serrano Academy  
 13. Industry Insights – Lex Fridman  
 14. Real-world AI – DeepLearningAI
+
+
+Learn Unix Philosophy !!
+
+
+
+# Để thực sự hiểu con người, bạn cần hiểu những điều sau:
+
+- Tháp nhu cầu của Maslow
+- Hiệu ứng khán giả
+- Hiệu ứng Dunning-Kruger
+- Lý thuyết gắn bó
+- Hội chứng Stockholm
+- Liệu pháp nhận thức hành vi
+- Hiệu ứng Pygmalion
+- Nơ-ron gương
+- Lây lan cảm xúc
+- Hiệu ứng hào quang
+- Sự bất lực học được
+- Bản ngã bóng tối của Carl Jung
+- Hành trình của người hùng theo Joseph Campbell
+- Tính tích cực độc hại
+- Lỗi quy kết cơ bản
+- Thiên kiến xác nhận và cách nó định hình thực tế
+- Hiệu ứng phản ứng ngược
+- Lý thuyết so sánh xã hội
+- Sự khác biệt giữa tư duy khan hiếm và tư duy dồi dào
+- Tại sao con người cần câu chuyện để tạo ý nghĩa
+- Tâm lý học của chủ nghĩa bộ lạc
+- Tác động vật lý của sự cô đơn

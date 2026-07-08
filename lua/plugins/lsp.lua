@@ -164,7 +164,8 @@ return {
       --     },
       --   },
       -- },
-      copilot = {},
+      -- copilot = {},
+      ols = {},
       ty = {
         root_markers = { 'uv.lock' },
       },

@@ -27,6 +27,7 @@ return {
         'typescript',
         'vimdoc',
         'vim',
+        'odin',
         'bash',
         'json',
         'markdown',

@@ -12,6 +12,11 @@ return {
         path = '~/funthings/',
       },
     },
+    templates = {
+      folder = 'Templates',
+      date_format = '%Y-%m-%d-%a',
+      time_format = '%H:%M',
+    },
     note_id_func = function(title)
       if title == nil or vim.trim(title) == '' then
         return tostring(os.time())

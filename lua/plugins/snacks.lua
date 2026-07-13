@@ -6,6 +6,62 @@ local function cwd()
   return vim.uv.cwd()
 end
 
+local image_toggle_patched = false
+local original_find_visible
+
+local function setup_buffer_image_toggle()
+  if image_toggle_patched then
+    return
+  end
+
+  local doc = Snacks.image.doc
+
+  original_find_visible = doc.find_visible
+
+  doc.find_visible = function(buf, callback)
+    if vim.b[buf].snacks_image_hidden then
+      callback {}
+      return
+    end
+
+    return original_find_visible(buf, callback)
+  end
+
+  image_toggle_patched = true
+end
+
+local function refresh_buffer_images(buf)
+  local group = 'snacks.image.inline.' .. buf
+
+  local ok = pcall(vim.api.nvim_exec_autocmds, 'BufWinEnter', {
+    group = group,
+    buffer = buf,
+    modeline = false,
+  })
+
+  -- Buffer chưa được Snacks.image attach.
+  if not ok and not vim.b[buf].snacks_image_hidden then
+    Snacks.image.doc.attach(buf)
+  end
+end
+
+local function toggle_buffer_images()
+  setup_buffer_image_toggle()
+
+  local buf = vim.api.nvim_get_current_buf()
+
+  -- Khi đang ẩn, lần toggle này sẽ hiển thị lại.
+  local show_images = vim.b[buf].snacks_image_hidden == true
+
+  vim.b[buf].snacks_image_hidden = not show_images
+
+  refresh_buffer_images(buf)
+
+  vim.notify(show_images and 'Inline images enabled for current buffer' or 'Inline images disabled for current buffer', vim.log.levels.INFO, {
+    title = 'Snacks.image',
+  })
+end
+
 return {
   'folke/snacks.nvim',
   lazy = false,
@@ -21,8 +77,8 @@ return {
       convert = {
         notify = true,
         mermaid = function()
-          local theme = vim.o.background == "light" and "neutral" or "dark"
-          return { "-i", "{src}", "-o", "{file}", "-e", "png", "-b", "transparent", "-t", theme, "-s", "{scale}" }
+          local theme = vim.o.background == 'light' and 'neutral' or 'dark'
+          return { '-i', '{src}', '-o', '{file}', '-e', 'png', '-b', 'transparent', '-t', theme, '-s', '{scale}' }
         end,
       },
     },
@@ -622,6 +678,18 @@ return {
         Snacks.picker.todo_comments { keywords = { 'WARN' } }
       end,
       desc = 'WARN',
+    },
+    {
+      '<leader>i',
+      function()
+        require('config.snacks-image-preview').toggle()
+      end,
+      desc = 'toggle image preview',
+    },
+    {
+      '<leader>ui',
+      toggle_buffer_images,
+      desc = 'Toggle inline images in current buffer',
     },
   },
   init = function()

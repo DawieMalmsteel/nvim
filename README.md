@@ -25,3 +25,27 @@ lua/
 ```sh
 XDG_CONFIG_HOME=$PWD/.. nvim --headless '+lua print("nvim config ok")' '+qa'
 ```
+
+## Mermaid rendering
+
+`Snacks.image` renders Mermaid diagrams via an executable named `mmdc`.
+
+A compatibility wrapper calls `mmdr` instead of the original `mmdc` (Chrome/Puppeteer-based).
+
+Source setup script:
+
+```text
+~/.config/nvim/setup-snacks-mmdr.sh
+```
+
+Manual setup/repair:
+
+```bash
+~/.config/nvim/setup-snacks-mmdr.sh
+```
+
+Cache reset (only when needed):
+
+```vim
+:lua vim.fn.delete(vim.fn.stdpath("cache") .. "/snacks/image", "rf")
+```

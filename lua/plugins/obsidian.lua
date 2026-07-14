@@ -1,4 +1,20 @@
 vim.opt_local.conceallevel = 2
+
+local function rename_linked_note()
+  local api = require 'obsidian.api'
+  local link = api.cursor_link()
+
+  if link == nil then
+    vim.notify('Obsidian: con trỏ không nằm trên link, đã hủy rename để tránh đổi tên note hiện tại', vim.log.levels.WARN)
+    return
+  end
+
+  vim.lsp.buf.rename(nil, {
+    name = 'obsidian-ls',
+    bufnr = 0,
+  })
+end
+
 return {
   'obsidian-nvim/obsidian.nvim',
   version = '*', -- use latest release, remove to use latest commit
@@ -58,6 +74,11 @@ return {
       '<m-p>',
       '<cmd>Obsidian paste_img<cr>',
       desc = 'paste image',
+    },
+    {
+      '<leader>rn',
+      rename_linked_note,
+      desc = 'Rename linked note',
     },
   },
 }

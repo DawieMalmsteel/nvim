@@ -23,7 +23,7 @@ return {
     map('n', '<A-r>', '<Cmd>BufferRestore<CR>', opts)
 
     -- Magic buffer-picking mode
-    map('n', '<A-p>', '<Cmd>BufferPick<CR>', opts)
+    -- map('n', '<A-p>', '<Cmd>BufferPick<CR>', opts)
     -- map('n', '<leader>1', '<Cmd>BufferPickDelete<CR>', opts)
 
     -- Sort automatically by...

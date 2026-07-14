@@ -1,5 +1,3 @@
-vim.opt_local.conceallevel = 2
-
 local function rename_linked_note()
   local api = require 'obsidian.api'
   local link = api.cursor_link()
@@ -45,7 +43,7 @@ return {
     end,
 
     ui = {
-      enable = false,
+      enable = true,
     },
   },
 

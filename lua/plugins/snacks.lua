@@ -680,14 +680,14 @@ return {
       desc = 'WARN',
     },
     {
-      '<leader>i',
+      '<leader>I',
       function()
         require('config.snacks-image-preview').toggle()
       end,
       desc = 'toggle image preview',
     },
     {
-      '<leader>ui',
+      '<leader>i',
       toggle_buffer_images,
       desc = 'Toggle inline images in current buffer',
     },

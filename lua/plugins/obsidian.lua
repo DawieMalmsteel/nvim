@@ -12,7 +12,7 @@ return {
     workspaces = {
       {
         name = 'work',
-        path = '~/funthings/',
+        path = '~/funthings/notes/',
       },
     },
     templates = {
@@ -30,6 +30,34 @@ return {
 
     ui = {
       enable = false,
+    },
+  },
+
+  keys = {
+    {
+      '<C-p>',
+      '<cmd>Obsidian quick_switch<cr>',
+      desc = 'Quick Switch',
+    },
+    {
+      '<cr>',
+      '<cmd>Obsidian follow_link<cr>',
+      desc = 'follow link',
+    },
+    {
+      '<backspace>',
+      '<cmd>Obsidian backlinks<cr>',
+      desc = 'backlinks',
+    },
+    {
+      '<m-cr>',
+      '<cmd>Obsidian backlinks<cr>',
+      desc = 'backlinks',
+    },
+    {
+      '<m-p>',
+      '<cmd>Obsidian paste_img<cr>',
+      desc = 'paste image',
     },
   },
 }

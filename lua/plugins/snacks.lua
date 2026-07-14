@@ -138,7 +138,7 @@ return {
       desc = 'Recent Files',
     },
     {
-      '<leader>r',
+      '<leader>R',
       function()
         Snacks.picker.buffers()
       end,

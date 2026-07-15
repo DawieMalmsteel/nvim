@@ -23,6 +23,10 @@ map({ 'n', 'v' }, '<leader>C', '', { desc = '+Cargo' })
 map({ 'n', 'v' }, '<leader>z', '', { desc = '+Zoom' })
 map({ 'n', 'v' }, '<leader>bs', '', { desc = '+sort buffer' })
 
+map("n", "<leader>yt", '^vg_"+y', {
+  desc = "Copy dòng, bỏ khoảng trắng đầu/cuối",
+})
+
 -- old keymaps: notes/init.lua
 local notes_dir = vim.fn.stdpath 'config' .. '/notes'
 

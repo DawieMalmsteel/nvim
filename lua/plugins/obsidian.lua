@@ -39,7 +39,7 @@ return {
         return tostring(os.time())
       end
 
-      return vim.trim(title):gsub('[/\\:*?"<>|]', '-')
+      return vim.trim(title):gsub('[/\\:*?"<>|]', ' ')
     end,
 
     ui = {
@@ -67,6 +67,11 @@ return {
       '<m-cr>',
       '<cmd>Obsidian backlinks<cr>',
       desc = 'backlinks',
+    },
+    {
+      '<c-n>',
+      '<cmd>Obsidian new<cr>',
+      desc = 'obsidian new note',
     },
     {
       '<m-p>',

@@ -7,6 +7,7 @@ vim.g.have_nerd_font = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.cmdheight = 0
+vim.o.conceallevel = 2
 
 vim.o.mouse = 'a'
 

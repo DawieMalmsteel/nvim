@@ -23,7 +23,7 @@ map({ 'n', 'v' }, '<leader>C', '', { desc = '+Cargo' })
 map({ 'n', 'v' }, '<leader>z', '', { desc = '+Zoom' })
 map({ 'n', 'v' }, '<leader>bs', '', { desc = '+sort buffer' })
 
-map("n", "<leader>yt", '^vg_"+y', {
+map("n", "<leader>yy", '^vg_"+y', {
   desc = "Copy dòng, bỏ khoảng trắng đầu/cuối",
 })
 

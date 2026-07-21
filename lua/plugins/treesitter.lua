@@ -30,6 +30,7 @@ return {
         'lua',
         'python',
         'rust',
+        'ron',
         'tsx',
         'javascript',
         'typescript',

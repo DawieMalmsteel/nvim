@@ -18,6 +18,7 @@ return {
   },
   init = function()
     vim.g.barbar_auto_setup = true
+    vim.g.barbar_tabline_visible = false
     vim.opt.showtabline = 0
   end,
   keys = {
@@ -57,5 +58,6 @@ return {
   },
   config = function(_, opts)
     require('barbar').setup(opts)
+    vim.opt.showtabline = 0
   end,
 }

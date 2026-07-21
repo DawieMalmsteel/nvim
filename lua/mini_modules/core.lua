@@ -1,7 +1,6 @@
 local modules = {
   'mini_modules.ai',
   'mini_modules.surround',
-  'mini_modules.indentscope',
   'mini_modules.bracketed',
   'mini_modules.bufremove',
   'mini_modules.icons',

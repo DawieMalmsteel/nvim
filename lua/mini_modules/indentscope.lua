@@ -1,5 +1,7 @@
 local M = function()
-  require('mini.indentscope').setup {
+  local indentscope = require 'mini.indentscope'
+
+  indentscope.setup {
     mappings = {
       object_scope = 'ii', -- Select the inner scope of the current block
       object_scope_with_border = 'ai', -- Select the entire scope including its borders
@@ -9,7 +11,8 @@ local M = function()
     symbol = '▏', -- │
     options = { try_as_border = true },
     draw = {
-      delay = 20,
+      delay = 0,
+      animation = indentscope.gen_animation.none(),
     },
   }
 end

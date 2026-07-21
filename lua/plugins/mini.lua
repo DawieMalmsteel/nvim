@@ -29,7 +29,6 @@ return {
             'ai',
             'surround',
             'bracketed',
-            'indentscope',
             'cursorword',
           }
 

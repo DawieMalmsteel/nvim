@@ -66,10 +66,23 @@ return {
   'folke/snacks.nvim',
   lazy = false,
   priority = 1000,
+  init = function()
+    vim.g.snacks_animate = false
+  end,
   opts = {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
     explorer = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = { enabled = false },
+      indent = {
+        char = ' ',
+      },
+      scope = {
+        char = '▏',
+      },
+    },
     image = {
       enabled = true,
       force = true,
@@ -98,6 +111,7 @@ return {
       height = 30,
       position = 'right',
     },
+    scope = { enabled = true },
     statuscolumn = { enabled = true },
     terminal = {
       win = { position = 'float' },
@@ -105,6 +119,10 @@ return {
     words = { enabled = true },
     zen = { enabled = true },
   },
+  config = function(_, opts)
+    vim.g.snacks_animate = false
+    require('snacks').setup(opts)
+  end,
   keys = {
     -- top-level picker/explorer
     -- { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },

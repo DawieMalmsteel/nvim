@@ -1,1 +1,4 @@
-return { 'justinmk/guh.nvim', event = 'VeryLazy' }
+return {
+  'justinmk/guh.nvim',
+  cmd = { 'Guh', 'GuhComment' },
+}

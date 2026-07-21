@@ -64,7 +64,7 @@ return {
         },
       },
       progress = {
-        enabled = false,
+        enabled = true,
       },
     },
 

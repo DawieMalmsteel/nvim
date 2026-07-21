@@ -85,9 +85,15 @@ return {
     local servers = require('config.lsp_servers').servers
 
     for name, cfg in pairs(servers) do
-      cfg.capabilities = vim.tbl_deep_extend('force', {}, capabilities, cfg.capabilities or {})
-      vim.lsp.config(name, cfg) -- Configure the server
-      vim.lsp.enable(name) -- Enable the server
+      if cfg.enabled ~= false then
+        local server_cfg = vim.tbl_deep_extend('force', {}, cfg)
+        server_cfg.enabled = nil
+        server_cfg.install = nil
+        server_cfg.mason = nil
+        server_cfg.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_cfg.capabilities or {})
+        vim.lsp.config(name, server_cfg) -- Configure the server
+        vim.lsp.enable(name) -- Enable the server
+      end
     end
 
     -- vim.lsp.enable 'gleam'

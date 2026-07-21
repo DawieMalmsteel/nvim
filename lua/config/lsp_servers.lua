@@ -1,5 +1,53 @@
 local M = {}
 
+M.rust_diagnostics = vim.g.lazyvim_rust_diagnostics or 'bacon-ls'
+
+-- Let rustaceanvim drive rust-analyzer defaults. Keep the old tuning below
+-- commented in case it is useful again for a very large workspace.
+-- M.rust_analyzer_settings = {
+--   ['rust-analyzer'] = {
+--     cachePriming = {
+--       enable = false,
+--     },
+--     cargo = {
+--       -- Keep rust-analyzer responsive on large workspaces.
+--       allFeatures = false,
+--       loadOutDirsFromCheck = false,
+--       buildScripts = {
+--         enable = false,
+--       },
+--     },
+--     checkOnSave = M.rust_diagnostics == 'rust-analyzer',
+--     diagnostics = {
+--       enable = M.rust_diagnostics == 'rust-analyzer',
+--     },
+--     procMacro = {
+--       enable = true,
+--       ignored = {
+--         ['async-trait'] = { 'async_trait' },
+--         ['napi-derive'] = { 'napi' },
+--         ['async-recursion'] = { 'async_recursion' },
+--       },
+--     },
+--     files = {
+--       -- Avoid rust-analyzer "Roots Scanned" stalls.
+--       watcher = 'client',
+--       exclude = {
+--         '.direnv',
+--         '.git',
+--         '.jj',
+--         '.github',
+--         '.gitlab',
+--         'bin',
+--         'node_modules',
+--         'target',
+--         'venv',
+--         '.venv',
+--       },
+--     },
+--   },
+-- }
+
 M.servers = {
   gopls = {
     settings = {
@@ -98,52 +146,14 @@ M.servers = {
   -- },
 
   rust_analyzer = {
-    settings = {
-      ['rust-analyzer'] = {
-        cachePriming = {
-          enable = false,
-        },
-        cargo = {
-          allFeatures = true,
-          loadOutDirsFromCheck = true,
-          buildScripts = {
-            enable = true,
-          },
-        },
-        -- Add clippy lints for Rust if using rust-analyzer
-        checkOnSave = {
-          enable = false,
-        },
-        -- Enable diagnostics if using rust-analyzer
-        diagnostics = {
-          enable = false,
-        },
-        procMacro = {
-          enable = true,
-          ignored = {
-            ['async-trait'] = { 'async_trait' },
-            ['napi-derive'] = { 'napi' },
-            ['async-recursion'] = { 'async_recursion' },
-          },
-        },
-        files = {
-          excludeDirs = {
-            '.direnv',
-            '.git',
-            '.github',
-            '.gitlab',
-            'bin',
-            'node_modules',
-            'target',
-            'venv',
-            '.venv',
-          },
-        },
-      },
-    },
+    -- rustaceanvim owns rust-analyzer. Keep this entry so Mason still installs it.
+    enabled = false,
+    install = true,
+    -- settings = M.rust_analyzer_settings,
   },
   bacon_ls = {
-    enabled = true,
+    enabled = M.rust_diagnostics == 'bacon-ls',
+    install = M.rust_diagnostics == 'bacon-ls',
   },
   -- solargraph = {},
   -- vtsls = {
@@ -203,10 +213,19 @@ M.tools = {
   'stylua',
   'markdownlint-cli2',
   'markdown-toc',
+  'bacon',
+  'codelldb',
 }
 
 function M.ensure_installed()
-  local ensure = vim.tbl_keys(M.servers)
+  local ensure = {}
+
+  for name, cfg in pairs(M.servers) do
+    if cfg.mason ~= false and (cfg.enabled ~= false or cfg.install == true) then
+      ensure[#ensure + 1] = name
+    end
+  end
+
   vim.list_extend(ensure, M.tools)
   return ensure
 end

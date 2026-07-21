@@ -1,1 +1,1 @@
-return { 'justinmk/guh.nvim' }
+return { 'justinmk/guh.nvim', event = 'VeryLazy' }

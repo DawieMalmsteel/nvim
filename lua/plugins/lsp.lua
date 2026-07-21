@@ -1,8 +1,10 @@
 return {
   'neovim/nvim-lspconfig',
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     {
       'mason-org/mason.nvim',
+      cmd = 'Mason',
       opts = {
         ui = {
           border = 'none',

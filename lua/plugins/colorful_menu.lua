@@ -1,5 +1,6 @@
 return {
   'xzbdmw/colorful-menu.nvim',
+  event = 'InsertEnter',
   config = function()
     require('blink.cmp').setup {
       completion = {

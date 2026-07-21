@@ -3,6 +3,7 @@ return {
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
+  event = 'VeryLazy',
   init = function()
     vim.g.barbar_auto_setup = true
     local map = vim.api.nvim_set_keymap

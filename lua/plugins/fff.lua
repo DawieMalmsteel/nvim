@@ -22,9 +22,6 @@ return {
       close = { '<C-c>', '<Esc>' },
     },
   },
-  -- No need to lazy-load with lazy.nvim.
-  -- This plugin initializes itself lazily.
-  lazy = false,
   keys = {
     {
       -- '\\\\', -- try it if you didn't it is a banger keybinding for a picker

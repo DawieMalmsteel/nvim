@@ -469,8 +469,8 @@ local M = function()
 	end
 
   local function get_harpoon()
-    local ok, harpoon = pcall(require, 'harpoon')
-    if not ok then
+    local harpoon = package.loaded.harpoon
+    if not harpoon then
       return ''
     end
 

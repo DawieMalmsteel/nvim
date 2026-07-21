@@ -4,13 +4,21 @@ return {
     build = ':TSUpdate',
     branch = 'main',
     main = 'nvim-treesitter',
-    init = function()
+    event = { 'BufReadPost', 'BufNewFile' },
+    config = function()
+      local function start(buf)
+        pcall(vim.treesitter.start, buf)
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+
+      if vim.bo.filetype ~= '' then
+        start(0)
+      end
+
       vim.api.nvim_create_autocmd('FileType', {
-        callback = function()
-          -- Enable treesitter highlighting and disable regex syntax
-          pcall(vim.treesitter.start)
-          -- Enable treesitter-based indentation
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        group = vim.api.nvim_create_augroup('treesitter_start', { clear = true }),
+        callback = function(ev)
+          start(ev.buf)
         end,
       })
 
@@ -102,5 +110,5 @@ return {
       })
     end,
   },
-  { 'nvim-treesitter/nvim-treesitter-context' },
+  { 'nvim-treesitter/nvim-treesitter-context', event = { 'BufReadPost', 'BufNewFile' } },
 }

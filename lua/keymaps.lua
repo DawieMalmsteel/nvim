@@ -44,6 +44,7 @@ local TEMP = vim.fn.stdpath 'cache' .. '/temp.md'
 map('n', '<leader>bh', function()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.fn.buflisted(buf) == 1 and vim.fn.bufwinnr(buf) == -1 then
+      require('config.mini_lazy').setup 'bufremove'
       require('mini.bufremove').delete(buf, false)
     end
   end
@@ -114,6 +115,7 @@ end, { desc = 'Create 20% Right Padding' })
 map('n', '<leader>bE', function()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.api.nvim_buf_get_name(buf) == TEMP then
+      require('config.mini_lazy').setup 'bufremove'
       require('mini.bufremove').delete(buf, true)
       break
     end
@@ -306,6 +308,7 @@ end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
 
 map('n', '<leader>tm', function()
+  require('config.mini_lazy').setup 'map'
   local mini_map = require 'mini.map'
   mini_map.toggle()
 end, { desc = 'Toggle Mini Map' })
@@ -365,12 +368,14 @@ end, { desc = 'Toggle Wrap Text' })
 
 -- Open Mini map
 map('n', '<leader>um', function()
+  require('config.mini_lazy').setup 'map'
   local mini_map = require 'mini.map'
   mini_map.toggle()
 end, { desc = 'Toggle Mini Map' })
 
 -- Toggle Mini map focus
 map('n', '<leader>uM', function()
+  require('config.mini_lazy').setup 'map'
   local mini_map = require 'mini.map'
   mini_map.toggle_focus()
 end, { desc = 'Toggle Mini Map Focus' })
@@ -421,7 +426,6 @@ map('n', '<leader>CO', '<CMD>CargoOutdated<CR>', { desc = '📊 Check outdated d
 map('n', '<leader>CD', '<CMD>CargoAutodd<CR>', { desc = '🤖 Automatically manage dependencies' })
 
 -- old keymaps: markdown_sniprun.lua
-map({ 'n', 'v' }, '<leader>mr', '<plug>SnipRun', { silent = true, desc = 'Run code block' })
 map('n', '<leader>mc', '<CMD>SnipClose<CR>', { silent = true, desc = 'Close code block' })
 map('n', '<leader>mC', '<cmd>SnipReplMemoryClean<cr>', { silent = true, desc = 'REPL memory clean' })
 

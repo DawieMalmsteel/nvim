@@ -3,6 +3,12 @@ return {
   'DawieMalmsteel/gtranslate',
   -- this is for local plugin development
   name = 'gtranslate',
+  cmd = { 'Gtrans', 'Atrans', 'Etrans' },
+  keys = {
+    { '<leader>tt', mode = 'v', desc = 'Google Translate' },
+    { '<leader>ta', mode = 'v', desc = 'Gemini AI Translate' },
+    { '<leader>te', mode = 'v', desc = 'Gemini Explain' },
+  },
   config = function()
     require('gtranslate').setup {
       target_lang = 'vi',

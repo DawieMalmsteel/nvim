@@ -1,6 +1,10 @@
 return {
   'michaelb/sniprun',
   build = 'sh install.sh',
+  cmd = { 'SnipRun', 'SnipReset', 'SnipInfo', 'SnipClose', 'SnipReplMemoryClean' },
+  keys = {
+    { '<leader>mr', '<Plug>SnipRun', mode = { 'n', 'v' }, silent = true, desc = 'Run code block' },
+  },
   opts = {
     display = {
       -- 'Classic', --# display results in the command-line  area

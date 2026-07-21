@@ -51,7 +51,6 @@ return {
       end,
     },
   },
-  lazy = false,
   keys = {
     { '<leader>e', "<cmd>lua require('oil').open()<CR>", desc = 'Oil', mode = { 'n' } },
     {

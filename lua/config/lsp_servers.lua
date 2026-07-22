@@ -87,32 +87,6 @@ M.servers = {
     },
   },
 
-  -- basedpyright = {
-  --   before_init = function(_, c)
-  --     c.settings = c.settings or {}
-  --     c.settings.python = c.settings.python or {}
-  --     c.settings.python.pythonPath = vim.fn.exepath 'python'
-  --   end,
-  --   settings = {
-  --     basedpyright = {
-  --       analysis = {
-  --         typeCheckingMode = 'basic',
-  --         autoImportCompletions = true,
-  --         useLibraryCodeForTypes = true,
-  --         diagnosticSeverityOverrides = {
-  --           reportUnusedImport = 'information',
-  --           reportUnusedFunction = 'information',
-  --           reportUnusedVariable = 'information',
-  --           reportGeneralTypeIssues = 'none',
-  --           reportOptionalMemberAccess = 'none',
-  --           reportOptionalSubscript = 'none',
-  --           reportPrivateImportUsage = 'none',
-  --         },
-  --       },
-  --     },
-  --   },
-  -- },
-  -- copilot = {},
   ols = {},
   ty = {
     root_markers = { 'uv.lock' },
@@ -122,38 +96,32 @@ M.servers = {
   tsgo = {},
   terraformls = {},
 
-  -- roslyn = {
-  --   settings = {
-  --     ['csharp|inlay_hints'] = {
-  --       csharp_enable_inlay_hints_for_implicit_object_creation = true,
-  --       csharp_enable_inlay_hints_for_implicit_variable_types = true,
-  --       csharp_enable_inlay_hints_for_lambda_parameter_types = true,
-  --       csharp_enable_inlay_hints_for_types = true,
-  --       dotnet_enable_inlay_hints_for_indexer_parameters = true,
-  --       dotnet_enable_inlay_hints_for_literal_parameters = true,
-  --       dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-  --       dotnet_enable_inlay_hints_for_other_parameters = true,
-  --       dotnet_enable_inlay_hints_for_parameters = true,
-  --       dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
-  --       dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
-  --       dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
-  --     },
-  --
-  --     ['csharp|code_lens'] = {
-  --       dotnet_enable_references_code_lens = true,
-  --     },
-  --   },
+  -- rust_analyzer = {
+  --   -- rustaceanvim owns rust-analyzer. Keep this entry so Mason still installs it.
+  --   enabled = false,
+  --   install = true,
+  --   -- settings = M.rust_analyzer_settings,
   -- },
-
-  rust_analyzer = {
-    -- rustaceanvim owns rust-analyzer. Keep this entry so Mason still installs it.
-    enabled = false,
-    install = true,
-    -- settings = M.rust_analyzer_settings,
-  },
   bacon_ls = {
-    enabled = M.rust_diagnostics == 'bacon-ls',
+    -- enabled = M.rust_diagnostics == 'bacon-ls',
+    enabled = true,
     install = M.rust_diagnostics == 'bacon-ls',
+    settings = {
+      bacon_ls = {
+        backend = 'cargo',
+        -- bacon = {
+        --   locationsFile = '.bacon-locations',
+        --   runInBackground = true,
+        --   runInBackgroundCommand = 'bacon',
+        --   runInBackgroundCommandArguments = '--headless -j bacon-ls',
+        --   validatePreferences = true,
+        --   createPreferencesFile = true,
+        --   synchronizeAllOpenFilesWaitMillis = 2000,
+        --   updateOnSave = true,
+        --   updateOnSaveWaitMillis = 1000,
+        -- },
+      },
+    },
   },
   -- solargraph = {},
   -- vtsls = {

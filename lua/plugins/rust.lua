@@ -14,6 +14,15 @@ return {
               vim.cmd.RustLsp 'debuggables'
             end, { desc = 'Rust Debuggables', buffer = bufnr })
           end,
+          default_settings = {
+            -- rust-analyzer language server configuration
+            ['rust-analyzer'] = {
+              checkOnSave = false,
+              diagnostics = {
+                enable = false,
+              },
+            },
+          },
           -- default_settings = require('config.lsp_servers').rust_analyzer_settings,
         },
       }

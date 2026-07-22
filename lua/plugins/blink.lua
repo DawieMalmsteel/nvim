@@ -7,7 +7,7 @@ return {
     'fang2hou/blink-copilot',
     'rafamadriz/friendly-snippets',
     'folke/lazydev.nvim',
-    'Kaiser-Yang/blink-cmp-git',
+    -- 'Kaiser-Yang/blink-cmp-git',
     'marcoSven/blink-cmp-yanky',
     -- 'kristijanhusak/vim-dadbod-completion',
     {
@@ -76,7 +76,7 @@ return {
     },
     sources = {
       -- compat = {},
-      default = { 'lsp', 'git', 'snippets', 'path', 'buffer', 'copilot', 'yank', 'lazydev' }, --copilot, 'dadbod', 'avante', 'ripgrep'
+      default = { 'lsp', 'snippets', 'path', 'buffer', 'copilot', 'yank', 'lazydev' }, --copilot, 'dadbod', 'avante', 'ripgrep''git',
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         -- dadbod_grip = { name = 'Grip SQL', module = 'dadbod-grip.completion.blink' },

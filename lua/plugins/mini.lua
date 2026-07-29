@@ -31,12 +31,35 @@ return {
             'bracketed',
             'cursorword',
           }
-
-          local file = vim.api.nvim_buf_get_name(ev.buf)
-          if file ~= '' and vim.fs.root(file, { '.git' }) then
-            mini.setup_many { 'diff', 'git' }
-          end
         end)
+      end,
+    })
+
+    -- mini.git / mini.diff: load on first buffer inside a git repo
+    local mini_git_loaded = false
+    vim.api.nvim_create_autocmd('BufReadPost', {
+      callback = function(ev)
+        if mini_git_loaded then
+          return
+        end
+        if vim.b[ev.buf].mini_git_checked then
+          return
+        end
+        vim.b[ev.buf].mini_git_checked = true
+        local file = vim.api.nvim_buf_get_name(ev.buf)
+        if file == '' then
+          return
+        end
+        local dir = vim.fn.fnamemodify(file, ':p:h')
+        -- finddir: thư mục .git; findfile: file .git (worktree / submodule)
+        local d = vim.fn.finddir('.git', dir .. ';')
+        if d == '' then
+          d = vim.fn.findfile('.git', dir .. ';')
+        end
+        if d ~= '' then
+          mini_git_loaded = true
+          mini.setup_many { 'diff', 'git' }
+        end
       end,
     })
 

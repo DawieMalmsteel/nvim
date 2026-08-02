@@ -1,3 +1,53 @@
+-- Obsidian.nvim: plugin config + custom logic (daily activity log).
+--
+-- Structure:
+--   1. Constants & shared helpers (normalize_day, FRONTMATTER_SORT)
+--   2. rename_linked_note keymap helper
+--   3. Activity log: append "HH:MM [[note]]" to Dailies/<day>.md on save
+--   4. Plugin spec (opts + keys)
+
+local VAULT_ROOT = vim.fn.fnamemodify(vim.fn.expand '~/funthings/notes', ':p'):gsub('/$', '')
+local DAILY_DIR = VAULT_ROOT .. '/Dailies'
+local DAILY_TEMPLATE = VAULT_ROOT .. '/Templates/Daily.md'
+local ISO_TIMESTAMP = '%Y-%m-%dT%H:%M:%S'
+local DAY_FORMAT = '%d-%m-%Y'
+local TIME_FORMAT = '%H:%M'
+local IGNORED_ACTIVITY_FOLDERS = {
+  Dailies = true,
+  Templates = true,
+  bases = true,
+}
+
+--- Normalize "YYYY-MM-DD" to "YYYY-MM-DDTHH:MM:SS"; pass ISO timestamps through.
+local function normalize_day(value)
+  if type(value) == 'string' then
+    if value:match '^%d%d%d%d%-%d%d%-%d%dT%d%d:%d%d:%d%d$' then
+      return value
+    end
+
+    local year, month, day = value:match '^(%d%d%d%d)%-(%d%d)%-(%d%d)$'
+    if year then
+      return string.format('%s-%s-%sT00:00:00', year, month, day)
+    end
+  end
+  return value
+end
+
+-- Property order for every frontmatter rewrite.
+local FRONTMATTER_SORT = {
+  'tags',
+  'status',
+  'book',
+  'created_day',
+  'updated_day',
+  'authors',
+  'author',
+  'rating',
+  'started',
+  'finished',
+  'source',
+}
+
 local function rename_linked_note()
   local api = require 'obsidian.api'
   local link = api.cursor_link()
@@ -13,18 +63,13 @@ local function rename_linked_note()
   })
 end
 
-local activity_group = vim.api.nvim_create_augroup('ObsidianDailyActivity', { clear = true })
-local vault_root = vim.fn.fnamemodify(vim.fn.expand '~/funthings/notes', ':p'):gsub('/$', '')
-local ignored_activity_folders = {
-  Dailies = true,
-  Templates = true,
-  bases = true,
-}
+-- ============================================================
+-- Activity log
+-- ============================================================
 
 local function daily_template_lines(day, timestamp)
-  local template_path = vault_root .. '/Templates/Daily.md'
-  if vim.fn.filereadable(template_path) == 1 then
-    local lines = vim.fn.readfile(template_path)
+  if vim.fn.filereadable(DAILY_TEMPLATE) == 1 then
+    local lines = vim.fn.readfile(DAILY_TEMPLATE)
     for index, line in ipairs(lines) do
       lines[index] = line:gsub('{{date:DD%-MM%-YYYY}}', day):gsub('{{date}}', timestamp)
     end
@@ -45,31 +90,64 @@ local function daily_template_lines(day, timestamp)
   }
 end
 
+--- Read the daily note. If it is open in a buffer, read from the buffer so
+--- unsaved edits are preserved (and seen by dedup); otherwise read from disk.
+local function read_daily(daily_path)
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(bufnr) then
+      local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':p')
+      if name == daily_path then
+        return vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+      end
+    end
+  end
+  return vim.fn.readfile(daily_path)
+end
+
+--- Write lines to the daily note. If the note is open in a buffer, update the
+--- buffer in place (keeping any unsaved edits) and write through it so the
+--- buffer never goes stale; otherwise write to disk directly.
+local function write_daily(lines, daily_path)
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(bufnr) then
+      local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':p')
+      if name == daily_path then
+        vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+        vim.api.nvim_buf_call(bufnr, function()
+          vim.cmd 'write'
+        end)
+        return
+      end
+    end
+  end
+  vim.fn.writefile(lines, daily_path)
+end
+
 local function append_daily_activity(file_path)
   local absolute_path = vim.fn.fnamemodify(file_path, ':p')
 
   -- Only handle markdown files inside the vault.
-  if not absolute_path:match '%.md$' or absolute_path:sub(1, #vault_root) ~= vault_root then
+  if not absolute_path:match '%.md$' or absolute_path:sub(1, #VAULT_ROOT) ~= VAULT_ROOT then
     return
   end
 
-  local relative_path = absolute_path:sub(#vault_root + 2)
+  local relative_path = absolute_path:sub(#VAULT_ROOT + 2)
   local folder = relative_path:match '^([^/]+)'
 
-  if ignored_activity_folders[folder] then
+  if IGNORED_ACTIVITY_FOLDERS[folder] then
     return
   end
 
-  local day = os.date '%d-%m-%Y'
-  local timestamp = os.date '%Y-%m-%dT%H:%M:%S'
-  local daily_path = vault_root .. '/Dailies/' .. day .. '.md'
+  local day = os.date(DAY_FORMAT)
+  local timestamp = os.date(ISO_TIMESTAMP)
+  local daily_path = DAILY_DIR .. '/' .. day .. '.md'
   local note_name = vim.fn.fnamemodify(absolute_path, ':t:r')
   local lines
 
   if vim.fn.filereadable(daily_path) == 1 then
-    lines = vim.fn.readfile(daily_path)
+    lines = read_daily(daily_path)
   else
-    vim.fn.mkdir(vault_root .. '/Dailies', 'p')
+    vim.fn.mkdir(DAILY_DIR, 'p')
     lines = daily_template_lines(day, timestamp)
   end
 
@@ -94,16 +172,21 @@ local function append_daily_activity(file_path)
     activity_heading = #lines
   end
 
-  table.insert(lines, activity_heading + 1, '- ' .. os.date '%H:%M' .. ' ' .. link)
-  vim.fn.writefile(lines, daily_path)
+  table.insert(lines, activity_heading + 1, '- ' .. os.date(TIME_FORMAT) .. ' ' .. link)
+  write_daily(lines, daily_path)
 end
 
+local activity_group = vim.api.nvim_create_augroup('ObsidianDailyActivity', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = activity_group,
   callback = function(args)
     append_daily_activity(args.file)
   end,
 })
+
+-- ============================================================
+-- Plugin spec
+-- ============================================================
 
 return {
   'obsidian-nvim/obsidian.nvim',
@@ -117,7 +200,7 @@ return {
     legacy_commands = false, -- this will be removed in 4.0.0
     workspaces = {
       {
-        name = 'work',
+        name = 'notes',
         path = '~/funthings/notes/',
       },
     },
@@ -144,39 +227,12 @@ return {
     -- In particular, do not inject id/aliases into every note.
     frontmatter = {
       enabled = true,
-      sort = {
-        'tags',
-        'status',
-        'book',
-        'created_day',
-        'updated_day',
-        'authors',
-        'author',
-        'rating',
-        'started',
-        'finished',
-        'source',
-      },
+      sort = FRONTMATTER_SORT,
       func = function(note)
         local metadata = vim.deepcopy(note.metadata or {})
-        local today = os.date '%Y-%m-%dT%H:%M:%S'
 
-        local function normalize_day(value)
-          if type(value) == 'string' then
-            if value:match '^%d%d%d%d%-%d%d%-%d%dT%d%d:%d%d:%d%d$' then
-              return value
-            end
-
-            local year, month, day = value:match '^(%d%d%d%d)%-(%d%d)%-(%d%d)$'
-            if year then
-              return string.format('%s-%s-%sT00:00:00', year, month, day)
-            end
-          end
-          return value
-        end
-
-        metadata.created_day = normalize_day(metadata.created_day) or today
-        metadata.updated_day = today
+        metadata.created_day = normalize_day(metadata.created_day) or os.date(ISO_TIMESTAMP)
+        metadata.updated_day = os.date(ISO_TIMESTAMP)
 
         -- NOTE: Frontmatter.parse strips validated keys (tags/aliases/id) out
         -- of note.metadata into note.tags / note.aliases. Reading them from
@@ -222,11 +278,6 @@ return {
       '<cmd>Obsidian backlinks<cr>',
       desc = 'backlinks',
     },
-    -- {
-    --   '<m-cr>',
-    --   '<cmd>Obsidian backlinks<cr>',
-    --   desc = 'backlinks',
-    -- },
     {
       '<c-n>',
       '<cmd>Obsidian new<cr>',

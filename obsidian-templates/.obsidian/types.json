@@ -1,0 +1,10 @@
+{
+  "types": {
+    "categories": "multitext",
+    "tags": "tags",
+    "status": "text",
+    "created_day": "datetime",
+    "updated_day": "datetime",
+    "created": "datetime"
+  }
+}

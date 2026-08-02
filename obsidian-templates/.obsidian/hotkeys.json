@@ -1,0 +1,108 @@
+{
+  "app:go-back": [
+    {
+      "modifiers": ["Mod", "Alt"],
+      "key": "ArrowLeft"
+    },
+    {
+      "modifiers": ["Alt"],
+      "key": "H"
+    }
+  ],
+  "app:go-forward": [
+    {
+      "modifiers": ["Mod", "Alt"],
+      "key": "ArrowRight"
+    },
+    {
+      "modifiers": ["Alt"],
+      "key": "L"
+    }
+  ],
+  "workspace:goto-tab-1": [
+    {
+      "modifiers": ["Alt", "Mod"],
+      "key": "1"
+    }
+  ],
+  "app:delete-file": [
+    {
+      "modifiers": ["Mod", "Shift"],
+      "key": "Backspace"
+    },
+    {
+      "modifiers": [],
+      "key": "F11"
+    }
+  ],
+  "workspace:undo-close-pane": [
+    {
+      "modifiers": ["Mod", "Shift"],
+      "key": "T"
+    },
+    {
+      "modifiers": ["Alt"],
+      "key": "R"
+    }
+  ],
+  "workspace:close": [
+    {
+      "modifiers": ["Alt"],
+      "key": "Q"
+    }
+  ],
+  "editor:toggle-comments": [
+    {
+      "modifiers": ["Mod"],
+      "key": "\\"
+    }
+  ],
+  "editor:insert-wikilink": [
+    {
+      "modifiers": ["Mod"],
+      "key": "K"
+    }
+  ],
+  "app:toggle-left-sidebar": [
+    {
+      "modifiers": ["Alt"],
+      "key": "E"
+    }
+  ],
+  "editor:open-link-in-new-leaf": [
+    {
+      "modifiers": ["Alt"],
+      "key": "Enter"
+    }
+  ],
+  "editor:follow-link": [
+    {
+      "modifiers": ["Mod"],
+      "key": "Enter"
+    }
+  ],
+  "file-explorer:new-file-in-current-tab": [
+    {
+      "modifiers": ["Mod"],
+      "key": "N"
+    }
+  ],
+  "editor:toggle-source": [
+    {
+      "modifiers": ["Alt"],
+      "key": "V"
+    }
+  ],
+  "markdown:toggle-preview": [
+    {
+      "modifiers": ["Mod", "Shift"],
+      "key": "V"
+    }
+  ],
+  "daily-notes:goto-today": [
+    {
+      "modifiers": ["Alt"],
+      "key": "D"
+    }
+  ]
+}

@@ -178,6 +178,14 @@ return {
         metadata.created_day = normalize_day(metadata.created_day) or today
         metadata.updated_day = today
 
+        -- NOTE: Frontmatter.parse strips validated keys (tags/aliases/id) out
+        -- of note.metadata into note.tags / note.aliases. Reading them from
+        -- metadata would silently drop them on every frontmatter rewrite
+        -- (save, rename, ...). Merge them back from the note instead.
+        if note.tags and #note.tags > 0 then
+          metadata.tags = vim.deepcopy(note.tags)
+        end
+
         -- Keep the tags property present even when it is empty.
         metadata.tags = metadata.tags or {}
 

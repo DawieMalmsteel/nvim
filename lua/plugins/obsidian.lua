@@ -18,9 +18,7 @@ local vault_root = vim.fn.fnamemodify(vim.fn.expand '~/funthings/notes', ':p'):g
 local ignored_activity_folders = {
   Dailies = true,
   Templates = true,
-  categories = true,
-  Tags = true,
-  Status = true,
+  bases = true,
 }
 
 local function daily_template_lines(day, timestamp)
@@ -35,8 +33,7 @@ local function daily_template_lines(day, timestamp)
 
   return {
     '---',
-    'categories: [daily]',
-    'tags: []',
+    'tags: [daily]',
     'created_day: ' .. timestamp,
     'updated_day: ' .. timestamp,
     '---',
@@ -50,10 +47,16 @@ end
 
 local function append_daily_activity(file_path)
   local absolute_path = vim.fn.fnamemodify(file_path, ':p')
+
+  -- Only handle markdown files inside the vault.
+  if not absolute_path:match '%.md$' or absolute_path:sub(1, #vault_root) ~= vault_root then
+    return
+  end
+
   local relative_path = absolute_path:sub(#vault_root + 2)
   local folder = relative_path:match '^([^/]+)'
 
-  if not absolute_path:match '%.md$' or ignored_activity_folders[folder] then
+  if ignored_activity_folders[folder] then
     return
   end
 
@@ -88,7 +91,7 @@ local function append_daily_activity(file_path)
   if activity_heading == nil then
     lines[#lines + 1] = ''
     lines[#lines + 1] = '## Activity'
-    activity_heading = #lines - 1
+    activity_heading = #lines
   end
 
   table.insert(lines, activity_heading + 1, '- ' .. os.date '%H:%M' .. ' ' .. link)
@@ -142,12 +145,11 @@ return {
     frontmatter = {
       enabled = true,
       sort = {
-        'categories',
         'tags',
         'status',
+        'book',
         'created_day',
         'updated_day',
-        'created',
         'authors',
         'author',
         'rating',
@@ -177,7 +179,7 @@ return {
         metadata.updated_day = today
 
         -- Keep the tags property present even when it is empty.
-        metadata.tags = note.tags or {}
+        metadata.tags = metadata.tags or {}
 
         return metadata
       end,

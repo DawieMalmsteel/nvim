@@ -6,7 +6,8 @@
 --   3. Activity log: append "HH:MM [[note]]" to Dailies/<day>.md on save
 --   4. Plugin spec (opts + keys)
 
-local VAULT_ROOT = vim.fn.fnamemodify(vim.fn.expand '~/funthings/notes', ':p'):gsub('/$', '')
+local VAULT = '~/funthings/notes'
+local VAULT_ROOT = vim.fn.fnamemodify(vim.fn.expand(VAULT), ':p'):gsub('/$', '')
 local DAILY_DIR = VAULT_ROOT .. '/Dailies'
 local DAILY_TEMPLATE = VAULT_ROOT .. '/Templates/Daily.md'
 local ISO_TIMESTAMP = '%Y-%m-%dT%H:%M:%S'
@@ -201,7 +202,7 @@ return {
     workspaces = {
       {
         name = 'notes',
-        path = '~/funthings/notes/',
+        path = VAULT,
       },
     },
     templates = {

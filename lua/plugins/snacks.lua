@@ -158,25 +158,11 @@ return {
       desc = 'Config Files',
     },
     {
-      '<leader>ff',
-      function()
-        Snacks.picker.files { cwd = cwd() }
-      end,
-      desc = 'Find Files',
-    },
-    {
       '<leader>fF',
       function()
         Snacks.picker.buffers { hidden = true, nofile = true }
       end,
       desc = 'All Buffers',
-    },
-    {
-      '<leader>fg',
-      function()
-        Snacks.picker.grep { cwd = cwd(), live = true }
-      end,
-      desc = 'Live Grep',
     },
     {
       '<leader>fG',
@@ -270,20 +256,6 @@ return {
         Snacks.picker.diagnostics_buffer()
       end,
       desc = 'Buffer Diagnostics',
-    },
-    {
-      '<leader>sG',
-      function()
-        Snacks.picker.grep { cwd = vim.env.PWD or vim.uv.cwd(), live = true }
-      end,
-      desc = 'Grep Global',
-    },
-    {
-      '<leader>sg',
-      function()
-        Snacks.picker.grep { cwd = cwd(), live = true }
-      end,
-      desc = 'Grep',
     },
     {
       '<leader>sH',

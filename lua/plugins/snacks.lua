@@ -1,74 +1,53 @@
+local snacks_util = require 'config.snacks-util'
+
+--- Working directory for pickers/lazygit: dir of the current buffer when it is
+--- a readable file, else the process cwd.
 local function cwd()
-  local file = vim.api.nvim_buf_get_name(0)
-  if file ~= '' and vim.fn.filereadable(file) == 1 then
-    return vim.fn.fnamemodify(file, ':h')
-  end
-  return vim.uv.cwd()
+  return snacks_util.cwd {
+    buf_get_name = function()
+      return vim.api.nvim_buf_get_name(0)
+    end,
+    filereadable = function(path)
+      return vim.fn.filereadable(path) == 1
+    end,
+    fnamemodify = function(path, mod)
+      return vim.fn.fnamemodify(path, mod)
+    end,
+    uv_cwd = function()
+      return vim.uv.cwd()
+    end,
+  }
 end
 
-local image_toggle_patched = false
-local original_find_visible
-
-local function setup_buffer_image_toggle()
-  if image_toggle_patched then
-    return
-  end
-
-  local doc = Snacks.image.doc
-
-  original_find_visible = doc.find_visible
-
-  doc.find_visible = function(buf, callback)
-    if vim.b[buf].snacks_image_hidden then
-      callback {}
-      return
-    end
-
-    return original_find_visible(buf, callback)
-  end
-
-  image_toggle_patched = true
-end
-
-local function refresh_buffer_images(buf)
-  local group = 'snacks.image.inline.' .. buf
-
-  local ok = pcall(vim.api.nvim_exec_autocmds, 'BufWinEnter', {
-    group = group,
-    buffer = buf,
-    modeline = false,
-  })
-
-  -- Buffer chưa được Snacks.image attach.
-  if not ok and not vim.b[buf].snacks_image_hidden then
-    Snacks.image.doc.attach(buf)
-  end
-end
-
-local function toggle_buffer_images()
-  setup_buffer_image_toggle()
-
-  local buf = vim.api.nvim_get_current_buf()
-
-  -- Khi đang ẩn, lần toggle này sẽ hiển thị lại.
-  local show_images = vim.b[buf].snacks_image_hidden == true
-
-  vim.b[buf].snacks_image_hidden = not show_images
-
-  refresh_buffer_images(buf)
-
-  vim.notify(show_images and 'Inline images enabled for current buffer' or 'Inline images disabled for current buffer', vim.log.levels.INFO, {
-    title = 'Snacks.image',
-  })
-end
+--- Inline-image toggle bound to the live Snacks + vim APIs. `image` is a lazy
+--- getter because Snacks is nil while this spec loads and only exists at
+--- toggle time; it actually reads `vim.b[buf].snacks_image_hidden`.
+local inline_images = snacks_util.inline_image_toggle {
+  image = function()
+    return Snacks.image
+  end,
+  get_bvar = function(buf, key)
+    return vim.b[buf][key]
+  end,
+  set_bvar = function(buf, key, value)
+    vim.b[buf][key] = value
+  end,
+  get_current_buf = function()
+    return vim.api.nvim_get_current_buf()
+  end,
+  exec_autocmds = function(event, opts)
+    return vim.api.nvim_exec_autocmds(event, opts)
+  end,
+  notify = function(msg, level, opts)
+    return vim.notify(msg, level, opts)
+  end,
+  info_level = vim.log.levels.INFO,
+}
 
 return {
   'folke/snacks.nvim',
   lazy = false,
   priority = 1000,
-  init = function()
-    vim.g.snacks_animate = false
-  end,
   opts = {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
@@ -468,13 +447,6 @@ return {
       desc = 'LSP Definitions',
     },
     {
-      'grd',
-      function()
-        Snacks.picker.lsp_definitions()
-      end,
-      desc = 'LSP Definitions',
-    },
-    {
       'grD',
       function()
         Snacks.picker.lsp_declarations()
@@ -706,11 +678,12 @@ return {
     },
     {
       '<leader>i',
-      toggle_buffer_images,
+      inline_images.toggle,
       desc = 'Toggle inline images in current buffer',
     },
   },
   init = function()
+    vim.g.snacks_animate = true
     vim.api.nvim_create_autocmd('User', {
       pattern = 'VeryLazy',
       callback = function()

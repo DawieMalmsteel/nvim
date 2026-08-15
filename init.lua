@@ -6,7 +6,6 @@ require 'config.neovide'
 -- require 'config.colors_cmd'
 -- require 'config.keyboard_input'
 require 'keymaps'
-require 'cli'
 
 -- vim.cmd 'colorscheme base46-eldritch'
 vim.cmd 'colorscheme catppuccin'

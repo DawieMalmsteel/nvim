@@ -52,12 +52,16 @@ return {
       end,
       equals = function(a, b)
         a, b = directory_value(a), directory_value(b)
-        if not a or not b then return a == b end
+        if not a or not b then
+          return a == b
+        end
         return normalize_directory(a) == normalize_directory(b)
       end,
       select = function(item)
         local path = directory_value(item)
-        if not path then return end
+        if not path then
+          return
+        end
         path = normalize_directory(path)
         if vim.fn.isdirectory(path) ~= 1 then
           vim.notify('Directory not found: ' .. path, vim.log.levels.WARN)
@@ -72,7 +76,9 @@ return {
     harpoon:setup(opts)
     harpoon:extend {
       UI_CREATE = function(ctx)
-        if not harpoon.ui.active_list or harpoon.ui.active_list.name ~= 'fff_dirs' then return end
+        if not harpoon.ui.active_list or harpoon.ui.active_list.name ~= 'fff_dirs' then
+          return
+        end
 
         vim.keymap.set('n', 'd', function()
           local line = vim.api.nvim_win_get_cursor(0)[1]

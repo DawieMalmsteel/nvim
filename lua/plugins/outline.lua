@@ -21,6 +21,6 @@ return {
     preview_window = {
       auto_preview = true,
       open_hover_on_preview = true,
-    }
+    },
   },
 }

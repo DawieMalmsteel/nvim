@@ -57,7 +57,9 @@ local M = function()
       return prefix .. pad .. ' │ ' .. desc
     end
 
-    local on_choice = vim.schedule_wrap(function(item, _) insert(item) end)
+    local on_choice = vim.schedule_wrap(function(item, _)
+      insert(item)
+    end)
     vim.ui.select(snippets, {
       prompt = 'Snippets',
       format_item = format_item,

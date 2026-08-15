@@ -7,13 +7,13 @@
 local M = {}
 
 local function proc_lines(pid, file)
-  local ok, lines = pcall(vim.fn.readfile, "/proc/" .. pid .. "/" .. file)
+  local ok, lines = pcall(vim.fn.readfile, '/proc/' .. pid .. '/' .. file)
   return ok and lines or {}
 end
 
 local function proc_ppid(pid)
-  for _, line in ipairs(proc_lines(pid, "status")) do
-    local ppid = line:match("^PPid:%s+(%d+)")
+  for _, line in ipairs(proc_lines(pid, 'status')) do
+    local ppid = line:match '^PPid:%s+(%d+)'
     if ppid then
       return tonumber(ppid)
     end
@@ -29,7 +29,7 @@ local function ancestor_process_named(name)
       return false
     end
 
-    local comm = proc_lines(ppid, "comm")[1] or ""
+    local comm = proc_lines(ppid, 'comm')[1] or ''
     if comm:find(name, 1, true) then
       return true
     end
@@ -43,25 +43,23 @@ end
 function M.setup()
   local in_tmux = vim.env.TMUX ~= nil
   local in_ssh = vim.env.SSH_TTY ~= nil or vim.env.SSH_CONNECTION ~= nil
-  local in_herdr = vim.env.HERDR_PANE_ID ~= nil or ancestor_process_named("herdr")
+  local in_herdr = vim.env.HERDR_PANE_ID ~= nil or ancestor_process_named 'herdr'
 
   if not (in_tmux or in_ssh or in_herdr) then
     return
   end
 
-  local osc52 = require("vim.ui.clipboard.osc52")
-  local has_wayland = vim.env.WAYLAND_DISPLAY ~= nil
-    and vim.fn.executable("wl-copy") == 1
-    and vim.fn.executable("wl-paste") == 1
+  local osc52 = require 'vim.ui.clipboard.osc52'
+  local has_wayland = vim.env.WAYLAND_DISPLAY ~= nil and vim.fn.executable 'wl-copy' == 1 and vim.fn.executable 'wl-paste' == 1
 
   local function copy(register)
     local emit = osc52.copy(register)
 
     return function(lines)
       if has_wayland then
-        local cmd = { "wl-copy", "--sensitive", "--type", "text/plain" }
-        if register == "*" then
-          cmd[#cmd + 1] = "--primary"
+        local cmd = { 'wl-copy', '--sensitive', '--type', 'text/plain' }
+        if register == '*' then
+          cmd[#cmd + 1] = '--primary'
         end
         vim.fn.system(cmd, lines)
       end
@@ -78,20 +76,20 @@ function M.setup()
     end
 
     return function()
-      local cmd = { "wl-paste", "--no-newline" }
-      if register == "*" then
-        cmd[#cmd + 1] = "--primary"
+      local cmd = { 'wl-paste', '--no-newline' }
+      if register == '*' then
+        cmd[#cmd + 1] = '--primary'
       end
 
-      local lines = vim.fn.systemlist(cmd, "", 1)
+      local lines = vim.fn.systemlist(cmd, '', 1)
       return vim.v.shell_error == 0 and lines or {}
     end
   end
 
   vim.g.clipboard = {
-    name = "OmarchyRemoteClipboard",
-    copy = { ["+"] = copy("+"), ["*"] = copy("*") },
-    paste = { ["+"] = paste("+"), ["*"] = paste("*") },
+    name = 'OmarchyRemoteClipboard',
+    copy = { ['+'] = copy '+', ['*'] = copy '*' },
+    paste = { ['+'] = paste '+', ['*'] = paste '*' },
     cache_enabled = 0,
   }
 end

@@ -3,7 +3,7 @@ return {
   ft = { 'html', 'svelte', 'vue', 'typescriptreact', 'javascriptreact' },
 
   opts = {
-    defaultPlaceholder = "…",
+    defaultPlaceholder = '…',
     queries = {
 
       -- Some examples you can use

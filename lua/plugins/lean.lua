@@ -1,4 +1,4 @@
-return{
+return {
   'Julian/lean.nvim',
   event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
 
@@ -14,5 +14,5 @@ return{
   ---@type lean.Config
   opts = { -- see the manual for full configuration options
     mappings = true,
-  }
+  },
 }

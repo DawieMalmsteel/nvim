@@ -44,11 +44,7 @@ function M.toggle()
 
   Snacks.image.doc.at_cursor(function(src)
     if not src then
-      vim.notify(
-        "Không tìm thấy ảnh hoặc Mermaid block tại cursor",
-        vim.log.levels.WARN,
-        { title = "Snacks Image" }
-      )
+      vim.notify('Không tìm thấy ảnh hoặc Mermaid block tại cursor', vim.log.levels.WARN, { title = 'Snacks Image' })
       return
     end
 
@@ -58,22 +54,22 @@ function M.toggle()
       end
 
       -- Tạo một split và buffer preview mới.
-      vim.cmd("botright vnew")
+      vim.cmd 'botright vnew'
 
       local preview_win = vim.api.nvim_get_current_win()
       local preview_buf = vim.api.nvim_get_current_buf()
 
-      vim.bo[preview_buf].buftype = "nofile"
-      vim.bo[preview_buf].bufhidden = "wipe"
+      vim.bo[preview_buf].buftype = 'nofile'
+      vim.bo[preview_buf].bufhidden = 'wipe'
       vim.bo[preview_buf].swapfile = false
       vim.bo[preview_buf].modifiable = false
-      vim.bo[preview_buf].filetype = "image"
+      vim.bo[preview_buf].filetype = 'image'
 
       vim.wo[preview_win].number = false
       vim.wo[preview_win].relativenumber = false
-      vim.wo[preview_win].signcolumn = "no"
-      vim.wo[preview_win].foldcolumn = "0"
-      vim.wo[preview_win].statuscolumn = ""
+      vim.wo[preview_win].signcolumn = 'no'
+      vim.wo[preview_win].foldcolumn = '0'
+      vim.wo[preview_win].statuscolumn = ''
       vim.wo[preview_win].wrap = false
 
       -- Có thể thay 50 bằng kích thước split mong muốn.
@@ -91,7 +87,7 @@ function M.toggle()
         max_height = 40,
       })
 
-      vim.api.nvim_create_autocmd("BufWipeout", {
+      vim.api.nvim_create_autocmd('BufWipeout', {
         buffer = preview_buf,
         once = true,
         callback = function()

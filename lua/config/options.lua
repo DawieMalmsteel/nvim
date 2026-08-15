@@ -1,4 +1,4 @@
-require("config.remote_clipboard").setup()
+require('config.remote_clipboard').setup()
 -- Core options & globals
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '

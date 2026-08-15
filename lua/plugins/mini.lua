@@ -16,6 +16,7 @@ return {
             'bufremove',
             'misc',
             'statusline',
+            'hipatterns',
           }
         end)
       end,
@@ -60,29 +61,6 @@ return {
           mini_git_loaded = true
           mini.setup_many { 'diff', 'git' }
         end
-      end,
-    })
-
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = {
-        'astro',
-        'css',
-        'heex',
-        'html',
-        'html-eex',
-        'javascript',
-        'javascriptreact',
-        'rust',
-        'svelte',
-        'typescript',
-        'typescriptreact',
-        'vue',
-      },
-      once = true,
-      callback = function()
-        mini.after_start(function()
-          mini.setup 'hipatterns'
-        end)
       end,
     })
 

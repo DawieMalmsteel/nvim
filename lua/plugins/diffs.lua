@@ -9,6 +9,7 @@ vim.g.diffs = {
 
 return {
   'barrettruth/diffs.nvim',
+  cmd = 'Diff',
   keys = {
     {
       '<leader>go',

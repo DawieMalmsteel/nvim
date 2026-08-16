@@ -178,15 +178,6 @@ map('n', '<C-x>', function()
   end
 end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 
--- Di chuyển diagnostic: dùng jump với float
-map('n', '[d', function()
-  vim.diagnostic.jump { count = -1 }
-end, { desc = 'Go to previous diagnostic' })
-
-map('n', ']d', function()
-  vim.diagnostic.jump { count = 1 }
-end, { desc = 'Go to next diagnostic' })
-
 -- Diagnostic mức độ error tiếp theo
 map('n', ']e', function()
   vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR }
@@ -196,16 +187,6 @@ end, { desc = 'Next Error' })
 map('n', '[e', function()
   vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR }
 end, { desc = 'Prev Error' })
-
--- Diagnostic mức độ warning tiếp theo
-map('n', ']w', function()
-  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.WARN }
-end, { desc = 'Next Warning' })
-
--- Diagnostic mức độ warning trước đó
-map('n', '[w', function()
-  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.WARN }
-end, { desc = 'Prev Warning' })
 
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 

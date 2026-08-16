@@ -10,8 +10,8 @@ lua/
   config/        core options, autocmds, lazy bootstrap
   plugins/       all lazy.nvim plugin specs
   mini_modules/  remaining mini.nvim helper setup
+  obsidian/      obsidian.nvim daily-activity logic
   keymaps.lua    global keymaps
-  cli.lua        optional CLI helpers
 ```
 
 ## Main choices

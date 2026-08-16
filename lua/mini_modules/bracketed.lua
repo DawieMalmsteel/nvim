@@ -14,7 +14,9 @@ local M = function()
   -- [U` `[u` `]u` `]U` - Undo states
   -- [W` `[w` `]w` `]W` - Window in current tab
   -- [Y` `[y` `]y` `]Y` - Yank selection replacing latest put region
-  require('mini.bracketed').setup()
+  require('mini.bracketed').setup {
+    diagnostic = { options = { float = false } },
+  }
 end
 
 return M

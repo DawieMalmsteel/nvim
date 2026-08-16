@@ -75,10 +75,10 @@ return {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         keys = {
-          goto_next_start = { [']f'] = '@function.outer', [']c'] = '@class.outer', [']a'] = '@parameter.inner' },
-          goto_next_end = { [']F'] = '@function.outer', [']C'] = '@class.outer', [']A'] = '@parameter.inner' },
-          goto_previous_start = { ['[f'] = '@function.outer', ['[c'] = '@class.outer', ['[a'] = '@parameter.inner' },
-          goto_previous_end = { ['[F'] = '@function.outer', ['[C'] = '@class.outer', ['[A'] = '@parameter.inner' },
+          goto_next_start = { [']]'] = '@function.outer', [']a'] = '@parameter.inner' },
+          goto_next_end = { [']['] = '@function.outer', [']A'] = '@parameter.inner' },
+          goto_previous_start = { ['[['] = '@function.outer', ['[a'] = '@parameter.inner' },
+          goto_previous_end = { ['[]'] = '@function.outer', ['[A'] = '@parameter.inner' },
         },
       },
     },
@@ -89,8 +89,8 @@ return {
           for key, query in pairs(keymaps) do
             local desc = query:gsub('@', ''):gsub('%..*', '')
             desc = desc:sub(1, 1):upper() .. desc:sub(2)
-            desc = (key:sub(1, 1) == '[' and 'Prev ' or 'Next ') .. desc
-            desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and ' End' or ' Start')
+            desc = (method:find('next', 1, true) and 'Next ' or 'Prev ') .. desc
+            desc = desc .. (method:find('_end', 1, true) and ' End' or ' Start')
             vim.keymap.set({ 'n', 'x', 'o' }, key, function()
               require('nvim-treesitter-textobjects.move')[method](query, 'textobjects')
             end, {

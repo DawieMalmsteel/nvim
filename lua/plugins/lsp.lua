@@ -56,32 +56,20 @@ return {
     vim.diagnostic.config {
       severity_sort = true,
       float = { border = 'rounded', source = 'if_many' },
-      underline = { severity = vim.diagnostic.severity.ERROR },
+      -- underline = { severity = vim.diagnostic.severity.ERROR },
+      underline = false,
       signs = vim.g.have_nerd_font and {
         text = {
           -- [vim.diagnostic.severity.ERROR] = '󰅚 ',
           -- [vim.diagnostic.severity.WARN] = '󰀪 ',
           -- [vim.diagnostic.severity.INFO] = '󰋽 ',
           -- [vim.diagnostic.severity.HINT] = '󰌶 ',
-          [vim.diagnostic.severity.ERROR] = '●',
-          [vim.diagnostic.severity.WARN] = '●',
-          [vim.diagnostic.severity.INFO] = '●',
-          [vim.diagnostic.severity.HINT] = '●',
+          [vim.diagnostic.severity.ERROR] = '◉',
+          [vim.diagnostic.severity.WARN] = '◉',
+          [vim.diagnostic.severity.INFO] = '◉',
+          [vim.diagnostic.severity.HINT] = '◉',
         },
       } or {},
-      virtual_text = {
-        source = 'if_many',
-        spacing = 2,
-        format = function(d)
-          local m = {
-            [vim.diagnostic.severity.ERROR] = d.message,
-            [vim.diagnostic.severity.WARN] = d.message,
-            [vim.diagnostic.severity.INFO] = d.message,
-            [vim.diagnostic.severity.HINT] = d.message,
-          }
-          return m[d.severity]
-        end,
-      },
     }
 
     local capabilities = require('blink.cmp').get_lsp_capabilities()

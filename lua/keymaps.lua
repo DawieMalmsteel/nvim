@@ -186,31 +186,31 @@ end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 
 -- Di chuyển diagnostic: dùng jump với float
 map('n', '[d', function()
-  vim.diagnostic.jump { count = -1, float = true }
+  vim.diagnostic.jump { count = -1 }
 end, { desc = 'Go to previous diagnostic' })
 
 map('n', ']d', function()
-  vim.diagnostic.jump { count = 1, float = true }
+  vim.diagnostic.jump { count = 1  }
 end, { desc = 'Go to next diagnostic' })
 
 -- Diagnostic mức độ error tiếp theo
 map('n', ']e', function()
-  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR, float = true }
+  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR}
 end, { desc = 'Next Error' })
 
 -- Diagnostic mức độ error trước đó
 map('n', '[e', function()
-  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR, float = true }
+  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR}
 end, { desc = 'Prev Error' })
 
 -- Diagnostic mức độ warning tiếp theo
 map('n', ']w', function()
-  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.WARN, float = true }
+  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.WARN}
 end, { desc = 'Next Warning' })
 
 -- Diagnostic mức độ warning trước đó
 map('n', '[w', function()
-  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.WARN, float = true }
+  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.WARN}
 end, { desc = 'Prev Warning' })
 
 -- old keymaps: general.lua

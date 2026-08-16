@@ -344,7 +344,13 @@ return {
     },
 
     -- git
-    { '<leader>ga', '<cmd>Git add %<cr>', desc = 'Git Add Current File' },
+    {
+      '<leader>ga',
+      function()
+        require('gitsigns').stage_buffer()
+      end,
+      desc = 'Git Add Current File',
+    },
     { '<leader>gA', '<cmd>Git add .<cr>', desc = 'Git Add All' },
     {
       '<leader>gb',

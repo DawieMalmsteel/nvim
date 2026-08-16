@@ -3,8 +3,6 @@ require 'config.autocmds'
 require 'config.lazy'
 require 'config.misc'
 require 'config.neovide'
--- require 'config.colors_cmd'
--- require 'config.keyboard_input'
 require 'keymaps'
 
 -- vim.cmd 'colorscheme base46-eldritch'

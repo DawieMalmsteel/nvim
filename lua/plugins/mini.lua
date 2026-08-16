@@ -4,7 +4,7 @@ return {
   'nvim-mini/mini.nvim',
   lazy = true,
   init = function()
-    local mini = require 'config.mini_lazy'
+    local mini = require 'config.mini_loader'
 
     vim.api.nvim_create_autocmd('User', {
       pattern = 'VeryLazy',

@@ -2,52 +2,6 @@ local M = {}
 
 M.rust_diagnostics = vim.g.lazyvim_rust_diagnostics or 'bacon-ls'
 
--- Let rustaceanvim drive rust-analyzer defaults. Keep the old tuning below
--- commented in case it is useful again for a very large workspace.
--- M.rust_analyzer_settings = {
---   ['rust-analyzer'] = {
---     cachePriming = {
---       enable = false,
---     },
---     cargo = {
---       -- Keep rust-analyzer responsive on large workspaces.
---       allFeatures = false,
---       loadOutDirsFromCheck = false,
---       buildScripts = {
---         enable = false,
---       },
---     },
---     checkOnSave = M.rust_diagnostics == 'rust-analyzer',
---     diagnostics = {
---       enable = M.rust_diagnostics == 'rust-analyzer',
---     },
---     procMacro = {
---       enable = true,
---       ignored = {
---         ['async-trait'] = { 'async_trait' },
---         ['napi-derive'] = { 'napi' },
---         ['async-recursion'] = { 'async_recursion' },
---       },
---     },
---     files = {
---       -- Avoid rust-analyzer "Roots Scanned" stalls.
---       watcher = 'client',
---       exclude = {
---         '.direnv',
---         '.git',
---         '.jj',
---         '.github',
---         '.gitlab',
---         'bin',
---         'node_modules',
---         'target',
---         'venv',
---         '.venv',
---       },
---     },
---   },
--- }
-
 M.servers = {
   gopls = {
     settings = {

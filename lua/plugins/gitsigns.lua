@@ -39,16 +39,16 @@ return {
       end
 
       map('[G', function()
-        gs.nav_hunk('first')
+        gs.nav_hunk 'first'
       end, 'First git hunk')
       map('[g', function()
-        gs.nav_hunk('prev')
+        gs.nav_hunk 'prev'
       end, 'Previous git hunk')
       map(']g', function()
-        gs.nav_hunk('next')
+        gs.nav_hunk 'next'
       end, 'Next git hunk')
       map(']G', function()
-        gs.nav_hunk('last')
+        gs.nav_hunk 'last'
       end, 'Last git hunk')
 
       map('<leader>hs', gs.stage_hunk, 'Stage hunk')

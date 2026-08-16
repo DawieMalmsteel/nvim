@@ -23,7 +23,7 @@ lua/
 ## Test
 
 ```sh
-XDG_CONFIG_HOME=$PWD/.. nvim --headless '+lua print("nvim config ok")' '+qa'
+./test.sh
 ```
 
 ## Mermaid rendering

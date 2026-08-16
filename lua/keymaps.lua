@@ -1,8 +1,7 @@
 -- Generated while flattening keymaps; keep global maps here.
 local map = vim.keymap.set
 
--- old keymaps: desc.lua
--- Decriptions for keymaps
+-- Keymap group descriptions
 map({ 'n', 'v' }, '<leader>c', '', { desc = '+code' })
 map({ 'n', 'v' }, '<leader>a', '', { desc = '+ai' })
 map({ 'n', 'v' }, '<leader>f', '', { desc = '+find' })
@@ -27,7 +26,6 @@ map('n', '<leader>yy', '^vg_"+y', {
   desc = 'Copy dòng, bỏ khoảng trắng đầu/cuối',
 })
 
--- old keymaps: notes/init.lua
 local notes_dir = vim.fn.stdpath 'config' .. '/notes'
 
 map('n', '<leader>N', function()
@@ -37,14 +35,13 @@ map('n', '<leader>N', function()
   require('oil').open_float(notes_dir)
 end, { desc = 'Open notes folder', silent = true })
 
--- old keymaps: buffer.lua
 local TEMP = vim.fn.stdpath 'cache' .. '/temp.md'
 
 -- Close Hidden Buffers
 map('n', '<leader>bh', function()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.fn.buflisted(buf) == 1 and vim.fn.bufwinnr(buf) == -1 then
-      require('config.mini_lazy').setup 'bufremove'
+      require('config.mini_loader').setup 'bufremove'
       require('mini.bufremove').delete(buf, false)
     end
   end
@@ -115,7 +112,7 @@ end, { desc = 'Create 20% Right Padding' })
 map('n', '<leader>bE', function()
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.api.nvim_buf_get_name(buf) == TEMP then
-      require('config.mini_lazy').setup 'bufremove'
+      require('config.mini_loader').setup 'bufremove'
       require('mini.bufremove').delete(buf, true)
       break
     end
@@ -128,7 +125,6 @@ map('n', '<leader>bE', function()
   end
 end, { desc = 'Delete Temp File' })
 
--- old keymaps: code.lua
 -- Hiển thị diagnostic dưới con trỏ
 map('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
 
@@ -172,9 +168,7 @@ map({ 'n', 'x' }, '<leader>crr', function()
   require('refactoring').select_refactor()
 end, { desc = 'Select Refactor' })
 
--- old keymaps: diagnostics.lua
 -- Diagnostic keymaps
--- map('n', '<leader>x', vim.diagnostic.setloclist, { desc = 'Diagnostic Quickfix list' })
 
 map('n', '<C-x>', function()
   if vim.diagnostic.is_enabled() then
@@ -190,30 +184,29 @@ map('n', '[d', function()
 end, { desc = 'Go to previous diagnostic' })
 
 map('n', ']d', function()
-  vim.diagnostic.jump { count = 1  }
+  vim.diagnostic.jump { count = 1 }
 end, { desc = 'Go to next diagnostic' })
 
 -- Diagnostic mức độ error tiếp theo
 map('n', ']e', function()
-  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR}
+  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.ERROR }
 end, { desc = 'Next Error' })
 
 -- Diagnostic mức độ error trước đó
 map('n', '[e', function()
-  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR}
+  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR }
 end, { desc = 'Prev Error' })
 
 -- Diagnostic mức độ warning tiếp theo
 map('n', ']w', function()
-  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.WARN}
+  vim.diagnostic.jump { count = 1, severity = vim.diagnostic.severity.WARN }
 end, { desc = 'Next Warning' })
 
 -- Diagnostic mức độ warning trước đó
 map('n', '[w', function()
-  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.WARN}
+  vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.WARN }
 end, { desc = 'Prev Warning' })
 
--- old keymaps: general.lua
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 map({ 'n', 'x' }, 'j', 'gj', { noremap = true, silent = true })
@@ -241,19 +234,11 @@ map('n', 'x', [["_x]])
 map('n', 'X', [["_dd]])
 map('v', 'x', [["_x]])
 
--- map('n', 'H', '<CMD>execute "silent! bprevious " . v:count1<CR>', { desc = 'Previous Buffer (with count)' })
--- map('n', 'L', '<CMD>execute "silent! bnext " . v:count1<CR>', { desc = 'Next Buffer (with count)' })
-
--- map('v', 'J', ":m'>+1<cr>gv=gv")
--- map('v', 'K', ":m'<-2<cr>gv=gv")
-
 map({ 'n', 'x' }, '-', '_')
 
 -- Visual mode: > / < nhiều lần (giữ nguyên selection để ấn tiếp)
 map('x', '>', '>gv', { desc = 'Indent và giữ selection' })
 map('x', '<', '<gv', { desc = 'Unindent và giữ selection' })
--- map({ 'n', 'x' }, '+', 'g_')
--- map({ 'n', 'x' }, '<S-tab>', '%')
 
 map('n', "y'", "yi'", { noremap = true })
 map('n', "v'", "vi'", { noremap = true })
@@ -261,25 +246,12 @@ map('n', "v'", "vi'", { noremap = true })
 map('n', 'y"', 'yi"', { noremap = true })
 map('n', 'v"', 'vi"', { noremap = true })
 
--- old keymaps: misc.lua
 -- add keymap to remove trailing whitespace
 map('n', '<C-\\>', ':%s/\\r//g<CR>', { noremap = true, silent = true })
 
 -- paste nhưng không thay đổi register
 map('x', '<leader>P', [["_dP]])
 
--- Edit file
--- map('n', '<leader><Tab>', function()
---   local dir = vim.fn.expand '%:p:h' .. '/'
---   require('snacks').input({ prompt = 'New file: ', default = dir }, function(path)
---     if not path or path == '' or path == dir then
---       return
---     end
---     vim.cmd('edit ' .. vim.fn.fnameescape(path))
---   end)
--- end, { desc = 'New file (curr dir)' })
-
--- old keymaps: quit.lua
 -- Quit
 map('n', '<leader>qq', '<CMD>qa<CR>', { desc = 'quit all' })
 
@@ -292,11 +264,9 @@ end, { desc = 'Delete Buffer' })
 
 map('n', '<leader>qB', '<CMD>bw<CR>', { desc = 'Quit Buffer and windows' })
 
--- old keymaps: terminal.lua
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 map('t', '<C-z>', '<Nop>', { desc = 'Disable Ctrl-Z in terminal mode' })
 
--- old keymaps: toggle.lua
 map('n', '<leader>td', function()
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)
@@ -308,30 +278,11 @@ end, { desc = 'Toggle diagnostics (Ctrl+x)' })
 map('n', '<leader>tc', '<CMD>TSContext toggle<CR>', { desc = 'Toggle Treesitter Context' })
 
 map('n', '<leader>tm', function()
-  require('config.mini_lazy').setup 'map'
   local mini_map = require 'mini.map'
   mini_map.toggle()
 end, { desc = 'Toggle Mini Map' })
 
 map('n', '<leader>ts', '<CMD>ShowkeysToggle<CR>', { desc = 'Toggle showkeys' })
-
--- map('n', '<leader>Tw', function()
---   if vim.wo.wrap then
---     vim.wo.wrap = false
---     vim.wo.linebreak = false
---     vim.opt_local.relativenumber = false
---     vim.opt_local.number = false
---     vim.notify('Wrap: OFF', vim.log.levels.INFO)
---   else
---     vim.wo.wrap = true
---     vim.wo.linebreak = true
---     vim.opt_local.relativenumber = true
---     vim.opt_local.number = true
---     vim.notify('Wrap: ON', vim.log.levels.INFO)
---   end
--- end, { desc = 'Toggle Wrap' })
-
--- map('n', '<leader>TT', '<Cmd>vertical term fish<CR>', { noremap = true, silent = true, desc = 'Terminal (vertical)' })
 
 map('n', '<leader>tn', function()
   -- :set laststatus=0
@@ -352,35 +303,19 @@ map('n', '<leader>tn', function()
     vim.wo.statuscolumn = ''
     vim.notify('Numbers: OFF', vim.log.levels.INFO)
   end
-end, { desc = 'Toggle Wrap' })
+end, { desc = 'Toggle Numbers' })
 
--- old keymaps: ui.lua
 -- Wraptext
 map('n', '<leader>uw', function()
   vim.wo.wrap = not vim.wo.wrap
 end, { desc = 'Toggle Wrap Text' })
 
--- Open mini starter
--- map('n', '<leader>uo', function()
---   local mini_starter = require 'mini.starter'
---   mini_starter.open()
--- end, { desc = 'Open MiniStarter' })
-
--- Open Mini map
-map('n', '<leader>um', function()
-  require('config.mini_lazy').setup 'map'
-  local mini_map = require 'mini.map'
-  mini_map.toggle()
-end, { desc = 'Toggle Mini Map' })
-
 -- Toggle Mini map focus
 map('n', '<leader>uM', function()
-  require('config.mini_lazy').setup 'map'
   local mini_map = require 'mini.map'
   mini_map.toggle_focus()
 end, { desc = 'Toggle Mini Map Focus' })
 
--- old keymaps: window.lua
 -- Keybinds to make split navigation easier.
 map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
@@ -393,10 +328,6 @@ map('n', '<C-Down>', ':resize -1<CR>', { desc = 'Giảm chiều cao cửa sổ' 
 map('n', '<C-Right>', ':vertical resize +1<CR>', { desc = 'Tăng chiều rộng cửa sổ' })
 map('n', '<C-Left>', ':vertical resize -1<CR>', { desc = 'Giảm chiều rộng cửa sổ' })
 
--- old keymaps: database.lua
--- map('n', '<leader>d', '<CMD>DBUIToggle<CR>', { desc = 'Toggle DB' })
-
--- old keymaps: cargo.lua
 -- Core Commands
 map('n', '<leader>Cb', '<CMD>CargoBench<CR>', { desc = '📊 Run benchmarks' })
 map('n', '<leader>CB', '<CMD>CargoBuild<CR>', { desc = '🏗️ Build the project' })
@@ -425,7 +356,6 @@ map('n', '<leader>CA', '<CMD>CargoAudit<CR>', { desc = '🛡️ Audit dependenci
 map('n', '<leader>CO', '<CMD>CargoOutdated<CR>', { desc = '📊 Check outdated dependencies' })
 map('n', '<leader>CD', '<CMD>CargoAutodd<CR>', { desc = '🤖 Automatically manage dependencies' })
 
--- old keymaps: markdown_sniprun.lua
 map('n', '<leader>mc', '<CMD>SnipClose<CR>', { silent = true, desc = 'Close code block' })
 map('n', '<leader>mC', '<cmd>SnipReplMemoryClean<cr>', { silent = true, desc = 'REPL memory clean' })
 

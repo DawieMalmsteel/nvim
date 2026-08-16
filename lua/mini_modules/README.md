@@ -1,7 +1,7 @@
 # mini.nvim modules
 
 Per-module configs, loaded contextually by `lua/plugins/mini.lua` through the
-`config.mini_lazy` loader:
+`config.mini_loader` loader:
 
 - on `VeryLazy`: `icons`, `bufremove`, `misc`, `statusline`, `hipatterns`
 - on first buffer read: `ai`, `surround`, `bracketed`, `cursorword`

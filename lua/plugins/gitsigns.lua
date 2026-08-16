@@ -54,6 +54,7 @@ return {
       map('<leader>hs', gs.stage_hunk, 'Stage hunk')
       map('<leader>hr', gs.reset_hunk, 'Reset hunk')
       map('<leader>hp', gs.preview_hunk, 'Preview hunk')
+      map('<leader>go', gs.preview_hunk, 'Preview hunk')
       map('<leader>hP', gs.preview_hunk_inline, 'Preview hunk inline')
       map('<leader>hb', gs.blame_line, 'Blame current line')
       map('<leader>hB', gs.toggle_current_line_blame, 'Toggle line blame')

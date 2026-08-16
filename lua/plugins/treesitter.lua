@@ -53,7 +53,6 @@ return {
         'gowork',
         'gotmpl',
         'sql',
-        'tmux',
         'terraform',
         'hcl',
       }

@@ -3,10 +3,13 @@ local M = function()
     view = {
       style = 'sign',
       signs = {
-        add = '┆',
-        -- add = '▍',
-        change = '┃',
-        delete = '',
+        -- add = '┆',
+        -- -- add = '▍',
+        -- change = '┃',
+        -- delete = '',
+        add = '▏',
+        change = '▏',
+        delete = '▏',
       },
     },
     mappings = {

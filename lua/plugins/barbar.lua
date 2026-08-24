@@ -36,11 +36,11 @@ return {
     { '<A-]>', '<Cmd>BufferMoveNext<CR>', desc = 'Move Buffer Next' },
     { '<A-q>', '<Cmd>BufferClose<CR>', desc = 'Close Buffer' },
     { '<A-r>', '<Cmd>BufferRestore<CR>', desc = 'Restore Buffer' },
-    { '<Space>bsb', '<Cmd>BufferOrderByBufferNumber<CR>', desc = 'Order Buffers by Number' },
-    { '<Space>bsn', '<Cmd>BufferOrderByName<CR>', desc = 'Order Buffers by Name' },
-    { '<Space>bsd', '<Cmd>BufferOrderByDirectory<CR>', desc = 'Order Buffers by Directory' },
-    { '<Space>bsl', '<Cmd>BufferOrderByLanguage<CR>', desc = 'Order Buffers by Language' },
-    { '<Space>bsw', '<Cmd>BufferOrderByWindowNumber<CR>', desc = 'Order Buffers by Window Number' },
+    -- { '<Space>bsb', '<Cmd>BufferOrderByBufferNumber<CR>', desc = 'Order Buffers by Number' },
+    -- { '<Space>bsn', '<Cmd>BufferOrderByName<CR>', desc = 'Order Buffers by Name' },
+    -- { '<Space>bsd', '<Cmd>BufferOrderByDirectory<CR>', desc = 'Order Buffers by Directory' },
+    -- { '<Space>bsl', '<Cmd>BufferOrderByLanguage<CR>', desc = 'Order Buffers by Language' },
+    -- { '<Space>bsw', '<Cmd>BufferOrderByWindowNumber<CR>', desc = 'Order Buffers by Window Number' },
     {
       '<leader>ub',
       function()

@@ -209,6 +209,7 @@ return {
     {
       '<backspace>',
       '<cmd>Obsidian backlinks<cr>',
+      ft = { 'markdown' },
       desc = 'backlinks',
     },
     {
@@ -230,6 +231,11 @@ return {
       '<leader>od',
       '<cmd>Obsidian dailies<cr>',
       desc = 'Open daily notes',
+    },
+    {
+      '<leader>ot',
+      '<cmd>Obsidian tags<cr>',
+      desc = 'Open tags',
     },
   },
 }

@@ -306,13 +306,13 @@ return {
       end,
       desc = 'Resume',
     },
-    {
-      '<leader>sr',
-      function()
-        Snacks.picker.resume()
-      end,
-      desc = 'Resume',
-    },
+    -- {
+    --   '<leader>sr',
+    --   function()
+    --     Snacks.picker.resume()
+    --   end,
+    --   desc = 'Resume',
+    -- },
     {
       '<leader>ss',
       function()
@@ -381,7 +381,7 @@ return {
       desc = 'Git Log File',
     },
     {
-      '<leader>gG',
+      '<leader>G',
       function()
         Snacks.lazygit { cwd = cwd() }
       end,

@@ -6,5 +6,5 @@ require 'config.neovide'
 require 'keymaps'
 
 -- vim.cmd 'colorscheme base46-eldritch'
-vim.cmd 'colorscheme catppuccin'
+vim.cmd 'colorscheme tokyonight'
 -- vim.cmd [[highlight Normal guibg=#0d0f18 guifg=NONE]]

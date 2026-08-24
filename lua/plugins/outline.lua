@@ -19,7 +19,7 @@ return {
       include_symbol_details = true,
     },
     preview_window = {
-      auto_preview = true,
+      auto_preview = false,
       open_hover_on_preview = true,
     },
   },

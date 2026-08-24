@@ -68,7 +68,9 @@ return {
     },
     snippets = { preset = 'mini_snippets' },
     cmdline = {
-      keymap = { preset = 'inherit' },
+      keymap = {
+        ['<C-y>'] = { 'select_and_accept' },
+      },
       completion = {
         menu = { auto_show = true },
         ghost_text = { enabled = false },

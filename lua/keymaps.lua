@@ -20,10 +20,14 @@ map({ 'n', 'v' }, '<leader>x', '', { desc = '+diagnostic' })
 map({ 'n', 'v' }, '<leader>w', '', { desc = '+wtf' })
 map({ 'n', 'v' }, '<leader>C', '', { desc = '+Cargo' })
 map({ 'n', 'v' }, '<leader>z', '', { desc = '+Zoom' })
-map({ 'n', 'v' }, '<leader>bs', '', { desc = '+sort buffer' })
+-- map({ 'n', 'v' }, '<leader>bs', '', { desc = '+sort buffer' })
 
 map('n', '<leader>yy', '^vg_"+y', {
   desc = 'Copy dòng, bỏ khoảng trắng đầu/cuối',
+})
+
+map('n', 'M', ':delmarks ', {
+  desc = 'Delete marks',
 })
 
 local notes_dir = vim.fn.stdpath 'config' .. '/notes'

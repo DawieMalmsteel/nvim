@@ -60,11 +60,25 @@ return {
       desc = 'Find Files (fff)',
     },
     {
+      '\\\\',
+      function()
+        require('fff').find_files()
+      end,
+      desc = 'Find Files (fff)',
+    },
+    {
       '<leader>fg',
       function()
         require('fff').live_grep()
       end,
       desc = 'Live Grep (fff)',
+    },
+    {
+      '<leader>sr',
+      function()
+        require('fff').resume()
+      end,
+      desc = 'resume (fff)',
     },
     {
       '<leader>sG',

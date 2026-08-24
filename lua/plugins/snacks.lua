@@ -47,60 +47,76 @@ local inline_images = snacks_util.inline_image_toggle {
 return {
   'folke/snacks.nvim',
   lazy = false,
+  dependencies = { 'amansingh-afk/milli.nvim' },
   priority = 1000,
-  opts = {
-    bigfile = { enabled = true },
-    dashboard = { enabled = true },
-    explorer = { enabled = true },
-    indent = {
-      enabled = true,
-      animate = { enabled = false },
+  opts = function()
+    local splash = require('milli').load { splash = 'vibecat' }
+    return {
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = true },
       indent = {
-        char = ' ',
+        enabled = true,
+        animate = { enabled = false },
+        indent = {
+          char = ' ',
+        },
+        scope = {
+          char = '▏',
+        },
       },
-      scope = {
-        char = '▏',
+      image = {
+        enabled = true,
+        force = true,
+        doc = { inline = true, float = true },
+        convert = {
+          notify = true,
+          mermaid = function()
+            local theme = vim.o.background == 'light' and 'neutral' or 'dark'
+            return { '-i', '{src}', '-o', '{file}', '-e', 'png', '-b', 'transparent', '-t', theme, '-s', '{scale}' }
+          end,
+        },
       },
-    },
-    image = {
-      enabled = true,
-      force = true,
-      doc = { inline = true, float = true },
-      convert = {
-        notify = true,
-        mermaid = function()
-          local theme = vim.o.background == 'light' and 'neutral' or 'dark'
-          return { '-i', '{src}', '-o', '{file}', '-e', 'png', '-b', 'transparent', '-t', theme, '-s', '{scale}' }
-        end,
+      input = { enabled = true },
+      lazygit = { enabled = true },
+      notifier = { enabled = true, timeout = 3000 },
+      picker = {
+        enabled = true,
+        ui_select = true,
+        layout = {
+          preset = 'default',
+        },
       },
-    },
-    input = { enabled = true },
-    lazygit = { enabled = true },
-    notifier = { enabled = true, timeout = 3000 },
-    picker = {
-      enabled = true,
-      ui_select = true,
-      layout = {
-        preset = 'default',
+      quickfile = { enabled = true },
+      scratch = {
+        width = 100,
+        height = 30,
+        position = 'right',
       },
-    },
-    quickfile = { enabled = true },
-    scratch = {
-      width = 100,
-      height = 30,
-      position = 'right',
-    },
-    scope = { enabled = true },
-    statuscolumn = { enabled = true },
-    terminal = {
-      win = { position = 'float' },
-    },
-    words = { enabled = true },
-    zen = { enabled = true },
-  },
+      scope = { enabled = true },
+      statuscolumn = { enabled = true },
+      terminal = {
+        win = { position = 'float' },
+      },
+      words = { enabled = true },
+      zen = { enabled = true },
+      dashboard = {
+        enabled = true,
+        preset = {
+          header = table.concat(splash.frames[1], '\n'),
+        },
+        sections = {
+          { section = 'header', padding = 1 },
+          { section = 'keys', gap = 1, padding = 1 },
+          { section = 'startup' },
+        },
+      },
+    }
+  end,
   config = function(_, opts)
     vim.g.snacks_animate = false
     require('snacks').setup(opts)
+    require('milli').snacks { splash = 'vibecat', loop = true }
   end,
   keys = {
     -- top-level picker/explorer

@@ -84,6 +84,9 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- Timestamp (ns) used by the Snacks dashboard to display startup duration.
+vim.g.nvim_start_time = vim.uv.hrtime()
+
 -- [[ Setting options ]]
 require 'options'
 

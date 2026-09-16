@@ -115,7 +115,28 @@ require('snacks').setup {
     sections = {
       { section = 'header', padding = 1 },
       { section = 'keys', gap = 1, padding = 1 },
-      { section = 'startup' },
+      -- Snacks' built-in `startup` section requires lazy.nvim stats; show
+      -- vim.pack numbers instead (vim.g.nvim_start_time is set in init.lua).
+      function()
+        local plugins = vim.pack.get(nil, { info = false })
+        local loaded = 0
+        for _, plugin in ipairs(plugins) do
+          if plugin.active then
+            loaded = loaded + 1
+          end
+        end
+        local elapsed_ms = (vim.uv.hrtime() - (vim.g.nvim_start_time or vim.uv.hrtime())) / 1e6
+        local ms = math.floor(elapsed_ms * 100 + 0.5) / 100
+        return {
+          align = 'center',
+          text = {
+            { '⚡ Neovim loaded ', hl = 'footer' },
+            { loaded .. '/' .. #plugins, hl = 'special' },
+            { ' plugins in ', hl = 'footer' },
+            { ms .. 'ms', hl = 'special' },
+          },
+        }
+      end,
     },
   },
 }

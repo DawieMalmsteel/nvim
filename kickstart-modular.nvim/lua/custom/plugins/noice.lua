@@ -1,0 +1,95 @@
+local pack = require 'custom.pack'
+
+--  1. **Sử dụng cmdline-window (tích hợp sẵn trong Neovim)**
+--
+-- Bạn có thể nhấn tổ hợp phím `Ctrl-f` khi đang ở cmdline (`:`) để mở cmdline-window. Trong cửa sổ này, bạn có thể sử dụng các phím di chuyển và lệnh của Vim như trong chế độ Normal.
+--
+-- - **Cách sử dụng:**
+--   - Nhấn `:` để vào cmdline.
+--   - Nhấn `Ctrl-f` để mở cmdline-window.
+--   - Sử dụng các phím di chuyển và lệnh Vim như bình thường.
+--   - Nhấn `Enter` để thực thi lệnh hoặc `Ctrl-c` để thoát.
+pack.add {
+  pack.gh 'folke/noice.nvim',
+  pack.gh 'MunifTanjim/nui.nvim',
+}
+
+require('noice').setup {
+  views = {
+    cmdline_popup = {
+      border = {
+        style = 'rounded',
+        -- padding = { 1, 2 },
+      },
+      position = {
+        row = 12,
+        col = '50%',
+      },
+      size = {
+        width = 60,
+        height = 'auto',
+      },
+      -- win_options = {
+      --   winhighlight = { NormalFloat = 'NormalFloat' },
+      -- },
+    },
+    popupmenu = {
+      relative = 'editor',
+      position = {
+        row = 3,
+        col = '50%',
+      },
+      size = {
+        width = 60,
+        height = 10,
+      },
+      border = {
+        style = 'rounded',
+        -- padding = { 1, 2 },
+      },
+    },
+  },
+
+  -- hide the search count message
+  -- routes = {
+  --   {
+  --     filter = {
+  --       event = 'msg_show',
+  --       kind = 'search_count',
+  --     },
+  --     opts = { skip = true },
+  --   },
+  -- },
+
+  lsp = {
+    signature = {
+      auto_open = {
+        enabled = false,
+      },
+    },
+    progress = {
+      enabled = true,
+    },
+  },
+
+  cmdline = {
+    format = {
+      replace = {
+        conceal = false,
+        pattern = '^:s/',
+        icon = '  ',
+        lang = 'regex',
+        view = 'cmdline',
+      },
+      replace_all = {
+        conceal = false,
+        pattern = '^:%%s/',
+        icon = ' 󰬳',
+        lang = 'regex',
+        view = 'cmdline',
+      },
+    },
+  },
+}
+
+-- vim: ts=2 sts=2 sw=2 et

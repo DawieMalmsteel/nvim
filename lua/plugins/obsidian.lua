@@ -1,25 +1,12 @@
--- Obsidian.nvim: plugin config + custom logic (daily activity log).
+-- Obsidian.nvim: plugin config.
 --
 -- Structure:
---   1. Constants, vault paths, vim-wired activity `deps`
+--   1. Constants
 --   2. rename_linked_note keymap helper
---   3. Activity log autocmd: append "HH:MM [[note]]" to Dailies/<day>.md on save.
---      All logic lives in lua/obsidian/activity.lua (pure + injectable); this
---      file only supplies the real vim/filesystem/time binding (`deps`).
---   4. Plugin spec (opts + keys)
+--   3. Plugin spec (opts + keys)
 
 local VAULT = '~/funthings/notes'
-local VAULT_ROOT = vim.fn.fnamemodify(vim.fn.expand(VAULT), ':p'):gsub('/$', '')
-local DAILY_DIR = VAULT_ROOT .. '/Dailies'
-local DAILY_TEMPLATE = VAULT_ROOT .. '/Templates/Daily.md'
-local ISO_TIMESTAMP = '%Y-%m-%dT%H:%M:%S'
-local DAY_FORMAT = '%d-%m-%Y'
-local TIME_FORMAT = '%H:%M'
-local IGNORED_ACTIVITY_FOLDERS = {
-  Dailies = true,
-  Templates = true,
-  bases = true,
-}
+local TIMESTAMP_FORMAT = '%Y-%m-%d %H:%M'
 
 local activity = require 'obsidian.activity'
 
@@ -54,70 +41,6 @@ local function rename_linked_note()
 end
 
 -- ============================================================
--- Activity log
--- ============================================================
-
--- Return the bufnr of an open, loaded buffer whose file path equals `path`, or nil.
-local function buffer_for(path)
-  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_loaded(bufnr) then
-      local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':p')
-      if name == path then
-        return bufnr
-      end
-    end
-  end
-end
-
--- vim-backed implementation of the `deps` table consumed by activity.append.
--- Buffer-aware so unsaved edits in an open daily note are both seen (dedup)
--- and kept on write, and the buffer never goes stale.
-local deps = {
-  root = VAULT_ROOT,
-  daily_dir = DAILY_DIR,
-  day_format = DAY_FORMAT,
-  iso_format = ISO_TIMESTAMP,
-  time_format = TIME_FORMAT,
-  ignored = IGNORED_ACTIVITY_FOLDERS,
-  read_daily = function(path)
-    local bufnr = buffer_for(path)
-    if bufnr then
-      return vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-    end
-    if vim.fn.filereadable(path) == 1 then
-      return vim.fn.readfile(path)
-    end
-  end,
-  write_daily = function(path, lines)
-    local bufnr = buffer_for(path)
-    if bufnr then
-      vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-      vim.api.nvim_buf_call(bufnr, function()
-        vim.cmd 'write'
-      end)
-    else
-      vim.fn.writefile(lines, path)
-    end
-  end,
-  read_template = function()
-    if vim.fn.filereadable(DAILY_TEMPLATE) == 1 then
-      return vim.fn.readfile(DAILY_TEMPLATE)
-    end
-  end,
-  ensure_daily_dir = function()
-    vim.fn.mkdir(DAILY_DIR, 'p')
-  end,
-}
-
-local activity_group = vim.api.nvim_create_augroup('ObsidianDailyActivity', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = activity_group,
-  callback = function(args)
-    activity.append(deps, vim.fn.fnamemodify(args.file, ':p'), os.date)
-  end,
-})
-
--- ============================================================
 -- Plugin spec
 -- ============================================================
 
@@ -139,7 +62,7 @@ return {
     },
     templates = {
       folder = 'Templates',
-      date_format = 'YYYY-MM-DDTHH:mm:ss',
+      date_format = 'YYYY-MM-DD HH:mm',
       time_format = 'HH:mm',
       substitutions = {},
     },
@@ -152,7 +75,7 @@ return {
 
     daily_notes = {
       folder = 'Dailies',
-      date_format = 'DD-MM-YYYY',
+      date_format = 'YYYY-MM-DD',
       template = 'Daily.md',
     },
 
@@ -164,8 +87,8 @@ return {
       func = function(note)
         local metadata = vim.deepcopy(note.metadata or {})
 
-        metadata.created_day = activity.normalize_day(metadata.created_day) or os.date(ISO_TIMESTAMP)
-        metadata.updated_day = os.date(ISO_TIMESTAMP)
+        metadata.created_day = activity.normalize_day(metadata.created_day) or os.date(TIMESTAMP_FORMAT)
+        metadata.updated_day = os.date(TIMESTAMP_FORMAT)
 
         -- NOTE: Frontmatter.parse strips validated keys (tags/aliases/id) out
         -- of note.metadata into note.tags / note.aliases. Reading them from

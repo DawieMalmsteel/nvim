@@ -7,19 +7,20 @@
 
 local M = {}
 
---- Normalize "YYYY-MM-DD" to "YYYY-MM-DDTHH:MM:SS"; pass ISO timestamps through.
---- Any other value (nil, other shapes) is returned unchanged.
+--- Normalize a day value to "YYYY-MM-DD HH:MM".
+--- Accepts "YYYY-MM-DD HH:MM" (unchanged), legacy ISO "YYYY-MM-DDTHH:MM[:SS]"
+--- and bare "YYYY-MM-DD" (midnight). Any other value is returned unchanged.
 --- @param value any
 --- @return any
 function M.normalize_day(value)
   if type(value) == 'string' then
-    if value:match '^%d%d%d%d%-%d%d%-%d%dT%d%d:%d%d:%d%d$' then
-      return value
+    local date, hour, min = value:match '^(%d%d%d%d%-%d%d%-%d%d)[T ](%d%d):(%d%d)'
+    if date and (value:match '^.-[T ]%d%d:%d%d$' or value:match '^.-[T ]%d%d:%d%d:%d%d$') then
+      return string.format('%s %s:%s', date, hour, min)
     end
 
-    local year, month, day = value:match '^(%d%d%d%d)%-(%d%d)%-(%d%d)$'
-    if year then
-      return string.format('%s-%s-%sT00:00:00', year, month, day)
+    if value:match '^%d%d%d%d%-%d%d%-%d%d$' then
+      return value .. ' 00:00'
     end
   end
   return value

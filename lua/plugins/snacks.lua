@@ -96,7 +96,11 @@ return {
       scope = { enabled = true },
       statuscolumn = { enabled = true },
       terminal = {
-        win = { position = 'float' },
+        win = {
+          position = 'float',
+          width = 0,
+          height = 0,
+        },
       },
       words = { enabled = true },
       zen = { enabled = true },

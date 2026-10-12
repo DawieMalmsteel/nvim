@@ -64,9 +64,12 @@ end
 -- normalize_day
 -- ===========================================================================
 
-check('normalize_day: ISO timestamp passes through unchanged', activity.normalize_day '2026-08-16T10:30:00' == '2026-08-16T10:30:00')
-check('normalize_day: date expands to midnight ISO', activity.normalize_day '2026-08-16' == '2026-08-16T00:00:00')
-check('normalize_day: date zero-pads parts', activity.normalize_day '2026-02-03' == '2026-02-03T00:00:00')
+check('normalize_day: current format passes through unchanged', activity.normalize_day '2026-08-16 10:30' == '2026-08-16 10:30')
+check('normalize_day: legacy ISO with seconds converts', activity.normalize_day '2026-08-16T10:30:00' == '2026-08-16 10:30')
+check('normalize_day: legacy ISO without seconds converts', activity.normalize_day '2026-08-16T10:30' == '2026-08-16 10:30')
+check('normalize_day: date expands to midnight', activity.normalize_day '2026-08-16' == '2026-08-16 00:00')
+check('normalize_day: date zero-pads parts', activity.normalize_day '2026-02-03' == '2026-02-03 00:00')
+check('normalize_day: trailing junk passes through', activity.normalize_day '2026-08-16T10:30:00Z' == '2026-08-16T10:30:00Z')
 check('normalize_day: DD-MM-YYYY (unused vault format) passes through', activity.normalize_day '16-08-2026' == '16-08-2026')
 check('normalize_day: non-date string passes through', activity.normalize_day 'garbage' == 'garbage')
 check('normalize_day: empty string passes through', activity.normalize_day '' == '')

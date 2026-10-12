@@ -12,7 +12,7 @@
     "page-preview": true,
     "daily-notes": {
         "folder": "Dailies",
-        "format": "DD-MM-YYYY",
+        "format": "YYYY-MM-DD",
         "template": "Templates/Daily.md"
     },
     "templates": true,
